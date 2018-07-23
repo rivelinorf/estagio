@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+<h2>SGE - Sistema de Gestão Educacional</h2>
 </body>
 </html>
