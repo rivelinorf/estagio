@@ -5,8 +5,7 @@ public class Estado {
     private String nome;
     private String abv;
 
-    public Estado(Long id, String nome, String abv) {
-        this.id = id;
+    public Estado(String nome, String abv) {
         this.nome = nome;
         this.abv = abv;
     }
