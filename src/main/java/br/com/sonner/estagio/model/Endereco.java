@@ -5,16 +5,16 @@ public class Endereco {
 	private String nome;
 	private String cep;
 
-	Bairro bairro;
-	Logradouro logradouro;
-	
+	private Bairro bairro;
+	private Logradouro logradouro;
+
 	public Endereco(long id, String nome, String cep, Bairro bairro, Logradouro logradouro) {
 		this.id = id;
 		this.nome = nome;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.logradouro = logradouro;
-		
+
 	}
 
 	public long getId() {

@@ -4,7 +4,7 @@ public class Bairro {
 	private long id;
 	private String nome;
 
-	Cidade cidade;
+	private Cidade cidade;
 	
 	public Bairro(long id, String nome, Cidade cidade) {
 		this.id =id;
