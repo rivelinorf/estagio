@@ -4,8 +4,7 @@ public class TipoLogradouro {
 	private long id;
 	private String nome;
 
-	public TipoLogradouro(long id, String nome) {
-		this.id = id;
+	public TipoLogradouro( String nome) {
 		this.nome = nome;
 	}
 
