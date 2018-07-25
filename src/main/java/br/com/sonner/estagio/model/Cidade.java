@@ -6,7 +6,7 @@ public class Cidade {
     private String cod;
     private String cep;
 
-    Estado estado;
+    private Estado estado;
 
     public Cidade(Long id, String nome, String cod, String cep, Estado estado) {
         this.id = id;
