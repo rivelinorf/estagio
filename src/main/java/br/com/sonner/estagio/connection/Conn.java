@@ -1,12 +1,10 @@
 package br.com.sonner.estagio.connection;
 
-import br.com.sonner.estagio.dao.EstadoDAOImpl;
-import br.com.sonner.estagio.dao.api.EstadoDAO;
-import br.com.sonner.estagio.model.Estado;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.Properties;
 
 public class Conn {
     private static Connection CONNECTION;
@@ -14,27 +12,27 @@ public class Conn {
     private Conn() {
     }
 
+    public static Properties loadProperties() throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        InputStream input = classLoader.getResourceAsStream("config.properties");
+
+        Properties properties = new Properties();
+        properties.load(input);
+
+        return properties;
+    }
+
     public static Connection getConnection() {
         try {
             if (CONNECTION == null) {
-                CONNECTION = DriverManager.getConnection("jdbc:mysql://localhost/sge", "root", "root");
+                Properties properties = loadProperties();
+                DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+                CONNECTION = DriverManager.getConnection(properties.getProperty("url") + properties.getProperty("database"), properties.getProperty("user"), properties.getProperty("password"));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return CONNECTION;
-    }
-
-    public static void main(String[] args) {
-        Connection connection1 = new Conn().getConnection();
-        Connection connection2 = new Conn().getConnection();
-        System.out.println(connection1);
-        System.out.println(connection2);
-
-        EstadoDAO estadoDAO = new EstadoDAOImpl();
-        Estado estado = new Estado("MINAS GERAIS", "MG");
-
-        estadoDAO.save(estado);
     }
 }

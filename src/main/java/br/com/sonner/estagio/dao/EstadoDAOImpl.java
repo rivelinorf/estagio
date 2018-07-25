@@ -40,12 +40,11 @@ public class EstadoDAOImpl implements EstadoDAO {
 
     @Override
     public void update(Estado estado) {
-        return null;
+
     }
 
     @Override
     public void delete(Estado estado) {
-        return null;
+
     }
 }
-m
