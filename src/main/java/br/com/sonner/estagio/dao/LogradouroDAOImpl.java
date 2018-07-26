@@ -19,12 +19,13 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public void save(Logradouro Logradouro) {
+	public void save(Logradouro logradouro) {
 		try {
-			PreparedStatement stmt = connection.prepareStatement("insert into logradouro (nome,tipoLogradouro) values (?,?)");
+			PreparedStatement stmt = connection.prepareStatement("insert into logradouro (nome,cidade,tipoLogradouro) values (?,?,?)");
 
-			stmt.setString(1, Logradouro.getNome());
-			//stmt.setString(2,Logradouro.getTipologradouro());
+			stmt.setString(1, logradouro.getNome());
+			stmt.setLong (2, logradouro.getCidade().getId());
+			stmt.setLong(3,logradouro.getTipologradouro().getId());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -33,7 +34,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public List<Logradouro> get(Logradouro Logradouro) {
+	public List<Logradouro> get() {
 		try {
 			List<Logradouro> logradouros = new ArrayList<Logradouro>();
 			PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro");
@@ -41,8 +42,11 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				br.com.sonner.estagio.model.Logradouro logradouro = new Logradouro("nome", null);
+				br.com.sonner.estagio.model.Logradouro logradouro = new Logradouro("nome", null,null);
 				logradouro.setNome(rs.getString("nome"));
+				//logradouro.setTipologradouro(rs.getLong(tipologradouro));
+				//logradouro.setCidade(rs.getString(cidade));
+				
 				logradouros.add(logradouro);
 			}
 
@@ -57,11 +61,11 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public void update(Logradouro Logradouro) {
+	public void update(Logradouro logradouro) {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement("update Logradouro set nome = ? where id = ?");
-			stmt.setString(1, Logradouro.getNome());
-			stmt.setLong(2, Logradouro.getId());
+			stmt.setString(1, logradouro.getNome());
+			stmt.setLong(2, logradouro.getId());
 			stmt.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -69,10 +73,10 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public void delete(Logradouro Logradouro) {
+	public void delete(Long id) {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement("delete from logradouro where id=?");
-			stmt.setLong(1, Logradouro.getId());
+			stmt.setLong(1, id);
 			stmt.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

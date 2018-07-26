@@ -6,12 +6,12 @@ import br.com.sonner.estagio.model.Logradouro;
 
 public interface LogradouroDAO {
 
-	void save(Logradouro Logradouro);
+	void save(Logradouro logradouro);
 
-	List<Logradouro> get(Logradouro Logradouro);
+	List<Logradouro> get();
 
-	void update(Logradouro Logradouro);
+	void update(Logradouro logradouro);
 
-	void delete(Logradouro Logradouro);
+	void delete(Long id);
 
 }

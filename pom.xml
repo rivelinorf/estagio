@@ -68,6 +68,7 @@
 					 <configuration>
 		                   <path>/</path>
 		                   <port>8899</port>
+		                   <contextReloadable>true</contextReloadable>
 		               </configuration>
 				</plugin>
 
