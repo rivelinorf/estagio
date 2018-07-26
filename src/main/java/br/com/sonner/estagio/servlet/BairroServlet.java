@@ -9,7 +9,7 @@ import br.com.sonner.estagio.model.Bairro;
 
 public class BairroServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) {
-		Bairro b = new Bairro(req.getParameter("nome"), req.getParameter("cidade"));
+		Bairro b = new Bairro(req.getParameter("nome"), null);
 		new BairroControllerImpl().save(b);
 	}
 }

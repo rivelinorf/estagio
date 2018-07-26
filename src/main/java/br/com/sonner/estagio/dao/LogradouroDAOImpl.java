@@ -88,6 +88,12 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
 	@Override
 	public Logradouro getOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
+	public Logradouro getOne(Long id) {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement("select * from bairro where id = ?");
 			try {stmt.setLong(1, id);
@@ -98,7 +104,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
 			ResultSet rs = stmt.executeQuery();
 			
-			LogradouroDAO logradouroDAO = new LogradouroDAO();
+			LogradouroDAO logradouroDAO = new LogradouroDAOImpl();
 			Logradouro l = logradouroDAO.getOne(rs.getLong("logradouro_cidade_fk"));
 
 			while (rs.next()) {
@@ -114,6 +120,6 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}	
-	}
+	}*/
 
 }

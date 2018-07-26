@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.BairroDAO;
+import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 
@@ -36,7 +37,7 @@ public class BairroDAOImpl implements BairroDAO {
 		}
 	}
 
-	@Override
+	/*@Override
 	public List<Bairro> getAll() {
 		try {
 			List<Bairro> bairros = new ArrayList<Bairro>();
@@ -45,11 +46,14 @@ public class BairroDAOImpl implements BairroDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				CidadeDAO cidadeDAO = new CidadeDAO;
-				Cidade c = cidadeDAO.getOne(rs.getLong("bairro_cidade_fk"));
+				
+				CidadeDAOImpl cDAO = new CidadeDAOImpl();
+				Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
+				
 				Bairro b = new Bairro(rs.getString("nome"), c);
 				b.setNome(rs.getString("nome"));
 				b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
+				
 				bairros.add(b);
 			}
 			
@@ -63,7 +67,7 @@ public class BairroDAOImpl implements BairroDAO {
 		}
 
 
-	}
+	}*/
 
 	@Override
 	public void update(Bairro bairro) {
@@ -97,6 +101,18 @@ public class BairroDAOImpl implements BairroDAO {
 	}
 
 	@Override
+	public List<Bairro> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Bairro getOne(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Override
 	public Bairro getOne(Long id) {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement("select * from bairro where id = ?");
@@ -112,7 +128,7 @@ public class BairroDAOImpl implements BairroDAO {
 			Cidade c = cidadeDAO.getOne(rs.getLong("bairro_cidade_fk"));
 			Bairro b = new Bairro(rs.getString("nome"), c);
 
-			while (rs.next()) {
+			if (rs.first()) {
 				b.setNome(rs.getString("nome"));
 				b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
 			}
@@ -126,5 +142,5 @@ public class BairroDAOImpl implements BairroDAO {
 			throw new RuntimeException(e);
 		}
 
-	}
+	}*/
 }
