@@ -6,6 +6,7 @@ drop table logradouro;
 drop table tipoLogradouro;
 drop table cidade;
 drop table estado;
+drop table pessoa;
 
 create database sge;
 use sge;

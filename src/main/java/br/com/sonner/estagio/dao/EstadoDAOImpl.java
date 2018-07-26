@@ -6,7 +6,9 @@ import br.com.sonner.estagio.model.Estado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoDAOImpl implements EstadoDAO {
@@ -34,8 +36,47 @@ public class EstadoDAOImpl implements EstadoDAO {
     }
 
     @Override
-    public List<Estado> get(Estado estado) {
-        return null;
+    public List<Estado> getAll() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("select * from estado");
+            ResultSet resultSet = stmt.executeQuery();
+
+            List<Estado> estados = new ArrayList<>();
+
+            while(resultSet.next()) {
+                Estado aux = new Estado(resultSet.getString("nome"), resultSet.getString("abv"));
+
+                aux.setId(resultSet.getLong("id"));
+
+                estados.add(aux);
+            }
+
+            return estados;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Estado getOne(Long id) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("select * from estado where id=?");
+            stmt.setLong(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+
+            Estado aux = null;
+
+            if(resultSet.first()) {
+                aux = new Estado(resultSet.getString("nome"), resultSet.getString("abv"));
+                aux.setId(resultSet.getLong("id"));
+            }
+
+            return aux;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -44,7 +85,7 @@ public class EstadoDAOImpl implements EstadoDAO {
     }
 
     @Override
-    public void delete(Estado estado) {
+    public void delete(Long id) {
 
     }
 }
