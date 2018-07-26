@@ -18,10 +18,17 @@ public class EstadoServlet extends HttpServlet {
        /* Estado novoEstado = new Estado(req.getParameter("nome"), req.getParameter("abv"));
         new EstadoControllerImpl().save(novoEstado);*/
 
-        EstadoDAO estadoDAO = new EstadoDAOImpl();
-        Estado pegoPorId = estadoDAO.getOne(Long.valueOf(req.getParameter("id")));
+        /*EstadoDAO estadoDAO = new EstadoDAOImpl();
+        Estado pegoPorId = estadoDAO.getOne(Long.valueOf(req.getParameter("id")));*/
 
-        System.out.println(pegoPorId.getNome());
+        /*Estado novoEstado = new Estado("MINAS GERAIS", "MG");
+        novoEstado.setId((long) 13);
+
+        EstadoDAO estadoDAO = new EstadoDAOImpl();
+        estadoDAO.update(novoEstado);*/
+
+        /*EstadoDAO estadoDAO = new EstadoDAOImpl();
+        estadoDAO.delete((long) 13);*/
 
         RequestDispatcher rd = req.getRequestDispatcher("/lista-estados.jsp");
         rd.forward(req, res);

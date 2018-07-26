@@ -81,11 +81,34 @@ public class EstadoDAOImpl implements EstadoDAO {
 
     @Override
     public void update(Estado estado) {
+        String sql = "update estado set nome=?, abv=? where id=?";
 
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, estado.getNome());
+            statement.setString(2, estado.getAbv());
+            statement.setLong(3, estado.getId());
+
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(Long id) {
+        String sql = "delete from estado where id=?";
 
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setLong(1, id);
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
