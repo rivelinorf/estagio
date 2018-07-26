@@ -2,15 +2,15 @@ package br.com.sonner.estagio.model;
 
 public class Endereco {
 	private long id;
-	private String nome;
+	private Integer numero;
 	private String cep;
 
 	private Bairro bairro;
 	private Logradouro logradouro;
 
-	public Endereco(long id, String nome, String cep, Bairro bairro, Logradouro logradouro) {
-		this.id = id;
-		this.nome = nome;
+	public Endereco(Integer numero, String cep, Bairro bairro, Logradouro logradouro) {
+
+		this.numero = numero;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.logradouro = logradouro;
@@ -25,12 +25,12 @@ public class Endereco {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Integer getNumero() {
+		return numero;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
 	public String getCep() {
