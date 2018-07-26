@@ -6,8 +6,7 @@ public class Bairro {
 
 	private Cidade cidade;
 	
-	public Bairro(long id, String nome, Cidade cidade) {
-		this.id =id;
+	public Bairro(String nome, Cidade cidade) {
 		this.nome = nome;
 		this.cidade = cidade;
 	}

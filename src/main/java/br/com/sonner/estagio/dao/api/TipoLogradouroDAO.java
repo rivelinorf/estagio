@@ -7,9 +7,9 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 public interface TipoLogradouroDAO {
 	void save(TipoLogradouro tipoLogradouro);
 
-	List<TipoLogradouro> get(TipoLogradouro tipoLogradouro);
+	List<TipoLogradouro> get();
 
 	void update(TipoLogradouro tipoLogradouro);
 
-	void delete(TipoLogradouro tipoLogradouro);
+	void delete(Long id);
 }

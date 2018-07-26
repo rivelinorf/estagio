@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.model.Logradouro;
 
-@WebServlet("/Logradouro")
+@WebServlet("/logradouro")
 
 public class LogradouroServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) {
-		Logradouro novoLogradouro = new Logradouro(req.getParameter("nome"), null);
+		Logradouro novoLogradouro = new Logradouro(req.getParameter("nome"), null, null);
 		new LogradouroControllerImpl().save(novoLogradouro);
 	}
 	
