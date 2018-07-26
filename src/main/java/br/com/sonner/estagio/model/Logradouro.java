@@ -6,9 +6,16 @@ public class Logradouro {
 	private String nome;
 	TipoLogradouro tipologradouro;
 
-	public Logradouro(long id, String nome, TipoLogradouro tipologradouro) {
-		this.id = id;
+	public Logradouro(String nome, TipoLogradouro tipologradouro) {
 		this.nome = nome;
+		this.tipologradouro = tipologradouro;
+	}
+
+	public TipoLogradouro getTipologradouro() {
+		return tipologradouro;
+	}
+
+	public void setTipologradouro(TipoLogradouro tipologradouro) {
 		this.tipologradouro = tipologradouro;
 	}
 
