@@ -1,5 +1,7 @@
 package br.com.sonner.estagio.servlet;
 
+import java.io.IOException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,16 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 @WebServlet("/tipoLogradouro")
 public class TipoLogradouroServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) {
-		TipoLogradouro novoTipoLogradouro = new TipoLogradouro(req.getParameter("nome"));
-		new TipoLogradouroControllerImpl().save(novoTipoLogradouro);
+		if (req.getParameter("nome") == null || req.getParameter("nome").length() == 0) {
+			try {
+				res.getWriter().append("DEU MUITO RUIM");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+
+			TipoLogradouro novoTipoLogradouro = new TipoLogradouro(req.getParameter("nome"));
+			new TipoLogradouroControllerImpl().save(novoTipoLogradouro);
+		}
 	}
 }

@@ -5,10 +5,27 @@ public class Logradouro {
 	private long id;
 	private String nome;
 	TipoLogradouro tipologradouro;
+	Cidade cidade;
 
-	public Logradouro(long id, String nome, TipoLogradouro tipologradouro) {
-		this.id = id;
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public Logradouro(String nome, TipoLogradouro tipologradouro,Cidade cidade) {
 		this.nome = nome;
+		this.tipologradouro = tipologradouro;
+		this.cidade = cidade;
+	}
+
+	public TipoLogradouro getTipologradouro() {
+		return tipologradouro;
+	}
+
+	public void setTipologradouro(TipoLogradouro tipologradouro) {
 		this.tipologradouro = tipologradouro;
 	}
 
