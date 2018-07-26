@@ -8,7 +8,9 @@ public interface LogradouroDAO {
 
 	void save(Logradouro logradouro);
 
-	List<Logradouro> get();
+	List<Logradouro> getAll();
+	
+	Logradouro getOne(Long id);
 
 	void update(Logradouro logradouro);
 

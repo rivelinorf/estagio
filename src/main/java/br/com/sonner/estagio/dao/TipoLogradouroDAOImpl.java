@@ -34,7 +34,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	}
 
 	@Override
-	public List<TipoLogradouro> get() {
+	public List<TipoLogradouro> getAll() {
 		try {
 			List<TipoLogradouro> tipoLogradouros = new ArrayList<TipoLogradouro>();
 			PreparedStatement stmt = this.connection.prepareStatement("select * from tipoLogradouro");
@@ -82,13 +82,23 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	}
 
 	@Override
-	public void getone(Long id) {
+	public TipoLogradouro getOne(Long id) {
+
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("select from tipoLogradouro where id=?");
+			PreparedStatement stmt = connection.prepareStatement("select from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
-			stmt.execute();
+			ResultSet resultSet = stmt.executeQuery();
+
+			TipoLogradouro temp = null;
+			if (resultSet.first()) {
+				temp = new TipoLogradouro(resultSet.getString("nome"));
+				temp.setId(resultSet.getLong("id"));
+			}
+			return temp;
+
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
+			return null;
 		}
 
 	}
