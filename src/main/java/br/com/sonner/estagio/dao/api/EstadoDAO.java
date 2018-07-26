@@ -7,7 +7,7 @@ import java.util.List;
 public interface EstadoDAO {
     void save(Estado estado);
     List<Estado> getAll();
-    Estado getOne(Long id);
+    Estado getOne(long id);
     void update(Estado estado);
-    void delete(Long id);
+    void delete(long id);
 }

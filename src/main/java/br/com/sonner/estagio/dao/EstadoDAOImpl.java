@@ -59,7 +59,7 @@ public class EstadoDAOImpl implements EstadoDAO {
     }
 
     @Override
-    public Estado getOne(Long id) {
+    public Estado getOne(long id) {
         try {
             PreparedStatement stmt = connection.prepareStatement("select * from estado where id=?");
             stmt.setLong(1, id);
@@ -98,7 +98,7 @@ public class EstadoDAOImpl implements EstadoDAO {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         String sql = "delete from estado where id=?";
 
         try {

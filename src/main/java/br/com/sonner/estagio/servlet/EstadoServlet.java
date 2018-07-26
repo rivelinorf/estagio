@@ -1,7 +1,6 @@
 package br.com.sonner.estagio.servlet;
 
-import br.com.sonner.estagio.dao.EstadoDAOImpl;
-import br.com.sonner.estagio.dao.api.EstadoDAO;
+import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.model.Estado;
 
 import javax.servlet.RequestDispatcher;
@@ -15,8 +14,8 @@ import java.io.IOException;
 @WebServlet("/estado-insere")
 public class EstadoServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-       /* Estado novoEstado = new Estado(req.getParameter("nome"), req.getParameter("abv"));
-        new EstadoControllerImpl().save(novoEstado);*/
+        Estado novoEstado = new Estado(req.getParameter("nome"), req.getParameter("abv"));
+        new EstadoControllerImpl().save(novoEstado);
 
         /*EstadoDAO estadoDAO = new EstadoDAOImpl();
         Estado pegoPorId = estadoDAO.getOne(Long.valueOf(req.getParameter("id")));*/
@@ -28,7 +27,8 @@ public class EstadoServlet extends HttpServlet {
         estadoDAO.update(novoEstado);*/
 
         /*EstadoDAO estadoDAO = new EstadoDAOImpl();
-        estadoDAO.delete((long) 13);*/
+        estadoDAO.delete((long) 15);*/
+
 
         RequestDispatcher rd = req.getRequestDispatcher("/lista-estados.jsp");
         rd.forward(req, res);

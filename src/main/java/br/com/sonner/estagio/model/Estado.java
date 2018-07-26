@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.model;
 
 public class Estado {
-    private Long id;
+    private long id;
     private String nome;
     private String abv;
 
@@ -26,11 +26,11 @@ public class Estado {
         this.abv = abv;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 }

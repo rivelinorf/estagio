@@ -8,8 +8,7 @@ public class Cidade {
 
     private Estado estado;
 
-    public Cidade(Long id, String nome, String cod, String cep, Estado estado) {
-        this.id = id;
+    public Cidade(String nome, String cod, String cep, Estado estado) {
         this.nome = nome;
         this.cod = cod;
         this.cep = cep;
