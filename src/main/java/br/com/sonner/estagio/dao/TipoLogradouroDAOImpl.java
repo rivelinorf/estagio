@@ -59,7 +59,8 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	@Override
 	public void update(TipoLogradouro tipoLogradouro) {
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
+			PreparedStatement stmt = this.connection
+					.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
 			stmt.setString(1, tipoLogradouro.getNome());
 			stmt.setLong(2, tipoLogradouro.getId());
 
@@ -70,7 +71,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	}
 
 	@Override
-	public void delete(Long id ) {
+	public void delete(Long id) {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement("delete from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
@@ -80,5 +81,16 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 		}
 	}
 
+	@Override
+	public void getone(Long id) {
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement("select from tipoLogradouro where id=?");
+			stmt.setLong(1, id);
+			stmt.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 
 }
