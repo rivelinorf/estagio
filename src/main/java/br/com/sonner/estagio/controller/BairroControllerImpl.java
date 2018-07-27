@@ -8,8 +8,10 @@ public class BairroControllerImpl implements BairroController {
 	
 	private BairroDAOImpl bDAO;
 	
+	public BairroControllerImpl() {
+		bDAO = BairroDAOImpl.getInstance();
+	}
 	
-
 	@Override
 	public void save(Bairro bairro) {
 		new BairroDAOImpl().save(bairro);

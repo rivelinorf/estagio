@@ -15,11 +15,19 @@ import br.com.sonner.estagio.model.Cidade;
 
 public class BairroDAOImpl implements BairroDAO {
 	private Connection connection;
+	public static BairroDAOImpl BAIRRO_DAO;
 
 	public BairroDAOImpl() {
 		this.connection = Conn.getConnection();
 	}
 
+	public static BairroDAOImpl getInstance() {
+		if (BAIRRO_DAO == null) {
+			BAIRRO_DAO = new BairroDAOImpl();
+		}
+		return BAIRRO_DAO;
+	}
+	
 	@Override
 	public void save(Bairro bairro) {
 		String sql = "insert into bairro (nome, bairro_cidade_fk) values (?, ?)";
@@ -46,8 +54,9 @@ public class BairroDAOImpl implements BairroDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-
-				CidadeDAOImpl cDAO = new CidadeDAOImpl();
+				
+				//falta getInstance do CidadeDAOImpl
+				//CidadeDAOImpl cDAO = CidadeDAOImpl.getInstance();
 				Cidade c = null;
 				//falta getOne de CidadeDAOImpl
 				//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
@@ -109,7 +118,8 @@ public class BairroDAOImpl implements BairroDAO {
 
 			ResultSet rs = stmt.executeQuery();
 
-			CidadeDAOImpl cDAO = new CidadeDAOImpl();
+			//falta getInstance do CidadeDAOImpl
+			//CidadeDAOImpl cDAO = cDAOImpl.getInstance();
 			Cidade c = null;
 			//falta getOne de CidadeDAOImpl
 			//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
@@ -130,4 +140,6 @@ public class BairroDAOImpl implements BairroDAO {
 		}
 
 	}
+
+
 }

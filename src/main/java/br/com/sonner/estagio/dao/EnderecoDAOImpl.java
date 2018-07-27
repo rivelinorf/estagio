@@ -16,9 +16,17 @@ import br.com.sonner.estagio.model.Logradouro;
 
 public class EnderecoDAOImpl implements EnderecoDAO {
 	private Connection connection;
+	public static EnderecoDAOImpl ENDERECO_DAO;
 
 	public EnderecoDAOImpl() {
 		this.connection = Conn.getConnection();
+	}
+	
+	public static EnderecoDAOImpl getInstance() {
+		if (ENDERECO_DAO == null) {
+			ENDERECO_DAO = new EnderecoDAOImpl();
+		}
+		return ENDERECO_DAO;
 	}
 
 	@Override
@@ -51,10 +59,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
 			while (rs.next()) {
 
-				BairroDAOImpl bDAO = new BairroDAOImpl();
+				BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
 				Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
 
-				LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
+				LogradouroDAOImpl lDAO = null;
+				//falta getInstance do LogradouroDAOImpl;
+				//lDAO = LogradouroDAOImpl.getInstance();
 				Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
 				Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
