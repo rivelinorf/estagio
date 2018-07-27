@@ -1,13 +1,13 @@
 package br.com.sonner.estagio.controller.api;
 
-import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.model.Cidade;
 
 import java.util.List;
 
-public interface EstadoController {
-    void save(Estado estado);
-    List<Estado> getAll();
-    Estado getOne(long id);
-    void update(Estado estado);
+public interface CidadeController {
+    void save(Cidade cidade);
+    List<Cidade> getAll();
+    Cidade getOne(long id);
+    void update(Cidade cidade);
     void delete(long id);
 }
