@@ -21,7 +21,7 @@ public class CidadeControllerImpl implements CidadeController {
 
     @Override
     public List<Cidade> getAll() {
-        return null;
+        return this.cidadeDAO.getAll();
     }
 
     @Override

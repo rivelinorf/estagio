@@ -2,6 +2,7 @@ package br.com.sonner.estagio.servlet.estado;
 
 import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.controller.api.EstadoController;
+import br.com.sonner.estagio.model.Estado;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +15,15 @@ import java.io.IOException;
 @WebServlet("/estado-insere")
 public class Insere extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-       /* Estado teste = new Estado(req.getParameter("nome"), req.getParameter("abv"));
-        teste.setId(23);*/
         EstadoController estadoController = new EstadoControllerImpl();
+        Estado novo = new Estado();
 
-        /*estadoController.save(teste);*/
-        /*estadoController.update(teste);*/
-        /*System.out.println(estadoController.getOne(23).getNome());*/
-        /*estadoController.delete(23);*/
+        novo.setNome(req.getParameter("nome"));
+        novo.setAbv(req.getParameter("abv"));
 
-        RequestDispatcher rd = req.getRequestDispatcher("/lista-estados.jsp");
+        estadoController.save(novo);
+
+        RequestDispatcher rd = req.getRequestDispatcher("/estado/lista.jsp");
         rd.forward(req, res);
     }
 }
