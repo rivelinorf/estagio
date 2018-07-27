@@ -22,5 +22,11 @@
     <button>Enviar</button>
     
 </form>
+
+<form action="/adicionaBairro" method="post">
+    Nome: <input type="text" name="nome"> <br>
+    <button>Enviar</button>
+    
+</form>
 </body>
 </html>
