@@ -12,7 +12,8 @@
 <form action="/cidade" method="post">
     <h3>Cidade</h3>
     nome: <input type="text" name="nome"> <br>
-    abreviacao: <input type="text" name="abv">
+    codigo: <input type="text" name="cod">
+    estado: <input type="text" name="estado">
     <button>Enviar</button>
 </form>
 

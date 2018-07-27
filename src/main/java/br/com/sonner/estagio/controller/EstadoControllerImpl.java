@@ -11,7 +11,7 @@ public class EstadoControllerImpl implements EstadoController {
     private EstadoDAO estadoDAO;
 
     public EstadoControllerImpl() {
-        this.estadoDAO = new EstadoDAOImpl();
+        this.estadoDAO = EstadoDAOImpl.getInstance();
     }
 
     @Override

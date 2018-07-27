@@ -13,9 +13,18 @@ import java.util.List;
 
 public class EstadoDAOImpl implements EstadoDAO {
     private Connection connection;
+    private static EstadoDAO ESTADO_DAO;
 
-    public EstadoDAOImpl() {
+    private EstadoDAOImpl() {
         this.connection = Conn.getConnection();
+    }
+
+    public static EstadoDAO getInstance() {
+        if (ESTADO_DAO == null) {
+            ESTADO_DAO = new EstadoDAOImpl();
+        }
+
+        return ESTADO_DAO;
     }
 
     @Override

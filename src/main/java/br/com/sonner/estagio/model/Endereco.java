@@ -9,12 +9,10 @@ public class Endereco {
 	private Logradouro logradouro;
 
 	public Endereco(Integer numero, String cep, Bairro bairro, Logradouro logradouro) {
-
 		this.numero = numero;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.logradouro = logradouro;
-
 	}
 
 	public long getId() {
