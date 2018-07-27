@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.sonner.estagio.connection.Conn;
-import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
@@ -42,7 +41,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 		}
 	}
 
-	/*@Override
+	@Override
 	public List<Endereco> getAll() {
 		try {
 			List<Endereco> enderecos = new ArrayList<Endereco>();
@@ -51,19 +50,19 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				
+
 				BairroDAOImpl bDAO = new BairroDAOImpl();
 				Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
-				
+
 				LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
 				Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
-				
+
 				Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
 				e.setNumero(rs.getInt("numero"));
 				e.setCep(rs.getString("cep"));
 				e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
 				e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
-				
+
 				enderecos.add(e);
 			}
 
@@ -75,7 +74,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 			throw new RuntimeException(e);
 		}
 
-	}*/
+	}
 
 	@Override
 	public void update(Endereco endereco) {
@@ -85,11 +84,11 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 			stmt.setInt(1, endereco.getNumero());
 			stmt.setString(2, endereco.getCep());
 			stmt.setLong(3, endereco.getId());
-			
+
 			stmt.execute();
-			
+
 			stmt.close();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -97,20 +96,48 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		String sql = "delete from endereco where id = ?";
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement(sql);
+			stmt.setLong(1, id);
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 
 	@Override
 	public Endereco getOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement("select * from endereco where id = ?");
+			stmt.setLong(1, id);
 
-	@Override
-	public List<Endereco> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+			ResultSet rs = stmt.executeQuery();
+
+			LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
+			Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
+
+			BairroDAOImpl bDAO = new BairroDAOImpl();
+			Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
+
+			Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+
+			if (rs.first()) {
+				e.setNumero(rs.getInt("numero"));
+				e.setCep(rs.getString("cep"));
+				e.getBairro().setId(rs.getInt("endereco_bairro_fk"));
+				e.getLogradouro().setId(rs.getInt("endereco_logradouro_fk"));
+			}
+			rs.close();
+			stmt.close();
+
+			return e;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 }
