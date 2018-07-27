@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.servlet;
+package br.com.sonner.estagio.servlet.tipologradouro;
 
 import java.io.IOException;
 

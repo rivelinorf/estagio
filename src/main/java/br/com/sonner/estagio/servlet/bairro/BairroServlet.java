@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.servlet;
+package br.com.sonner.estagio.servlet.bairro;
 
 import java.io.IOException;
 import java.io.PrintWriter;

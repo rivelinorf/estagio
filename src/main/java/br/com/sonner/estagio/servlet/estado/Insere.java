@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.servlet;
+package br.com.sonner.estagio.servlet.estado;
 
 import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.controller.api.EstadoController;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/estado-insere")
-public class EstadoServlet extends HttpServlet {
+public class Insere extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
        /* Estado teste = new Estado(req.getParameter("nome"), req.getParameter("abv"));
         teste.setId(23);*/

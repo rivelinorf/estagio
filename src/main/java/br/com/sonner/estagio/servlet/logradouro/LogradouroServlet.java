@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.servlet;
+package br.com.sonner.estagio.servlet.logradouro;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

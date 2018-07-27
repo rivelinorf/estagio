@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.servlet;
+package br.com.sonner.estagio.servlet.cidade;
 
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.EstadoControllerImpl;
