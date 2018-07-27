@@ -5,6 +5,9 @@ public class Estado {
     private String nome;
     private String abv;
 
+    public Estado() {
+    }
+
     public Estado(String nome, String abv) {
         this.nome = nome;
         this.abv = abv;

@@ -6,14 +6,25 @@ import br.com.sonner.estagio.model.Cidade;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CidadeDAOImpl implements CidadeDAO {
     private Connection connection;
+    private static CidadeDAO CIDADE_DAO;
 
-    public CidadeDAOImpl() {
+    private CidadeDAOImpl() {
         this.connection = Conn.getConnection();
+    }
+
+    public static CidadeDAO getInstance() {
+        if (CIDADE_DAO == null) {
+            CIDADE_DAO = new CidadeDAOImpl();
+        }
+
+        return CIDADE_DAO;
     }
 
     @Override
@@ -37,7 +48,30 @@ public class CidadeDAOImpl implements CidadeDAO {
 
     @Override
     public List<Cidade> getAll() {
-        return null;
+        try {
+            String sql = "select * from cidade";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Cidade> cidades = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Cidade aux = new Cidade();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setCod(resultSet.getString("codigo"));
+                aux.setCep(resultSet.getString("cep"));
+                aux.setEstado(EstadoDAOImpl.getInstance().getOne(resultSet.getLong("cidade_estado_fk")));
+
+                cidades.add(aux);
+            }
+
+            return cidades;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -8,6 +8,9 @@ public class Cidade {
 
     private Estado estado;
 
+    public Cidade() {
+    }
+
     public Cidade(String nome, String cod, String cep, Estado estado) {
         this.nome = nome;
         this.cod = cod;

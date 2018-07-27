@@ -53,9 +53,11 @@ public class EstadoDAOImpl implements EstadoDAO {
             List<Estado> estados = new ArrayList<>();
 
             while(resultSet.next()) {
-                Estado aux = new Estado(resultSet.getString("nome"), resultSet.getString("abv"));
+                Estado aux = new Estado();
 
                 aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setAbv(resultSet.getString("abv"));
 
                 estados.add(aux);
             }
@@ -77,8 +79,11 @@ public class EstadoDAOImpl implements EstadoDAO {
             Estado aux = null;
 
             if(resultSet.first()) {
-                aux = new Estado(resultSet.getString("nome"), resultSet.getString("abv"));
+                aux = new Estado();
+
                 aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setAbv(resultSet.getString("abv"));
             }
 
             return aux;
