@@ -4,7 +4,10 @@ public class TipoLogradouro {
 	private long id;
 	private String nome;
 
-	public TipoLogradouro( String nome) {
+	public TipoLogradouro() {
+	}
+
+	public TipoLogradouro(String nome) {
 		this.nome = nome;
 	}
 

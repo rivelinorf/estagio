@@ -7,17 +7,21 @@ public class Logradouro {
 	TipoLogradouro tipologradouro;
 	Cidade cidade;
 
+	public Logradouro() {
+
+	}
+
+	public Logradouro(String nome, TipoLogradouro tipologradouro, Cidade cidade) {
+		this.nome = nome;
+		this.tipologradouro = tipologradouro;
+		this.cidade = cidade;
+	}
+
 	public Cidade getCidade() {
 		return cidade;
 	}
 
 	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
-
-	public Logradouro(String nome, TipoLogradouro tipologradouro,Cidade cidade) {
-		this.nome = nome;
-		this.tipologradouro = tipologradouro;
 		this.cidade = cidade;
 	}
 
