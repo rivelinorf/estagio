@@ -62,7 +62,7 @@ create table if not exists endereco (
 -- inserindo dados
 insert into estado (nome, abv) values ("SAO PAULO", "SP");
 insert into estado (nome, abv) values ("MINAS GERAIS", "MG");
-insert into cidade (nome, codigo, cep, cidade_estado_fk) values ("uberlandia", "udia", "38400", 2);
+insert into cidade (nome, codigo, cep, cidade_estado_fk) values ("Uberlandia", "udia", "38400", 2);
 insert into cidade (nome, codigo, cep, cidade_estado_fk) values ("Osasco", "ossc", "38400", 1);
 insert into tipoLogradouro (nome) values ("RUA");
 insert into tipoLogradouro (nome) values ("AVENIDA");

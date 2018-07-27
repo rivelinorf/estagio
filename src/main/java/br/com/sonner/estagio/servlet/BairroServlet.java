@@ -24,7 +24,7 @@ public class BairroServlet extends HttpServlet {
     	
     	Estado estado = new EstadoControllerImpl().getOne(2);
     	Cidade cidade = new Cidade("Uberlandia", "udia", "5656", estado);
-    	cidade.setId(1);
+    	cidade.setId(2);
     	String nome = request.getParameter("nome");
     	
     	

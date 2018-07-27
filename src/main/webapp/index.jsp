@@ -13,6 +13,7 @@
     <h3>Cidade</h3>
     nome: <input type="text" name="nome"> <br>
     codigo: <input type="text" name="cod">
+    cep: <input type="text" name="cep">
     estado: <input type="text" name="estado">
     <button>Enviar</button>
 </form>
