@@ -8,8 +8,8 @@
 	<form action="/logradouro-insere" method="post">
 		<h3>Logradouro</h3>
 		TipoLogradouro: <input type="text" name="tipo Logradouro"> <br>
-		nome: <input type="text" name="nome"> <br> Cidade: <input
-			type="text" name="cidade"> <br>
+		nome: <input type="text" name="nome"> <br>
+		 Cidade: <input	type="text" name="cidade"> <br>
 		<button>Enviar</button>
 	</form>
 </body>

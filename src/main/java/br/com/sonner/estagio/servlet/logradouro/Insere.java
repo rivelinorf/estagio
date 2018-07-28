@@ -24,21 +24,20 @@ import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 @WebServlet("/logradouro-insere")
-
-public class InsereLogradouro extends HttpServlet {
+public class Insere extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		CidadeController cidadeController = new CidadeControllerImpl();
 		LogradouroController logradouroController = new LogradouroControllerImpl();
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		TipoLogradouro tipologradouro = tipoLogradouroController
-				.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+		
+		TipoLogradouro tipologradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
 
 		logradouroController.save(new Logradouro("nome", tipologradouro, cidade));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/logradouro/lista.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/logradouro/insere.jsp");
 
 		rd.forward(req, res);
 	}

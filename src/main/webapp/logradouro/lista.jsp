@@ -1,3 +1,6 @@
+<%@page import="br.com.sonner.estagio.model.Logradouro"%>
+<%@page import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
+<%@page import="br.com.sonner.estagio.controller.api.LogradouroController"%>
 <%@ page import="br.com.sonner.estagio.controller.EstadoControllerImpl" %>
 <%@ page import="br.com.sonner.estagio.controller.api.EstadoController" %>
 <%@ page import="br.com.sonner.estagio.model.Estado" %>
@@ -8,12 +11,13 @@
 </head>
 <body>
     <table border="1">
-        <% EstadoController estadoController = new EstadoControllerImpl(); %>
-        <% for (Estado estado: estadoController.getAll()) { %>
+        <% LogradouroController logradouroController = new LogradouroControllerImpl(); %>
+        <% for (Logradouro logradouro: logradouroController.getAll()) { %>
             <tr>
-                <td><%= estado.getId() %></td>
-                <td><%= estado.getNome() %></td>
-                <td><%= estado.getAbv() %></td>
+                <td><%= logradouro.getId() %></td>
+                <td><%= logradouro.getNome() %></td>
+                <td><%= logradouro.getCidade() %></td>
+                <td><%= logradouro.getTipologradouro() %></td>
             </tr>
         <% } %>
     </table>

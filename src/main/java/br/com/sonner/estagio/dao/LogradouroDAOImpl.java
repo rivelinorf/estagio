@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
+import br.com.sonner.estagio.controller.CidadeControllerImpl;
+import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
+import br.com.sonner.estagio.controller.api.CidadeController;
+import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
@@ -53,18 +57,18 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			List<Logradouro> logradouros = new ArrayList<>();
 
 			while (resultSet.next()) {
-				// tipo logradouro getONE e salva na variavel "t"
-				TipoLogradouro t = null;
+				CidadeController cidadeController = new CidadeControllerImpl();
+				TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-				// Cidade getONE e salva na variavel "c"
-				Cidade c = null;
+				TipoLogradouro tipologradouro = tipoLogradouroController.getOne(resultSet.getLong("logradouro_tipologradouro_fk"));
+				Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
 
-				Logradouro l = new Logradouro(resultSet.getString("nome"), t, c);
-				l.setNome(resultSet.getString("nome"));
-				l.getTipologradouro().setId(resultSet.getLong("logradouro_tipo_fk"));
-				l.getCidade().setId(resultSet.getLong("logradouro_cidade_fk"));
+				Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
+				logradouro.setNome(resultSet.getString("nome"));
+				logradouro.getTipologradouro().setId(resultSet.getLong("logradouro_tipo_fk"));
+				logradouro.getCidade().setId(resultSet.getLong("logradouro_cidade_fk"));
 
-				logradouros.add(l);
+				logradouros.add(logradouro);
 			}
 
 			resultSet.close();
@@ -110,20 +114,21 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro where id = ?");
 			stmt.setLong(1, id);
 
-			ResultSet rs = stmt.executeQuery();
+			ResultSet resultSet = stmt.executeQuery();
 
-			// tipo logradouro getONE e salva na variavel "t"
-			TipoLogradouro t = null;
+			CidadeController cidadeController = new CidadeControllerImpl();
+			TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-			// Cidade getONE e salva na variavel "c"
-			Cidade c = null;
+			TipoLogradouro tipologradouro = tipoLogradouroController.getOne(resultSet.getLong("logradouro_tipologradouro_fk"));
+			Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
+			
 
-			Logradouro logradouro = new Logradouro(rs.getString("nome"), t, c);
+			Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
 
-			if (rs.first()) {
-				logradouro.setNome(rs.getString("nome"));
-				logradouro.getCidade().setId(rs.getLong("logradouro_cidade_fk"));
-				logradouro.getTipologradouro().setId(rs.getLong("logradouro_tipo_fk"));
+			if (resultSet.first()) {
+				logradouro.setNome(resultSet.getString("nome"));
+				logradouro.getCidade().setId(resultSet.getLong("logradouro_cidade_fk"));
+				logradouro.getTipologradouro().setId(resultSet.getLong("logradouro_tipo_fk"));
 			}
 
 			return logradouro;

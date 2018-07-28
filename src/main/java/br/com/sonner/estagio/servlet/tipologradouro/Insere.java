@@ -14,13 +14,13 @@ import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/tipoLogradouro")
+@WebServlet("/tipoLogradouro-insere")
 public class Insere extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 		tipoLogradouroController.save(new TipoLogradouro("nome"));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/tipologradouro/lista.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/tipologradouro/insere.jsp");
 
 		rd.forward(req, res);
 

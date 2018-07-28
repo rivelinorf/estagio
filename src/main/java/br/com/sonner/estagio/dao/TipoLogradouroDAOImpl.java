@@ -11,23 +11,21 @@ import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
-	
+
 	private Connection connection;
 	private static TipoLogradouroDAO TIPOLOGRADOURO_DAO;
-	
 
 	public TipoLogradouroDAOImpl() {
 		this.connection = Conn.getConnection();
 	}
-	
+
 	public static TipoLogradouroDAO getInstance() {
-		if(TIPOLOGRADOURO_DAO==null) {
+		if (TIPOLOGRADOURO_DAO == null) {
 			TIPOLOGRADOURO_DAO = new TipoLogradouroDAOImpl();
 		}
-		
-		
+
 		return TIPOLOGRADOURO_DAO;
-		
+
 	}
 
 	@Override

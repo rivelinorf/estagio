@@ -1,16 +1,25 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: matheus
-  Date: 7/27/18
-  Time: 4:08 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@page import="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"%>
+<%@page import="br.com.sonner.estagio.model.TipoLogradouro"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title>Title</title>
+<title>Title</title>
 </head>
 <body>
+	<form action="/tipologradouro-atualiza" method="post">
+		TipoLogradouro: <select name="id">
+			<%
+				for (TipoLogradouro tipoLogradouro : new TipoLogradouroControllerImpl().getAll()) {
+			%>
+			<option value="<%=tipoLogradouro.getId()%>"><%=tipoLogradouro.getNome()%></option>
+			<%
+				}
+			%>
+		</select><br> Tipo De Logradouro: <input type="text" name="TipoLogradouro">
+		<br>
+		<button>Enviar</button>
+	</form>
 
 </body>
 </html>
