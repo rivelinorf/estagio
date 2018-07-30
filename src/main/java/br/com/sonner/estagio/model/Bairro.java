@@ -6,6 +6,10 @@ public class Bairro {
 
 	private Cidade cidade;
 	
+	public Bairro() {
+		
+	}
+	
 	public Bairro(String nome, Cidade cidade) {
 		this.nome = nome;
 		this.cidade = cidade;
