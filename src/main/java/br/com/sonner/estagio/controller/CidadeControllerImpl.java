@@ -26,16 +26,16 @@ public class CidadeControllerImpl implements CidadeController {
 
     @Override
     public Cidade getOne(long id) {
-        return null;
+        return this.cidadeDAO.getOne(id);
     }
 
     @Override
     public void update(Cidade cidade) {
-
+        this.cidadeDAO.update(cidade);
     }
 
     @Override
     public void delete(long id) {
-
+        this.cidadeDAO.delete(id);
     }
 }

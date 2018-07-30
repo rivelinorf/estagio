@@ -34,10 +34,10 @@
 <a href="/logradouro/deleta.jsp"><button style="background-color: red">Deleta logradouro</button></a><br>
 <br><br>
 
-<a href="/tipo-logradouro/insere.jsp"><button style="background-color: lawngreen">Inserir tipologradouro</button></a><br>
-<a href="/tipo-logradouro/lista.jsp"><button style="background-color: yellow">Listar tipologradouros</button></a><br>
-<a href="/tipo-logradouro/atualiza.jsp"><button style="background-color: blue">Atualiza tipologradouro</button></a><br>
-<a href="/tipo-logradouro/deleta.jsp"><button style="background-color: red">Deleta tipologradouro</button></a><br>
+<a href="/tipologradouro/insere.jsp"><button style="background-color: lawngreen">Inserir tipologradouro</button></a><br>
+<a href="/tipologradouro/lista.jsp"><button style="background-color: yellow">Listar tipologradouros</button></a><br>
+<a href="/tipologradouro/atualiza.jsp"><button style="background-color: blue">Atualiza tipologradouro</button></a><br>
+<a href="/tipologradouro/deleta.jsp"><button style="background-color: red">Deleta tipologradouro</button></a><br>
 <br><br>
 
 </body>

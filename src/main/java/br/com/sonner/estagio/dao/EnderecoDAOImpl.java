@@ -1,155 +1,154 @@
 package br.com.sonner.estagio.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EnderecoDAOImpl implements EnderecoDAO {
-	private Connection connection;
-	public static EnderecoDAOImpl ENDERECO_DAO;
+    private Connection connection;
+    public static EnderecoDAOImpl ENDERECO_DAO;
 
-	public EnderecoDAOImpl() {
-		this.connection = Conn.getConnection();
-	}
-	
-	public static EnderecoDAOImpl getInstance() {
-		if (ENDERECO_DAO == null) {
-			ENDERECO_DAO = new EnderecoDAOImpl();
-		}
-		return ENDERECO_DAO;
-	}
+    public EnderecoDAOImpl() {
+        this.connection = Conn.getConnection();
+    }
 
-	@Override
-	public void save(Endereco endereco) {
-		String sql = "insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (?, ?, ?, ?)";
+    public static EnderecoDAOImpl getInstance() {
+        if (ENDERECO_DAO == null) {
+            ENDERECO_DAO = new EnderecoDAOImpl();
+        }
+        return ENDERECO_DAO;
+    }
 
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+    @Override
+    public void save(Endereco endereco) {
+        String sql = "insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (?, ?, ?, ?)";
 
-			stmt.setInt(1, endereco.getNumero());
-			stmt.setString(2, endereco.getCep());
-			stmt.setLong(3, endereco.getLogradouro().getId());
-			stmt.setLong(4, endereco.getBairro().getId());
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
 
-			stmt.execute();
-			stmt.close();
+            stmt.setInt(1, endereco.getNumero());
+            stmt.setString(2, endereco.getCep());
+            stmt.setLong(3, endereco.getLogradouro().getId());
+            stmt.setLong(4, endereco.getBairro().getId());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+            stmt.execute();
+            stmt.close();
 
-	@Override
-	public List<Endereco> getAll() {
-		try {
-			List<Endereco> enderecos = new ArrayList<Endereco>();
-			PreparedStatement stmt = this.connection.prepareStatement("select * from endereco");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-			ResultSet rs = stmt.executeQuery();
+    @Override
+    public List<Endereco> getAll() {
+        try {
+            List<Endereco> enderecos = new ArrayList<Endereco>();
+            PreparedStatement stmt = this.connection.prepareStatement("select * from endereco");
 
-			while (rs.next()) {
+            ResultSet rs = stmt.executeQuery();
 
-				BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
-				Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
+            while (rs.next()) {
 
-				LogradouroDAOImpl lDAO = null;
-				//falta getInstance do LogradouroDAOImpl;
-				//lDAO = LogradouroDAOImpl.getInstance();
-				Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
+                BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
+                Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
 
-				Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
-				e.setNumero(rs.getInt("numero"));
-				e.setCep(rs.getString("cep"));
-				e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
-				e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
+                LogradouroDAOImpl lDAO = null;
+                //falta getInstance do LogradouroDAOImpl;
+                //lDAO = LogradouroDAOImpl.getInstance();
+                Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
-				enderecos.add(e);
-			}
+                Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+                e.setNumero(rs.getInt("numero"));
+                e.setCep(rs.getString("cep"));
+                e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
+                e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
 
-			rs.close();
-			stmt.close();
+                enderecos.add(e);
+            }
 
-			return enderecos;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+            rs.close();
+            stmt.close();
 
-	}
+            return enderecos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-	@Override
-	public void update(Endereco endereco) {
-		String sql = "update endereco set numero = ?, cep = ? where id = ?";
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement(sql);
-			stmt.setInt(1, endereco.getNumero());
-			stmt.setString(2, endereco.getCep());
-			stmt.setLong(3, endereco.getId());
+    }
 
-			stmt.execute();
+    @Override
+    public void update(Endereco endereco) {
+        String sql = "update endereco set numero = ?, cep = ? where id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setInt(1, endereco.getNumero());
+            stmt.setString(2, endereco.getCep());
+            stmt.setLong(3, endereco.getId());
 
-			stmt.close();
+            stmt.execute();
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            stmt.close();
 
-	@Override
-	public void delete(Long id) {
-		String sql = "delete from endereco where id = ?";
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement(sql);
-			stmt.setLong(1, id);
-			
-			stmt.execute();
-			stmt.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	}
+    @Override
+    public void delete(Long id) {
+        String sql = "delete from endereco where id = ?";
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
+            stmt.setLong(1, id);
 
-	@Override
-	public Endereco getOne(Long id) {
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement("select * from endereco where id = ?");
-			stmt.setLong(1, id);
+            stmt.execute();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-			ResultSet rs = stmt.executeQuery();
+    }
 
-			LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
-			Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
+    @Override
+    public Endereco getOne(Long id) {
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement("select * from endereco where id = ?");
+            stmt.setLong(1, id);
 
-			BairroDAOImpl bDAO = new BairroDAOImpl();
-			Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
+            ResultSet rs = stmt.executeQuery();
 
-			Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+            LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
+            Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
-			if (rs.first()) {
-				e.setNumero(rs.getInt("numero"));
-				e.setCep(rs.getString("cep"));
-				e.getBairro().setId(rs.getInt("endereco_bairro_fk"));
-				e.getLogradouro().setId(rs.getInt("endereco_logradouro_fk"));
-			}
-			rs.close();
-			stmt.close();
+            BairroDAOImpl bDAO = new BairroDAOImpl();
+            Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
 
-			return e;
+            Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+            if (rs.first()) {
+                e.setNumero(rs.getInt("numero"));
+                e.setCep(rs.getString("cep"));
+                e.getBairro().setId(rs.getInt("endereco_bairro_fk"));
+                e.getLogradouro().setId(rs.getInt("endereco_logradouro_fk"));
+            }
+            rs.close();
+            stmt.close();
 
-	}
+            return e;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }

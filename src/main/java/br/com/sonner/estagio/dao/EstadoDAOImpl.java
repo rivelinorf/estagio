@@ -84,6 +84,8 @@ public class EstadoDAOImpl implements EstadoDAO {
                 aux.setId(resultSet.getLong("id"));
                 aux.setNome(resultSet.getString("nome"));
                 aux.setAbv(resultSet.getString("abv"));
+
+                stmt.close();
             }
 
             return aux;
@@ -113,11 +115,8 @@ public class EstadoDAOImpl implements EstadoDAO {
 
     @Override
     public void delete(long id) {
-        String sql = "delete from estado where id=?";
-
         try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-
+            PreparedStatement statement = connection.prepareStatement("delete from estado where id=?");
             statement.setLong(1, id);
             statement.execute();
             statement.close();

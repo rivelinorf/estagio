@@ -11,6 +11,9 @@
     <title>Title</title>
 </head>
 <body>
-
+    <form action="/cidade-deleta" method="post">
+        id: <input type="text" name="id">
+        <button>Enviar</button>
+    </form>
 </body>
 </html>

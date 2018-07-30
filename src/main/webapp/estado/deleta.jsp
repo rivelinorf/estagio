@@ -11,8 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/estado-atualiza" method="post">
-        Estado para deletar
+    <form action="/estado-deleta" method="post">
+        Estado para deletar: <input type="text" name="id">
         <button>Enviar</button>
     </form>
 </body>
