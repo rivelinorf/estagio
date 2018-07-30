@@ -1,6 +1,6 @@
-<%@ page import="br.com.sonner.estagio.controller.EstadoControllerImpl" %>
-<%@ page import="br.com.sonner.estagio.controller.api.EstadoController" %>
-<%@ page import="br.com.sonner.estagio.model.Estado" %>
+<%@page import="br.com.sonner.estagio.controller.EnderecoControllerImpl"%>
+<%@page import="br.com.sonner.estagio.model.Endereco"%>
+<%@page import="br.com.sonner.estagio.controller.api.EnderecoController"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,12 +8,14 @@
 </head>
 <body>
     <table border="1">
-        <% EstadoController estadoController = new EstadoControllerImpl(); %>
-        <% for (Estado estado: estadoController.getAll()) { %>
+        <% EnderecoController enderecoController = new EnderecoControllerImpl(); %>
+        <% for (Endereco endereco: enderecoController.getAll()) { %>
             <tr>
-                <td><%= estado.getId() %></td>
-                <td><%= estado.getNome() %></td>
-                <td><%= estado.getAbv() %></td>
+                <td><%= endereco.getId() %></td>
+                <td><%= endereco.getNumero() %></td>
+                <td><%= endereco.getCep() %></td>
+                <td><%= endereco.getBairro().getNome() %> </td>
+                <td><%= endereco.getLogradouro().getNome() %></td>
             </tr>
         <% } %>
     </table>

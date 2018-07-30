@@ -17,7 +17,7 @@ public class Deleta extends HttpServlet {
 			throws ServletException, IOException {
 		new LogradouroControllerImpl().delete(Long.valueOf(request.getParameter("id")));
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logradouro/deleta.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logradouro/lista.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

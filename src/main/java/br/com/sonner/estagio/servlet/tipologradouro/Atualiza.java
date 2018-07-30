@@ -28,7 +28,7 @@ public class Atualiza extends HttpServlet {
 
 		tipoLogradouroController.update(tipoLogradouro);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/tipologradouro/atualiza.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/tipologradouro/lista.jsp");
 		requestDispatcher.forward(request, response);
 
 	}
