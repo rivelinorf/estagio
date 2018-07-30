@@ -1,7 +1,6 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/tipoLogradouro-insere")
+@WebServlet("/tipologradouro-insere")
 public class Insere extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();

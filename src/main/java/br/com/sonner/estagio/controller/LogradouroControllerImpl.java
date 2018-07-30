@@ -4,12 +4,17 @@ import java.util.List;
 
 import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
+import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.model.Logradouro;
 
 public class LogradouroControllerImpl implements LogradouroController {
 
-	private LogradouroDAOImpl lDAO;
-	
+	private LogradouroDAO lDAO;
+
+	public LogradouroControllerImpl() {
+		this.lDAO = LogradouroDAOImpl.getIntance();
+	}
+
 	@Override
 	public void save(Logradouro logradouro) {
 		this.lDAO.save(logradouro);
@@ -33,7 +38,7 @@ public class LogradouroControllerImpl implements LogradouroController {
 	@Override
 	public void delete(long id) {
 		this.lDAO.delete(id);
-		
+
 	}
 
 }

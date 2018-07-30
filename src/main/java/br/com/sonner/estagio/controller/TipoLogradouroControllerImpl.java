@@ -4,11 +4,17 @@ import java.util.List;
 
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.dao.TipoLogradouroDAOImpl;
+import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 public class TipoLogradouroControllerImpl implements TipoLogradouroController {
 
-	private TipoLogradouroDAOImpl tDAO;
+	private TipoLogradouroDAO tDAO;
+	
+	
+	public TipoLogradouroControllerImpl() {
+		this.tDAO = TipoLogradouroDAOImpl.getInstance();
+	}
 
 	@Override
 	public void save(TipoLogradouro tipoLogradouro) {
