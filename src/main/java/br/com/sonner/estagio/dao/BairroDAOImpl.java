@@ -55,8 +55,8 @@ public class BairroDAOImpl implements BairroDAO {
 
 			while (rs.next()) {
 				
-				//falta getInstance do CidadeDAOImpl
-				//CidadeDAOImpl cDAO = CidadeDAOImpl.getInstance();
+
+				CidadeDAO cDAO = CidadeDAOImpl.getInstance();
 				Cidade c = null;
 				//falta getOne de CidadeDAOImpl
 				//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
@@ -103,6 +103,8 @@ public class BairroDAOImpl implements BairroDAO {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
 			stmt.setLong(1, id);
+			
+			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -118,8 +120,8 @@ public class BairroDAOImpl implements BairroDAO {
 
 			ResultSet rs = stmt.executeQuery();
 
-			//falta getInstance do CidadeDAOImpl
-			//CidadeDAOImpl cDAO = cDAOImpl.getInstance();
+
+			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
 			Cidade c = null;
 			//falta getOne de CidadeDAOImpl
 			//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));

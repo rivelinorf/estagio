@@ -11,10 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-    <form action="/estado-insere" method="post">
+    <form action="/endereco-insere" method="post">
         <h3>Estado</h3>
-        nome: <input type="text" name="nome"> <br>
-        abreviacao: <input type="text" name="abv">
+        numero: <input type="text" name="numero"> <br>
+        cep: <input type="text" name="cep">
         <button>Enviar</button>
     </form>
 </body>
