@@ -55,6 +55,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 			while (rs.next()) {
 				TipoLogradouro tipoLogradouro2 = new TipoLogradouro("nome");
 				tipoLogradouro2.setNome(rs.getString("nome"));
+				tipoLogradouro2.setId(rs.getLong("id"));
 				tipoLogradouros.add(tipoLogradouro2);
 			}
 
@@ -70,8 +71,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	@Override
 	public void update(TipoLogradouro tipoLogradouro) {
 		try {
-			PreparedStatement stmt = this.connection
-					.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
+			PreparedStatement stmt = this.connection.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
 			stmt.setString(1, tipoLogradouro.getNome());
 			stmt.setLong(2, tipoLogradouro.getId());
 

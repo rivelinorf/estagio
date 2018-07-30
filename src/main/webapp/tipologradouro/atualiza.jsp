@@ -16,8 +16,7 @@
 			<%
 				}
 			%>
-		</select><br> Tipo De Logradouro: <input type="text" name="TipoLogradouro">
-		<br>
+		</select><br> Tipo De Logradouro: <input type="text" name="nome" placeholder="Ex:Rua,Avenida....">	<br>
 		<button>Enviar</button>
 	</form>
 

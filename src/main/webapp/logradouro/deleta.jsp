@@ -7,8 +7,7 @@
 <body>
 <form action="/logradouro-deleta" method="post">
 		<h3> Logradouro  Deleta</h3>
-		Logradouro: <input type="text" name=" logradouro"> <br>
-		id: <input	type="text" name="id">
+		id: <input	type="text" name="id" placeholder="Informe o id a ser deletado">
 		<button>Enviar</button>
 	</form>
 

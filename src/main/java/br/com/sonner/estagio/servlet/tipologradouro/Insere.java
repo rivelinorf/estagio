@@ -15,10 +15,14 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 public class Insere extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		tipoLogradouroController.save(new TipoLogradouro("nome"));
+		
+		TipoLogradouro novo = new TipoLogradouro();
+		
+		novo.setNome(req.getParameter("nome"));
+		
+		tipoLogradouroController.save(novo);
 
-		RequestDispatcher rd = req.getRequestDispatcher("/tipologradouro/insere.jsp");
-
+		RequestDispatcher rd = req.getRequestDispatcher("/tipologradouro/lista.jsp");
 		rd.forward(req, res);
 
 	}
