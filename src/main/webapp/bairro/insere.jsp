@@ -6,7 +6,7 @@
 </head>
 <body>
     <form action="/bairro-insere" method="post">
-        <h3>Estado</h3>
+        <h3>Bairro</h3>
         nome: <input type="text" name="nome"> <br>
         <button>Enviar</button>
     </form>

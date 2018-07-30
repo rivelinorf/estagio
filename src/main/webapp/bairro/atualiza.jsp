@@ -11,7 +11,9 @@
 			<%
 				for (Bairro bairro : new BairroControllerImpl().getAll()) {
 			%>
-			<option value="<%=bairro.getId()%>"><%=bairro.getNome()%>"<%=bairro.getCidade()%>"
+			<option value="<%=bairro.getId()%>">
+			<%=bairro.getNome()%>
+			"<%=bairro.getCidade()%>"
 			</option>
 			<%
 				}

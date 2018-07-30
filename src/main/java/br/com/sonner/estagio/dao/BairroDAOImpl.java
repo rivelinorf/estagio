@@ -103,6 +103,8 @@ public class BairroDAOImpl implements BairroDAO {
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
 			stmt.setLong(1, id);
+			
+			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
