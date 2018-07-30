@@ -4,4 +4,44 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>Atualiza</servlet-name>
+  	<display-name>Atualiza</display-name>
+  	<description></description>
+  	<servlet-class>br.com.sonner.estagio.servlet.bairro.Atualiza</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Deleta</servlet-name>
+  	<display-name>Deleta</display-name>
+  	<description></description>
+  	<servlet-class>br.com.sonner.estagio.servlet.bairro.Deleta</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Insere</servlet-name>
+  	<display-name>Insere</display-name>
+  	<description></description>
+  	<servlet-class>br.com.sonner.estagio.servlet.bairro.Insere</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>Lista</servlet-name>
+  	<display-name>Lista</display-name>
+  	<description></description>
+  	<servlet-class>br.com.sonner.estagio.servlet.bairro.Lista</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Atualiza</servlet-name>
+  	<url-pattern>/Atualiza</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Deleta</servlet-name>
+  	<url-pattern>/Deleta</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Insere</servlet-name>
+  	<url-pattern>/Insere</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Lista</servlet-name>
+  	<url-pattern>/Lista</url-pattern>
+  </servlet-mapping>
 </web-app>
