@@ -94,7 +94,7 @@ public class CidadeDAOImpl implements CidadeDAO {
                 aux.setId(resultSet.getLong("id"));
                 aux.setNome(resultSet.getString("nome"));
                 aux.setCep(resultSet.getString("cep"));
-                aux.setCod(resultSet.getString("cod"));
+                aux.setCod(resultSet.getString("codigo"));
                 aux.setEstado(estadoDAO.getOne(resultSet.getLong("cidade_estado_fk")));
 
                 statement.close();

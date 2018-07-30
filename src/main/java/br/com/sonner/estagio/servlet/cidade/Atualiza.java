@@ -29,6 +29,9 @@ public class Atualiza extends HttpServlet {
 
         cidadeController.update(novaCidade);
 
+        Cidade teste = cidadeController.getOne(Long.valueOf(request.getParameter("id")));
+        System.out.printf(teste.getNome());
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/cidade/lista.jsp");
         requestDispatcher.forward(request, response);
     }

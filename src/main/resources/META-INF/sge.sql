@@ -23,7 +23,7 @@ create table if not exists cidade (
         codigo VARCHAR(50) NOT NULL,
         cep VARCHAR(50) NOT NULL,
         cidade_estado_fk BIGINT,
-        constraint cidade_estado_fk foreign key (id) references estado(id)
+        constraint cidade_estado_fk foreign key (cidade_estado_fk) references estado(id)
 )ENGINE = innodb;
 
 create table if not exists tipoLogradouro (
@@ -36,8 +36,8 @@ create table if not exists logradouro (
         nome VARCHAR(50) NOT NULL,
         logradouro_cidade_fk BIGINT,
         logradouro_tipo_fk BIGINT,
-        constraint logradouro_cidade_fk foreign key (id) references cidade(id),
-        constraint logradouro_tipo_fk foreign key (id) references tipoLogradouro(id)
+        constraint logradouro_cidade_fk foreign key (logradouro_cidade_fk) references cidade(id),
+        constraint logradouro_tipo_fk foreign key (logradouro_tipo_fk) references tipoLogradouro(id)
 )ENGINE = innodb;
 
 
@@ -45,7 +45,7 @@ create table if not exists bairro (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
         bairro_cidade_fk BIGINT,
-        constraint bairro_cidade_fk foreign key (id) references cidade(id)
+        constraint bairro_cidade_fk foreign key (bairro_cidade_fk) references cidade(id)
 )ENGINE = innodb;
 
 create table if not exists endereco (
@@ -54,8 +54,8 @@ create table if not exists endereco (
         cep VARCHAR(50),
         endereco_logradouro_fk BIGINT,
         endereco_bairro_fk BIGINT,
-        constraint endereco_logradouro_fk foreign key (id) references logradouro(id),
-        constraint endereco_bairro_fk foreign key (id) references bairro(id)        
+        constraint endereco_logradouro_fk foreign key (endereco_logradouro_fk) references logradouro(id),
+        constraint endereco_bairro_fk foreign key (endereco_bairro_fk) references bairro(id)        
 )ENGINE = innodb;
 
 -- inserindo dados
