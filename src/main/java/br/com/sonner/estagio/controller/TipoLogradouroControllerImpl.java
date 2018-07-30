@@ -10,8 +10,7 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 public class TipoLogradouroControllerImpl implements TipoLogradouroController {
 
 	private TipoLogradouroDAO tDAO;
-	
-	
+
 	public TipoLogradouroControllerImpl() {
 		this.tDAO = TipoLogradouroDAOImpl.getInstance();
 	}

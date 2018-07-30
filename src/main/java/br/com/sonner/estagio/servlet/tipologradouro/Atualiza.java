@@ -18,8 +18,7 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 
 @WebServlet("/tipologradouro-atualiza")
 public class Atualiza extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 		TipoLogradouro tipoLogradouro = new TipoLogradouro();
 
