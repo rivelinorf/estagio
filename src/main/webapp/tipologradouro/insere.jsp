@@ -8,7 +8,7 @@
 <body>
 	
 	<form action="/tipologradouro-insere" method="post">
-		<h3>Tipo Logradouro</h3>
+		<h3>Inserir Tipo Logradouro</h3>
 		tipo de logradouro: <input type="text" name="tipo de logradrouro"> <br>
 		<button>Enviar</button>
 	</form>
