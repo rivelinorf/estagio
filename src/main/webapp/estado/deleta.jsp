@@ -12,10 +12,7 @@
 </head>
 <body>
     <form action="/estado-atualiza" method="post">
-        <h3>Estado</h3>
-        nome: <input type="text" name="nome"> <br>
-        abreviacao: <input type="text" name="abv">
-        id: <input type="text" name="id">
+        Estado para deletar
         <button>Enviar</button>
     </form>
 </body>
