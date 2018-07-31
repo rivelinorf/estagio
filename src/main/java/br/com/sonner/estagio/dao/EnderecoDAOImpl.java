@@ -2,6 +2,7 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
+import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
@@ -61,12 +62,11 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                 BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
                 Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
 
-                LogradouroDAOImpl lDAO = null;
-                //falta getInstance do LogradouroDAOImpl;
-                //lDAO = LogradouroDAOImpl.getInstance();
+                LogradouroDAO lDAO = LogradouroDAOImpl.getIntance();
                 Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
                 Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+                e.setId(rs.getLong("id"));
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
                 e.getBairro().setId(rs.getLong("endereco_bairro_fk"));

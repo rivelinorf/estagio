@@ -1,9 +1,9 @@
 <%@page import="br.com.sonner.estagio.controller.BairroControllerImpl"%>
 <%@page import="br.com.sonner.estagio.model.Bairro"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title>Title</title>
+<title>Title</title>
 </head>
 <body>
 	<form action="/bairro-atualiza" method="post">
@@ -12,15 +12,13 @@
 				for (Bairro bairro : new BairroControllerImpl().getAll()) {
 			%>
 			<option value="<%=bairro.getId()%>">
-			<%=bairro.getNome()%>
-			"<%=bairro.getCidade()%>"
+				<%=bairro.getNome()%>
 			</option>
 			<%
 				}
 			%>
-		</select><br> 
-		nome: <input type="text" name="nome"> <br>
-		cidade: <input type="text" name="cidade">
+		</select><br> nome: <input type="text" name="nome"> <br> id
+		da cidade: <input type="text" name="cidade">
 
 		<button>Enviar</button>
 	</form>

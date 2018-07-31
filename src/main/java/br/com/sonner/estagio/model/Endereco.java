@@ -7,6 +7,10 @@ public class Endereco {
 
 	private Bairro bairro;
 	private Logradouro logradouro;
+	
+	public Endereco() {
+		
+	}
 
 	public Endereco(Integer numero, String cep, Bairro bairro, Logradouro logradouro) {
 		this.numero = numero;

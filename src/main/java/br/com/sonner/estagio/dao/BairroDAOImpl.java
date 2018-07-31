@@ -57,11 +57,10 @@ public class BairroDAOImpl implements BairroDAO {
 				
 
 				CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-				Cidade c = null;
-				//falta getOne de CidadeDAOImpl
-				//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
+				Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
 
 				Bairro b = new Bairro(rs.getString("nome"), c);
+				b.setId(rs.getLong("id"));
 				b.setNome(rs.getString("nome"));
 				b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
 
@@ -122,9 +121,7 @@ public class BairroDAOImpl implements BairroDAO {
 
 
 			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-			Cidade c = null;
-			//falta getOne de CidadeDAOImpl
-			//c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
+			Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
 			Bairro b = new Bairro(rs.getString("nome"), c);
 
 			if (rs.first()) {
