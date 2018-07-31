@@ -39,7 +39,7 @@ public class Atualiza extends HttpServlet {
 
 		logradouroController.update(logradouro);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logradouro/atualiza.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logradouro/lista.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

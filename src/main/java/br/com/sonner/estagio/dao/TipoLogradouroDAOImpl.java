@@ -64,20 +64,22 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
 			return tipoLogradouros;
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
+			return null;
 		}
 	}
 
 	@Override
 	public void update(TipoLogradouro tipoLogradouro) {
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
+			PreparedStatement stmt = this.connection
+					.prepareStatement("update tipoLogradouro set nome = ? where id = ?");
 			stmt.setString(1, tipoLogradouro.getNome());
 			stmt.setLong(2, tipoLogradouro.getId());
 
 			stmt.execute();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 	}
 
@@ -88,23 +90,26 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 			stmt.setLong(1, id);
 			stmt.execute();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public TipoLogradouro getOne(Long id) {
-
 		try {
 			PreparedStatement stmt = connection.prepareStatement("select from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 
-			TipoLogradouro temp = null;
+			TipoLogradouro temp = new TipoLogradouro();
 			if (resultSet.first()) {
-				temp = new TipoLogradouro(resultSet.getString("nome"));
+
+				temp.setNome(resultSet.getString("nome"));
 				temp.setId(resultSet.getLong("id"));
+
+				stmt.close();
 			}
+
 			return temp;
 
 		} catch (SQLException e) {

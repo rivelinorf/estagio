@@ -7,7 +7,7 @@
 <body>
 	<form action="/logradouro-insere" method="post">
 		<h3>Inserir Logradouro</h3>
-		TipoLogradouro: <input type="text" name="nome" placeholder="id do tipo logradouro"> <br>
+		TipoLogradouro: <input type="text" name="tipoLogradouro" placeholder="id do tipo logradouro"> <br>
 		nome: <input type="text" name="nome" placeholder="nome do logradouro"> <br>
 		 Cidade: <input	type="text" name="cidade" placeholder="id da cidade "> <br>
 		<button>Enviar</button>
