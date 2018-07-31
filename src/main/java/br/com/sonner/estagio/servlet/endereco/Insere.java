@@ -38,8 +38,8 @@ public class Insere extends HttpServlet {
 		enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"),
 				bairro, logradouro));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/endereco/insere.jsp");
-		rd.forward(req, res);
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/endereco/lista.jsp");
+		requestDispatcher.forward(req, res);;
 	}
 
 }

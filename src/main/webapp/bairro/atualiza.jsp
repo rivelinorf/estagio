@@ -1,5 +1,7 @@
 <%@page import="br.com.sonner.estagio.controller.BairroControllerImpl"%>
 <%@page import="br.com.sonner.estagio.model.Bairro"%>
+<%@ page import="br.com.sonner.estagio.controller.CidadeControllerImpl" %>
+<%@ page import="br.com.sonner.estagio.model.Cidade" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
@@ -17,10 +19,17 @@
 			<%
 				}
 			%>
-		</select><br> nome: <input type="text" name="nome"> <br> id
-		da cidade: <input type="text" name="cidade">
+		</select><br> Novo nome: <input type="text" name="nome"> <br> nova
+		cidade: <select name="cidade">
+			<%
+				for (Cidade cidade : new CidadeControllerImpl().getAll()) {
+			%>
+			<option value="<%=cidade.getId()%>"><%=cidade.getNome()%></option>
+			<%
+				}
+			%>
 
-		<button>Enviar</button>
+			<button>Enviar</button>
 	</form>
 </body>
 </html>

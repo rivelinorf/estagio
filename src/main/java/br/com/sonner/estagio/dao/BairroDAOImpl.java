@@ -44,6 +44,24 @@ public class BairroDAOImpl implements BairroDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void update(Bairro bairro) {
+		String sql = "update bairro set nome = ? where id = ?";
+		try {
+			PreparedStatement stmt = this.connection.prepareStatement(sql);
+			stmt.setString(1, bairro.getNome());
+			stmt.setLong(2, bairro.getId());
+
+			stmt.execute();
+
+			stmt.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
+	}
 
 	@Override
 	public List<Bairro> getAll() {
@@ -79,25 +97,7 @@ public class BairroDAOImpl implements BairroDAO {
 	}
 
 	@Override
-	public void update(Bairro bairro) {
-		String sql = "update bairro set nome = ? where id = ?";
-		try {
-			PreparedStatement stmt = this.connection.prepareStatement(sql);
-			stmt.setString(1, bairro.getNome());
-			stmt.setLong(2, bairro.getId());
-
-			stmt.execute();
-
-			stmt.close();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-	}
-
-	@Override
-	public void delete(Long id) {
+	public void delete(long id) {
 		String sql = "delete from bairro where id = ?";
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
@@ -112,21 +112,23 @@ public class BairroDAOImpl implements BairroDAO {
 	}
 
 	@Override
-	public Bairro getOne(Long id) {
+	public Bairro getOne(long id) {
+		String sql = "select * from bairro where id=?";
+		
 		try {
-			PreparedStatement stmt = this.connection.prepareStatement("select * from bairro where id = ?");
+			PreparedStatement stmt = this.connection.prepareStatement(sql);
 			stmt.setLong(1, id);
 
 			ResultSet rs = stmt.executeQuery();
-
-
 			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-			Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
-			Bairro b = new Bairro(rs.getString("nome"), c);
+			
+			Bairro b = null;
 
 			if (rs.first()) {
+				b = new Bairro();
+				b.setId(rs.getLong("id"));
 				b.setNome(rs.getString("nome"));
-				b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
+				b.setCidade(cDAO.getOne(rs.getLong("bairro_cidade_fk")));
 			}
 
 			rs.close();

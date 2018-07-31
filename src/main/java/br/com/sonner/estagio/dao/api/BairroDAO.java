@@ -7,6 +7,6 @@ public interface BairroDAO {
 	void save(Bairro bairro);
 	List<Bairro> getAll();
 	void update (Bairro bairro);
-	void delete(Long id);
-	Bairro getOne(Long id);
+	void delete(long id);
+	Bairro getOne(long id);
 }

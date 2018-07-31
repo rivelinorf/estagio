@@ -37,7 +37,7 @@ public class Insere extends HttpServlet {
 
 		bairroController.save(new Bairro(req.getParameter("nome"), cidade));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/bairro/insere.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/bairro/lista.jsp");
 		rd.forward(req, res);
 
 	}

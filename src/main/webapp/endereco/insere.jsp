@@ -1,3 +1,10 @@
+<%@page import="br.com.sonner.estagio.controller.EnderecoControllerImpl"%>
+<%@page import="br.com.sonner.estagio.model.Endereco"%>
+<%@page import="br.com.sonner.estagio.controller.BairroControllerImpl"%>
+<%@page import="br.com.sonner.estagio.model.Bairro"%>
+<%@page import="br.com.sonner.estagio.model.Logradouro"%>
+<%@page
+	import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
@@ -5,11 +12,37 @@
 </head>
 <body>
 	<form action="/endereco-insere" method="post">
-		<h3>Estado</h3>
-		numero: <input type="text" name="numero"> <br> 
-		cep: <input type="text" name="cep">
-		id do logradouro: <input type="text" name="logradouro">
-		id do bairro: <input type="text" name="bairro">
+		<h3>Endereço</h3>
+		número: <input type="text" name="numero" placeholder="Ex.: 111"><br>
+		<br> cep: <input type="text" name="cep"
+			placeholder="Ex.: 00000-000"> <br>
+		<br> Bairro:
+			<select name="bairro">
+				<%
+					for (Bairro bairro : new BairroControllerImpl().getAll()) {
+				%>
+				<option value="<%=bairro.getId()%>">
+					<%=bairro.getNome()%>
+					<%=bairro.getCidade().getNome()%>
+				</option>
+			<%
+				}
+			%>
+			</select><br>
+		<br>Logradouro:
+			<select name="logradouro">
+				<%
+					for (Logradouro logradouro : new LogradouroControllerImpl().getAll()) {
+				%>
+				<option value="<%=logradouro.getId()%>">
+					<%=logradouro.getTipologradouro().getNome()%>
+					<%=logradouro.getNome()%>
+
+				</option>
+				<%
+					}
+				%></select>
+
 		<button>Enviar</button>
 	</form>
 </body>
