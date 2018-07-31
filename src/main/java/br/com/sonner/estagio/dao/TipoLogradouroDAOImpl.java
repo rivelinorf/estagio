@@ -97,7 +97,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	@Override
 	public TipoLogradouro getOne(Long id) {
 		try {
-			PreparedStatement stmt = connection.prepareStatement("select from tipoLogradouro where id=?");
+			PreparedStatement stmt = connection.prepareStatement("select * from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 
@@ -114,6 +114,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+
 			return null;
 		}
 
