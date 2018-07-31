@@ -43,6 +43,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			stmt.setString(1, logradouro.getNome());
 			stmt.setLong(2, logradouro.getCidade().getId());
 			stmt.setLong(3, logradouro.getTipologradouro().getId());
+			
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -62,8 +63,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 				CidadeController cidadeController = new CidadeControllerImpl();
 				TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-				TipoLogradouro tipologradouro = tipoLogradouroController
-						.getOne(resultSet.getLong("logradouro_tipologradouro_fk"));
+				TipoLogradouro tipologradouro = tipoLogradouroController.getOne(resultSet.getLong("logradouro_tipo_fk"));
 				Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
 
 				Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
