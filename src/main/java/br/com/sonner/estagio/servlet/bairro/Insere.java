@@ -26,18 +26,19 @@ import br.com.sonner.estagio.model.Estado;
 @WebServlet("/bairro-insere")
 public class Insere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws javax.servlet.ServletException, IOException {
 
 		CidadeController cidadeController = new CidadeControllerImpl();
 		BairroController bairroController = new BairroControllerImpl();
-		
+
 		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
 
 		bairroController.save(new Bairro(req.getParameter("nome"), cidade));
 
-		
 		RequestDispatcher rd = req.getRequestDispatcher("/bairro/insere.jsp");
+		rd.forward(req, res);
 
 	}
 }
