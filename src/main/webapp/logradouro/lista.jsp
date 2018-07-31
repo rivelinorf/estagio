@@ -12,9 +12,9 @@
         <% for (Logradouro logradouro: logradouroController.getAll()) { %>
             <tr>
                 <td><%= logradouro.getId() %></td>
+                <td><%= logradouro.getTipologradouro().getNome() %></td>
                 <td><%= logradouro.getNome() %></td>
-                <td><%= logradouro.getCidade() %></td>
-                <td><%= logradouro.getTipologradouro() %></td>
+                <td><%= logradouro.getCidade().getNome() %></td>
             </tr>
         <% } %>
     </table>

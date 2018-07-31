@@ -36,14 +36,14 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
 	@Override
 	public void save(Logradouro logradouro) {
-		String sql="insert into logradouro (nome,logradouro_cidade_fk,logradouro_tipo_fk) values (?,?,?)";
+		String sql = "insert into logradouro (nome,logradouro_cidade_fk,logradouro_tipo_fk) values (?,?,?)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.setString(1, logradouro.getNome());
 			stmt.setLong(2, logradouro.getCidade().getId());
 			stmt.setLong(3, logradouro.getTipologradouro().getId());
-			
+
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -63,10 +63,12 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 				CidadeController cidadeController = new CidadeControllerImpl();
 				TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-				TipoLogradouro tipologradouro = tipoLogradouroController.getOne(resultSet.getLong("logradouro_tipo_fk"));
+				TipoLogradouro tipologradouro = tipoLogradouroController
+						.getOne(resultSet.getLong("logradouro_tipo_fk"));
 				Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
 
 				Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
+				logradouro.setId(resultSet.getLong("id"));
 				logradouro.setNome(resultSet.getString("nome"));
 				logradouro.getTipologradouro().setId(resultSet.getLong("logradouro_tipo_fk"));
 				logradouro.getCidade().setId(resultSet.getLong("logradouro_cidade_fk"));
@@ -128,6 +130,8 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			if (resultSet.first()) {
 				logradouro = new Logradouro();
 				logradouro.setNome(resultSet.getString("nome"));
+				logradouro.setId(resultSet.getLong("id"));
+
 				logradouro.setCidade(cidadeDAO.getOne(resultSet.getLong("logradouro_cidade_fk")));
 				logradouro.setTipologradouro(tipoLogradouroDAO.getOne(resultSet.getLong("logradouro_tipo_fk")));
 
