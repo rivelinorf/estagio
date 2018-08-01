@@ -9,6 +9,7 @@ drop table estado;
 
 create database sge;
 use sge;
+ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_general_ci;
 
 -- tabelas
 create table if not exists estado (
@@ -52,6 +53,7 @@ create table if not exists endereco (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         numero INT NOT NULL,
         cep VARCHAR(50),
+        complemento VARCHAR(50),
         endereco_logradouro_fk BIGINT,
         endereco_bairro_fk BIGINT,
         constraint endereco_logradouro_fk foreign key (endereco_logradouro_fk) references logradouro(id),
@@ -71,12 +73,12 @@ insert into bairro (nome, bairro_cidade_fk) values ("brasil", 1);
 insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (87, "2423141", 1, 1);
 
 -- limpar tabelas
-delete from endereco;
-delete from bairro;
-delete from logradouro;
-delete from tipoLogradouro;
-delete from cidade;
-delete from estado;
+-- delete from endereco;
+-- delete from bairro;
+-- delete from logradouro;
+-- delete from tipoLogradouro;
+-- delete from cidade;
+-- delete from estado;
 
 -- selecionar tudo
 select * from endereco;

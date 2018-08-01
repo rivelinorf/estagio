@@ -3,12 +3,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Title</title>
+<title>Inserir</title>
 </head>
 <body>
 	<form action="/bairro-insere" method="post">
 		<h3>Bairro</h3>
-		nome: <input type="text" name="nome"> <br> <br>Cidade:
+		Nome: <input type="text" name="nome"> <br> <br>Cidade:
 		<select name="cidade">
 			<%
 				for (Cidade cidade : new CidadeControllerImpl().getAll()) {
@@ -17,8 +17,8 @@
 			<%
 				}
 			%>
-		</select>
-		<br><br>
+		</select> <br>
+		<br>
 		<button>Enviar</button>
 	</form>
 </body>
