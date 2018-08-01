@@ -31,15 +31,16 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     @Override
     public void save(Endereco endereco) {
-        String sql = "insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (?, ?, ?, ?)";
+        String sql = "insert into endereco (numero, cep, complemento, endereco_logradouro_fk, endereco_bairro_fk) values (?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             stmt.setInt(1, endereco.getNumero());
             stmt.setString(2, endereco.getCep());
-            stmt.setLong(3, endereco.getLogradouro().getId());
-            stmt.setLong(4, endereco.getBairro().getId());
+            stmt.setString(3, endereco.getComplemento());
+            stmt.setLong(4, endereco.getLogradouro().getId());
+            stmt.setLong(5, endereco.getBairro().getId());
 
             stmt.execute();
             stmt.close();
@@ -65,10 +66,11 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                 LogradouroDAO lDAO = LogradouroDAOImpl.getIntance();
                 Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
-                Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+                Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), rs.getString("complemento"), b, l);
                 e.setId(rs.getLong("id"));
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
+                e.setComplemento(rs.getString("complemento"));
                 e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
                 e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
 
@@ -87,12 +89,13 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     @Override
     public void update(Endereco endereco) {
-        String sql = "update endereco set numero = ?, cep = ? where id = ?";
+        String sql = "update endereco set numero = ?, cep = ?, complemento = ? where id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
             stmt.setInt(1, endereco.getNumero());
             stmt.setString(2, endereco.getCep());
-            stmt.setLong(3, endereco.getId());
+            stmt.setString(3, endereco.getComplemento());
+            stmt.setLong(4, endereco.getId());
 
             stmt.execute();
 
@@ -132,11 +135,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             BairroDAOImpl bDAO = new BairroDAOImpl();
             Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
 
-            Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), b, l);
+            Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), rs.getString("complemento"), b, l);
 
             if (rs.first()) {
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
+                e.setComplemento(rs.getString("complemento"));
                 e.getBairro().setId(rs.getInt("endereco_bairro_fk"));
                 e.getLogradouro().setId(rs.getInt("endereco_logradouro_fk"));
             }

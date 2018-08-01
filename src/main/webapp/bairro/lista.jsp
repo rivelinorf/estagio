@@ -4,10 +4,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Title</title>
+<title>Bairros</title>
 </head>
 <body>
 	<table border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nome</th>
+				<th>Cidade</th>
+				<th>Estado</th>
+			</tr>
+		</thead>
 		<%
 			BairroController bairroController = new BairroControllerImpl();
 		%>

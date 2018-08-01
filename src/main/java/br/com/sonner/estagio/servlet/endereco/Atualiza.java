@@ -36,6 +36,7 @@ public class Atualiza extends HttpServlet {
 		endereco.setId(Long.valueOf(req.getParameter("id")));
 		endereco.setNumero(Integer.parseInt(req.getParameter("numero")));
 		endereco.setCep(req.getParameter("cep"));
+		endereco.setComplemento(req.getParameter("complemento"));
 		endereco.setBairro(bairro);
 		endereco.setLogradouro(logradouro);
 

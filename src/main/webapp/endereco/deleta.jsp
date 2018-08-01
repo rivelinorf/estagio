@@ -3,11 +3,12 @@
 <%@page import="br.com.sonner.estagio.controller.BairroControllerImpl"%>
 <%@page import="br.com.sonner.estagio.model.Bairro"%>
 <%@page import="br.com.sonner.estagio.model.Logradouro"%>
-<%@page	import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
+<%@page
+	import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Title</title>
+<title>Deletar</title>
 </head>
 <body>
 	<form action="/endereco-deleta" method="post">
@@ -21,6 +22,7 @@
 				<%=endereco.getLogradouro().getNome()%>
 				<%=endereco.getNumero()%>
 				<%=endereco.getCep()%>
+				<%=endereco.getComplemento()%>
 				<%=endereco.getBairro().getNome()%>
 				<%=endereco.getBairro().getCidade().getNome()%>
 				<%=endereco.getBairro().getCidade().getEstado().getNome()%>

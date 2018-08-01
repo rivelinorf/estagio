@@ -1,11 +1,11 @@
 <%@page import="br.com.sonner.estagio.controller.BairroControllerImpl"%>
 <%@page import="br.com.sonner.estagio.model.Bairro"%>
-<%@ page import="br.com.sonner.estagio.controller.CidadeControllerImpl" %>
-<%@ page import="br.com.sonner.estagio.model.Cidade" %>
+<%@ page import="br.com.sonner.estagio.controller.CidadeControllerImpl"%>
+<%@ page import="br.com.sonner.estagio.model.Cidade"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Title</title>
+<title>Atualizar</title>
 </head>
 <body>
 	<form action="/bairro-atualiza" method="post">
@@ -19,8 +19,9 @@
 			<%
 				}
 			%>
-		</select><br> Novo nome: <input type="text" name="nome"> <br> nova
-		cidade: <select name="cidade">
+		</select><br>
+		<br> Novo nome: <input type="text" name="nome"> <br>
+		<br> Nova cidade: <select name="cidade">
 			<%
 				for (Cidade cidade : new CidadeControllerImpl().getAll()) {
 			%>
@@ -28,8 +29,10 @@
 			<%
 				}
 			%>
+		</select><br>
+		<br>
 
-			<button>Enviar</button>
+		<button>Enviar</button>
 	</form>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>Title</title>
+<title>Deletar</title>
 </head>
 <body>
 	<form action="/bairro-deleta" method="post">
@@ -17,7 +17,7 @@
 			<%
 				}
 			%>
-			</select>
+		</select>
 		<button>Enviar</button>
 	</form>
 
