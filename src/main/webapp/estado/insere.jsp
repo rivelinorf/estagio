@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
+<<<<<<< HEAD
 <title>Title</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/lib/bootstrap/css/bootstrap.css">
@@ -15,8 +16,12 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/main.css">
 <script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+=======
+    <jsp:include page="/includes/head.jsp"></jsp:include>
+>>>>>>> branch 'master' of https://github.com/rivelinorf/estagio.git
 </head>
 <body>
+<<<<<<< HEAD
 	<nav>
 		<a href="<%=request.getContextPath()%>/index.jsp">
 			<div class="box-img">
@@ -80,5 +85,11 @@
 			type="text" name="abv">
 		<button>Enviar</button>
 	</form>
+=======
+    <jsp:include page="/includes/menu.jsp"></jsp:include>
+    <section class="main">
+        <jsp:include page="/includes/header.jsp?titulo=Inserir Estado"></jsp:include>
+    </section>
+>>>>>>> branch 'master' of https://github.com/rivelinorf/estagio.git
 </body>
 </html>
