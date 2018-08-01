@@ -15,8 +15,12 @@ a:hover {
     text-decoration: none;
 }
 
+button:focus {
+    outline: 0;
+}
+
 nav {
-    width: 200px;
+    width: 250px;
     height: 100%;
     float: left;
     text-align: center;
@@ -29,6 +33,10 @@ nav {
 nav hr {
     margin-bottom: 15px;
     margin-top: 15px;
+}
+
+#menu-content{
+    margin-bottom: 20px;
 }
 
 .nav-btn {
@@ -70,35 +78,42 @@ hr {
     border-color: rgba(255,255,255,0.5);
 }
 
-.logo {
+.box-img {
     transition: background-color 0.5s;
     padding: 5px;
     cursor: pointer;
 }
 
-.logo img {
+.box-img img {
     width: 90%;
     height: 90px;
     padding: 0 25px 0 25px;
     margin: auto;
 }
 
-.logo:hover {
+.box-img:hover {
     background-color: rgba(0,0,0,0.3);
     border-radius: 5px;
     border-bottom: rgba(0,0,0,0.3);
 }
 
-.user {
-    width: 95%;
-    height: 140px;
+.dropdown-content {
+    display: none;
+    width: 100%;
+}
+
+.dropdown-content a {
+    display: block;
+}
+
+.drop-btn {
+    background-color: rgba(0,255,0, 0.3);
 }
 
 #login {
-    position: absolute;
-    bottom: 10px;
     left: 8px;
-    width: 180px;
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
 }
-
 
