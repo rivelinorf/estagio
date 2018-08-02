@@ -19,7 +19,7 @@ public class Deleta extends HttpServlet {
 
 		new EnderecoControllerImpl().delete(Integer.parseInt(req.getParameter("id")));
 	
-	RequestDispatcher requestDispatcher = req.getRequestDispatcher("/endereco/lista.jsp");
+	RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/lista.jsp");
 	requestDispatcher.forward(req, res);
 	}
 
