@@ -6,8 +6,15 @@
 <html>
 <head>
 <title>Atualizar</title>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/lib/bootstrap/css/bootstrap.css">
+<script src="<%=request.getContextPath()%>/assets/lib/jquery/jquery.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/estilo.css">
+<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 </head>
 <body>
+	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<form action="/bairro-atualiza" method="post">
 		Bairro: <select name="id">
 			<%
@@ -19,9 +26,8 @@
 			<%
 				}
 			%>
-		</select><br>
-		<br> Novo nome: <input type="text" name="nome"> <br>
-		<br> Nova cidade: <select name="cidade">
+		</select><br> <br> Novo nome: <input type="text" name="nome">
+		<br> <br> Nova cidade: <select name="cidade">
 			<%
 				for (Cidade cidade : new CidadeControllerImpl().getAll()) {
 			%>
@@ -29,8 +35,7 @@
 			<%
 				}
 			%>
-		</select><br>
-		<br>
+		</select><br> <br>
 
 		<button>Enviar</button>
 	</form>

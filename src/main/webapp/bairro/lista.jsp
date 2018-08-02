@@ -2,15 +2,29 @@
 <%@ page import="br.com.sonner.estagio.controller.api.BairroController"%>
 <%@ page import="br.com.sonner.estagio.model.Bairro"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<style type="text/css" media="all">
+@import url("./css/maven-base.css");
+
+@import url("./css/maven-theme.css");
+
+@import url("./css/estilo.css");
+</style>
 <html>
 <head>
 <title>Bairros</title>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/lib/bootstrap/css/bootstrap.css">
+<script src="<%=request.getContextPath()%>/assets/lib/jquery/jquery.js"></script>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/estilo.css">
+<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 </head>
 <body>
+	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<table border="1">
 		<thead>
 			<tr>
-				<th>ID</th>
+				<th>#</th>
 				<th>Nome</th>
 				<th>Cidade</th>
 				<th>Estado</th>
