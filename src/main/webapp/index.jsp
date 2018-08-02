@@ -10,24 +10,20 @@
 </head>
 
 <body>
-	<div class ="container">
+	<div class="container borda-login">
 		<div class="box-img">
 			<img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
 		</div>
-		<div class ="form-input">
+		<div class="form-input">
 			<form action="" method="post">
-					 <input type="text" name="usuario"placeholder="usuario">
-				<br> 
-					<input type="password"name="senha" placeholder=" senha">
+				<input class="input" type="text" name="usuario" placeholder="Usuario"> <br>
+				<input class="input" type="password" name="senha" placeholder="Senha">
 			</form>
 
 		</div>
-		<br>
-		<a href="<%=request.getContextPath()%>/home.jsp"><button 
-			class="btn btn-green">login</button></a>
-
-
-
+		<br> <a class="link" href="<%=request.getContextPath()%>/home.jsp"><button class="login">login</button></a>
+		<a class="link" href="#">Esqueceu sua senha ?</a><br><br>
+		<a class="link" href="#">Cadastrar-se</a>
 	</div>
 </body>
 
