@@ -29,7 +29,7 @@ public class BairroServlet extends HttpServlet {
 		
 		request.setAttribute("listaBairro", bairros);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/bairro/lista.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/bairro/lista.jsp");
 		rd.forward(request, response);
 		
 

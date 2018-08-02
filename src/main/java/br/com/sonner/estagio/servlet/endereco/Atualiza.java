@@ -44,7 +44,7 @@ public class Atualiza extends HttpServlet {
 
 		enderecoController.update(endereco);
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/endereco/lista.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/lista.jsp");
 		requestDispatcher.forward(req, res);
 	}
 

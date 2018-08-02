@@ -37,7 +37,7 @@ public class Atualiza extends HttpServlet {
 
 		bairroController.update(bairro);
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/bairro/lista.jsp");
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/lista.jsp");
 		requestDispatcher.forward(req, res);
 
 	}
