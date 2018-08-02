@@ -5,10 +5,12 @@ import br.com.sonner.estagio.dao.EstadoDAOImpl;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.model.Estado;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoControllerImpl implements EstadoController {
     private EstadoDAO estadoDAO;
+
 
     public EstadoControllerImpl() {
         this.estadoDAO = EstadoDAOImpl.getInstance();
