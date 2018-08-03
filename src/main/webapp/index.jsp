@@ -22,8 +22,9 @@
 
 		</div>
 		<br> <a class="link" href="<%=request.getContextPath()%>/home.jsp"><button class="login">login</button></a>
-		<a class="link" href="#">Esqueceu sua senha ?</a><br><br>
-		<a class="link" href="#">Cadastrar-se</a>
+		<br>
+		<a class="link" href="<%=request.getContextPath()%>/senha.jsp">Esqueceu sua senha ?</a><br><br>
+		<a class="link" href="<%=request.getContextPath()%>/cadastro.jsp">Cadastrar-se</a>
 	</div>
 </body>
 
