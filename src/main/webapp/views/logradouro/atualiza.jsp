@@ -13,15 +13,18 @@
 			<%
 				for (Logradouro logradouro : new LogradouroControllerImpl().getAll()) {
 			%>
-			<option value=<%=logradouro.getId()%>><%=logradouro.getTipologradouro().getNome()%> <%=logradouro.getNome()%> <%=logradouro.getCidade().getNome()%>
+			<option value=<%=logradouro.getId()%>><%=logradouro.getTipologradouro().getNome()%>
+				<%=logradouro.getNome()%>
+				<%=logradouro.getCidade().getNome()%>
 			</option>
 			<%
 				}
 			%>
-		</select><br> 
-		nome: <input type="text" name="nome" placeholder="nome do logradouro"> <br>
-		cidade: <input type="text" name="cidade" placeholder="id da cidade a ser atualizado" >
-		 tipo Logradouro: <input type="text" name="tipoLogradouro" placeholder="id do tipo do logradouro">
+		</select><br> nome: <input type="text" name="nome"
+			placeholder="nome do logradouro"> <br> cidade: <input
+			type="text" name="cidade" placeholder="id da cidade a ser atualizado">
+		tipo Logradouro: <input type="text" name="tipoLogradouro"
+			placeholder="id do tipo do logradouro">
 
 		<button>Enviar</button>
 	</form>
