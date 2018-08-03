@@ -5,6 +5,8 @@
 <%@page import="br.com.sonner.estagio.model.Logradouro"%>
 <%@page
 	import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
@@ -12,35 +14,30 @@
 <title>Inserir</title>
 </head>
 <body>
+<body>
+	<jsp:useBean id="bairros"
+		class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
+	<jsp:useBean id="logradouros"
+		class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
 	<form action="/endereco-insere" method="post">
 		<h3>Endereço</h3>
-		número: <input type="text" name="numero" placeholder="Ex.: 111"><br>
+		Número: <input type="text" name="numero" placeholder="Ex.: 111"><br>
 		<br> cep: <input type="text" name="cep"
 			placeholder="Ex.: 00000-000"> <br> Complemento: <input
 			type="text" name="complemento"> <br> Bairro: <select
 			name="bairro">
-			<%
-				for (Bairro bairro : new BairroControllerImpl().getAll()) {
-			%>
-			<option value="<%=bairro.getId()%>">
-				<%=bairro.getNome()%>
-				<%=bairro.getCidade().getNome()%>
-			</option>
-			<%
-				}
-			%>
-		</select><br> <br>Logradouro: <select name="logradouro">
-			<%
-				for (Logradouro logradouro : new LogradouroControllerImpl().getAll()) {
-			%>
-			<option value="<%=logradouro.getId()%>">
-				<%=logradouro.getTipologradouro().getNome()%>
-				<%=logradouro.getNome()%>
+			<c:forEach items="${bairros.all}" var="bairro">
+				<option value="${bairro.id}">${bairro.nome}
+					${bairro.cidade.nome}</option>
+			</c:forEach>
 
-			</option>
-			<%
-				}
-			%>
+		</select> <br>
+		<br>Logradouro: <select name="logradouro">
+			<c:forEach items="${logradouros.all}" var="logradouro">
+				<option value="${logradouro.id}">
+					${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
+			</c:forEach>
+
 		</select>
 
 		<button>Enviar</button>

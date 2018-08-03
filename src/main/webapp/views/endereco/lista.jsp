@@ -2,14 +2,16 @@
 <%@page import="br.com.sonner.estagio.model.Endereco"%>
 <%@page import="br.com.sonner.estagio.controller.api.EnderecoController"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <title>Endereços</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" href="resources/css/endereco.css" rel="stylesheet">
 </head>
 <body>
-	<table border=1>
+	<jsp:useBean id="enderecos"
+		class="br.com.sonner.estagio.controller.EnderecoControllerImpl"></jsp:useBean>
+	<table>
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -23,28 +25,21 @@
 				<th>Estado</th>
 			</tr>
 		</thead>
-		<%
-			EnderecoController enderecoController = new EnderecoControllerImpl();
-		%>
-		<%
-			for (Endereco endereco : enderecoController.getAll()) {
-		%>
-
-		<tr>
-			<td><%=endereco.getId()%></td>
-			<td><%=endereco.getLogradouro().getTipologradouro().getNome()%></td>
-			<td><%=endereco.getLogradouro().getNome()%></td>
-			<td><%=endereco.getNumero()%></td>
-			<td><%=endereco.getCep()%></td>
-			<td><%=endereco.getComplemento()%></td>
-			<td><%=endereco.getBairro().getNome()%></td>
-			<td><%=endereco.getBairro().getCidade().getNome()%></td>
-			<td><%=endereco.getBairro().getCidade().getEstado().getNome()%></td>
-
-		</tr>
-		<%
-			}
-		%>
+		<c:forEach items="${enderecos.all}" var="endereco">
+			<tr>
+				<td>${endereco.id}</td>
+				<td>${endereco.logradouro.tipologradouro.nome}</td>
+				<td>${endereco.logradouro.nome}</td>
+				<td>${endereco.numero}</td>
+				<td>${endereco.cep}</td>
+				<td>${endereco.complemento}</td>
+				<td>${endereco.bairro.nome}</td>
+				<td>${endereco.bairro.cidade.nome}</td>
+				<td>${endereco.bairro.cidade.estado.nome}</td>
+				<td><a href="/endereco-atualiza?id=${endereco.id}">Editar</a></td>
+				<td><a href="/endereco-deleta?id=${endereco.id}">Remover</a></td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

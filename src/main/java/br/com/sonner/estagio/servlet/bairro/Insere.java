@@ -33,7 +33,7 @@ public class Insere extends HttpServlet {
 		CidadeController cidadeController = new CidadeControllerImpl();
 		BairroController bairroController = new BairroControllerImpl();
 
-		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
 
 		bairroController.save(new Bairro(req.getParameter("nome"), cidade));
 
