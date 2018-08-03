@@ -14,7 +14,6 @@
 		<h1>Redefinir Senha</h1>
 		<div class="form-input">
 			<form action="" method="post">
-
 				<input class="input" type="text" name="nome" placeholder="insira seu nome">	<br><br> 
 			 <br> <input class="input" type="email" name="nome"placeholder="insira seu email"> <br> <br> 
 				<input class="login" type="submit" value="Enviar"><br>
