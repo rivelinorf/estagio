@@ -14,8 +14,7 @@ $(document).ready(function () {
            url: "/views/estado.jsp",
            type: "GET",
            success: function (data) {
-               console.log(data)
-               $(".table-content").html(data)
+               $("#table-content").html(data).fadeIn(500)
            }
        })
     });

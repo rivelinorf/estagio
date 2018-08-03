@@ -5,7 +5,7 @@
 </head>
 <body>
     <nav>
-    <jsp:include page="/includes/menu.jsp"></jsp:include>
+        <jsp:include page="/includes/menu.jsp"></jsp:include>
     </nav>
     <section id="content">
         <header>
@@ -13,9 +13,9 @@
                 <jsp:param name="titulo" value="Home"></jsp:param>
             </jsp:include>
         </header>
-        <table class="table-content" border="1">
+        <div id="table-content">
 
-        </table>
+        </div>
     </section>
 </body>
 </html>

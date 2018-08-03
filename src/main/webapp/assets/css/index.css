@@ -10,9 +10,7 @@ body {
 .container {
 	width: 420px;
 	height: 520px;
-	top: 15%;
-	left: 40%;
-	position: absolute;
+	margin: 150px auto auto;
 	text-align: center;
 }
 

@@ -73,12 +73,12 @@ insert into bairro (nome, bairro_cidade_fk) values ("brasil", 1);
 insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (87, "2423141", 1, 1);
 
 -- limpar tabelas
--- delete from endereco;
--- delete from bairro;
--- delete from logradouro;
--- delete from tipoLogradouro;
--- delete from cidade;
--- delete from estado;
+delete from endereco;
+delete from bairro;
+delete from logradouro;
+delete from tipoLogradouro;
+delete from cidade;
+delete from estado;
 
 -- selecionar tudo
 select * from endereco;
