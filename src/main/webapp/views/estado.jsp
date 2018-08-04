@@ -3,23 +3,23 @@
 
 <jsp:useBean id="estados" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 <table class="table">
-
+    <thead>
     <tr>
+        <th></th>
         <th>Nome</th>
         <th>Abreviação</th>
-        <th><span style="margin-left: 8%">Editar</span></th>
-        <th><span style="margin-left: 8%">Excluir</span></th>
     </tr>
+    </thead>
+    <tbody>
     <c:forEach items="${estados.all}" var="estado">
         <tr>
-            <td>${estado.nome}</td>
-            <td>${estado.abv}</td>
-            <td>
+            <td style="text-align: center">
                 <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
-            </td>
-            <td>
                 <button class="main-btn btn-excluir"><i class="fas fa-times-circle"></i></button>
             </td>
+            <td>${estado.nome}</td>
+            <td>${estado.abv}</td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
