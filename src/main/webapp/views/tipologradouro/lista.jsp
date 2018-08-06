@@ -1,8 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 	<jsp:useBean id="tipologradouro"
 		class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 	<table class="table">
