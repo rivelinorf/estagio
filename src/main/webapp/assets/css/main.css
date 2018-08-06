@@ -197,7 +197,7 @@ hr {
 }
 
 .btn-editar, .btn-excluir {
-    width: 15%;
+    width: 50px;
     display: inline;
     margin: 0 5px 0 5px;
 }
