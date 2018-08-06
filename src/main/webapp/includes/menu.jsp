@@ -14,7 +14,7 @@
     <div>
         <button type="button" class="main-btn btn-title" id="estado">Estado</button>
         <a href="<%=request.getContextPath()%>/views/cidade/lista.jsp">
-
+        
             <button type="button" class="main-btn btn-title cidade">Cidade</button>
         </a>
 
