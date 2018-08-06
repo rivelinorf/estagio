@@ -15,7 +15,7 @@
         <tr>
             <td style="text-align: center" id="botoes">
                 <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
-                <button class="main-btn btn-excluir"><i class="fas fa-times-circle"></i></button>
+                <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i class="fas fa-times-circle"></i></button>
             </td>
             <td>${estado.nome}</td>
             <td>${estado.abv}</td>
