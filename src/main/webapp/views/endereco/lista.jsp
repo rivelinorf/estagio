@@ -19,7 +19,7 @@
 	<tbody>
 		<c:forEach items="${enderecos.all}" var="endereco">
 			<tr>
-				<td style="text-align: center">
+				<td style="text-align: center" id="botoes">
 					<button class="main-btn btn-editar">
 						<i class="fas fa-pen-square"></i>
 					</button>
@@ -27,8 +27,7 @@
 						<i class="fas fa-times-circle"></i>
 					</button>
 				</td>
-				<td>${endereco.logradouro.tipologradouro.nome}</td>
-				<td>${endereco.logradouro.nome}</td>
+				<td>${endereco.logradouro.tipologradouro.nome} ${endereco.logradouro.nome}</td>
 				<td>${endereco.numero}</td>
 				<td>${endereco.cep}</td>
 				<td>${endereco.complemento}</td>

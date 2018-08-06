@@ -184,20 +184,9 @@ hr {
     width: 85%;
 }
 
-#table-content {
-    display:none;
-    width: 100%;
-    height: 85%;
-    margin: 50px auto auto auto;
-    font-size: 20px;
-}
-
-#table-content td {
-    vertical-align: middle;
-}
 
 .btn-editar, .btn-excluir {
-    width: 50px;
+    width: 40px;
     display: inline;
     margin: 0 5px 0 5px;
 }
@@ -214,24 +203,15 @@ hr {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-#table-content table tbody, #table-content table thead  {
-    display: block;
-    width: 100%;
+table {
+
+	text-align: left;
+	width:100%;
 }
 
-#table-content table tbody {
-    overflow: auto;
-    height: 780px;
+#botoes{
+	width:154px;
 }
-
-th, td {
-    width: 540px;
-}
-
-#table-content table tr:nth-child(2n+0) {
-    background-color: rgb(46, 46, 46);
-}
-
 
 
 

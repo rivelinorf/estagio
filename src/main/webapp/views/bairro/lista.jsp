@@ -15,7 +15,7 @@
 	<tbody>
 		<c:forEach items="${bairros.all}" var="bairro">
 			<tr>
-				<td style="text-align: center">
+				<td style="text-align: center" id="botoes">
 					<button class="main-btn btn-editar">
 						<i class="fas fa-pen-square"></i>
 					</button>
