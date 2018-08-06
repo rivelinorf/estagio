@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.connection.Conn;
+import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.model.Bairro;
@@ -89,13 +90,15 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     @Override
     public void update(Endereco endereco) {
-        String sql = "update endereco set numero = ?, cep = ?, complemento = ? where id = ?";
+        String sql = "update endereco set numero = ?, cep = ?, complemento = ?,endereco_bairro_fk = ?, endereco_logradouro_fk = ?  where id = ?";
         try {
             PreparedStatement stmt = this.connection.prepareStatement(sql);
             stmt.setInt(1, endereco.getNumero());
             stmt.setString(2, endereco.getCep());
             stmt.setString(3, endereco.getComplemento());
-            stmt.setLong(4, endereco.getId());
+            stmt.setLong(4, endereco.getBairro().getId());
+            stmt.setLong(5, endereco.getLogradouro().getId());
+            stmt.setLong(6, endereco.getId());
 
             stmt.execute();
 
@@ -129,20 +132,20 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
             ResultSet rs = stmt.executeQuery();
 
-            LogradouroDAOImpl lDAO = new LogradouroDAOImpl();
-            Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
+            LogradouroDAO lDAO = LogradouroDAOImpl.getIntance();
 
-            BairroDAOImpl bDAO = new BairroDAOImpl();
-            Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
+            BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
 
-            Endereco e = new Endereco(rs.getInt("numero"), rs.getString("cep"), rs.getString("complemento"), b, l);
+            Endereco e = null;
 
             if (rs.first()) {
+            	e = new Endereco();
+                e.setId(rs.getLong("id"));
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
                 e.setComplemento(rs.getString("complemento"));
-                e.getBairro().setId(rs.getInt("endereco_bairro_fk"));
-                e.getLogradouro().setId(rs.getInt("endereco_logradouro_fk"));
+                e.setBairro(bDAO.getOne(rs.getLong("endereco_bairro_fk")));
+                e.setLogradouro(lDAO.getOne(rs.getLong("endereco_logradouro_fk")));
             }
             rs.close();
             stmt.close();

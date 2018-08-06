@@ -36,8 +36,8 @@ public class Atualiza extends HttpServlet {
 		BairroController bairroController = new BairroControllerImpl();
 		Bairro bairro = new Bairro();
 
-		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
-
+		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		
 		bairro.setId(Long.valueOf(req.getParameter("id")));
 		bairro.setNome(req.getParameter("nome"));
 		bairro.setCidade(cidade);

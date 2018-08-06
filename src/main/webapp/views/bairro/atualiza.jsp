@@ -12,16 +12,16 @@
 <body>
 	<jsp:useBean id="cidades"
 		class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
-	Altera bairro - ${bairro.nome}
+	Altera bairro - ${bairro.cidade.id}
 
 	<form action="/bairro-atualiza" method="post">
 
 		<input type="hidden" name="id" value="${bairro.id}" /> <br> Novo
 		nome: <input type="text" name="nome" value="${bairro.nome}"> <br>
 
-		<br> Nova cidade: <select name="cidadeID">
+		<br> Nova cidade: <select name="cidade">
 			<c:forEach items="${cidades.all}" var="cidade">
-				<option value="${cidade.id}">
+				<option value="${cidade.id}" >
 				${cidade.nome}
 				</option>
 

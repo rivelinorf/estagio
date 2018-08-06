@@ -41,5 +41,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="/views/endereco/insere.jsp">Adicionar novo</a>
 </body>
 </html>

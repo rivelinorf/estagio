@@ -47,11 +47,12 @@ public class BairroDAOImpl implements BairroDAO {
 	
 	@Override
 	public void update(Bairro bairro) {
-		String sql = "update bairro set nome = ? where id = ?";
+		String sql = "update bairro set nome = ?, bairro_cidade_fk = ? where id = ?";
 		try {
 			PreparedStatement stmt = this.connection.prepareStatement(sql);
 			stmt.setString(1, bairro.getNome());
-			stmt.setLong(2, bairro.getId());
+			stmt.setLong(2, bairro.getCidade().getId());
+			stmt.setLong(3, bairro.getId());
 
 			stmt.execute();
 
