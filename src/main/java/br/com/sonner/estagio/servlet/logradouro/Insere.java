@@ -26,14 +26,14 @@ public class Insere extends HttpServlet {
 		CidadeController cidadeController = new CidadeControllerImpl();
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 		
-		TipoLogradouro tipologradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipoLogradouro")));
+		TipoLogradouro tipologradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipoLogradouroID")));
 		
 		
-		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
 
 		logradouroController.save(new Logradouro(req.getParameter("nome"), tipologradouro, cidade));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/logradouro/lista.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/views/logradouro/lista.jsp");
 		rd.forward(req, res);
 	}
 

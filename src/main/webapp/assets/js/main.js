@@ -16,6 +16,26 @@ $(document).ready(function() {
 			}
 		})
 	});
+	
+	$("#tipologradouro").on("click", function() {
+		$.ajax({
+			url : "/views/tipologradouro/lista.jsp",
+			type : "GET",
+			success : function(data) {
+				$("#table-content").html(data).fadeIn(500)
+			}
+		})
+	});
+	
+	$("#logradouro").on("click", function() {
+		$.ajax({
+			url : "/views/logradouro/lista.jsp",
+			type : "GET",
+			success : function(data) {
+				$("#table-content").html(data).fadeIn(500)
+			}
+		})
+	});
 
 	$("#bairro").on("click", function() {
 		$.ajax({

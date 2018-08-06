@@ -9,18 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
+import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 @WebServlet("/logradouro-atualiza")
 public class Atualiza extends HttpServlet {
+	
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		Logradouro logradouro = new LogradouroControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
+		req.setAttribute("logradouro", logradouro);
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+		requestDispatcher.forward(req, res);
+	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
@@ -28,8 +37,8 @@ public class Atualiza extends HttpServlet {
 		LogradouroController logradouroController = new LogradouroControllerImpl();
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-		TipoLogradouro tipologradouro = tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro")));
-		Cidade cidade = cidadeController.getOne(Long.valueOf(request.getParameter("cidade")));
+		TipoLogradouro tipologradouro = tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouroID")));
+		Cidade cidade = cidadeController.getOne(Long.valueOf(request.getParameter("cidadeID")));
 
 		Logradouro logradouro = new Logradouro();
 		logradouro.setId(Long.valueOf(request.getParameter("id")));
@@ -39,7 +48,7 @@ public class Atualiza extends HttpServlet {
 
 		logradouroController.update(logradouro);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/logradouro/lista.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/lista.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

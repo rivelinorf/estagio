@@ -1,20 +1,28 @@
-<%@page import="br.com.sonner.estagio.model.TipoLogradouro"%>
-<%@page import="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"%>
-<%@page import="br.com.sonner.estagio.controller.api.TipoLogradouroController"%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<html>
-<head>
-	<title>Title</title>
-</head>
-<body>
-	<table border="1">
-		<%TipoLogradouroController tipoLougradorController = new TipoLogradouroControllerImpl();%>
-		<%for (TipoLogradouro tipoLogradouro : tipoLougradorController.getAll()) {%>
-		<tr>
-			<td><%=tipoLogradouro.getId()%></td>
-			<td><%=tipoLogradouro.getNome()%></td>
-		</tr>
-		<%}%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+	<jsp:useBean id="tipologradouro"
+		class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Nome</th>
+			</tr>
+		</thead>
+		<c:forEach items="${tipologradouro.all}" var="tipologradouro">
+			<tr>
+			   <td style="text-align: center" id="botoes">
+                <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
+                <button class="main-btn btn-excluir"><i class="fas fa-times-circle"></i></button>
+            </td>
+				<td>${tipologradouro.nome}</td>
+			
+			</tr>
+		</c:forEach>
 	</table>
-</body>
-</html>
+	<a href="/views/tipologradouro/insere.jsp">Adicionar novo</a>
+
+

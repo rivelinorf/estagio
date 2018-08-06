@@ -17,12 +17,11 @@
 
 			<button type="button" class="main-btn btn-title cidade">Cidade</button>
 		</a>
-		<ahref="<%=request.getContextPath()%>/views/tipologradouro/lista.jsp">
-		<button type="button" class="main-btn btn-title tipologradouro">Tipode
-			Logradouro</button>
-		</a> <a href="<%=request.getContextPath()%>/views/logradouro/lista.jsp">
-			<button type="button" class="main-btn btn-title logradouro">Logradouro</button>
-		</a> 
+		
+		<button type="button" class="main-btn btn-title tipologradouro"id=tipologradouro>Tipo de Logradouro</button>
+	
+			<button type="button" class="main-btn btn-title logradouro"id=logradouro>Logradouro</button>
+	
 			<button type="button" class="main-btn btn-title" id="bairro">Bairro</button>
 
 			<button type="button" class="main-btn btn-title" id="endereco">Endereço</button>

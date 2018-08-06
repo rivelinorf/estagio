@@ -22,7 +22,7 @@ public class Insere extends HttpServlet {
 		
 		tipoLogradouroController.save(novo);
 
-		RequestDispatcher rd = req.getRequestDispatcher("/tipologradouro/lista.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/views/tipologradouro/lista.jsp");
 		rd.forward(req, res);
 
 	}

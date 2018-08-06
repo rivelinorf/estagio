@@ -9,10 +9,9 @@
         <th><span style="margin-left: 8%">Editar</span></th>
         <th><span style="margin-left: 8%">Excluir</span></th>
     </tr>
-    <c:forEach items="${tipologradouro.all}" var="estado">
+    <c:forEach items="${tipologradouro.all}" var="tipologradouro">
         <tr>
             <td>${tipologradouro.nome}</td>
-            <td>${tipologradouro.abv}</td>
             <td>
                 <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
             </td>

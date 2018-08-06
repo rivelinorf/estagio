@@ -1,16 +1,27 @@
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="br.com.sonner.estagio.controller.LogradouroControllerImpl"%>
+<%@page import="br.com.sonner.estagio.model.Logradouro"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-    <title>Title</title>
+<title>Deletar</title>
 </head>
 <body>
-<form action="/logradouro-deleta" method="post">
-		<h3> Logradouro  Deleta</h3>
-		id: <input	type="text" name="id" placeholder="Informe o id a ser deletado">
+	Deleta Logradouro - ${logradouro.id}
+	<form action="/logradouro-deleta" method="post">
+		Logradouro: <select name="id">
+			<%
+				for (Logradouro logradouro : new LogradouroControllerImpl().getAll()) {
+			%>
+			<option value="<%=logradouro.getId()%>">
+				<%=logradouro.getNome()%>
+			</option>
+			<%
+				}
+			%>
+		</select>
 		<button>Enviar</button>
 	</form>
-
 
 </body>
 </html>
