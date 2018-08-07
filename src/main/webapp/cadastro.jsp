@@ -13,14 +13,10 @@
 		</div>
 		<h1>Cadastro de Usuario</h1>
 		<div class="form-input">
-			<form action="" method="post">
+			<form action="/usuario-insere" method="post">
 				<input class="input" type="text" name="nome" placeholder="nome"><br>
-				<br> <input class="input" type="data" name="data" placeholder="insira sua Data de Nascimento"> <br>
-				<br> <input class="input" type="text" name="nomePai" placeholder="insira o nome do seu pai"> <br>
-				<br> <input class="input" type="text" name="nomeMae" placeholder="insira o nome da sua mae"> <br>
-				<br> <input class="input" type="text" name="endereco" placeholder="insira seu endereco"> <br>
-				<br> <input class="input" type="email" name="nome" placeholder="insira seu email"> <br>
-				<br> <input class="input" type="password" name="nome" placeholder="insira sua senha"> <br>
+				<br> <input class="input" type="text" name="usuario" placeholder="insira seu usuario"> <br>
+				<br> <input class="input" type="password" name="senha" placeholder="insira sua senha"> <br>
 				<br> <input class="login" type="submit" value="Cadastrar"><br>
 			</form>
 		</div>
