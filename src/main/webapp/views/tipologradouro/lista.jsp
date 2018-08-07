@@ -9,10 +9,10 @@
 <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div id="content">
-		<sge:header titulo="Pesquisa de Tipos de Logradouros"></sge:header>
+		<sge:header titulo="Pesquisa de Tipos de Logradouros" botoes='<%=new String[]{"fas fa-filter","fas fa-plus-circle","fas fa-eraser","fas fa-times-circle"}%>'></sge:header>
+		<table class="table" id="table-content">
 		<thead>
 			<tr>
 				<th></th>
@@ -22,8 +22,10 @@
 		</tbody>
 		<c:forEach items="${tipologradouros.all}" var="tipologradouro">
 			<tr>
-				<td width="90px" id="botoes"><i class="fas fa-pen-square"></i>
-					<i class="fas fa-times-circle"></i></td>
+				<td width="90px" id="botoes">
+					 <a href="/views/tipologradouro/atualiza.jsp"><i class="fas fa-pen-square"></i></a>
+					<i class="fas fa-times-circle"></i>
+					 </td>
 				<td>${tipologradouro.nome}</td>
 			</tr>
 		</c:forEach>
