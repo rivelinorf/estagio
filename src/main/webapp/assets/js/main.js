@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 $(document).ready(function() {
 	/*
 	 * $(".btn-title").on("click", function () { for (var i = 0; i <
@@ -59,5 +59,4 @@ $(document).ready(function() {
 	});
 
 });
-=======
->>>>>>> refs/remotes/origin/master
+
