@@ -17,13 +17,12 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        System.out.println("chegou no filter");
         HttpServletRequest request = ((HttpServletRequest) servletRequest);
         Usuario usuario = (Usuario) request.getSession().getAttribute("USER");
 
         if (usuario == null) {
             ((HttpServletResponse)servletResponse).sendRedirect("/index.jsp");
-//          RequestDispatcher requestDispatcher = request.getRequestDispatcher("/index.jsp");
-//          requestDispatcher.forward(request, servletResponse);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

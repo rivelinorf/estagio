@@ -8,5 +8,6 @@
   <filter-mapping>
     <filter-name>authenticationFilter</filter-name>
     <url-pattern>/views/*</url-pattern>
+    <url-pattern>/views/home.jsp</url-pattern>
   </filter-mapping>
 </web-app>
