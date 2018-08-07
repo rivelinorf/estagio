@@ -11,7 +11,7 @@
 
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div id="content">
-    <sge:header titulo="Pesquisa de Estados"></sge:header>
+    <sge:header titulo="Pesquisa de Estados" botoes='<%=new String[]{"fas fa-filter", "fas fa-plus-circle", "fas fa-eraser", "fas fa-times-circle"} %>'></sge:header>
     <table class="table" id="table-content">
         <thead>
         <tr>
