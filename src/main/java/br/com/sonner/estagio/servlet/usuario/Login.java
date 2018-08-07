@@ -14,7 +14,7 @@ import br.com.sonner.estagio.controller.UsuarioControllerImpl;
 import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
 
-@WebServlet("/logar")
+@WebServlet("/usuario-logar")
 public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,11 +29,11 @@ public class Login extends HttpServlet {
 		user.setSenha(senha);
 		
 		UsuarioController usuarioController = new UsuarioControllerImpl();
+		user = usuarioController.efetuaLogin(user);
+		HttpSession sessao = request.getSession();
+		sessao.setAttribute("USER", user);
 
-		if (usuarioController.efetuaLogin(user)) {
-			HttpSession sessao = request.getSession();
-			sessao.setAttribute("USER", usuario);
-			
+		if (user != null) {
 			rd = request.getRequestDispatcher("home.jsp");
 			rd.forward(request, response);
 		} else {

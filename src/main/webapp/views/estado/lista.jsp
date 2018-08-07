@@ -3,7 +3,6 @@
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="estados" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
-<jsp:useBean id="dashboard" scope="session" class="br.com.sonner.estagio.util.Dashboard"></jsp:useBean>
 <sge:header titulo="Pesquisa de Estados"></sge:header>
 <table class="table" id="table-content">
     <thead>

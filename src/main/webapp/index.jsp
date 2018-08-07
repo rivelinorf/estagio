@@ -15,12 +15,11 @@
 			<img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
 		</div>
 		<div class="form-input">
-			<form action="logar" method="post">
+			<form action="/usuario-logar" method="post">
 				<input class="input" type="text" name="usuario" placeholder="Usuario"> <br>
 				<input class="input" type="password" name="senha" placeholder="Senha">
 				<br> <button class="login">login</button>
 			</form>
-
 		</div>
 
 		<br>

@@ -4,6 +4,6 @@ import br.com.sonner.estagio.model.Usuario;
 
 public interface UsuarioController {
 	void save(Usuario usuario);
-	boolean efetuaLogin(Usuario usuario);
+	Usuario efetuaLogin(Usuario usuario);
 	void logout();
 }
