@@ -24,7 +24,7 @@ public class Insere extends HttpServlet {
 
         cidadeController.save(new Cidade(req.getParameter("nome"), req.getParameter("cod"), req.getParameter("cep"), estado));
 
-        RequestDispatcher rd = req.getRequestDispatcher("/cidade/estado.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/cidade/list.jsp");
         rd.forward(req, res);
     }
 }

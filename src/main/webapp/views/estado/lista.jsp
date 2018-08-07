@@ -1,8 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 
 <jsp:useBean id="estados" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
-<table class="table">
+<jsp:useBean id="dashboard" scope="session" class="br.com.sonner.estagio.util.Dashboard"></jsp:useBean>
+<sge:header titulo="Pesquisa de Estados"></sge:header>
+<table class="table" id="table-content">
     <thead>
     <tr>
         <th></th>

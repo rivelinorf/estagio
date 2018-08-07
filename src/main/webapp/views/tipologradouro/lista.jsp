@@ -10,6 +10,16 @@
 		</tr>
 	</thead>
 	<tbody>
+	<jsp:useBean id="tipologradouro"
+		class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+	<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Nome</th>
+				<th>Nome</th>
+			</tr>
+		</thead>
 		<c:forEach items="${tipologradouro.all}" var="tipologradouro">
 			<tr>
 				<td width="90px" id="botoes">
