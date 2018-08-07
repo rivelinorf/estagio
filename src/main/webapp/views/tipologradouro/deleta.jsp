@@ -19,9 +19,7 @@
 					<%
 						for (TipoLogradouro tipologradouro : new TipoLogradouroControllerImpl().getAll()) {
 					%>
-					<option value="<%=tipologradouro.getId()%>">
-						<%=tipologradouro.getNome()%>
-					</option>
+					<option value="<%=tipologradouro.getId()%>"><%=tipologradouro.getNome()%></option>
 					<%
 						}
 					%>
