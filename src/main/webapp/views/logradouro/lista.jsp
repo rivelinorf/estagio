@@ -1,29 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
 
-<jsp:useBean id="logradouro"
+<jsp:useBean id="logradouros"
 	class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
-<table class="table">
-	<thead>
-		<tr>
-			<th></th>
-			<th>Nome</th>
-			<th>Cidade</th>
-			<th>TipoLogradouro</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:forEach items="${logradouro.all}" var="logradouro">
+<html>
+<head>
+<jsp:include page="/includes/head.jsp"></jsp:include>
+</head>
+<body>
+	<jsp:include page="/includes/menu.jsp"></jsp:include>
+	<div id="content">
+		<sge:header titulo="Pesquisa de Logradouros"></sge:header>
+		<thead>
 			<tr>
-				<td width="90px" id="botoes">
-					<i class="fas fa-pen-square"></i>
-					<i class="fas fa-times-circle"></i></td>
-				<td>${logradouro.nome}</td>
-				<td>${logradouro.cidade.nome}</td>
-				<td>${logradouro.cidade.estado.nome}</td>
+				<th></th>
+				<th>Nome</th>
+				<th>Cidade</th>
+				<th>TipoLogradouro</th>
 			</tr>
-		</c:forEach>
-	</tbody>
-</table>
-<a href="/views/logradouro/insere.jsp">Adicionar novo</a>
-
+		</thead>
+		<tbody>
+			<c:forEach items="${logradouros.all}" var="logradouro">
+				<tr>
+					<td width="90px" id="botoes"><i class="fas fa-pen-square"></i>
+						<i class="fas fa-times-circle"></i></td>
+					<td>${logradouro.nome}</td>
+					<td>${logradouro.cidade.nome}</td>
+					<td>${logradouro.cidade.estado.nome}</td>
+				</tr>
+			</c:forEach>
+		</tbody>
+		</table>
+	</div>
+</body>
+</html>

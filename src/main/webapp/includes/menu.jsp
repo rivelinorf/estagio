@@ -14,13 +14,11 @@
         <hr>
         <div>
             <a href="/views/estado/lista.jsp"><button type="button" class="main-btn btn-title" id="estado">Estado</button></a>
-            <button type="button" class="main-btn btn-title cidade">Cidade</button>
-            <button type="button" class="main-btn btn-title tipologradouro" id=tipologradouro>Tipo de Logradouro
-            </button>
-            <button type="button" class="main-btn btn-title logradouro" id=logradouro>Logradouro</button>
-            <button type="button" class="main-btn btn-title" id="bairro">Bairro</button>
-            <button type="button" class="main-btn btn-title" id="endereco">Endereço</button>
-
+            <a href="/views/cidade/lista.jsp"> <button type="button" class="main-btn btn-title cidade">Cidade</button></a>
+            <a href="/views/tipologradouro/lista.jsp"><button type="button" class="main-btn btn-title tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
+            <a href="/views/logradouro/lista.jsp"><button type="button" class="main-btn btn-title logradouro" id=logradouro>Logradouro</button></a>
+            <a href="/views/bairro/lista.jsp"><button type="button" class="main-btn btn-title" id="bairro">Bairro</button></a>
+            <a href="/views/endereco/lista.jsp"><button type="button" class="main-btn btn-title" id="endereco">Endereço</button></a>
         </div>
     </div>
     <footer class="container-nav">
