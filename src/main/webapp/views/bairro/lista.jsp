@@ -16,10 +16,10 @@
 		<c:forEach items="${bairros.all}" var="bairro">
 			<tr>
 				<td style="text-align: center" id="botoes">
-					<button class="main-btn btn-editar">
+					<button class="main-btn btn-editar" onclick="editarbairro()" value="${bairro.id}"=>
 						<i class="fas fa-pen-square"></i>
 					</button>
-					<button class="main-btn btn-excluir">
+					<button class="main-btn btn-excluir" onclick="excluirbairro()" value="${bairro.id}">
 						<i class="fas fa-times-circle"></i>
 					</button>
 				</td>

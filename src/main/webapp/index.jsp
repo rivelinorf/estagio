@@ -15,13 +15,14 @@
 			<img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
 		</div>
 		<div class="form-input">
-			<form action="" method="post">
+			<form action="logar" method="post">
 				<input class="input" type="text" name="usuario" placeholder="Usuario"> <br>
 				<input class="input" type="password" name="senha" placeholder="Senha">
+				<br> <button class="login">login</button>
 			</form>
 
 		</div>
-		<br> <a class="link" href="<%=request.getContextPath()%>/home.jsp"><button class="login">login</button></a>
+
 		<br>
 		<a class="link" href="<%=request.getContextPath()%>/senha.jsp">Esqueceu sua senha ?</a><br><br>
 		<a class="link" href="<%=request.getContextPath()%>/cadastro.jsp">Cadastrar-se</a>
