@@ -6,16 +6,24 @@ drop table logradouro;
 drop table tipoLogradouro;
 drop table cidade;
 drop table estado;
+drop table usuario;
 
 create database sge;
 use sge;
 ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_general_ci;
 
 -- tabelas
+
+create table usuario (
+        login VARCHAR(10),
+        senha VARCHAR(10),
+        nome VARCHAR(50)
+);dfsd
+
 create table if not exists estado (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
-        abv VARCHAR(10) 
+        abv VARCHAR(10)
 )ENGINE = innodb;
 
 create table if not exists cidade (
@@ -57,7 +65,7 @@ create table if not exists endereco (
         endereco_logradouro_fk BIGINT,
         endereco_bairro_fk BIGINT,
         constraint endereco_logradouro_fk foreign key (endereco_logradouro_fk) references logradouro(id),
-        constraint endereco_bairro_fk foreign key (endereco_bairro_fk) references bairro(id)        
+        constraint endereco_bairro_fk foreign key (endereco_bairro_fk) references bairro(id)
 )ENGINE = innodb;
 
 -- inserindo dados
@@ -79,6 +87,8 @@ delete from logradouro;
 delete from tipoLogradouro;
 delete from cidade;
 delete from estado;
+delete from usuario;
+
 
 -- selecionar tudo
 select * from endereco;
@@ -87,17 +97,18 @@ select * from logradouro;
 select * from tipoLogradouro;
 select * from cidade;
 select * from estado;
+select * from usuario;
 
 -- selecionar com innerJoin
 select cidade.id, cidade.nome as cidade, estado.nome as estado from cidade inner join estado on cidade.cidade_estado_fk=estado.id;
-select tipoLogradouro.nome as tipoLogradouro, logradouro.nome as logradouro, cidade.nome as cidade, estado.nome as estado from logradouro 
-        inner join tipoLogradouro on logradouro.logradouro_tipo_fk=tipoLogradouro.id 
-        inner join cidade on logradouro.logradouro_cidade_fk=cidade.id 
+select tipoLogradouro.nome as tipoLogradouro, logradouro.nome as logradouro, cidade.nome as cidade, estado.nome as estado from logradouro
+        inner join tipoLogradouro on logradouro.logradouro_tipo_fk=tipoLogradouro.id
+        inner join cidade on logradouro.logradouro_cidade_fk=cidade.id
         inner join estado on cidade.cidade_estado_fk=estado.id;
 select bairro.nome as bairro, cidade.nome as cidade from bairro inner join cidade on bairro.bairro_cidade_fk=cidade.id;
 select tipoLogradouro.nome as tipo, logradouro.nome, endereco.numero, endereco.cep, bairro.nome as bairro, cidade.nome as cidade, estado.nome as estado from endereco
         inner join logradouro on logradouro.id=endereco.endereco_logradouro_fk
-        inner join tipoLogradouro on logradouro.logradouro_tipo_fk=tipoLogradouro.id 
+        inner join tipoLogradouro on logradouro.logradouro_tipo_fk=tipoLogradouro.id
         inner join bairro on bairro.id=endereco.endereco_bairro_fk
-        inner join cidade on logradouro.logradouro_cidade_fk=cidade.id 
+        inner join cidade on logradouro.logradouro_cidade_fk=cidade.id
         inner join estado on cidade.cidade_estado_fk=estado.id;

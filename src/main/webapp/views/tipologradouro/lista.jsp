@@ -7,6 +7,7 @@
 			<tr>
 				<th></th>
 				<th>Nome</th>
+				<th>Nome</th>
 			</tr>
 		</thead>
 		<c:forEach items="${tipologradouro.all}" var="tipologradouro">
