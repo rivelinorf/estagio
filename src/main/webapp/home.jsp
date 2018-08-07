@@ -2,7 +2,6 @@
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>

@@ -20,7 +20,7 @@ public class UsuarioControllerImpl implements UsuarioController{
 	}
 
 	@Override
-	public boolean efetuaLogin(Usuario usuario) {
+	public Usuario efetuaLogin(Usuario usuario) {
 		return this.usuarioDAO.efetuaLogin(usuario);
 	}
 
