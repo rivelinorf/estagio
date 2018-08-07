@@ -20,7 +20,7 @@ $(document).ready(function() {
 	$("#tipologradouro").on("click", function() {
 		$.ajax({
 			url : "/views/tipologradouro/lista.jsp",
-			type : "GET",
+			type : "GET", 
 			success : function(data) {
 				$("#table-content").html(data).fadeIn(500)
 			}
