@@ -207,6 +207,10 @@ table {
 	width: 100%;
 }
 
+#table-content td {
+	vertical-align: middle;
+}
+
 #botoes {
 	width: 154px;
 }
