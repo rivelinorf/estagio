@@ -56,5 +56,36 @@ $(document).ready(function() {
 			}
 		})
 	});
+	
+	$("#editar").on("click", function() {
+		$.ajax({
+			url : "/views/endereco/lista.jsp",
+			type : "GET",
+			success : function(data) {
+				$("#table-content").html(data).fadeIn(500)
+			}
+		})
+	});
 
 });
+
+
+var editarbairro = function() {
+	$.ajax({
+		url : "/bairro-atualiza?id="+$(this).val(),
+		type : "GET",
+		success : function(data) {
+			$("#table-content").html(data).fadeIn(500)
+		}
+	})
+}
+
+var excluirbairro = function() {
+	$.ajax({
+		url : "/bairro-deleta?id="+$(this).val(),
+		type : "GET",
+		success : function(data) {
+			$("#table-content").html(data).fadeIn(500)
+		}
+	})
+}
