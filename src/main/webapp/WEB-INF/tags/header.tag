@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="titulo" required="true" type="java.lang.String" %>
+<%@ attribute name="page" required="false" type="java.lang.String" %>
 <%@ attribute name="actionFiltrar" required="false" type="java.lang.String" %>
 <%@ attribute name="actionNovo" required="false" type="java.lang.String" %>
 <%@ attribute name="actionSalvar" required="false" type="java.lang.String" %>
@@ -35,14 +36,14 @@
 <script>
     $("#filtrar").on("click", function () {
        $.ajax({
-           url: "/pesquisa-estado",
+           url: "/pesquisa-${page}",
            type: "GET",
            data: {
                estado: $("#pesquisa-estado-nome").val(),
                abv: $("#pesquisa-estado-abv").val()
            },
            success: function (data) {
-                console.log(data);
+               location.reload();
            }
        })
     });

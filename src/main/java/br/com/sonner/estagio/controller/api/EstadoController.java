@@ -10,4 +10,6 @@ public interface EstadoController {
     Estado getOne(long id);
     void update(Estado estado);
     void delete(long id);
+    List<Estado> getEstadosPesquisados();
+    void setEstadosPesquisados(String nome, String abv);
 }

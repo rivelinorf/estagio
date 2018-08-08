@@ -10,7 +10,7 @@ import java.util.List;
 
 public class EstadoControllerImpl implements EstadoController {
     private EstadoDAO estadoDAO;
-
+    private static List<Estado> ESTADOS_PESQUISADOS;
 
     public EstadoControllerImpl() {
         this.estadoDAO = EstadoDAOImpl.getInstance();
@@ -39,6 +39,14 @@ public class EstadoControllerImpl implements EstadoController {
     @Override
     public void delete(long id) {
         this.estadoDAO.delete(id);
+    }
+
+    public void setEstadosPesquisados(String nome, String abv) {
+        EstadoControllerImpl.ESTADOS_PESQUISADOS = this.estadoDAO.pesquisaEstado(nome, abv);
+    }
+
+    public List<Estado> getEstadosPesquisados() {
+        return ESTADOS_PESQUISADOS;
     }
 
 }

@@ -10,4 +10,5 @@ public interface EstadoDAO {
     Estado getOne(long id);
     void update(Estado estado);
     void delete(long id);
+    List<Estado> pesquisaEstado(String nome, String abv);
 }

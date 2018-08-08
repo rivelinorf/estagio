@@ -124,4 +124,34 @@ public class EstadoDAOImpl implements EstadoDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public List<Estado> pesquisaEstado(String nome, String abv) {
+        try {
+            String sql = "select * from estado where nome=? and abv=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1,nome);
+            preparedStatement.setString(2,abv);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Estado> estados = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Estado aux = new Estado();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setAbv(resultSet.getString("abv"));
+
+                estados.add(aux);
+            }
+
+            return estados;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

@@ -14,6 +14,7 @@
 <div class="main">
     <sge:header
             titulo="Pesquisa de Tipo de Logradouro"
+            page="tipologradouro"
             actionFiltrar="/views/tipologradouro/lista.jsp"
             actionNovo="/views/tipologradouro/insere.jsp"
             actionLimpar="true"

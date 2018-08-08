@@ -13,6 +13,7 @@
 <div class="main">
     <sge:header
             titulo="Pesquisa de Estados"
+            page="estado"
             actionFiltrar="/views/estado/lista.jsp"
             actionNovo="/views/estado/insere.jsp"
             actionLimpar="true"
@@ -37,7 +38,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${estados.all}" var="estado">
+            <c:forEach items="${estados.estadosPesquisados}" var="estado">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
