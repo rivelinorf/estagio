@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="titulo" required="true" type="java.lang.String" %>
-<%@ attribute name="actionListar" required="false" type="java.lang.String" %>
+<%@ attribute name="actionFiltrar" required="false" type="java.lang.String" %>
 <%@ attribute name="actionNovo" required="false" type="java.lang.String" %>
 <%@ attribute name="actionSalvar" required="false" type="java.lang.String" %>
 <%@ attribute name="actionLimpar" required="false" type="java.lang.String" %>
@@ -12,8 +12,8 @@
         <h3>${titulo}</h3>
     </div>
     <div id="tollbar">
-        <c:if test="${not empty actionListar}">
-            <button class="main-btn" onclick="location.href='${actionListar}'">
+        <c:if test="${not empty actionFiltrar}">
+            <button class="main-btn" id="filtrar">
                 <i class="fa fa-search"></i> Filtrar
             </button>
         </c:if>
@@ -27,12 +27,23 @@
             <button class="main-btn"><i class="fas fa-eraser"></i> Limpar</button>
         </c:if>
         <c:if test="${not empty actionFechar}">
-            <button class="main-btn" onclick="location.href='${actionFechar}'"><i class="fas fa-window-close"></i> Fechar</button>
+            <button class="main-btn" onclick="location.href='/views/home.jsp'"><i class="fas fa-window-close"></i> Fechar</button>
         </c:if>
     </div>
 </header>
 
 <script>
-    $("#salvar").on("click", function () {
-    })
+    $("#filtrar").on("click", function () {
+       $.ajax({
+           url: "/pesquisa-estado",
+           type: "GET",
+           data: {
+               estado: $("#pesquisa-estado-nome").val(),
+               abv: $("#pesquisa-estado-abv").val()
+           },
+           success: function (data) {
+                console.log(data);
+           }
+       })
+    });
 </script>

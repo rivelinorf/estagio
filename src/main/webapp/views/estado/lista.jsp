@@ -13,13 +13,21 @@
 <div class="main">
     <sge:header
             titulo="Pesquisa de Estados"
-            actionListar="/views/estado/lista.jsp"
+            actionFiltrar="/views/estado/lista.jsp"
             actionNovo="/views/estado/insere.jsp"
-            actionLimpar="ff"
+            actionLimpar="true"
+            actionFechar="true"
     >
     </sge:header>
+    <div class="div-form" style="width: 60%;">
+        <div class="form-div">
+            <div>Estado:</div>
+            <input type="text" name="nome" class="form-control" style="background-color: rgb(46,46,46)" id="pesquisa-estado-nome"></div>
+        <div class="form-div">
+            <div>Abreviação:</div>
+            <input type="text" name="abv" class="form-control" style="background-color: rgb(46,46,46)" id="pesquisa-estado-abv"></div>
+    </div>
     <div class="content">
-        <input type="text" placeholder="Buscar..." class="form-control" style="width: 300px; margin-bottom: 10px">
         <table class="table">
             <thead>
             <tr>
@@ -31,7 +39,7 @@
             <tbody>
             <c:forEach items="${estados.all}" var="estado">
                 <tr>
-                    <td width="90px" id="botoes">
+                    <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i
                                 class="fas fa-times-circle"></i></button>
