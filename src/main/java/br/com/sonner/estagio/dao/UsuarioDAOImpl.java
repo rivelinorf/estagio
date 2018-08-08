@@ -80,10 +80,4 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     }
 
-    @Override
-    public void logout() {
-        // TODO Auto-generated method stub
-
-    }
-
 }

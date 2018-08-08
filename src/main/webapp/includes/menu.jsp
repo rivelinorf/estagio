@@ -29,7 +29,7 @@
 				vindo: Matheus</span>
             </div>
         </a>
-        <a href="<%=request.getContextPath()%>/index.jsp">
+        <a href="/usuario-logout">
             <button class="btn-sair">Sair</button>
         </a>
     </footer>

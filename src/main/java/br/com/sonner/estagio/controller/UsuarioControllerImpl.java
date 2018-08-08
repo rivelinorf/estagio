@@ -24,10 +24,5 @@ public class UsuarioControllerImpl implements UsuarioController{
 		return this.usuarioDAO.efetuaLogin(usuario);
 	}
 
-	@Override
-	public void logout() {
-		// TODO Auto-generated method stub
-		
-	}
 
 }
