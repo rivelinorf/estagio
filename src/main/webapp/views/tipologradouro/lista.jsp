@@ -10,9 +10,9 @@
 </head>
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
-	<div id="content">
+	<div class="main">
 		<sge:header titulo="Pesquisa de Tipos de Logradouros" botoes='<%=new String[]{"fas fa-filter","fas fa-plus-circle","fas fa-eraser","fas fa-times-circle"}%>'></sge:header>
-		<table class="table" id="table-content">
+		<table class="table content">
 		<thead>
 			<tr>
 				<th></th>

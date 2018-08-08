@@ -9,7 +9,7 @@
 <body>
     <jsp:include page="/includes/menu.jsp"></jsp:include>
 
-    <div id="content">
+    <div class="main">
         "Graficos"
     </div>
 </body>

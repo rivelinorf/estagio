@@ -181,19 +181,23 @@ hr {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-#content {
+.main {
     width: 85%;
 }
 
-#table-content {
+.content {
     width: 100%;
-    /* height: 85%; */
-    margin: 50px auto auto auto;
+    height: 88%;
+    margin: 10px auto auto auto;
+    padding: 30px;
     font-size: 20px;
-    overflow: auto;
+    background-color: rgb(46, 46, 46);
+    border-radius: 5px;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
-#table-content td {
+.content td {
     vertical-align: middle;
 }
 
@@ -218,17 +222,26 @@ hr {
     box-shadow: none;
 }
 
-#table-content table tbody, #table-content table thead  {
-
-}
-
-#table-content table tbody {
+.content table tbody {
     overflow: auto;
     height: 780px;
 }
 
-#table-content table tr:nth-child(2n+0) {
+.content table tr:nth-child(2n+0) {
+    background-color: rgb(51, 51, 51);
+}
+
+.content table tr:nth-child(2n+0) button {
     background-color: rgb(46, 46, 46);
+}
+
+.novo {
+    width: 90%;
+    margin: auto;
+}
+
+.novo td {
+    padding: 5px;
 }
 
 #tollbar {

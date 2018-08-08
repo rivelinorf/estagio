@@ -10,30 +10,38 @@
 <body>
 
 <jsp:include page="/includes/menu.jsp"></jsp:include>
-<div id="content">
-    <sge:header titulo="Pesquisa de Estados" list="true"></sge:header>
-    <table class="table" id="table-content">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Abreviação</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${estados.all}" var="estado">
+<div class="main">
+    <sge:header
+            titulo="Pesquisa de Estados"
+            list="true"
+            actionListar="/views/estado/lista.jsp"
+            actionSalvar="/views/estado/insere.jsp">
+    </sge:header>
+    <div class="content">
+        <input type="text" placeholder="Buscar..." class="form-control" style="width: 300px; margin-bottom: 10px">
+        <table class="table">
+            <thead>
             <tr>
-                <td style="text-align: center" id="botoes">
-                    <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
-                    <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i
-                            class="fas fa-times-circle"></i></button>
-                </td>
-                <td>${estado.nome}</td>
-                <td>${estado.abv}</td>
+                <th></th>
+                <th>Nome</th>
+                <th>Abreviação</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach items="${estados.all}" var="estado">
+                <tr>
+                    <td style="text-align: center" id="botoes">
+                        <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
+                        <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i
+                                class="fas fa-times-circle"></i></button>
+                    </td>
+                    <td>${estado.nome}</td>
+                    <td>${estado.abv}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
