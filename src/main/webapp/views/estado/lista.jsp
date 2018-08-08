@@ -14,7 +14,9 @@
     <sge:header
             titulo="Pesquisa de Estados"
             actionListar="/views/estado/lista.jsp"
-            actionSalvar="/views/estado/insere.jsp">
+            actionNovo="/views/estado/insere.jsp"
+            actionLimpar="ff"
+    >
     </sge:header>
     <div class="content">
         <input type="text" placeholder="Buscar..." class="form-control" style="width: 300px; margin-bottom: 10px">
@@ -29,7 +31,7 @@
             <tbody>
             <c:forEach items="${estados.all}" var="estado">
                 <tr>
-                    <td style="text-align: center" id="botoes">
+                    <td width="90px" id="botoes">
                         <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i
                                 class="fas fa-times-circle"></i></button>
