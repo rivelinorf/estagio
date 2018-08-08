@@ -6,6 +6,24 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <style>
+        .form-div {
+            display: flex;
+            width: 75%;
+            margin: auto auto 6px;
+        }
+
+        .form-div input {
+            width: 75%;
+        }
+
+        .form-div div {
+            margin: 5px;
+            width: 20%;
+            text-align: right;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -13,27 +31,15 @@
 <div class="main">
     <sge:header
             titulo="Inserir novo Estado"
-            list="true"
-            actionListar="/views/estado/lista.jsp"
-            actionSalvar="/views/estado/insere.jsp">
+            actionSalvar="fdas"
+            actionLimpar="fads"
+            actionFechar="/views/estado/lista.jsp">
     </sge:header>
 
     <div class="content">
         <form action="/insere-estado" method="post">
-            <table class="novo">
-                <tr>
-                    <td align="right" width="200px">Nome: </td>
-                    <td> <input type="text" name="nome" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td align="right">Abreviação: </td>
-                    <td> <input type="text" name="abv" class="form-control"></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button class="main-btn">Enviar</button></td>
-                </tr>
-            </table>
+            <div class="form-div"><div>Nome:</div> <input type="text" name="nome" class="form-control"></div>
+            <div class="form-div"><div>Abreviação:</div> <input type="text" name="abv" class="form-control"></div>
         </form>
     </div>
 </div>

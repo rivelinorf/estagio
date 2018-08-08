@@ -76,7 +76,7 @@ header {
 }
 
 div.titulo h3 {
-    border-bottom: 1px solid white;
+    /*border-bottom: 1px solid white;*/
 }
 
 div.botoes {
@@ -249,8 +249,16 @@ hr {
 }
 
 #tollbar button {
-    display: inline;
-    padding: 0px;
-    width: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1px;
+    /*width: 100px;*/
     margin: 0 1px 0 1px;
+    vertical-align: middle;
 }
+
+#tollbar button i {
+    margin: 0 5px 0 5px;
+}
+

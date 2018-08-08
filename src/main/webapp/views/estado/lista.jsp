@@ -13,7 +13,6 @@
 <div class="main">
     <sge:header
             titulo="Pesquisa de Estados"
-            list="true"
             actionListar="/views/estado/lista.jsp"
             actionSalvar="/views/estado/insere.jsp">
     </sge:header>
