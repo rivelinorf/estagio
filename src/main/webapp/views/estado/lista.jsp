@@ -21,10 +21,10 @@
     >
     </sge:header>
     <div class="div-form" style="width: 60%;">
-        <div class="form-div">
+        <div class="form-row">
             <div>Estado:</div>
             <input type="text" name="nome" class="form-control" style="background-color: rgb(46,46,46)" id="pesquisa-estado-nome"></div>
-        <div class="form-div">
+        <div class="form-row">
             <div>Abreviação:</div>
             <input type="text" name="abv" class="form-control" style="background-color: rgb(46,46,46)" id="pesquisa-estado-abv"></div>
     </div>

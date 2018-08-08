@@ -20,8 +20,8 @@
     <div class="content">
         <div class="div-form">
             <form action="/insere-estado" method="post">
-                <div class="form-div"><div>Nome:</div> <input type="text" name="nome" class="form-control"></div>
-                <div class="form-div"><div>Abreviação:</div> <input type="text" name="abv" class="form-control"></div>
+                <div class="form-row"><div>Nome:</div> <input type="text" name="nome" class="form-control"></div>
+                <div class="form-row"><div>Abreviação:</div> <input type="text" name="abv" class="form-control"></div>
             </form>
         </div>
     </div>
