@@ -115,6 +115,116 @@ div.botoes i:hover {
 
 .main-btn:hover {
     background-color: green;
+}
+
+body {
+    background-color: rgb(51, 51, 51);
+    display: flex;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    transition: background-color 1s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: white;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgb(51, 51, 51);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button:focus {
+    outline: 0;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    float: left;
+    width: 13%;
+    text-align: center;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgb(46, 46, 46);
+}
+
+header {
+    background: rgb(46, 46, 46);
+    padding: 20px 0 10px 0;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    margin: auto auto 20px;
+}
+
+div.titulo h3 {
+    /*border-bottom: 1px solid white;*/
+}
+
+div.botoes {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+div.botoes i {
+    font-size: 20px;
+    padding: 0 9px 0 0;
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
+div.botoes i:hover {
+    color: #34ce57;
+}
+
+.container-nav {
+    width: 100%;
+    text-align: center;
+}
+
+.main-btn {
+    /*display: block;*/
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: rgb(51, 51, 51);
+    border-style: none;
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.main-btn:hover {
+    background-color: green;
 
 }
 
@@ -135,6 +245,22 @@ div.botoes i:hover {
     overflow: auto;
     background-color: rgba(255, 0, 0, 0.5);
 }
+
+.btn-editar, .btn-excluir {
+    width: 20%;
+    display: inline;
+    padding: 5px;
+    margin: auto;
+}
+
+.btn-excluir {
+    background-color: red;
+}
+
+.btn-editar:hover, .btn-excluir:hover {
+    background-color: rgb(46, 46, 46);
+}
+
 
 hr {
     border-color: rgba(255, 255, 255, 0.5);
@@ -187,14 +313,17 @@ hr {
 
 .content {
     width: 100%;
-    height: 88%;
-    margin: 10px auto auto auto;
-    padding: 30px;
+    height: 75%;
+    margin: 20px auto auto auto;
     font-size: 20px;
     background-color: rgb(46, 46, 46);
     border-radius: 5px;
     overflow: scroll;
     overflow-x: hidden;
+}
+
+.table td, .table th {
+    padding: 5px;
 }
 
 .content td {
@@ -205,14 +334,6 @@ hr {
     width: 15%;
     display: inline;
     margin: 0 5px 0 5px;
-}
-
-.fa-pen-square {
-    color:blue;
-}
-
-.fa-times-circle {
-    color:red;
 }
 
 .fa-pen-square:active, .fa-times-circle:active {
@@ -231,8 +352,144 @@ hr {
     background-color: rgb(51, 51, 51);
 }
 
-.content table tr:nth-child(2n+0) button {
-    background-color: rgb(46, 46, 46);
+.novo {
+    width: 90%;
+    margin: auto;
+}
+
+.novo td {
+    padding: 5px;
+}
+
+#tollbar {
+    display: flex;
+}
+
+#tollbar button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1px;
+    /*width: 100px;*/
+    margin: 0 1px 0 1px;
+    vertical-align: middle;
+}
+
+#tollbar button i {
+    /*margin: 0 5px 0 5px;*/
+}
+
+
+.btn-sair {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: red;
+    border-style: none;
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.btn-sair:hover {
+    overflow: auto;
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.btn-editar, .btn-excluir {
+    width: 50px;
+    display: inline;
+    padding: 5px;
+    margin: auto;
+}
+
+.btn-excluir {
+    background-color: red;
+}
+
+.btn-editar {
+    background-color: blue;
+}
+
+.btn-editar:hover, .btn-excluir:hover {
+    background-color: rgb(30, 30, 30);
+}
+
+
+hr {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.box-img {
+    transition: background-color 0.5s;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.box-img:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    border-bottom: rgba(0, 0, 0, 0.3);
+}
+
+.logo {
+    width: 90%;
+    height: 90px;
+    padding: 0 25px 0 25px;
+    margin: auto;
+}
+
+.user-img {
+    border-radius: 100%;
+    width: 100px;
+    display: block;
+    margin: auto;
+}
+
+.dropdown-content {
+    display: none;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.dropdown-content a {
+    display: block;
+}
+
+.drop-btn {
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.main {
+    width: 85%;
+}
+
+
+.table td, .table th {
+    padding: 5px;
+}
+
+.content td {
+    vertical-align: middle;
+}
+
+.fa-pen-square:active, .fa-times-circle:active {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 5px;
+    box-shadow: none;
+}
+
+.content table tbody {
+    overflow: auto;
+    height: 780px;
+}
+
+.content table tr:nth-child(2n+0) {
+    background-color: rgb(51, 51, 51);
 }
 
 .novo {
@@ -262,3 +519,19 @@ hr {
     margin: 0 5px 0 5px;
 }
 
+
+.form-div {
+    display: flex;
+    width: 75%;
+    margin: auto auto 6px;
+}
+
+.form-div input {
+    width: 75%;
+}
+
+.form-div div {
+    margin: 5px;
+    width: 20%;
+    text-align: right;
+}
