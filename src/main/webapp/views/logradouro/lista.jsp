@@ -13,29 +13,59 @@
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 		<sge:header titulo="Pesquisa de Logradouro"
-			actionListar="/views/logradouro/lista.jsp"
-			actionNovo="/views/logradouro/insere.jsp" actionLimpar="ff">
+			actionFiltrar="/views/logradouro/lista.jsp"
+			actionNovo="/views/logradouro/insere.jsp" actionLimpar="true"
+			actionFechar="true">
 		</sge:header>
+		<div class="div-form" style="width: 60%;">
+			<div class="form-div">
+				<div>Nome:</div>
+				<input type="text" name="nome" class="form-control"
+					style="background-color: rgb(46, 46, 46)" id="pesquisa-estado-nome">
+			</div>
+
+
+			<div class="form-div">
+				<div>Tipo de logradouro:</div>
+				<select name="tipologradouroID" class="form-control"
+					style="background-color: rgb(46, 46, 46)" id="pesquisa-estado-abv">
+					<c:forEach items="${tipologradouro.all}" var="tipologradouro">
+						<option value="${tipologradouro.id}">${tipologradouro.nome}</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div class="form-div">
+				<div>Cidade:</div>
+				<select name="cidadeID" class="form-control"
+					style="background-color: rgb(46, 46, 46)"
+					id="pesquisa-logradouro-abv">
+				</select>
+			</div>
+			<c:forEach items="${cidade.all}" var="cidade">
+				<option value="${cidade.id}">${cidade.nome}</option>
+			</c:forEach>
+		</div>
+
 		<div class="content">
-			<input type="text" placeholder="Buscar..." class="form-control"
-				style="width: 300px; margin-bottom: 10px">
 			<table class="table">
 				<thead>
 					<tr>
 						<th></th>
 						<th>Nome</th>
+						<th>Tipo de Logradouro</th>
 						<th>Cidade</th>
-						<th>TipoLogradouro</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${logradouros.all}" var="logradouro">
 						<tr>
-							<td width="90px" id="botoes">
+							<td id="botoes" width="150px" style="text-align: center">
 								<button class="main-btn btn-editar">
 									<i class="fas fa-pen-square"></i>
 								</button>
-								<button class="main-btn btn-excluir" id="deleta-logradouro"value="${logradouro.id}">
+								<button class="main-btn btn-excluir" id="deleta-logradouro"
+									value="${logradouro.id}">
 									<i class="fas fa-times-circle"></i>
 								</button>
 							</td>

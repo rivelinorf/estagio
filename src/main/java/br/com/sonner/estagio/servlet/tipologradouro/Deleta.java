@@ -17,7 +17,7 @@ public class Deleta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		new TipoLogradouroControllerImpl().delete(Long.valueOf(request.getParameter("id")));
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/bairro/lista.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/lista.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

@@ -14,9 +14,9 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 @WebServlet("/insere-tipologradouro")
 public class Insere extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		TipoLogradouro novo = new TipoLogradouro();
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 		
-		TipoLogradouro novo = new TipoLogradouro();
 		
 		novo.setNome(req.getParameter("nome"));
 		
