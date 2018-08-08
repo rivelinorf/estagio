@@ -1,30 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
-
+<%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="tipologradouro"
+	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 
 <html>
 <head>
-<title>Inserir</title>
+<jsp:include page="/includes/head.jsp"></jsp:include>
+<style>
+.form-div {
+	display: flex;
+	width: 75%;
+	margin: auto auto 6px;
+}
+
+.form-div input {
+	width: 75%;
+}
+
+.form-div div {
+	margin: 5px;
+	width: 20%;
+	text-align: right;
+}
+</style>
 </head>
 <body>
-	<jsp:useBean id="tipologradouro"
-		class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
-	<form action="/tipologradouro-insere" method="post">
-		<h3>Tipo logradouro</h3>
-		Nome: <input type="text" name="nome"> <br> <br>tipologradouro:
-		<select name="tipologradouroID">
-			<c:forEach items="${tipologradouro.all}" var="tipologradouro">
-				<option value="${tipologradouro.id}">
-				${tipologradouro.nome}
-				</option>
+	<jsp:include page="/includes/menu.jsp"></jsp:include>
+	<div class="main">
+		<sge:header titulo="Inserir novo Logradouro" actionSalvar="fdas"
+			actionLimpar="fads" actionFechar="/views/tipologradouro/lista.jsp">
+		</sge:header>
 
-			</c:forEach>
+		<div class="content">
+			<form action="/insere-tipologradouro" method="post">
+				<div class="form-div">
+					<div>Nome:</div>
+					<input type="text" name="nome" class="form-control">
+				</div>
 
-		</select><br> <br>
-		<button>Enviar</button>
-	</form>
+			</form>
+		</div>
+	
 </body>
 </html>
+

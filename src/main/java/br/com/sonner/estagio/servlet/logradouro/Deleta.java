@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 
-@WebServlet("/logradouro-deleta")
+@WebServlet("/deleta-logradouro")
 public class Deleta extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

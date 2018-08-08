@@ -18,7 +18,7 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/logradouro-insere")
+@WebServlet("/insere-logradouro")
 public class Insere extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

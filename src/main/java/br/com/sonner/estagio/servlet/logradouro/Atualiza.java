@@ -21,7 +21,7 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/logradouro-atualiza")
+@WebServlet("/atualiza-logradouro")
 public class Atualiza extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

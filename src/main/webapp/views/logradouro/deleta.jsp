@@ -8,7 +8,7 @@
 </head>
 <body>
 	Deleta Logradouro - ${logradouro.id}
-	<form action="/logradouro-deleta" method="post">
+	<form action="/deleta-logradouro" method="post">
 		Logradouro: <select name="id">
 			<%
 				for (Logradouro logradouro : new LogradouroControllerImpl().getAll()) {

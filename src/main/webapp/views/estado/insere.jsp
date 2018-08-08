@@ -26,7 +26,6 @@
     </style>
 </head>
 <body>
-
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header

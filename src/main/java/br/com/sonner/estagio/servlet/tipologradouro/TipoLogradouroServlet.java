@@ -20,7 +20,7 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/listatipologradouro")
+@WebServlet("/lista-tipologradouro")
 public class TipoLogradouroServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws javax.servlet.ServletException, IOException {

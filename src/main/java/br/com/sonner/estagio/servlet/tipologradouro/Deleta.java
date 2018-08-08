@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 
-@WebServlet("/tipologradouro-deleta")
+@WebServlet("/deleta-tipologradouro")
 public class Deleta extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

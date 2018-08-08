@@ -18,7 +18,7 @@ import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/tipologradouro-atualiza")
+@WebServlet("/atualiza-tipologradouro")
 public class Atualiza extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

@@ -11,7 +11,7 @@ import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
-@WebServlet("/tipologradouro-insere")
+@WebServlet("/insere-tipologradouro")
 public class Insere extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
