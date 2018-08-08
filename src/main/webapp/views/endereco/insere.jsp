@@ -16,7 +16,7 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir novo Endereco" list="true"
+		<sge:header titulo="Inserir endereço"
 			actionListar="/views/endereco/lista.jsp"
 			actionSalvar="/views/endereco/insere.jsp">
 		</sge:header>

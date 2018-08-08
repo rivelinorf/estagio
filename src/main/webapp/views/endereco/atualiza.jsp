@@ -14,7 +14,7 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Atualizar Endereco" list="true"
+		<sge:header titulo="Atualizar endereco"
 			actionListar="/views/endereco/lista.jsp"
 			actionSalvar="/views/endereco/insere.jsp">
 		</sge:header>

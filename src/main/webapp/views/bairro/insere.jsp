@@ -11,7 +11,7 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir novo Bairro" list="true"
+		<sge:header titulo="Inserir bairro"
 			actionListar="/views/estado/lista.jsp"
 			actionSalvar="/views/estado/insere.jsp">
 		</sge:header>

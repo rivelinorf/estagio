@@ -12,7 +12,7 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Endereco" list="true"
+		<sge:header titulo="Pesquisa de Endereco"
 			actionListar="/views/endereco/lista.jsp"
 			actionSalvar="/views/endereco/insere.jsp">
 		</sge:header>
