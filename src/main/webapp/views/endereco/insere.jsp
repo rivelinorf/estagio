@@ -16,10 +16,12 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir endereço"
-			actionListar="/views/endereco/lista.jsp"
-			actionSalvar="/views/endereco/insere.jsp">
-		</sge:header>
+    <sge:header
+            titulo="Inserir novo Endereço"
+            actionSalvar="fdas"
+            actionLimpar="fads"
+            actionFechar="/views/endereco/lista.jsp">
+    </sge:header>
 
 		<div class="content">
 			<form action="/endereco-insere" method="post">

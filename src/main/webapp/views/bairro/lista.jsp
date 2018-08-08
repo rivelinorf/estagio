@@ -12,10 +12,13 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Bairros"
-			actionListar="/views/bairro/lista.jsp"
-			actionSalvar="/views/bairro/insere.jsp">
-		</sge:header>
+    <sge:header
+            titulo="Pesquisa de Bairros"
+            actionListar="/views/bairro/lista.jsp"
+            actionNovo="/views/bairro/insere.jsp"
+            actionLimpar="ff"
+    >
+    </sge:header>
 		<div class="content">
 			<input type="text" placeholder="Buscar..." class="form-control"
 				style="width: 300px; margin-bottom: 10px">
