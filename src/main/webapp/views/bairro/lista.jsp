@@ -32,14 +32,12 @@
 					<c:forEach items="${bairros.all}" var="bairro">
 						<tr>
 							<td style="text-align: center" id="botoes">
-								<button class="main-btn btn-editar" onclick="editarbairro()"
-									value="${bairro.id}"=>
+								<a href="/bairro-atualiza?id=${bairro.id}"><button class="main-btn btn-editar">
 									<i class="fas fa-pen-square"></i>
-								</button>
-								<button class="main-btn btn-excluir" onclick="excluirbairro()"
-									value="${bairro.id}">
+								</button></a>
+								<a href="/bairro-deleta?id=${bairro.id}"><button class="main-btn btn-excluir">
 									<i class="fas fa-times-circle"></i>
-								</button>
+								</button></a>
 							</td>
 							<td>${bairro.nome}</td>
 							<td>${bairro.cidade.nome}</td>
@@ -52,4 +50,3 @@
 	</div>
 </body>
 </html>
-

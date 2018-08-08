@@ -10,6 +10,7 @@
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
+
 </head>
 <body>
 
@@ -22,42 +23,32 @@
 
 		<div class="content">
 			<form action="/endereco-insere" method="post">
-				<table class="novo">
-					<tr>
-						<td width="200px">Número:</td>
-						<td><input type="text" name="numero" placeholder="Ex.: 111" class="form-control"></td>
-					</tr>
-					<tr>
-						<td>cep:</td>
-						<td><input type="text" name="cep"
-							placeholder="Ex.: 00000-000" class="form-control"></td>
 
-					</tr>
-					<tr>
-						<td>Complemento:</td>
-						<td><input type="text" name="complemento" class="form-control"></td>
-					</tr>
-					<tr>
-						<td>Bairro:</td>
-						<td><select name="bairro">
-								<c:forEach items="${bairros.all}" var="bairro">
-									<option value="${bairro.id}">${bairro.nome}
-										${bairro.cidade.nome}</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td>Logradouro:</td>
-						<td><select name="logradouro">
-								<c:forEach items="${logradouros.all}" var="logradouro">
-									<option value="${logradouro.id}">
-										${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
-								</c:forEach>
-						</select></td>
-					</tr>
+				Número: <input type="text" name="numero" placeholder="Ex.: 111"
+					class="form-control">
+					
+				CEP: <input type="text" name="cep"
+					placeholder="Ex.: 00000-000" class="form-control">
 
-					<td><button class="main-btn">Enviar</button></td>
-				</table>
+
+				Complemento: <input type="text" name="complemento" placeholder="(opcional)"
+					class="form-control">
+					
+				Bairro: <select name="bairro">
+					<c:forEach items="${bairros.all}" var="bairro">
+						<option value="${bairro.id}">${bairro.nome}
+							${bairro.cidade.nome}</option>
+					</c:forEach>
+				</select> Logradouro: <select name="logradouro">
+					<c:forEach items="${logradouros.all}" var="logradouro">
+						<option value="${logradouro.id}">
+							${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
+					</c:forEach>
+				</select>
+
+
+				<button class="main-btn">Enviar</button>
+
 			</form>
 		</div>
 	</div>

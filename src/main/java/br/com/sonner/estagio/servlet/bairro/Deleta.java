@@ -21,13 +21,4 @@ public class Deleta extends HttpServlet {
 		requestDispatcher.forward(req, res);
 	}
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
-		new BairroControllerImpl().delete(Long.valueOf(req.getParameter("id")));
-
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/lista.jsp");
-		requestDispatcher.forward(req, res);
-
-	}
-
 }

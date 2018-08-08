@@ -18,24 +18,19 @@
 
 		<div class="content">
 			<form action="/bairro-insere" method="post">
-				<table class="novo">
-					<tr>
-						<td  align="right" width="200px">Nome:</td>
-						<td><input type="text" name="nome" class="form-control"></td>
-					</tr>
-					<tr>
-						<td>Cidade:</td>
-						<td><select name="cidadeID" align="right">
-								<c:forEach items="${cidades.all}" var="cidade">
-									<option value="${cidade.id}">${cidade.nome}</option>
 
-								</c:forEach>
-						</select></td>
-					</tr>
-					<tr>
-						<td><button class="main-btn">Enviar</button></td>
-					</tr>
-				</table>
+				Nome: <input type="text" name="nome" class="form-control" width="20px">
+
+				Cidade: <select name="cidadeID">
+					<c:forEach items="${cidades.all}" var="cidade">
+						<option value="${cidade.id}">${cidade.nome}</option>
+
+					</c:forEach>
+				</select>
+				
+
+				<button class="main-btn">Enviar</button>
+
 			</form>
 		</div>
 	</div>

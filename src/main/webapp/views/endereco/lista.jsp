@@ -12,7 +12,7 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Estados" list="true"
+		<sge:header titulo="Pesquisa de Endereco" list="true"
 			actionListar="/views/endereco/lista.jsp"
 			actionSalvar="/views/endereco/insere.jsp">
 		</sge:header>
@@ -36,13 +36,12 @@
 					<c:forEach items="${enderecos.all}" var="endereco">
 						<tr>
 							<td style="text-align: center" id="botoes">
-								<button type="button" class="main-btn btn-editar"
-									id="editar-endereco" value="${endereco.id}">
+								<a href="/endereco-atualiza?id=${endereco.id}"><button class="main-btn btn-editar">
 									<i class="fas fa-pen-square"></i>
-								</button>
-								<button class="main-btn btn-excluir">
+								</button></a>
+								<a href="/endereco-deleta?id=${endereco.id}"><button class="main-btn btn-excluir">
 									<i class="fas fa-times-circle"></i>
-								</button>
+								</button></a>
 							</td>
 							<td>${endereco.logradouro.tipologradouro.nome}
 								${endereco.logradouro.nome}</td>
@@ -56,7 +55,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="/views/endereco/insere.jsp">Adicionar novo</a>
 		</div>
 	</div>
 </body>
