@@ -8,8 +8,8 @@ import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 public class TipoLogradouroControllerImpl implements TipoLogradouroController {
-
 	private TipoLogradouroDAO tDAO;
+	private static List<TipoLogradouro> TIPOLOGADOURO_PESQUISADOS;
 
 	public TipoLogradouroControllerImpl() {
 		this.tDAO = TipoLogradouroDAOImpl.getInstance();
@@ -39,6 +39,17 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
 	@Override
 	public void delete(long id) {
 		this.tDAO.delete(id);
+	}
+
+	@Override
+	public List<TipoLogradouro> getTipoLogradourosPesquisados() {
+		return TIPOLOGADOURO_PESQUISADOS;
+	}
+
+	@Override
+	public  void setTipoLogradourosPesquisados(String nome) {
+        TipoLogradouroControllerImpl.TIPOLOGADOURO_PESQUISADOS=this.tDAO.pesquisaTipoLogradouro(nome);
+	
 	}
 
 }
