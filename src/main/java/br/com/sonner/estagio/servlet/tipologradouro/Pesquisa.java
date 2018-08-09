@@ -13,5 +13,8 @@ public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	TipoLogradouroControllerImpl tipoLogradouroController =new TipoLogradouroControllerImpl();
     	tipoLogradouroController.setTipoLogradourosPesquisados(request.getParameter("tipologradouro"));
+    	
+        response.sendRedirect("/views/tipologradouro/lista.jsp");
+
     }
 }

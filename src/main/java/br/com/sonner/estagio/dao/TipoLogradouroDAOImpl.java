@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
-import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {

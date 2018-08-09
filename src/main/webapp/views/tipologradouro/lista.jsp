@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -13,18 +12,20 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Tipo de Logradouro"
-			page="tipologradouro" actionFiltrar="/views/tipologradouro/lista.jsp"
+		<sge:header titulo="Pesquisa de Tipo de Logradouros" page="tipologradouro"
+			actionFiltrar="/views/tipologradouro/lista.jsp"
 			actionNovo="/views/tipologradouro/insere.jsp" actionLimpar="true"
 			actionFechar="true">
 		</sge:header>
 		<div class="div-form" style="width: 60%;">
-			<div class="form-div">
-				<div>Nome:</div>
-				<input type="text" name="nome" class="form-control"
-					style="background-color: rgb(46, 46, 46)"
-					id="pesquisa-tipologradouro-nome">
-			</div>
+			<form action="/pesquisa-tipologradouro" method="get" id="filter-form">
+				<div class="form-row">
+					<div>Tipo de Logradouro:</div>
+					<input type="text" name="tipologradouro" class="form-control"
+						style="background-color: rgb(46, 46, 46)"
+						id="pesquisa-tipologradouro-nome">
+				</div>
+			</form>
 		</div>
 		<div class="content">
 			<table class="table">
@@ -35,7 +36,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${tipologradouros.tipoLogradourosPesquisados}"
+					<c:forEach items="${tipologradouros.tipologradourosPesquisados}"
 						var="tipologradouro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
