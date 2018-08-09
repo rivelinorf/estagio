@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.util;
+package br.com.sonner.estagio.dao.queries;
 
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.TipoLogradouro;

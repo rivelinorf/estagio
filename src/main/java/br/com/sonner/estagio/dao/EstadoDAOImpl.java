@@ -3,7 +3,7 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.model.Estado;
-import br.com.sonner.estagio.util.QueryStringEstado;
+import br.com.sonner.estagio.dao.queries.QueryStringEstado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

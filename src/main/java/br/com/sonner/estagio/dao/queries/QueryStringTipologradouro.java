@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.util;
+package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringTipologradouro {
     private String sql = "SELECT * FROM tipoLogradouro WHERE 1 ";

@@ -9,7 +9,7 @@ import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.util.QueryStringTipologradouro;
+import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 
 public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 

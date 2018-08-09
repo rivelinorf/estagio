@@ -17,7 +17,7 @@ import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.util.QueryStringTipologradouro;
+import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 
 public class LogradouroDAOImpl implements LogradouroDAO {
 

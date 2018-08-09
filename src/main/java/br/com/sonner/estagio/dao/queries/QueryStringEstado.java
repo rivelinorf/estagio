@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.util;
+package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringEstado {
     private String sql = "SELECT * FROM estado WHERE 1 ";
