@@ -9,6 +9,7 @@ import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.util.QueryStringTipologradouro;
 
 public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
@@ -125,10 +126,8 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	public List<TipoLogradouro> pesquisaTipoLogradouro(String nome) {
 	
 		try {
-            String sql = "select * from tipoLogradouro where nome=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setString(1,nome);
+            QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome).build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
 
             ResultSet resultSet = preparedStatement.executeQuery();
             List<TipoLogradouro> tipologradouros = new ArrayList<>();
