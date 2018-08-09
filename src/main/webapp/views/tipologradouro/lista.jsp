@@ -36,7 +36,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${tipologradouros.tipologradourosPesquisados}"
+					<c:forEach items="${tipologradouros.tipoLogradourosPesquisados}"
 						var="tipologradouro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
