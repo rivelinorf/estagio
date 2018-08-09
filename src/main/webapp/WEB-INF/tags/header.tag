@@ -35,16 +35,6 @@
 
 <script>
     $("#filtrar").on("click", function () {
-       $.ajax({
-           url: "/pesquisa-${page}",
-           type: "GET",
-           data: {
-               estado: $("#pesquisa-estado-nome").val(),
-               abv: $("#pesquisa-estado-abv").val()
-           },
-           success: function (data) {
-               location.reload();
-           }
-       })
+        $("#filter-form").submit();
     });
 </script>
