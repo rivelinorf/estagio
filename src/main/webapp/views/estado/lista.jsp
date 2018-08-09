@@ -1,13 +1,13 @@
-<%@ page import="java.util.List" %>
 <%@ page import="br.com.sonner.estagio.model.Estado" %>
 <%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="estadoController" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 
 <%
-    List<Estado> lista  =  (List) session.getAttribute("lista");
+    List<Estado> lista = (List) session.getAttribute("lista");
     EstadoFiltroVO vo = (EstadoFiltroVO) session.getAttribute("filtro");
 
     if (vo == null) {
@@ -60,7 +60,8 @@
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
-                        <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i class="fas fa-times-circle"></i></button>
+                        <button class="main-btn btn-excluir" class="deleta" onclick="location.href='/estado-deleta?id=${estado.id}'"><i
+                                class="fas fa-times-circle"></i></button>
                     </td>
                     <td>${estado.nome}</td>
                     <td>${estado.abv}</td>
