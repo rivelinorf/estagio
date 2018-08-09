@@ -18,13 +18,18 @@
     </sge:header>
 
     <div class="content">
-        <div class="div-form">
-            <form action="/insere-estado" method="post">
-                <div class="form-row"><div>Nome:</div> <input type="text" name="nome" class="form-control"></div>
-                <div class="form-row"><div>Abreviação:</div> <input type="text" name="abv" class="form-control"></div>
-            </form>
-        </div>
+        <form action="/insere-estado" method="post" id="insere-form">
+            <div class="div-form">
+                <div class="form-row">
+                    <div>Nome:</div>
+                    <input type="text" name="nome" class="form-control"></div>
+                <div class="form-row">
+                    <div>Abreviação:</div>
+                    <input type="text" name="abv" class="form-control"></div>
+            </div>
+        </form>
     </div>
+</div>
 </div>
 </body>
 </html>

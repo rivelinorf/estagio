@@ -37,4 +37,8 @@
     $("#filtrar").on("click", function () {
         $("#filter-form").submit();
     });
+
+    $("#salvar").on("click", function () {
+        $("#insere-form").submit();
+    })
 </script>
