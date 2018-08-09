@@ -14,9 +14,9 @@
     <sge:header
             titulo="Pesquisa de Estados"
             page="estado"
-            actionFiltrar="/views/estado/lista.jsp"
+            actionFiltrar="true"
             actionNovo="/views/estado/insere.jsp"
-            actionLimpar="true"
+            formId="filter-form"
             actionFechar="true"
     >
     </sge:header>
@@ -46,8 +46,7 @@
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
-                        <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i
-                                class="fas fa-times-circle"></i></button>
+                        <button class="main-btn btn-excluir" id="deleta-estado" value="${estado.id}"><i class="fas fa-times-circle"></i></button>
                     </td>
                     <td>${estado.nome}</td>
                     <td>${estado.abv}</td>

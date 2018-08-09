@@ -13,7 +13,7 @@
     <sge:header
             titulo="Inserir novo Estado"
             actionSalvar="true"
-            actionLimpar="true"
+            formId="insere-form"
             actionFechar="true">
     </sge:header>
 
