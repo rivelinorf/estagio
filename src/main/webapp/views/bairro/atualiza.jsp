@@ -26,11 +26,10 @@
 					</div>
 					<div class="form-row">
 						<div>Cidade:</div>
-						<select name="cidade" class="form-control">
-							<option disabled selected>Selecione uma opção...</option>
+						<select name="cidadeID" class="form-control">
+							<option value="${bairro.cidade.id}">${bairro.cidade.nome}</option>
 							<c:forEach items="${cidades.all}" var="cidade">
 								<option value="${cidade.id}">${cidade.nome}</option>
-
 							</c:forEach>
 
 						</select>

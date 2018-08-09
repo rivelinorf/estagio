@@ -30,7 +30,8 @@
 					<div class="form-row">
 						<div>Logradouro:</div>
 						<select name="logradouro" class="form-control">
-							<option disabled selected>Selecione uma opção...</option>
+							<option value="${endereco.logradouro.id}">${endereco.logradouro.tipologradouro.nome}
+								${endereco.logradouro.nome}</option>
 							<c:forEach items="${logradouros.all}" var="logradouro">
 								<option value="${logradouro.id}">
 									${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
@@ -50,7 +51,8 @@
 					<div class="form-row">
 						<div>Bairro:</div>
 						<select name="bairro" class="form-control">
-							<option disabled selected>Selecione uma opção...</option>
+							<option value="${endereco.bairro.id}">${endereco.bairro.nome}
+								${endereco.bairro.cidade.nome}</option>
 							<c:forEach items="${bairros.all}" var="bairro">
 								<option value="${bairro.id}">${bairro.nome}
 									${bairro.cidade.nome}</option>
