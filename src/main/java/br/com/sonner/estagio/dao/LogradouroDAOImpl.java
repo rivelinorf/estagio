@@ -63,7 +63,8 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 				CidadeController cidadeController = new CidadeControllerImpl();
 				TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-				TipoLogradouro tipologradouro = tipoLogradouroController.getOne(resultSet.getLong("logradouro_tipo_fk"));
+				TipoLogradouro tipologradouro = tipoLogradouroController
+						.getOne(resultSet.getLong("logradouro_tipo_fk"));
 				Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
 
 				Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
@@ -145,37 +146,9 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public List<Logradouro> pesquisaLogradouro(String nome, Cidade cidade, TipoLogradouro tipologradouro) {
-		try {
-			Logradouro logradouro= null;
-            String sql = "select  logradouro where nome=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            
-
-            preparedStatement.setString(1,nome);
-            preparedStatement.setLong(2, logradouro.getCidade().getId());
-            preparedStatement.setLong(3, logradouro.getTipologradouro().getId());
-
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Logradouro> logradouros = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Logradouro aux = new Logradouro();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString(nome));
-                aux.setTipologradouro(tipologradouro);
-                aux.setCidade(cidade);
-
-                logradouros.add(aux);
-            }
-		return logradouros;
+	public List<Logradouro> pesquisaLogradouro(String nome, long cidadeID, long tipologradouroID) {
 		
-		   } catch (SQLException e) {
-	            e.printStackTrace();
-	            return null;
-		}
+		return null;
 	}
 
 }

@@ -1,8 +1,6 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
-import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

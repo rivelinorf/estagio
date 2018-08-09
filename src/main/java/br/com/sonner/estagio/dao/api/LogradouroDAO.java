@@ -18,7 +18,7 @@ public interface LogradouroDAO {
 
 	void delete(Long id);
 	
-	List<Logradouro> pesquisaLogradouro(String nome,Cidade cidade,TipoLogradouro tipoLogradouro);
+	List<Logradouro> pesquisaLogradouro(String nome,long cidadeID,long tipologradouroID);
 
 
 }
