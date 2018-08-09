@@ -147,7 +147,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
 	@Override
 	public List<Logradouro> pesquisaLogradouro(String nome, long cidadeID, long tipologradouroID) {
-		
+
 		return null;
 	}
 

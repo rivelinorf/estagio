@@ -3,18 +3,16 @@
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
 <jsp:useBean id="tipologradouros"
 	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
-
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Tipo de Logradouros" page="tipologradouro"
-			actionFiltrar="/views/tipologradouro/lista.jsp"
-			actionNovo="/views/tipologradouro/insere.jsp" actionLimpar="true"
+		<sge:header titulo="Pesquisa de Tipo de Logradouros"
+			page="tipologradouro" actionFiltrar="true"
+			actionNovo="/views/tipologradouro/insere.jsp" formId="filter-form"
 			actionFechar="true">
 		</sge:header>
 		<div class="div-form" style="width: 60%;">
