@@ -1,8 +1,20 @@
+<%@page import="br.com.sonner.estagio.model.TipoLogradouro"%>
+<%@page import="java.util.List"%>
+<%@page import="br.com.sonner.estagio.vos.TipologradouroFiltroVO"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="tipologradouros"
-	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouroController"class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<%
+    List<TipoLogradouro> lista = (List) session.getAttribute("lista");
+    TipologradouroFiltroVO vo = (TipologradouroFiltroVO) session.getAttribute("filtro");
+
+    if (vo == null) {
+        vo = new TipologradouroFiltroVO();
+        vo.setNome("");
+        
+    }
+%>
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -10,18 +22,20 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Tipo de Logradouros"
+		<sge:header 
+			titulo="Pesquisa de Tipo de Logradouros"
 			page="tipologradouro" actionFiltrar="true"
-			actionNovo="/views/tipologradouro/insere.jsp" formId="filter-form"
+			actionNovo="/views/tipologradouro/insere.jsp"
+			formId="filter-form"
 			actionFechar="true">
 		</sge:header>
 		<div class="div-form" style="width: 60%;">
 			<form action="/pesquisa-tipologradouro" method="get" id="filter-form">
-				<div class="form-row">
+				<div class="form-row">()()
 					<div>Tipo de Logradouro:</div>
 					<input type="text" name="tipologradouro" class="form-control"
 						style="background-color: rgb(46, 46, 46)"
-						id="pesquisa-tipologradouro-nome">
+						id="pesquisa-tipologradouro-nome" value="<%=vo.getNome() %>">
 				</div>
 			</form>
 		</div>

@@ -16,8 +16,6 @@ public interface TipoLogradouroController {
 
 	void delete(long id);
 
-	List<TipoLogradouro> getTipoLogradourosPesquisados();
-
-	void setTipoLogradourosPesquisados(String nome);
+	
 
 }
