@@ -9,6 +9,7 @@ import br.com.sonner.estagio.model.Bairro;
 public class BairroControllerImpl implements BairroController {
 	
 	private BairroDAOImpl bDAO;
+	private static List<Bairro> BAIRROS_PESQUISADOS;
 	
 	public BairroControllerImpl() {
 		bDAO = BairroDAOImpl.getInstance();
@@ -38,6 +39,17 @@ public class BairroControllerImpl implements BairroController {
 	@Override
 	public void delete(long id) {
 		this.bDAO.delete(id);
+		
+	}
+
+	@Override
+	public List<Bairro> getBairrosPesquisados() {
+		return BAIRROS_PESQUISADOS;
+	}
+
+	@Override
+	public void setBairrosPesquisados(String nome, long cidadeID) {
+		BairroControllerImpl.BAIRROS_PESQUISADOS = this.bDAO.pesquisaBairro(nome, cidadeID);
 		
 	}
 	

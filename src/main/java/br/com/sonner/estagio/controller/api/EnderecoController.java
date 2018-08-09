@@ -10,6 +10,9 @@ public interface EnderecoController {
 	Endereco getOne(long id);
 	void update(Endereco endereco);
 	void delete(long id);
+	List<Endereco> getEnderecosPesquisados();
+	void setEnderecosPesquisados(String cep);
+	
 	
 
 }

@@ -143,5 +143,41 @@ public class BairroDAOImpl implements BairroDAO {
 
 	}
 
+	@Override
+	public List<Bairro> pesquisaBairro(String nome, long cidadeID) {
+		try {
+		List<Bairro> bairros = new ArrayList<Bairro>();
+		PreparedStatement stmt = this.connection.prepareStatement("select * from bairro where nome=? and bairro_cidade_fk=?");
+		
+		stmt.setString(1, nome);
+		stmt.setLong(2, cidadeID);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			
+
+			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
+			Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
+
+			Bairro b = new Bairro();
+			b.setId(rs.getLong("id"));
+			b.setNome(rs.getString("nome"));
+			b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
+
+			bairros.add(b);
+		}
+
+		rs.close();
+		stmt.close();
+
+		return bairros;
+		
+		}catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+
 
 }
