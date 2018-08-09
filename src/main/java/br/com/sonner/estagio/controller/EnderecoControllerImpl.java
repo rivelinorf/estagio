@@ -9,6 +9,7 @@ import br.com.sonner.estagio.model.Endereco;
 public class EnderecoControllerImpl implements EnderecoController {
 
 	private EnderecoDAOImpl eDAO;
+	private static List<Endereco> ENDERECOS_PESQUISADOS;
 
 	public EnderecoControllerImpl() {
 		eDAO = EnderecoDAOImpl.getInstance();
@@ -40,6 +41,17 @@ public class EnderecoControllerImpl implements EnderecoController {
 	public void delete(long id) {
 		this.eDAO.delete(id);
 
+	}
+
+	@Override
+	public List<Endereco> getEnderecosPesquisados() {
+		return ENDERECOS_PESQUISADOS;
+	}
+
+	@Override
+	public void setEnderecosPesquisados(String cep) {
+		EnderecoControllerImpl.ENDERECOS_PESQUISADOS = this.eDAO.pesquisaEndereco(cep);
+		
 	}
 
 }

@@ -32,7 +32,7 @@
 				<div>Cidade:</div>
 				<select name="cidadeID" class="form-control"
 					style="background-color: rgb(46, 46, 46)">
-					<option	disabled selected>Selecione	uma	opção...</option>
+					<option disabled selected>Selecione uma opção...</option>
 					<c:forEach items="${cidades.all}" var="cidade">
 						<option value="${cidade.id}">${cidade.nome}</option>
 
@@ -54,7 +54,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${bairros.all}" var="bairro">
+					<c:forEach items="${bairros.bairrosPesquisados}" var="bairro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center"><a
 								href="/bairro-atualiza?id=${bairro.id}"><button
