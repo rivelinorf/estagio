@@ -11,25 +11,35 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Atualizar bairro"
-			actionListar="/views/estado/lista.jsp"
-			actionSalvar="/views/estado/insere.jsp">
+		<sge:header titulo="Atualizar bairro" actionSalvar="true"
+			actionLimpar="true" actionFechar="true">
 		</sge:header>
 
-		<form action="/bairro-atualiza" method="post">
+		<div class="content">
+			<div class="div-form">
+				<form action="/bairro-atualiza" method="post">
+					<input type="hidden" name="id" value="${bairro.id}" />
+					<div class="form-row">
+						<div>Nome:</div>
+						<input type="text" name="nome" class="form-control"
+							value="${bairro.nome}">
+					</div>
+					<div class="form-row">
+						<div>Cidade:</div>
+						<select name="cidade" class="form-control">
+							<option disabled selected>Selecione uma opção...</option>
+							<c:forEach items="${cidades.all}" var="cidade">
+								<option value="${cidade.id}">${cidade.nome}</option>
 
-			<input type="hidden" name="id" value="${bairro.id}" /> <br>
-			Novo nome: <input type="text" name="nome" value="${bairro.nome}">
-			<br> <br> Nova cidade: <select name="cidade">
-				<c:forEach items="${cidades.all}" var="cidade">
-					<option value="${cidade.id}">${cidade.nome}</option>
+							</c:forEach>
 
-				</c:forEach>
+						</select>
+					</div>
 
-			</select><br> <br>
-
-			<button>Enviar</button>
-		</form>
+					<button class="main-btn">Enviar</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

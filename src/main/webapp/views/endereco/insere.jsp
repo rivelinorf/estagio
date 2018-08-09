@@ -10,48 +10,60 @@
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
-
 </head>
 <body>
-
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-    <sge:header
-            titulo="Inserir novo Endereço"
-            actionSalvar="fdas"
-            actionLimpar="fads"
-            actionFechar="/views/endereco/lista.jsp">
-    </sge:header>
+		<sge:header titulo="Inserir novo Endereço" actionSalvar="true"
+			actionLimpar="true" actionFechar="true">
+		</sge:header>
 
 		<div class="content">
-			<form action="/endereco-insere" method="post">
+			<div class="div-form">
+				<form action="/endereco-insere" method="post">
 
-				Número: <input type="text" name="numero" placeholder="Ex.: 111"
-					class="form-control">
-					
-				CEP: <input type="text" name="cep"
-					placeholder="Ex.: 00000-000" class="form-control">
+					<div class="form-row">
+						<div>Número:</div>
+						<input type="text" name="numero" placeholder="Ex.: 111"
+							class="form-control">
+					</div>
+					<div class="form-row">
+						<div>Logradouro:</div>
+						<select name="logradouro" class="form-control">
+							<option disabled selected>Selecione uma opção...</option>
+							<c:forEach items="${logradouros.all}" var="logradouro">
+								<option value="${logradouro.id}">
+									${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="form-row">
+						<div>CEP:</div>
+						<input type="text" name="cep" placeholder="Ex.: 00000-000"
+							class="form-control">
+					</div>
 
+					<div class="form-row">
+						<div>Complemento:</div>
+						<input type="text" name="complemento" placeholder="(opcional)"
+							class="form-control">
+					</div>
 
-				Complemento: <input type="text" name="complemento" placeholder="(opcional)"
-					class="form-control">
-					
-				Bairro: <select name="bairro">
-					<c:forEach items="${bairros.all}" var="bairro">
-						<option value="${bairro.id}">${bairro.nome}
-							${bairro.cidade.nome}</option>
-					</c:forEach>
-				</select> Logradouro: <select name="logradouro">
-					<c:forEach items="${logradouros.all}" var="logradouro">
-						<option value="${logradouro.id}">
-							${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
-					</c:forEach>
-				</select>
+					<div class="form-row">
+						<div>Bairro:</div>
+						<select name="bairro" class="form-control">
+							<option disabled selected>Selecione uma opção...</option>
+							<c:forEach items="${bairros.all}" var="bairro">
+								<option value="${bairro.id}">${bairro.nome}
+									${bairro.cidade.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
 
+					<button class="main-btn">Enviar</button>
 
-				<button class="main-btn">Enviar</button>
-
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

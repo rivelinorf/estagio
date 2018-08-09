@@ -14,33 +14,54 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Atualizar endereço"
-			actionListar="/views/endereco/lista.jsp"
-			actionSalvar="/views/endereco/insere.jsp">
+		<sge:header titulo="Atualizar endereço" actionSalvar="true"
+			actionLimpar="true" actionFechar="true">
 		</sge:header>
 
-		<form action="/endereco-atualiza" method="post">
+		<div class="content">
+			<div class="div-form">
+				<form action="/endereco-atualiza" method="post">
+					<input type="hidden" name="id" value="${endereco.id}" />
+					<div class="form-row">
+						<div>Número:</div>
+						<input type="text" name="numero" placeholder="Ex.: 111"
+							class="form-control" value="${endereco.numero}">
+					</div>
+					<div class="form-row">
+						<div>Logradouro:</div>
+						<select name="logradouro" class="form-control">
+							<option disabled selected>Selecione uma opção...</option>
+							<c:forEach items="${logradouros.all}" var="logradouro">
+								<option value="${logradouro.id}">
+									${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<div class="form-row">
+						<div>CEP:</div>
+						<input type="text" name="cep" placeholder="Ex.: 00000-000"
+							class="form-control" value="${endereco.cep}">
+					</div>
+					<div class="form-row">
+						<div>Complemento:</div>
+						<input type="text" name="complemento" class="form-control"
+							value="${endereco.complemento}">
+					</div>
+					<div class="form-row">
+						<div>Bairro:</div>
+						<select name="bairro" class="form-control">
+							<option disabled selected>Selecione uma opção...</option>
+							<c:forEach items="${bairros.all}" var="bairro">
+								<option value="${bairro.id}">${bairro.nome}
+									${bairro.cidade.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
 
-			<input type="hidden" name="id" value="${endereco.id}" /> Endereco: <br>
-			Número: <input type="text" name="numero" placeholder="Ex.: 111"
-				value="${endereco.numero}"> <br> CEP: <input
-				type="text" name="cep" placeholder="Ex.: 00000-000"
-				value="${endereco.cep}"><br> Complemento: <input
-				type="text" name="complemento" value="${endereco.complemento}">
-			Bairro: <select name="bairro">
-				<c:forEach items="${bairros.all}" var="bairro">
-					<option value="${bairro.id}">${bairro.nome}
-						${bairro.cidade.nome}</option>
-				</c:forEach>
-			</select> Logradouro: <select name="logradouro">
-				<c:forEach items="${logradouros.all}" var="logradouro">
-					<option value="${logradouro.id}">
-						${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
-				</c:forEach>
-			</select>
-
-			<button>Enviar</button>
-		</form>
+					<button class="main-btn">Enviar</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
