@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
 public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
@@ -97,6 +98,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	@Override
 	public TipoLogradouro getOne(Long id) {
 		try {
+		    
 			PreparedStatement stmt = connection.prepareStatement("select * from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
 			ResultSet resultSet = stmt.executeQuery();
@@ -120,4 +122,32 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
 	}
 
+	@Override
+	public List<TipoLogradouro> pesquisaTipoLogradouro(String nome) {
+	
+		try {
+            String sql = "select * from tipoLogradouro where nome=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1,nome);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<TipoLogradouro> tipologradouros = new ArrayList<>();
+
+            while (resultSet.next()) {
+                TipoLogradouro aux = new TipoLogradouro();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+
+                tipologradouros.add(aux);
+            }
+
+            return tipologradouros;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+	}
+	}
 }

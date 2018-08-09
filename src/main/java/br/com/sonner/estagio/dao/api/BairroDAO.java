@@ -9,4 +9,5 @@ public interface BairroDAO {
 	void update (Bairro bairro);
 	void delete(long id);
 	Bairro getOne(long id);
+	List<Bairro> pesquisaBairro(String nome, long cidadeID);
 }

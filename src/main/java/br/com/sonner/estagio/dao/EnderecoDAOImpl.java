@@ -158,4 +158,43 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     }
 
+	@Override
+	public List<Endereco> pesquisaEndereco(String cep) {
+        try {
+            List<Endereco> enderecos = new ArrayList<Endereco>();
+            PreparedStatement stmt = this.connection.prepareStatement("select * from endereco where cep=?");
+            
+            stmt.setString(1, cep);
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
+                Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
+
+                LogradouroDAO lDAO = LogradouroDAOImpl.getIntance();
+                Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
+
+                Endereco e = new Endereco();
+                e.setId(rs.getLong("id"));
+                e.setNumero(rs.getInt("numero"));
+                e.setCep(rs.getString("cep"));
+                e.setComplemento(rs.getString("complemento"));
+                e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
+                e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
+
+                enderecos.add(e);
+            }
+
+            rs.close();
+            stmt.close();
+
+            return enderecos;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }		
+		
+	}
+
 }

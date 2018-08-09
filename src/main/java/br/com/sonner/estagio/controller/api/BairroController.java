@@ -10,6 +10,8 @@ public interface BairroController {
 	Bairro getOne(long id);
 	void update(Bairro bairro);
 	void delete(long id);
+	List<Bairro> getBairrosPesquisados();
+	void setBairrosPesquisados(String nome, long cidadeID);
 	
 
 }
