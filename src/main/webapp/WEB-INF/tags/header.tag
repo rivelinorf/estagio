@@ -46,6 +46,6 @@
     })
 
     $("#limpar").on("click", function () {
-        $("#${formId}").trigger("reset");
+        $("#${formId} input").val(null);
     })
 </script>

@@ -2,17 +2,16 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.EstadoController;
 import br.com.sonner.estagio.dao.EstadoDAOImpl;
-import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.EstadoFiltroVO;
 
 import java.util.List;
 
 public class EstadoControllerImpl implements EstadoController {
-    private EstadoDAO estadoDAO;
+    private EstadoDAOImpl estadoDAO;
 
     public EstadoControllerImpl() {
-        this.estadoDAO = EstadoDAOImpl.getInstance();
+        this.estadoDAO = (EstadoDAOImpl) EstadoDAOImpl.getInstance();
     }
 
     @Override

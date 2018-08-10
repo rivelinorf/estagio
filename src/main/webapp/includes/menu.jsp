@@ -13,12 +13,12 @@
         </div>
         <hr>
         <div>
-            <a href="/views/estado/lista.jsp"><button type="button" class="main-btn btn-title" id="estado">Estado</button></a>
-            <a href="/views/cidade/lista.jsp"> <button type="button" class="main-btn btn-title cidade">Cidade</button></a>
-            <a href="/views/tipologradouro/lista.jsp"><button type="button" class="main-btn btn-title tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
-            <a href="/views/logradouro/lista.jsp"><button type="button" class="main-btn btn-title logradouro" id=logradouro>Logradouro</button></a>
-            <a href="/views/bairro/lista.jsp"><button type="button" class="main-btn btn-title" id="bairro">Bairro</button></a>
-            <a href="/views/endereco/lista.jsp"><button type="button" class="main-btn btn-title" id="endereco">Endereço</button></a>
+            <a href="/views/estado/lista.jsp"><button type="button" class="main-btn btn-menu" id="estado">Estado</button></a>
+            <a href="/views/cidade/lista.jsp"> <button type="button" class="main-btn btn-menu cidade">Cidade</button></a>
+            <a href="/views/tipologradouro/lista.jsp"><button type="button" class="main-btn btn-menu tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
+            <a href="/views/logradouro/lista.jsp"><button type="button" class="main-btn btn-menu logradouro" id=logradouro>Logradouro</button></a>
+            <a href="/views/bairro/lista.jsp"><button type="button" class="main-btn btn-menu" id="bairro">Bairro</button></a>
+            <a href="/views/endereco/lista.jsp"><button type="button" class="main-btn btn-menu" id="endereco">Endereço</button></a>
         </div>
     </div>
     <footer class="container-nav">
