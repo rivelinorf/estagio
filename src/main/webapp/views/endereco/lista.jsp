@@ -1,3 +1,6 @@
+<%@ page import="br.com.sonner.estagio.model.Endereco"%>
+<%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO"%>
+<%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -8,51 +11,37 @@
 <jsp:useBean id="logradouros"
 	class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
 
+<%
+	List<Endereco> lista = (List) session.getAttribute("lista");
+	EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("filtro");
+
+	if (vo == null) {
+		vo = new EnderecoFiltroVO();
+		vo.setCep("");
+	}
+%>
+
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Enderecos" page="bairro"
-			actionFiltrar="/views/endereco/lista.jsp"
-			actionNovo="/views/endereco/insere.jsp" actionLimpar="true"
-			actionFechar="true">
+
+		<sge:header titulo="Pesquisa de Endereços" page="estado"
+			actionFiltrar="true" actionNovo="/views/endereco/insere.jsp"
+			formId="filter-form" actionFechar="true">
 		</sge:header>
 
 		<div class="div-form" style="width: 60%;">
-			<div class="form-row">
-				<div>Nome:</div>
-				<input type="text" name="nome" class="form-control"
-					style="background-color: rgb(46, 46, 46)">
-			</div>
-
-			<div class="form-row">
-				<div>Bairro:</div>
-				<select name="bairro" class="form-control"
-					style="background-color: rgb(46, 46, 46)">
-					<option	disabled selected>Selecione	uma	opção...</option>
-					<c:forEach items="${bairros.all}" var="bairro">
-						<option value="${bairro.id}">${bairro.nome}
-							${bairro.cidade.nome}</option>
-					</c:forEach>
-				</select>
-			</div>
-
-			<div class="form-row">
-				<div>Cidade:</div>
-				<select name="logradouro" class="form-control"
-					style="background-color: rgb(46, 46, 46)">
-					<option	disabled selected>Selecione	uma	opção...</option>
-					<c:forEach items="${logradouros.all}" var="logradouro">
-						<option value="${logradouro.cidade.id}">
-							${logradouro.cidade.nome} </option>
-					</c:forEach>
-				</select>
-			</div>
-
+			<form action="/pesquisa-endereco" method="get" id="filter-form">
+				<div class="form-row">
+					<div>CEP:</div>
+					<input type="text" name="cep" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+				</div>
+			</form>
 		</div>
 
 		<div class="content">
@@ -70,7 +59,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${enderecos.all}" var="endereco">
+					<c:forEach items="${lista}" var="endereco">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center"><a
 								href="/endereco-atualiza?id=${endereco.id}"><button
