@@ -1,11 +1,17 @@
 package br.com.sonner.estagio.controller;
 
 import java.util.List;
-
 import br.com.sonner.estagio.controller.api.LogradouroController;
+import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
+import br.com.sonner.estagio.dao.TipoLogradouroDAOImpl;
+import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
+import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
+import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 public class LogradouroControllerImpl implements LogradouroController {
 
@@ -40,5 +46,18 @@ public class LogradouroControllerImpl implements LogradouroController {
 		this.lDAO.delete(id);
 
 	}
+
+	@Override
+	public List<Logradouro> filtrar(LogradouroFiltroVO logradouroPesquisados) {
+		TipoLogradouroDAO tDAO = TipoLogradouroDAOImpl.getInstance();
+		TipoLogradouro tipologradouro =tDAO.getOne(logradouroPesquisados.getTipologradouro());
+		
+		
+		CidadeDAO cDAO = CidadeDAOImpl.getInstance();
+		Cidade cidade = cDAO.getOne(logradouroPesquisados.getCidade());
+		
+		return this.lDAO.pesquisaLogradouro(logradouroPesquisados, cidade, tipologradouro);
+	}
+	
 
 }
