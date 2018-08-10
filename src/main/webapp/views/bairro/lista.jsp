@@ -1,3 +1,6 @@
+<%@ page import="br.com.sonner.estagio.model.Bairro" %>
+<%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -5,6 +8,17 @@
 	class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
 <jsp:useBean id="cidades"
 	class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
+
+<%
+    List<Bairro> lista = (List) session.getAttribute("lista");
+    BairroFiltroVO vo = (BairroFiltroVO) session.getAttribute("filtro");
+
+    if (vo == null) {
+        vo = new BairroFiltroVO();
+        vo.setNome("");
+        vo.setCidade(null);
+    }
+%>
 
 <html>
 <head>
@@ -14,11 +28,15 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Pesquisa de Bairros" page="bairro"
-			actionFiltrar="/views/bairro/lista.jsp"
-			actionNovo="/views/bairro/insere.jsp" actionLimpar="true"
-			actionFechar="true">
-		</sge:header>
+    <sge:header
+            titulo="Pesquisa de Bairros"
+            page="bairro"
+            actionFiltrar="true"
+            actionNovo="/views/bairro/insere.jsp"
+            formId="filter-form"
+            actionFechar="true"
+    >
+    </sge:header>
 
 		<div class="div-form" style="width: 60%;">
 			<div class="form-row">
@@ -54,7 +72,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${bairros.bairrosPesquisados}" var="bairro">
+					<c:forEach items="${lista}" var="bairro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center"><a
 								href="/bairro-atualiza?id=${bairro.id}"><button

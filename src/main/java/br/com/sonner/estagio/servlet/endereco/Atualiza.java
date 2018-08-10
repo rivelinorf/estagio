@@ -25,14 +25,13 @@ import br.com.sonner.estagio.model.Logradouro;
 @WebServlet("/endereco-atualiza")
 public class Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-	Endereco endereco = new EnderecoControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
-	req.setAttribute("endereco", endereco);
-	RequestDispatcher resquestDispatcher = req.getRequestDispatcher("views/endereco/atualiza.jsp");
-	resquestDispatcher.forward(req, res);
+		Endereco endereco = new EnderecoControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
+		req.setAttribute("endereco", endereco);
+		RequestDispatcher resquestDispatcher = req.getRequestDispatcher("views/endereco/atualiza.jsp");
+		resquestDispatcher.forward(req, res);
 	}
-	
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		LogradouroController logradouroController = new LogradouroControllerImpl();

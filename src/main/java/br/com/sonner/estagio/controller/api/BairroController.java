@@ -3,6 +3,8 @@ package br.com.sonner.estagio.controller.api;
 import java.util.List;
 
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 public interface BairroController {
 	void save(Bairro bairro);
@@ -10,8 +12,5 @@ public interface BairroController {
 	Bairro getOne(long id);
 	void update(Bairro bairro);
 	void delete(long id);
-	List<Bairro> getBairrosPesquisados();
-	void setBairrosPesquisados(String nome, long cidadeID);
-	
-
+	List<Bairro> filtrar(BairroFiltroVO bairrosPesquisados);
 }

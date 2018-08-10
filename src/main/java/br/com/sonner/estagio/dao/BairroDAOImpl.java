@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringBairro;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 
@@ -144,15 +145,13 @@ public class BairroDAOImpl implements BairroDAO {
 	}
 
 	@Override
-	public List<Bairro> pesquisaBairro(String nome, long cidadeID) {
+	public List<Bairro> pesquisaBairro(String nome, Cidade cidade) {
 		try {
 		List<Bairro> bairros = new ArrayList<Bairro>();
-		PreparedStatement stmt = this.connection.prepareStatement("select * from bairro where nome=? and bairro_cidade_fk=?");
+		QueryStringBairro queryString = new QueryStringBairro.Builder().nome(nome).cidade(cidade).build();
+		PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
 		
-		stmt.setString(1, nome);
-		stmt.setLong(2, cidadeID);
-		
-		ResultSet rs = stmt.executeQuery();
+		ResultSet rs = preparedStatement.executeQuery();
 		
 		while (rs.next()) {
 			
@@ -160,16 +159,15 @@ public class BairroDAOImpl implements BairroDAO {
 			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
 			Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
 
-			Bairro b = new Bairro();
+			Bairro b = new Bairro(rs.getString("nome"), c);
 			b.setId(rs.getLong("id"));
 			b.setNome(rs.getString("nome"));
 			b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
 
 			bairros.add(b);
 		}
-
 		rs.close();
-		stmt.close();
+		preparedStatement.close();
 
 		return bairros;
 		
