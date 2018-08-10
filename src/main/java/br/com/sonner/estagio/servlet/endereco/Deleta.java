@@ -14,13 +14,13 @@ import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 @WebServlet("/endereco-deleta")
 public class Deleta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		new EnderecoControllerImpl().delete(Integer.parseInt(req.getParameter("id")));
-	
-	RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/lista.jsp");
-	requestDispatcher.forward(req, res);
+
+		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/lista.jsp");
+		requestDispatcher.forward(req, res);
 	}
 
 }

@@ -22,7 +22,7 @@ import br.com.sonner.estagio.model.Cidade;
 @WebServlet("/bairro-atualiza")
 public class Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Bairro bairro = new BairroControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
 		req.setAttribute("bairro", bairro);
@@ -37,7 +37,7 @@ public class Atualiza extends HttpServlet {
 		Bairro bairro = new Bairro();
 
 		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
-		
+
 		bairro.setId(Long.valueOf(req.getParameter("id")));
 		bairro.setNome(req.getParameter("nome"));
 		bairro.setCidade(cidade);

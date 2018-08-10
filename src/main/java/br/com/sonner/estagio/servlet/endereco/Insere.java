@@ -35,11 +35,12 @@ public class Insere extends HttpServlet {
 		Logradouro logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
 		Bairro bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
 
-		enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"), req.getParameter("complemento"),
-				bairro, logradouro));
+		enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"),
+				req.getParameter("complemento"), bairro, logradouro));
 
 		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/lista.jsp");
-		requestDispatcher.forward(req, res);;
+		requestDispatcher.forward(req, res);
+		;
 	}
 
 }

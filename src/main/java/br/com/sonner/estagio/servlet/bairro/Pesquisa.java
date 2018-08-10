@@ -12,10 +12,16 @@ import br.com.sonner.estagio.controller.BairroControllerImpl;
 
 @WebServlet("/pesquisa-bairro")
 public class Pesquisa extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		BairroControllerImpl bairroController = new BairroControllerImpl();
-		bairroController.setBairrosPesquisados(request.getParameter("nome"), Long.valueOf(request.getParameter("cidadeID")));
+		bairroController.setBairrosPesquisados(request.getParameter("nome"),
+				Long.valueOf(request.getParameter("cidadeID")));
 	}
 
 }

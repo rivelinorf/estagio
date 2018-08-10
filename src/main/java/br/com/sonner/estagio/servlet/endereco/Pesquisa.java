@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 
 @WebServlet("/pesquisa-endereco")
-public class Pesquisa extends HttpServlet{
+public class Pesquisa extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
