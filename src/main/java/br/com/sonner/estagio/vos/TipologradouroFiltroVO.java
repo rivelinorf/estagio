@@ -1,9 +1,9 @@
 package br.com.sonner.estagio.vos;
 
 public class TipologradouroFiltroVO {
-	
-    private String nome;
-    
+
+	private String nome;
+
 	public String getNome() {
 		return nome;
 	}
@@ -12,7 +12,4 @@ public class TipologradouroFiltroVO {
 		this.nome = nome;
 	}
 
-    
-    
-    
 }

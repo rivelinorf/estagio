@@ -17,6 +17,7 @@ import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 
 public class LogradouroDAOImpl implements LogradouroDAO {
@@ -147,30 +148,33 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 	}
 
 	@Override
-	public List<Logradouro> pesquisaLogradouro(String nome, long cidadeID, long tipologradouroID) {
+	public List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO logradouroPesquisados, Cidade cidade,
+			TipoLogradouro tipologradouro) {
 		try {
-            QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome).build();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+			QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(null)
+					.build();
+			PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Logradouro> logradouros = new ArrayList<>();
-            while (resultSet.next()) {
-                Logradouro aux = new Logradouro();
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<Logradouro> logradouros = new ArrayList<>();
 
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-               // aux.setTipologradouro(tipologradouro);
-               //aux.setCidade(cidade);
-                
+			while (resultSet.next()) {
+				Logradouro aux = new Logradouro();
 
-                logradouros.add(aux);
-            }
+				aux.setId(resultSet.getLong("id"));
+				aux.setNome(resultSet.getString("nome"));
+				aux.setTipologradouro(tipologradouro);
+				aux.setCidade(cidade);
 
-            return logradouros;
-	    } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-	}
+				logradouros.add(aux);
+			}
+
+			return logradouros;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }

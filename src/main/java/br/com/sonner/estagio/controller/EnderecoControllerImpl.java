@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.sonner.estagio.controller.api.EnderecoController;
 import br.com.sonner.estagio.dao.EnderecoDAOImpl;
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 public class EnderecoControllerImpl implements EnderecoController {
 
@@ -44,14 +45,9 @@ public class EnderecoControllerImpl implements EnderecoController {
 	}
 
 	@Override
-	public List<Endereco> getEnderecosPesquisados() {
-		return ENDERECOS_PESQUISADOS;
+	public List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados) {
+		return this.eDAO.pesquisaEndereco(enderecosPesquisados.getCep());
 	}
 
-	@Override
-	public void setEnderecosPesquisados(String cep) {
-		EnderecoControllerImpl.ENDERECOS_PESQUISADOS = this.eDAO.pesquisaEndereco(cep);
-		
-	}
 
 }

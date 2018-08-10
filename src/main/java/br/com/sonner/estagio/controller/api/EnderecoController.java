@@ -3,6 +3,7 @@ package br.com.sonner.estagio.controller.api;
 import java.util.List;
 
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 public interface EnderecoController {
 	void save(Endereco endereco);
@@ -10,8 +11,8 @@ public interface EnderecoController {
 	Endereco getOne(long id);
 	void update(Endereco endereco);
 	void delete(long id);
-	List<Endereco> getEnderecosPesquisados();
-	void setEnderecosPesquisados(String cep);
+	List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
+
 	
 	
 

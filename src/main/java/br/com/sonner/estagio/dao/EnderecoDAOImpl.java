@@ -4,6 +4,8 @@ import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringBairro;
+import br.com.sonner.estagio.dao.queries.QueryStringEndereco;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
@@ -162,11 +164,11 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 	public List<Endereco> pesquisaEndereco(String cep) {
         try {
             List<Endereco> enderecos = new ArrayList<Endereco>();
-            PreparedStatement stmt = this.connection.prepareStatement("select * from endereco where cep=?");
+            QueryStringEndereco queryString = new QueryStringEndereco.Builder().cep(cep).build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
             
-            stmt.setString(1, cep);
-            
-            ResultSet rs = stmt.executeQuery();
+       
+            ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
 
@@ -188,7 +190,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             }
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
 
             return enderecos;
         } catch (SQLException e) {

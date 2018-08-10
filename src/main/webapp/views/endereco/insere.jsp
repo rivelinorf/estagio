@@ -14,9 +14,12 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir novo Endereço" actionSalvar="true"
-			actionLimpar="true" actionFechar="true">
-		</sge:header>
+    <sge:header
+            titulo="Inserir novo Endereco"
+            actionSalvar="true"
+            formId="insere-form"
+            actionFechar="true">
+    </sge:header>
 
 		<div class="content">
 			<div class="div-form">

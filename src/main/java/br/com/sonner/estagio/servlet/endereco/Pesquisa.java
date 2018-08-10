@@ -7,8 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.EnderecoControllerImpl;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 @WebServlet("/pesquisa-endereco")
 public class Pesquisa extends HttpServlet {
@@ -19,7 +21,16 @@ public class Pesquisa extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		enderecoController.setEnderecosPesquisados(request.getParameter("cep"));
+		
+		EnderecoFiltroVO vo = new EnderecoFiltroVO();
+		vo.setCep(request.getParameter("cep"));
+		
+        HttpSession session = request.getSession();
+        session.setAttribute("filtro", vo);
+        session.setAttribute("lista", enderecoController.filtrar(vo));
+        
+        response.sendRedirect("/views/endereco/lista.jsp");
 	}
 }

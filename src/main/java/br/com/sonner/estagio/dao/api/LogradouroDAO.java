@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 public interface LogradouroDAO {
 
@@ -18,7 +19,7 @@ public interface LogradouroDAO {
 
 	void delete(Long id);
 	
-	List<Logradouro> pesquisaLogradouro(String nome,long cidadeID,long tipologradouroID);
+	List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO logradouroPesquisados ,Cidade cidade,TipoLogradouro tipologradouro);
 
 
 }
