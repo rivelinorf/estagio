@@ -33,8 +33,7 @@ public class Insere extends HttpServlet {
 
 		logradouroController.save(new Logradouro(req.getParameter("nome"), tipologradouro, cidade));
 
-		RequestDispatcher rd = req.getRequestDispatcher("/views/logradouro/lista.jsp");
-		rd.forward(req, res);
+		res.sendRedirect("/views/logradouro/lista.jsp");
 	}
 
 }

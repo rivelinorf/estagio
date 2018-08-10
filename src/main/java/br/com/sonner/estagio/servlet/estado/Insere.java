@@ -21,8 +21,6 @@ public class Insere extends HttpServlet {
         aux.setAbv(request.getParameter("abv"));
 
         estadoController.save(aux);
-
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/lista.jsp");
-        requestDispatcher.forward(request, response);
+        response.sendRedirect("/views/estado/lista.jsp");
     }
 }

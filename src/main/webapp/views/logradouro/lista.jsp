@@ -18,14 +18,15 @@
 			actionFechar="true">
 		</sge:header>
 		<div class="div-form" style="width: 60%;">
-			<div class="form-div">
+			<form action="/pesquisa-logradouro" method="get" id="filter-form">
+			
+			<div class="form-row">
 				<div>Nome:</div>
 				<input type="text" name="nome" class="form-control"
-					style="background-color: rgb(46, 46, 46)" id="pesquisa-estado-nome">
+					style="background-color: rgb(46, 46, 46)" id="pesquisa-logradouro-nome">
 			</div>
-
-
-			<div class="form-div">
+			
+			<div class="form-row">
 				<div>Tipo de logradouro:</div>
 				<select name="tipologradouroID" class="form-control"
 					style="background-color: rgb(46, 46, 46)" id="pesquisa-estado-abv">
@@ -35,7 +36,7 @@
 				</select>
 			</div>
 
-			<div class="form-div">
+			<div class="form-row">
 				<div>Cidade:</div>
 				<select name="cidadeID" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
@@ -58,7 +59,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${logradouros.all}" var="logradouro">
+					<c:forEach items="${logradouros.logradourosPesquisados}" var="logradouro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
 								<button class="main-btn btn-editar">

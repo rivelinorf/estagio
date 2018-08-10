@@ -17,6 +17,7 @@ import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 
 public class LogradouroDAOImpl implements LogradouroDAO {
 
@@ -143,6 +144,33 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public List<Logradouro> pesquisaLogradouro(String nome, long cidadeID, long tipologradouroID) {
+		try {
+            QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome).build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Logradouro> logradouros = new ArrayList<>();
+            while (resultSet.next()) {
+                Logradouro aux = new Logradouro();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+               // aux.setTipologradouro(tipologradouro);
+               //aux.setCidade(cidade);
+                
+
+                logradouros.add(aux);
+            }
+
+            return logradouros;
+	    } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+	}
 	}
 
 }
