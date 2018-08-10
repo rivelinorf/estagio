@@ -46,6 +46,6 @@
     })
 
     $("#limpar").on("click", function () {
-        $("#${formId} input").val(null);
+        $("#${formId} input").val(null)
     })
 </script>
