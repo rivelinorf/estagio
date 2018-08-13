@@ -32,22 +32,20 @@
             actionFechar="true"
     >
     </sge:header>
-    <div class="div-form" style="width: 60%;">
-        <form action="/pesquisa-cidade" method="get" id="filter-form">
+    <div class="div-form">
+        <form action="/pesquisa-cidade" method="get" id="filter-form" style="width: 50%;">
             <div class="form-row">
                 <div>Cidade:</div>
-                <input type="text" name="cidade" class="form-control" style="background-color: rgb(46,46,46)"
+                <input type="text" name="cidade" class="form-control"
                        id="pesquisa-cidade-nome" value="<%= vo.getNome() %>">
             </div>
             <div class="form-row">
-                <div>Cep:</div>
-                <input type="text" name="cep" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-cidade-cep" value="<%= vo.getCep() %>">
-            </div>
-            <div class="form-row">
                 <div>Sigla:</div>
-                <input type="text" name="sigla" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-cidade-sigla" value="<%= vo.getSigla() %>">
+                <input type="text" name="sigla" class="form-control"
+                       id="pesquisa-cidade-sigla" value="<%= vo.getSigla() %>" style="width: 19.8%">
+                <div>Cep:</div>
+                <input type="text" name="cep" class="form-control"
+                       id="pesquisa-cidade-cep" value="<%= vo.getCep() %>" style="width: 19.8%;">
             </div>
             <div class="form-row">
                 <div>Estado:</div>
@@ -67,6 +65,9 @@
                 </select>
             </div>
         </form>
+        <div class="msg danger">
+            fasdfas
+        </div>
     </div>
     <div class="content">
         <table class="table">
@@ -83,7 +84,8 @@
             <c:forEach items="${listaCidade}" var="cidade">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar" onclick="location.href='/cidade/preenche-vo?id=${cidade.id}'"><i
+                        <button class="main-btn btn-editar"
+                                onclick="location.href='/cidade/preenche-vo?id=${cidade.id}'"><i
                                 class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-red" value="${cidade.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i

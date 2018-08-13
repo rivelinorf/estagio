@@ -17,33 +17,31 @@
             actionFechar="true">
     </sge:header>
 
-    <div class="content">
-        <form action="/insere-cidade" method="post" id="insere-form">
-            <div class="div-form">
-                <div class="form-row">
-                    <div>Nome:</div>
-                    <input type="text" name="nome" class="form-control">
-                </div>
-                <div class="form-row">
-                    <div>Sigla:</div>
-                    <input type="text" name="sigla" class="form-control">
-                </div>
-                <div class="form-row">
-                    <div>Cep:</div>
-                    <input type="text" name="cep" class="form-control">
-                </div>
-                <div class="form-row">
-                    <div>Estado:</div>
-                    <select name="estado" class="form-control"
-                            style="background-color: rgb(46, 46, 46)">
-                        <c:forEach items="${estados.all}" var="estado">
-                            <option value="${estado.id}">${estado.nome}</option>
-                        </c:forEach>
-                    </select>
-                </div>
+
+    <div class="div-form">
+        <form action="/insere-cidade" method="post" id="insere-form" style="width: 100%;">
+            <div class="form-row">
+                <div>Nome:</div>
+                <input type="text" name="nome" class="form-control">
+            </div>
+            <div class="form-row">
+                <div>Sigla:</div>
+                <input type="text" name="sigla" class="form-control" style="width: 20.2%;">
+                <div>Cep:</div>
+                <input type="text" name="cep" class="form-control" style="width: 20.2%">
+            </div>
+            <div class="form-row">
+                <div>Estado:</div>
+                <select name="estado" class="form-control"
+                        style="background-color: rgb(46, 46, 46)">
+                    <c:forEach items="${estados.all}" var="estado">
+                        <option value="${estado.id}">${estado.nome}</option>
+                    </c:forEach>
+                </select>
             </div>
         </form>
     </div>
+
 </div>
 </body>
 </html>
