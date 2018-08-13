@@ -17,7 +17,7 @@ public class Deleta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		BairroControllerImpl bairroController = new BairroControllerImpl();
+		/*BairroControllerImpl bairroController = new BairroControllerImpl();
 		bairroController.delete(Long.valueOf(req.getParameter("id")));
 		
 		HttpSession session = req.getSession();
@@ -27,7 +27,7 @@ public class Deleta extends HttpServlet {
 		vo.setNome("");
 		session.setAttribute("lista", bairroController.filtrar(vo));
 
-		res.sendRedirect("/views/bairro/lista.jsp");
+		res.sendRedirect("/views/bairro/lista.jsp");*/
 	}
 
 }

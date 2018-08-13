@@ -11,9 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
-import br.com.sonner.estagio.controller.api.CidadeController;
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 @WebServlet("/pesquisa-bairro")
 public class Pesquisa extends HttpServlet {
@@ -24,25 +23,21 @@ public class Pesquisa extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CidadeController cidadeController = new CidadeControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
+        BairroFiltroVO vo = new BairroFiltroVO();
+
+        vo.setNome(request.getParameter("nome"));
 		
-		BairroFiltroVO vo = new BairroFiltroVO();
-		
-		String nome = request.getParameter("nome");
-		Long cidadeID = Long.valueOf(request.getParameter("cidadeID"));
-		
-		Cidade cidade = cidadeController.getOne(cidadeID);
-		
-		vo.setNome(nome);
-		vo.setCidade(cidade);
-		
+        if(request.getParameter("cidadeID") != null) {
+            vo.setCidade(Long.valueOf(request.getParameter("cidadeID")));
+        }
+
 		HttpSession session = request.getSession();
-		session.setAttribute("filtro", vo);
-		session.setAttribute("lista", bairroController.filtrar(vo));
-		
-		response.sendRedirect("/views/bairro/lista.jsp");
-		
+        session.setAttribute("filtroBairro", vo);
+        session.setAttribute("listaBairro", bairroController.filtrar(vo));
+
+        response.sendRedirect("/views/bairro/lista.jsp");
+
 	}
 
 }

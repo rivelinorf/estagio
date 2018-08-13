@@ -45,8 +45,8 @@ public class EnderecoControllerImpl implements EnderecoController {
 	}
 
 	@Override
-	public List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados) {
-		return this.eDAO.pesquisaEndereco(enderecosPesquisados.getCep());
+	public List<Endereco> filtrar(EnderecoFiltroVO vo) {
+		return this.eDAO.pesquisaEndereco(vo);
 	}
 
 

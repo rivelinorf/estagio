@@ -12,13 +12,11 @@
 	class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
 
 <%
-	List<Endereco> lista = (List) session.getAttribute("lista");
-	EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("filtro");
-
-	if (vo == null) {
-		vo = new EnderecoFiltroVO();
-		vo.setCep("");
-	}
+    EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("filtroEndereco");
+    if (vo == null) {
+        vo = new EnderecoFiltroVO();
+        vo.setCep("");
+        }
 %>
 
 <html>
@@ -29,7 +27,7 @@
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 
-		<sge:header titulo="Pesquisa de Endereços" page="estado"
+		<sge:header titulo="Pesquisa de Endereços" page="endereco"
 			actionFiltrar="true" actionNovo="/views/endereco/insere.jsp"
 			formId="filter-form" actionFechar="true">
 		</sge:header>
@@ -82,6 +80,28 @@
 				</tbody>
 			</table>
 		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="confirm-modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-body">
+						<p>Deseja realmente remover o registro do banco?</p>
+						<div style="text-align: right">
+							<button type="button" class="main-btn btn-black" id="deletar"
+								data-dismiss="modal"
+								onclick="location.href = '/endereco-deleta?id='+this.value">Sim
+							</button>
+							<button type="button" class="main-btn btn-red"
+								data-dismiss="modal">Não</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 	</div>
 </body>
 </html>

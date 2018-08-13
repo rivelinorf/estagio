@@ -43,8 +43,8 @@ public class BairroControllerImpl implements BairroController {
 	}
 
 	@Override
-	public List<Bairro> filtrar(BairroFiltroVO bairrosPesquisados) {
-		return this.bDAO.pesquisaBairro(bairrosPesquisados.getNome(), bairrosPesquisados.getCidade());
+	public List<Bairro> filtrar(BairroFiltroVO vo) {
+		return this.bDAO.pesquisaBairro(vo);
 	}
 
 

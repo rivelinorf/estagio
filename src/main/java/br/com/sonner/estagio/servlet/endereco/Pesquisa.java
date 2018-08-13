@@ -23,13 +23,13 @@ public class Pesquisa extends HttpServlet {
 			throws ServletException, IOException {
 		
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
+		
 		vo.setCep(request.getParameter("cep"));
 		
         HttpSession session = request.getSession();
-        session.setAttribute("filtro", vo);
-        session.setAttribute("lista", enderecoController.filtrar(vo));
+        session.setAttribute("filtroEndereco", vo);
+        session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
         
         response.sendRedirect("/views/endereco/lista.jsp");
 	}

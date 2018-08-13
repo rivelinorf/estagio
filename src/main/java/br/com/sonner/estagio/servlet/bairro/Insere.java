@@ -25,7 +25,7 @@ public class Insere extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws javax.servlet.ServletException, IOException {
 
-		Bairro bairro = new Bairro();
+		/*Bairro bairro = new Bairro();
 		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		
@@ -46,6 +46,6 @@ public class Insere extends HttpServlet {
 		vo.setNome("");
 		session.setAttribute("lista", bairroController.filtrar(vo));
 		
-		res.sendRedirect("/views/bairro/lista.jsp");
+		res.sendRedirect("/views/bairro/lista.jsp");*/
 	}
 }

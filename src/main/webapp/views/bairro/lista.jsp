@@ -10,14 +10,7 @@
 	class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 
 <%
-	List<Bairro> lista = (List) session.getAttribute("lista");
-	BairroFiltroVO vo = (BairroFiltroVO) session.getAttribute("filtro");
-
-	if (vo == null) {
-		vo = new BairroFiltroVO();
-		vo.setNome("");
-		vo.setCidade(null);
-	}
+	List<Bairro> lista = (List) session.getAttribute("lista-bairro");
 %>
 
 <html>
@@ -68,7 +61,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${lista}" var="bairro">
+					<c:forEach items="${listaBairro}" var="bairro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
 							

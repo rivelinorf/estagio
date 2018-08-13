@@ -11,8 +11,10 @@ import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringBairro;
+import br.com.sonner.estagio.dao.queries.QueryStringCidade;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 public class BairroDAOImpl implements BairroDAO {
 	private Connection connection;
@@ -145,37 +147,35 @@ public class BairroDAOImpl implements BairroDAO {
 	}
 
 	@Override
-	public List<Bairro> pesquisaBairro(String nome, Cidade cidade) {
-		try {
-		List<Bairro> bairros = new ArrayList<Bairro>();
-		QueryStringBairro queryString = new QueryStringBairro.Builder().nome(nome).cidade(cidade).build();
-		PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-		
-		ResultSet rs = preparedStatement.executeQuery();
-		
-		while (rs.next()) {
-			
+	public List<Bairro> pesquisaBairro(BairroFiltroVO vo) {
+        try {
+            QueryStringBairro queryString = new QueryStringBairro.Builder()
+                    .bairro(vo.getNome())
+                    .cidade(vo.getCidade())
+                    .build();
 
-			CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-			Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
+            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
+            ResultSet resultSet = statement.executeQuery();
 
-			Bairro b = new Bairro(rs.getString("nome"), c);
-			b.setId(rs.getLong("id"));
-			b.setNome(rs.getString("nome"));
-			b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
+            List<Bairro> bairros = new ArrayList<>();
 
-			bairros.add(b);
-		}
-		rs.close();
-		preparedStatement.close();
+            while (resultSet.next()) {
+                Bairro aux = new Bairro();
 
-		return bairros;
-		
-		}catch (SQLException e) {
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("bairro_cidade_fk")));
+
+                bairros.add(aux);
+            }
+
+            return bairros;
+        } catch (SQLException e) {
             e.printStackTrace();
             return null;
         }
-	}
+    }
 
+	
 
 }

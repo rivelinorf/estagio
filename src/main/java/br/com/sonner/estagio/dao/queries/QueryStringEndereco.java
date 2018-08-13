@@ -12,14 +12,15 @@ public class QueryStringEndereco {
 	}
 
 	public static class Builder {
-		private String sql = "select * from bairro where 1";
+        private String sql = "SELECT * FROM endereco WHERE 1 ";
 
-		public Builder cep(String cep) {
-			if (cep != "") {
-				this.sql += "and cep like '" + cep + "%' ";
-			}
-			return this;
-		}
+        public Builder cep(String cep) {
+            if (cep != "") {
+                this.sql += "and cep LIKE '"+ cep +"%' ";
+            }
+
+            return this;
+        }
 		
 		public QueryStringEndereco build() {
 			return new QueryStringEndereco(this);

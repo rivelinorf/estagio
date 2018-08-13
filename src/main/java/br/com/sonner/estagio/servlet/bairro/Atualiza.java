@@ -26,7 +26,7 @@ public class Atualiza extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		CidadeController cidadeController = new CidadeControllerImpl();
+		/*CidadeController cidadeController = new CidadeControllerImpl();
 		BairroController bairroController = new BairroControllerImpl();
 		Bairro bairro = new Bairro();
 
@@ -45,7 +45,7 @@ public class Atualiza extends HttpServlet {
 		vo.setNome("");
 		session.setAttribute("lista", bairroController.filtrar(vo));
 		
-		res.sendRedirect("/views/bairro/lista.jsp");
+		res.sendRedirect("/views/bairro/lista.jsp");*/
 
 	}
 

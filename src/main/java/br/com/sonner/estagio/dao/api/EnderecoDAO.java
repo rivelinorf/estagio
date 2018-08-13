@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 public interface EnderecoDAO {
 	void save(Endereco endereco);
@@ -16,5 +17,5 @@ public interface EnderecoDAO {
 
 	Endereco getOne(Long id);
 	
-	List<Endereco> pesquisaEndereco(String cep);
+	List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo);
 }

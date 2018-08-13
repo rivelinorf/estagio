@@ -16,7 +16,7 @@ import br.com.sonner.estagio.vos.BairroFiltroVO;
 @WebServlet("/preenche-vo-bairro")
 public class PreencheVo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	BairroControllerImpl bairroController = new BairroControllerImpl();
+    	/*BairroControllerImpl bairroController = new BairroControllerImpl();
     	BairroFiltroVO vo = new BairroFiltroVO();
     	
     	Bairro bairro = bairroController.getOne(Long.valueOf(request.getParameter("id")));
@@ -28,5 +28,6 @@ public class PreencheVo extends HttpServlet {
     	session.setAttribute("bairro-para-editar", vo);
     	
     	response.sendRedirect("/views/bairro/atualiza.jsp");
+    }*/
     }
 }

@@ -9,6 +9,7 @@ import br.com.sonner.estagio.dao.queries.QueryStringEndereco;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -161,10 +162,10 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     }
 
 	@Override
-	public List<Endereco> pesquisaEndereco(String cep) {
+	public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
         try {
             List<Endereco> enderecos = new ArrayList<Endereco>();
-            QueryStringEndereco queryString = new QueryStringEndereco.Builder().cep(cep).build();
+            QueryStringEndereco queryString = new QueryStringEndereco.Builder().cep(vo.getCep()).build();
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
             
        
@@ -183,8 +184,8 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
                 e.setComplemento(rs.getString("complemento"));
-                e.getBairro().setId(rs.getLong("endereco_bairro_fk"));
-                e.getLogradouro().setId(rs.getLong("endereco_logradouro_fk"));
+                e.setBairro(BairroDAOImpl.getInstance().getOne(rs.getLong("endereco_bairro_fk")));
+                e.setLogradouro(LogradouroDAOImpl.getIntance().getOne(rs.getLong("endereco_logradouro_fk")));
 
                 enderecos.add(e);
             }
