@@ -11,16 +11,14 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-    <sge:header
-            titulo="Inserir novo Bairro"
-            actionSalvar="true"
-            formId="insere-form"
-            actionFechar="true">
-    </sge:header>
+		<sge:header titulo="Inserir novo Bairro" actionSalvar="true"
+			formId="insere-form" actionFechar="true">
+		</sge:header>
 
 		<div class="content">
-			<div class="div-form">
-				<form action="/bairro-insere" method="post">
+			<form action="/bairro-insere" method="post">
+				<div class="div-form">
+
 
 					<div class="form-row">
 						<div>Nome:</div>
@@ -29,15 +27,14 @@
 					<div class="form-row">
 						<div>Cidade:</div>
 						<select name="cidadeID" class="form-control">
-						<option	disabled selected>Selecione	uma	opção...</option>
 							<c:forEach items="${cidades.all}" var="cidade">
 								<option value="${cidade.id}">${cidade.nome}</option>
 
 							</c:forEach>
 						</select>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

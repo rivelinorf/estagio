@@ -24,28 +24,21 @@ public class Insere extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws javax.servlet.ServletException, IOException {
+		
+		System.out.println("entrou");
 
-		/*Bairro bairro = new Bairro();
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		BairroControllerImpl bairroController = new BairroControllerImpl();
-		
-		String nome = req.getParameter("nome");
-		Long cidadeID = Long.valueOf(req.getParameter("cidadeID"));
-		
-		Cidade cidade = cidadeController.getOne(cidadeID);
-		
-		bairro.setCidade(cidade);
-		bairro.setNome(nome);
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        BairroFiltroVO vo = new BairroFiltroVO();
+        HttpSession session = req.getSession();
 
-		bairroController.save(bairro);
+        Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
+        bairroController.save(new Bairro(req.getParameter("nome"), cidade));
 
-		HttpSession session = req.getSession();
-		BairroFiltroVO vo = new BairroFiltroVO();
-		
-		vo.setCidade(null);
-		vo.setNome("");
-		session.setAttribute("lista", bairroController.filtrar(vo));
-		
-		res.sendRedirect("/views/bairro/lista.jsp");*/
+        vo.setNome("");
+        vo.setCidade(null);
+        session.setAttribute("listaBairro", bairroController.filtrar(vo));
+
+        res.sendRedirect("/views/bairro/lista.jsp");
 	}
 }
