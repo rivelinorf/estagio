@@ -9,7 +9,7 @@
 <%
     List<Estado> lista = (List) session.getAttribute("lista");
     EstadoFiltroVO vo = (EstadoFiltroVO) session.getAttribute("filtro");
-
+    
     if (vo == null) {
         vo = new EstadoFiltroVO();
         vo.setEstado("");
@@ -39,11 +39,11 @@
             <div class="form-row">
                 <div>Estado:</div>
                 <input type="text" name="estado" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-estado-nome" value="<%=vo.getEstado() %>"></div>
+                       id="pesquisa-estado-nome" value="<%= vo.getEstado() %>"></div>
             <div class="form-row">
                 <div>Abreviação:</div>
                 <input type="text" name="abv" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-estado-abv" value="<%=vo.getAbv() %>"></div>
+                       id="pesquisa-estado-abv" value="<%= vo.getAbv() %>"></div>
         </form>
     </div>
     <div class="content">
@@ -59,7 +59,7 @@
             <c:forEach items="${lista}" var="estado">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar"><i class="fas fa-pen-square"></i></button>
+                        <button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${estado.id}'"><i class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-red" value="${estado.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
                                 class="fas fa-times-circle"></i></button>
