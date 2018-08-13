@@ -29,7 +29,7 @@ public class Atualiza extends HttpServlet {
 
         vo.setEstado("");
         vo.setAbv("");
-        session.setAttribute("lista", estadoController.filtrar(vo));
+        session.setAttribute("listaEstado", estadoController.filtrar(vo));
 
         response.sendRedirect("/views/estado/lista.jsp");
     }
