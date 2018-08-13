@@ -49,9 +49,11 @@
             </div>
             <div class="form-row">
                 <div>Estado:</div>
-                <select name="estado" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                <select name="estado" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
+
+
+
                     <c:forEach items="${estados.all}" var="estado">
                         <c:choose>
                             <c:when test="${estado.id == filtroCidade.estado}">
@@ -62,6 +64,8 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+
+
                 </select>
             </div>
         </form>

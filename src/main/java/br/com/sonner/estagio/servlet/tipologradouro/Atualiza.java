@@ -1,44 +1,39 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
-import java.io.IOException;
-import java.util.List;
+import br.com.sonner.estagio.controller.EstadoControllerImpl;
+import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
+import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.EstadoFiltroVO;
+import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.sun.corba.se.spi.protocol.RequestDispatcherDefault;
-
-import br.com.sonner.estagio.controller.BairroControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.TipoLogradouroController;
-import br.com.sonner.estagio.model.Bairro;
-import br.com.sonner.estagio.model.TipoLogradouro;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @WebServlet("/atualiza-tipologradouro")
 public class Atualiza extends HttpServlet {
-	
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		TipoLogradouro tipoLogradouro = new TipoLogradouroControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
-		req.setAttribute("tipoLogradouro", tipoLogradouro);
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
-		requestDispatcher.forward(req, res);
-	}
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		TipoLogradouro tipoLogradouro = new TipoLogradouro();
+        TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
+        TipoLogradouro tipoLogradouro = new TipoLogradouro();
 
-		tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
-		tipoLogradouro.setNome(request.getParameter("nome"));
+        tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
+        tipoLogradouro.setNome(request.getParameter("tipologradouro"));
 
-		tipoLogradouroController.update(tipoLogradouro);
+        tipoLogradouroController.update(tipoLogradouro);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/tipologradouro/lista.jsp");
-		requestDispatcher.forward(request, response);
+        HttpSession session = request.getSession();
+        TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
+        vo.setNome("");
 
-	}
+
+        session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+
+        response.sendRedirect("/views/tipologradouro/lista.jsp");
+    }
 }

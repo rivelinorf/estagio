@@ -16,8 +16,6 @@ public interface LogradouroController {
 	void update(Logradouro logradouro);
 
 	void delete(long id);
-	
-	List<Logradouro> filtrar(LogradouroFiltroVO logradouroPesquisados);
 
 
 }

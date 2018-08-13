@@ -131,9 +131,8 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
 			if (resultSet.first()) {
 				logradouro = new Logradouro();
-				logradouro.setNome(resultSet.getString("nome"));
 				logradouro.setId(resultSet.getLong("id"));
-
+				logradouro.setNome(resultSet.getString("nome"));
 				logradouro.setCidade(cidadeDAO.getOne(resultSet.getLong("logradouro_cidade_fk")));
 				logradouro.setTipologradouro(tipoLogradouroDAO.getOne(resultSet.getLong("logradouro_tipo_fk")));
 

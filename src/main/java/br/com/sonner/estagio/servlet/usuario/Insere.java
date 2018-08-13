@@ -13,8 +13,11 @@ import br.com.sonner.estagio.controller.UsuarioControllerImpl;
 import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
 
+@SuppressWarnings("serial")
 @WebServlet("/usuario-insere")
 public class Insere extends HttpServlet {
+
+
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		UsuarioController usuarioController = new UsuarioControllerImpl();
 		
