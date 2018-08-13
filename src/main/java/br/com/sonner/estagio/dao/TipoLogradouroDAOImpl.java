@@ -98,21 +98,20 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	@Override
 	public TipoLogradouro getOne(Long id) {
 		try {
-		    
 			PreparedStatement stmt = connection.prepareStatement("select * from tipoLogradouro where id=?");
 			stmt.setLong(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 
-			TipoLogradouro temp = new TipoLogradouro();
+			TipoLogradouro aux = new TipoLogradouro();
 			if (resultSet.first()) {
 
-				temp.setNome(resultSet.getString("nome"));
-				temp.setId(resultSet.getLong("id"));
+				aux.setNome(resultSet.getString("nome"));
+				aux.setId(resultSet.getLong("id"));
 
 				stmt.close();
 			}
 
-			return temp;
+			return aux;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,28 +123,29 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
 	@Override
 	public List<TipoLogradouro> pesquisaTipoLogradouro(String nome) {
-	
+
 		try {
-            QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome).build();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+			QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome)
+					.build();
+			PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<TipoLogradouro> tipologradouros = new ArrayList<>();
+			ResultSet resultSet = preparedStatement.executeQuery();
+			List<TipoLogradouro> tipologradouros = new ArrayList<>();
 
-            while (resultSet.next()) {
-                TipoLogradouro aux = new TipoLogradouro();
+			while (resultSet.next()) {
+				TipoLogradouro aux = new TipoLogradouro();
 
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
+				aux.setId(resultSet.getLong("id"));
+				aux.setNome(resultSet.getString("nome"));
 
-                tipologradouros.add(aux);
-            }
+				tipologradouros.add(aux);
+			}
 
-            return tipologradouros;
+			return tipologradouros;
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
