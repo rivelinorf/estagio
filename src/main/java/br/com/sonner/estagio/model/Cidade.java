@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.model;
 
 public class Cidade {
-    private long id;
+    private Long id;
     private String nome;
     private String cod;
     private String cep;
@@ -50,11 +50,11 @@ public class Cidade {
         this.estado = estado;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

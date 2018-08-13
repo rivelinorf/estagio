@@ -55,7 +55,7 @@
             <c:forEach items="${listaEstado}" var="estado">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${estado.id}'"><i
+                        <button class="main-btn btn-editar" onclick="location.href='/estado/preenche-vo?id=${estado.id}'"><i
                                 class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-red" value="${estado.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i

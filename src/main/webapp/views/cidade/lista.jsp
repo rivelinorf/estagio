@@ -83,7 +83,7 @@
             <c:forEach items="${listaCidade}" var="cidade">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${cidade.id}'"><i
+                        <button class="main-btn btn-editar" onclick="location.href='/cidade/preenche-vo?id=${cidade.id}'"><i
                                 class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-red" value="${cidade.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
@@ -109,7 +109,7 @@
                     <p>Desja realmente remover o registro do banco?</p>
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar" data-dismiss="modal"
-                                onclick="location.href = '/estado-deleta?id='+this.value">Sim
+                                onclick="location.href = '/cidade-deleta?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red" data-dismiss="modal">Não</button>
                     </div>

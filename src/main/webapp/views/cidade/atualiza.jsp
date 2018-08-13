@@ -1,28 +1,72 @@
-<%@ page import="br.com.sonner.estagio.controller.CidadeControllerImpl" %>
-<%@ page import="br.com.sonner.estagio.model.Cidade" %><%--
-  Created by IntelliJ IDEA.
-  User: matheus
-  Date: 7/27/18
-  Time: 4:08 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Cidade" %>
+<%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
+<jsp:useBean id="estados" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
+
+<%
+    CidadeFiltroVO vo = (CidadeFiltroVO) session.getAttribute("cidadeParaEditar");
+
+    if (vo == null) {
+        vo = new CidadeFiltroVO();
+        vo.setNome("");
+        vo.setSigla("");
+        vo.setCep("");
+        vo.setEstado(null);
+    }
+%>
+
 <html>
 <head>
-    <title>Title</title>
+    <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-    <form action="/cidade-atualiza" method="post">
-        Cidade: <select name="id">
-        <% for(Cidade cidade: new CidadeControllerImpl().getAll()) { %>
-        <option value="<%=cidade.getId()%>"><%=cidade.getNome()%></option>
-        <%}%>
-    </select><br>
-        nome: <input type="text" name="nome"> <br>
-        codigo: <input type="text" name="codigo"> <br>
-        cep: <input type="text" name="cep"> <br>
-        estado: <input type="text" name="estado"> <br>
-        <button>Enviar</button>
-    </form>
+<jsp:include page="/includes/menu.jsp"></jsp:include>
+<div class="main">
+    <sge:header
+            titulo="Editar estado"
+            actionSalvar="true"
+            formId="edit-form"
+            actionFechar="true">
+    </sge:header>
+
+    <div class="content">
+        <form action="/atualiza-cidade?id=<%= vo.getId() %>" method="post" id="edit-form">
+            <div class="div-form">
+                <div class="form-row">
+                    <div>Nome:</div>
+                    <input type="text" name="cidade" class="form-control" value="<%= vo.getNome() %>">
+                </div>
+                <div class="form-row">
+                    <div>Sigla:</div>
+                    <input type="text" name="sigla" class="form-control" value="<%= vo.getSigla() %>">
+                </div>
+                <div class="form-row">
+                    <div>Cep:</div>
+                    <input type="text" name="cep" class="form-control" value="<%= vo.getCep() %>">
+                </div>
+                <div class="form-row">
+                    <div>Estado:</div>
+                    <select name="estado" class="form-control"
+                            style="background-color: rgb(46, 46, 46)">
+                        <option value="">Selecione uma opção...</option>
+                        <c:forEach items="${estados.all}" var="estado">
+                            <c:choose>
+                                <c:when test="${estado.id == cidadeParaEditar.estado}">
+                                    <option value="${estado.id}" selected>${estado.nome}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${estado.id}">${estado.nome}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>
