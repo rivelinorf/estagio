@@ -70,14 +70,13 @@
 				<tbody>
 					<c:forEach items="${lista}" var="bairro">
 						<tr>
-							<td id="botoes" width="150px" style="text-align: center"><a
-								href="/bairro-atualiza?id=${bairro.id}"><button
-										class="main-btn btn-editar">
-										<i class="fas fa-pen-square"></i>
-									</button></a> <a href="/bairro-deleta?id=${bairro.id}"><button
-										class="main-btn btn-red">
-										<i class="fas fa-times-circle"></i>
-									</button></a></td>
+							<td id="botoes" width="150px" style="text-align: center">
+							
+							<button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${bairro.id}'"><i class="fas fa-pen-square"></i></button>
+							<button class="main-btn btn-red" value="${bairro.id}" data-toggle="modal"
+                                data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
+                                class="fas fa-times-circle"></i></button>
+							</td>
 							<td>${bairro.nome}</td>
 							<td>${bairro.cidade.nome}</td>
 							<td>${bairro.cidade.estado.nome}</td>
@@ -85,6 +84,28 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="confirm-modal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-body">
+						<p>Deseja realmente remover o registro do banco?</p>
+						<div style="text-align: right">
+							<button type="button" class="main-btn btn-black" id="deletar"
+								data-dismiss="modal"
+								onclick="location.href = '/bairro-deleta?id='+this.value">Sim
+							</button>
+							<button type="button" class="main-btn btn-red"
+								data-dismiss="modal">Não</button>
+						</div>
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
 </body>

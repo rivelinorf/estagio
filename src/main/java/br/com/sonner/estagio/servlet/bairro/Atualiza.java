@@ -2,12 +2,12 @@ package br.com.sonner.estagio.servlet.bairro;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
@@ -15,6 +15,7 @@ import br.com.sonner.estagio.controller.api.BairroController;
 import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 /**
  * Servlet implementation class Atualiza
@@ -22,13 +23,6 @@ import br.com.sonner.estagio.model.Cidade;
 @WebServlet("/bairro-atualiza")
 public class Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		Bairro bairro = new BairroControllerImpl().getOne(Long.valueOf(req.getParameter("id")));
-		req.setAttribute("bairro", bairro);
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/atualiza.jsp");
-		requestDispatcher.forward(req, res);
-	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -44,8 +38,14 @@ public class Atualiza extends HttpServlet {
 
 		bairroController.update(bairro);
 
-		RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/lista.jsp");
-		requestDispatcher.forward(req, res);
+		HttpSession session = req.getSession();
+		BairroFiltroVO vo = new BairroFiltroVO();
+		
+		vo.setCidade(null);
+		vo.setNome("");
+		session.setAttribute("lista", bairroController.filtrar(vo));
+		
+		res.sendRedirect("/views/bairro/lista.jsp");
 
 	}
 

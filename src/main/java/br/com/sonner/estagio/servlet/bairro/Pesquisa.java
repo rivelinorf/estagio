@@ -30,7 +30,9 @@ public class Pesquisa extends HttpServlet {
 		BairroFiltroVO vo = new BairroFiltroVO();
 		
 		String nome = request.getParameter("nome");
-		Long cidade = Long.valueOf(request.getParameter("cidadeID"));
+		Long cidadeID = Long.valueOf(request.getParameter("cidadeID"));
+		
+		Cidade cidade = cidadeController.getOne(cidadeID);
 		
 		vo.setNome(nome);
 		vo.setCidade(cidade);

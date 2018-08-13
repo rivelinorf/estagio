@@ -4,10 +4,7 @@ import java.util.List;
 
 import br.com.sonner.estagio.controller.api.BairroController;
 import br.com.sonner.estagio.dao.BairroDAOImpl;
-import br.com.sonner.estagio.dao.CidadeDAOImpl;
-import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Bairro;
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 public class BairroControllerImpl implements BairroController {
@@ -47,9 +44,7 @@ public class BairroControllerImpl implements BairroController {
 
 	@Override
 	public List<Bairro> filtrar(BairroFiltroVO bairrosPesquisados) {
-		CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-		Cidade cidade = cDAO.getOne(bairrosPesquisados.getCidade());
-		return this.bDAO.pesquisaBairro(bairrosPesquisados.getNome(), cidade);
+		return this.bDAO.pesquisaBairro(bairrosPesquisados.getNome(), bairrosPesquisados.getCidade());
 	}
 
 
