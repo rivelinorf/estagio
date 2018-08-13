@@ -1,14 +1,11 @@
-<%@ page import="br.com.sonner.estagio.model.Estado" %>
 <%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="estadoController" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 
 <%
-    List<Estado> lista = (List) session.getAttribute("lista");
-    EstadoFiltroVO vo = (EstadoFiltroVO) session.getAttribute("filtro");
+    EstadoFiltroVO vo = (EstadoFiltroVO) session.getAttribute("filtroEstado");
 
     if (vo == null) {
         vo = new EstadoFiltroVO();
@@ -56,10 +53,11 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${lista}" var="estado">
+            <c:forEach items="${listaEstado}" var="estado">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${estado.id}'"><i class="fas fa-pen-square"></i></button>
+                        <button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${estado.id}'"><i
+                                class="fas fa-pen-square"></i></button>
                         <button class="main-btn btn-red" value="${estado.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
                                 class="fas fa-times-circle"></i></button>

@@ -3,7 +3,9 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringCidade;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -137,6 +139,40 @@ public class CidadeDAOImpl implements CidadeDAO {
             statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Cidade> pesquisaCidade(CidadeFiltroVO vo) {
+        try {
+            QueryStringCidade queryString = new QueryStringCidade.Builder()
+                    .cidade(vo.getNome())
+                    .cep(vo.getCep())
+                    .sigla(vo.getSigla())
+                    .estado(vo.getEstado())
+                    .build();
+
+            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Cidade> cidades = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Cidade aux = new Cidade();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setCod(resultSet.getString("codigo"));
+                aux.setCep(resultSet.getString("cep"));
+                aux.setEstado(EstadoDAOImpl.getInstance().getOne(resultSet.getLong("cidade_estado_fk")));
+
+                cidades.add(aux);
+            }
+
+            return cidades;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

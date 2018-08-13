@@ -22,8 +22,8 @@ public class Pesquisa extends HttpServlet {
         vo.setAbv(request.getParameter("abv"));
 
         HttpSession session = request.getSession();
-        session.setAttribute("filtro", vo);
-        session.setAttribute("lista", estadoController.filtrar(vo));
+        session.setAttribute("filtroEstado", vo);
+        session.setAttribute("listaEstado", estadoController.filtrar(vo));
 
         response.sendRedirect("/views/estado/lista.jsp");
     }
