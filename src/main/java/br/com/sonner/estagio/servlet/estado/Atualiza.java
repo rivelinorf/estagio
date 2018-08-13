@@ -16,21 +16,25 @@ import java.io.IOException;
 public class Atualiza extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
+        EstadoFiltroVO vo = new EstadoFiltroVO();
+        HttpSession session = request.getSession();
         Estado estado = new Estado();
 
-        estado.setId(Long.valueOf(request.getParameter("id")));
-        estado.setNome(request.getParameter("estado"));
-        estado.setAbv(request.getParameter("abv"));
+        if (request.getParameter("estado") != "" && request.getParameter("abv") != "") {
+            estado.setNome(request.getParameter("estado"));
+            estado.setAbv(request.getParameter("abv"));
+            estado.setId(Long.valueOf(request.getParameter("id")));
 
-        estadoController.update(estado);
+            estadoController.update(estado);
 
-        HttpSession session = request.getSession();
-        EstadoFiltroVO vo = new EstadoFiltroVO();
+            vo.setEstado("");
+            vo.setAbv("");
+            session.setAttribute("listaEstado", estadoController.filtrar(vo));
 
-        vo.setEstado("");
-        vo.setAbv("");
-        session.setAttribute("listaEstado", estadoController.filtrar(vo));
-
-        response.sendRedirect("/views/estado/lista.jsp");
+            response.sendRedirect("/views/estado/lista.jsp");
+        } else {
+            session.setAttribute("errors", "Impossivel atualizar se existir campos vazios");
+            response.sendRedirect("/views/estado/atualiza.jsp");
+        }
     }
 }

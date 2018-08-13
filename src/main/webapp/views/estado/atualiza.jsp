@@ -27,7 +27,9 @@
             formId="edit-form"
             actionFechar="true">
     </sge:header>
-
+    <div class="msg">
+        ${errors}
+    </div>
     <div class="content">
         <form action="/atualiza-estado?id=<%= vo.getId() %>" method="post" id="edit-form">
             <div class="div-form">
@@ -42,4 +44,11 @@
     </div>
 </div>
 </body>
+
+<script>
+    if ("${errors}" != "") {
+        $(".msg").css({"background-color": "rgba(255,0,0,0.3)"}).fadeIn(400);
+        <% session.setAttribute("errors", "");%>
+    }
+</script>
 </html>
