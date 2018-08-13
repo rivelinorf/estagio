@@ -21,7 +21,7 @@ public class Pesquisa extends HttpServlet {
         vo.setCep(request.getParameter("cep"));
         vo.setSigla(request.getParameter("sigla"));
 
-        if(request.getParameter("estado") != null) {
+        if (request.getParameter("estado") != "") {
             vo.setEstado(Long.valueOf(request.getParameter("estado")));
         }
 

@@ -6,6 +6,7 @@ import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.controller.api.EstadoController;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,18 +14,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/cidade-insere")
+@WebServlet("/insere-cidade")
 public class Insere extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        CidadeController cidadeController = new CidadeControllerImpl();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         EstadoController estadoController = new EstadoControllerImpl();
+        CidadeFiltroVO vo = new CidadeFiltroVO();
+        HttpSession session = req.getSession();
+
         Estado estado = estadoController.getOne(Long.valueOf(req.getParameter("estado")));
+        cidadeController.save(new Cidade(req.getParameter("nome"), req.getParameter("sigla"), req.getParameter("cep"), estado));
 
-        cidadeController.save(new Cidade(req.getParameter("nome"), req.getParameter("cod"), req.getParameter("cep"), estado));
+        vo.setNome("");
+        vo.setSigla("");
+        vo.setCep("");
+        vo.setEstado(null);
+        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
 
-        RequestDispatcher rd = req.getRequestDispatcher("/cidade/list.jsp");
-        rd.forward(req, res);
+        res.sendRedirect("/views/cidade/lista.jsp");
     }
 }
