@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
+<jsp:useBean id="tipologradouroController" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+
 <%
     LogradouroFiltroVO vo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
 
@@ -33,7 +35,7 @@
                 <div>Tipo Logradouro:</div>
                 <select name="tipologradouro" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${tipologradouro.all}" var="tipologradouro">
+                    <c:forEach items="${tipologradouros.all}" var="tipologradouro">
                         <c:choose>
                             <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro.id}">
                                 <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>

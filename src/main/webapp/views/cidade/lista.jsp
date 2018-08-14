@@ -47,13 +47,11 @@
                 <input type="text" name="cep" class="form-control"
                        id="pesquisa-cidade-cep" value="<%= vo.getCep() %>" style="width: 19.8%;">
             </div>
+
             <div class="form-row">
                 <div>Estado:</div>
                 <select name="estado" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
-
-
-
                     <c:forEach items="${estados.all}" var="estado">
                         <c:choose>
                             <c:when test="${estado.id == filtroCidade.estado}">

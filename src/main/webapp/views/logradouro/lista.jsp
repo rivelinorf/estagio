@@ -41,8 +41,8 @@ s
             </div>
 
             <div class="form-row">
-                <div>Cidade:</div>
-                <select name="tipologradouroID" class="form-control"
+                <div>Tipo de Logradouro:</div>
+                <select name="tipologradouro" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouros.all}" var="tipologradouro">
@@ -59,9 +59,10 @@ s
             </div>
         </form>
 
+
         <div class="form-row">
             <div>Cidade:</div>
-            <select name="cidadeID" class="form-control"
+            <select name="cidade" class="form-control"
                     style="background-color: rgb(46, 46, 46)">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${cidades.all}" var="cidade">

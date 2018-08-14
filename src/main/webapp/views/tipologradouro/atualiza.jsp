@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="tipologradouros" class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouroController"
+             class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 
 
 <%

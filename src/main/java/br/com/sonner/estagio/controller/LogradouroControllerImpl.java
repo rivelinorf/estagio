@@ -57,11 +57,18 @@ public class LogradouroControllerImpl implements LogradouroController {
         if (logradouro.getNome().length() == 0) {
             erros.add("Nao é possivel inserir um logradouro sem nome ");
         }
-        if (logradouro.getTipologradouro() == null) {
-            erros.add("Impossível ter um logradouro sem um tipo de logradouro selecionada");
+
+
+        if (logradouro.getNome().length() > 40) {
+            erros.add("Nome do logradouro nao pode exceder  40 caracteres  ");
         }
+
+        if (logradouro.getTipologradouro() == null) {
+            erros.add("Impossível ter um logradouro sem um tipo de logradouro selecionado");
+        }
+
         if (logradouro.getCidade() == null) {
-            erros.add("Impossível ter um logradouro sem uma cidade selecionada");
+            erros.add("Impossível ter um logradouro sem uma cidade selecionado");
         }
         return erros;
     }
