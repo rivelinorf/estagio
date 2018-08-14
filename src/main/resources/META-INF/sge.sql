@@ -24,7 +24,7 @@ create table usuario (
 create table if not exists estado (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
-        abv VARCHAR(10) 
+        abv VARCHAR(5) NOT NULL 
 )ENGINE = innodb;
 
 create table if not exists cidade (
@@ -32,7 +32,7 @@ create table if not exists cidade (
         nome VARCHAR(50) NOT NULL,
         codigo VARCHAR(50) NOT NULL,
         cep VARCHAR(50) NOT NULL,
-        cidade_estado_fk BIGINT,
+        cidade_estado_fk BIGINT NOT NULL,
         constraint cidade_estado_fk foreign key (cidade_estado_fk) references estado(id)
 )ENGINE = innodb;
 

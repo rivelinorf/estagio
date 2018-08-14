@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.EstadoFiltroVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/atualiza-estado")
 public class Atualiza extends HttpServlet {
@@ -19,11 +21,13 @@ public class Atualiza extends HttpServlet {
         EstadoFiltroVO vo = new EstadoFiltroVO();
         HttpSession session = request.getSession();
         Estado estado = new Estado();
+        estado.setNome(request.getParameter("estado"));
+        estado.setAbv(request.getParameter("abv"));
+        estado.setId(Long.valueOf(request.getParameter("id")));
 
-        if (request.getParameter("estado") != "" && request.getParameter("abv") != "") {
-            estado.setNome(request.getParameter("estado"));
-            estado.setAbv(request.getParameter("abv"));
-            estado.setId(Long.valueOf(request.getParameter("id")));
+        List<String> erros = estadoController.validation(estado);
+
+        if (erros.size() == 0) {
 
             estadoController.update(estado);
 
@@ -33,8 +37,9 @@ public class Atualiza extends HttpServlet {
 
             response.sendRedirect("/views/estado/lista.jsp");
         } else {
-            session.setAttribute("errors", "Impossivel atualizar se existir campos vazios");
-            response.sendRedirect("/views/estado/atualiza.jsp");
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }

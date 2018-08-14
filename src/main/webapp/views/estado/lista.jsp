@@ -31,9 +31,6 @@
     >
     </sge:header>
     <div class="div-form">
-        <div class="msg">
-            ${errors}
-        </div>
         <form action="/pesquisa-estado" method="get" id="filter-form" style="width: 50%;">
             <div class="form-row">
                 <div>Estado:</div>
@@ -93,10 +90,4 @@
     </div>
 </div>
 </body>
-<script>
-    if ("${errors}" != "") {
-        $(".msg").css({"background-color": "rgba(255,0,0,0.3)"}).fadeIn(400);
-        <% session.setAttribute("errors", "");%>
-    }
-</script>
 </html>

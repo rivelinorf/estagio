@@ -6,8 +6,14 @@ import java.util.List;
 
 public interface CidadeController {
     void save(Cidade cidade);
+
     List<Cidade> getAll();
+
     Cidade getOne(long id);
+
     void update(Cidade cidade);
+
     void delete(long id);
+
+    List<String> validation(Cidade estado);
 }

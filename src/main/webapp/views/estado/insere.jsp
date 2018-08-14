@@ -16,9 +16,6 @@
             formId="insere-form"
             actionFechar="true">
     </sge:header>
-    <div class="msg">
-        ${errors}
-    </div>
     <div class="div-form">
         <form action="/insere-estado" method="post" id="insere-form" style="width: 60%; margin: auto">
             <div class="form-row">
@@ -31,10 +28,4 @@
     </div>
 </div>
 </body>
-<script>
-    if ("${errors}" != "") {
-        $(".msg").css({"background-color": "rgba(255,0,0,0.3)"}).fadeIn(400);
-        <% session.setAttribute("errors", "");%>
-    }
-</script>
 </html>
