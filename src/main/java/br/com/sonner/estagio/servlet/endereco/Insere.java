@@ -1,7 +1,9 @@
 package br.com.sonner.estagio.servlet.endereco;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,24 +31,34 @@ public class Insere extends HttpServlet {
 		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
+		Endereco endereco = new Endereco();
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
 		HttpSession session = req.getSession();
 
 		Logradouro logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
 		Bairro bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
-		
-		enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"),
-				req.getParameter("complemento"), bairro, logradouro));
-		
-		vo.setNumero(null);
-		vo.setCep("");
-		vo.setComplemento("");
-		vo.setBairro(null);
-		vo.setLogradouro(null);
-		
-		session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
-		
-		res.sendRedirect("/views/endereco/lista.jsp");
+
+		List<String> erros = enderecoController.validation(endereco);
+
+		if (erros.size() == 0) {
+
+			enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"),
+					req.getParameter("complemento"), bairro, logradouro));
+
+			vo.setNumero(null);
+			vo.setCep("");
+			vo.setComplemento("");
+			vo.setBairro(null);
+			vo.setLogradouro(null);
+
+			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+
+			res.sendRedirect("/views/endereco/lista.jsp");
+		} else {
+			session.setAttribute("errors", erros);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/insere.jsp");
+			requestDispatcher.forward(req, res);
+		}
 
 	}
 

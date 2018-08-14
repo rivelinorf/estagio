@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
-import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
@@ -25,7 +24,7 @@ public class Atualiza extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		CidadeController cidadeController = new CidadeControllerImpl();
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		Bairro bairro = new Bairro();
 		BairroFiltroVO vo = new BairroFiltroVO();
