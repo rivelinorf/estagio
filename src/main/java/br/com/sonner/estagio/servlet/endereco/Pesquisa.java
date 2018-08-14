@@ -21,16 +21,31 @@ public class Pesquisa extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		EnderecoFiltroVO vo = new EnderecoFiltroVO();
+        EnderecoFiltroVO vo = new EnderecoFiltroVO();
+
+        vo.setCep(request.getParameter("cep"));
+        vo.setComplemento(request.getParameter("complemento"));
 		
-		vo.setCep(request.getParameter("cep"));
-		
-        HttpSession session = request.getSession();
+        if(request.getParameter("bairro") != "") {
+            vo.setBairro(Long.valueOf(request.getParameter("bairro")));
+        }
+        
+        if(request.getParameter("logradouro") != "") {
+            vo.setLogradouro(Long.valueOf(request.getParameter("logradouro")));
+        }
+        
+        /*if(request.getParameter("numero") != "") {
+            vo.setNumero(Integer.parseInt(request.getParameter("numero")));
+        }*/
+
+		HttpSession session = request.getSession();
         session.setAttribute("filtroEndereco", vo);
         session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
-        
+
         response.sendRedirect("/views/endereco/lista.jsp");
+
 	}
+
 }
+

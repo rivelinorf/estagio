@@ -11,7 +11,7 @@ public interface EnderecoController {
 	Endereco getOne(long id);
 	void update(Endereco endereco);
 	void delete(long id);
-	List<Endereco> filtrar(EnderecoFiltroVO vo);
+	List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
 
 	
 	

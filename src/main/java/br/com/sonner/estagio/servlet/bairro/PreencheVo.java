@@ -13,21 +13,26 @@ import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 
-@WebServlet("/preenche-vo-bairro")
+@WebServlet("/bairro/preenche-vo")
 public class PreencheVo extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	/*BairroControllerImpl bairroController = new BairroControllerImpl();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	BairroControllerImpl bairroController = new BairroControllerImpl();
     	BairroFiltroVO vo = new BairroFiltroVO();
     	
     	Bairro bairro = bairroController.getOne(Long.valueOf(request.getParameter("id")));
-    	vo.setNome(bairro.getNome());
-    	vo.setCidade(bairro.getCidade());
     	vo.setId(bairro.getId());
+    	vo.setNome(bairro.getNome());
+    	vo.setCidade(bairro.getCidade().getId());
     	
     	HttpSession session = request.getSession();
-    	session.setAttribute("bairro-para-editar", vo);
+    	session.setAttribute("bairroParaEditar", vo);
     	
     	response.sendRedirect("/views/bairro/atualiza.jsp");
-    }*/
     }
+    
 }
