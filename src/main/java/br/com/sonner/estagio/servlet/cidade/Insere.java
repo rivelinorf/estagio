@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/insere-cidade")
 public class Insere extends HttpServlet {
@@ -26,14 +27,24 @@ public class Insere extends HttpServlet {
         HttpSession session = req.getSession();
 
         Estado estado = estadoController.getOne(Long.valueOf(req.getParameter("estado")));
-        cidadeController.save(new Cidade(req.getParameter("nome"), req.getParameter("sigla"), req.getParameter("cep"), estado));
+        Cidade novaCidade = new Cidade(req.getParameter("nome"), req.getParameter("sigla"), req.getParameter("cep"), estado);
+        List<String> erros = cidadeController.validation(novaCidade);
 
-        vo.setNome("");
-        vo.setSigla("");
-        vo.setCep("");
-        vo.setEstado(null);
-        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+        if (erros.size() == 0) {
+            cidadeController.save(novaCidade);
 
-        res.sendRedirect("/views/cidade/lista.jsp");
+            vo.setNome("");
+            vo.setSigla("");
+            vo.setCep("");
+            vo.setEstado(null);
+            session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+
+            res.sendRedirect("/views/cidade/lista.jsp");
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/cidade/insere.jsp");
+            requestDispatcher.forward(req, res);
+        }
+
     }
 }

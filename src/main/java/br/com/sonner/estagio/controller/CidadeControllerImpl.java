@@ -6,6 +6,7 @@ import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CidadeControllerImpl implements CidadeController {
@@ -38,6 +39,41 @@ public class CidadeControllerImpl implements CidadeController {
     @Override
     public void delete(long id) {
         this.cidadeDAO.delete(id);
+    }
+
+    @Override
+    public List<String> validation(Cidade cidade) {
+        List<String> erros = new ArrayList<>();
+
+        if (cidade.getNome().length() == 0) {
+            erros.add("Não é possivel ter uma cidade sem nome");
+        }
+
+        if (cidade.getNome().length() > 50) {
+            erros.add("Nome da cidade não pode exceder 50 caracteres");
+        }
+
+        if (cidade.getCod().length() == 0) {
+            erros.add("Não é possivel ter cidade sem sigla");
+        }
+
+        if (cidade.getCod().length() > 5) {
+            erros.add("Sigla da cidade não pode exceder 5 caracteres");
+        }
+
+        if (cidade.getCep().length() == 0) {
+            erros.add("Não é possivel ter uma cidade sem CEP");
+        }
+
+        if (cidade.getCep().length() > 10) {
+            erros.add("Sigla da cidade não pode exceder 10 caracteres");
+        }
+
+        if (cidade.getEstado() == null) {
+            erros.add("Impossível ter uma cidade sem estado");
+        }
+
+        return erros;
     }
 
     public List<Cidade> filtrar (CidadeFiltroVO vo) {

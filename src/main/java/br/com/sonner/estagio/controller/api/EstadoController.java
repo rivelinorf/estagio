@@ -15,4 +15,6 @@ public interface EstadoController {
     void update(Estado estado);
 
     void delete(long id);
+
+    List<String> validation(Estado estado);
 }

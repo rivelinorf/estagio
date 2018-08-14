@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/atualiza-cidade")
 public class Atualiza extends HttpServlet {
@@ -23,6 +24,7 @@ public class Atualiza extends HttpServlet {
         CidadeFiltroVO vo = new CidadeFiltroVO();
         EstadoController estadoController = new EstadoControllerImpl();
         Cidade novaCidade = new Cidade();
+        HttpSession session = request.getSession();
 
         novaCidade.setId(Long.valueOf(request.getParameter("id")));
         novaCidade.setNome(request.getParameter("cidade"));
@@ -30,16 +32,24 @@ public class Atualiza extends HttpServlet {
         novaCidade.setCod(request.getParameter("sigla"));
         novaCidade.setEstado(estadoController.getOne(Long.valueOf(request.getParameter("estado"))));
 
-        cidadeController.update(novaCidade);
+        List<String> erros = cidadeController.validation(novaCidade);
 
-        vo.setNome("");
-        vo.setSigla("");
-        vo.setCep("");
-        vo.setEstado(null);
+        if (erros.size() == 0) {
+            cidadeController.update(novaCidade);
 
-        HttpSession session = request.getSession();
-        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+            vo.setNome("");
+            vo.setSigla("");
+            vo.setCep("");
+            vo.setEstado(null);
 
-        response.sendRedirect("/views/cidade/lista.jsp");
+            session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+
+            response.sendRedirect("/views/cidade/lista.jsp");
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
     }
 }

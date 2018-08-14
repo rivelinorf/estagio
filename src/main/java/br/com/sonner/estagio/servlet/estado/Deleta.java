@@ -24,11 +24,11 @@ public class Deleta extends HttpServlet {
 
         cidadeFiltroVO.setNome("");
         cidadeFiltroVO.setCep("");
-        cidadeFiltroVO.setSigla("");session.setAttribute("errors", 1);
+        cidadeFiltroVO.setSigla("");
         cidadeFiltroVO.setEstado(Long.valueOf(request.getParameter("id")));
 
-        if (cidadeController.filtrar(cidadeFiltroVO).size() != 0) {
-            session.setAttribute("errors", "Impossivel deletar, estado possue relacionamento");
+        if (cidadeController.filtrar(cidadeFiltroVO).size() > 0) {
+            session.setAttribute("errors", "Impossivel deletar!, Estado possue relacionamento");
         } else {
             estadoController.delete(Long.valueOf(request.getParameter("id")));
             session.setAttribute("errors", "");

@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.EstadoFiltroVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/insere-estado")
 public class Insere extends HttpServlet {
@@ -20,10 +22,11 @@ public class Insere extends HttpServlet {
         HttpSession session = request.getSession();
         EstadoFiltroVO vo = new EstadoFiltroVO();
 
-        if (request.getParameter("nome") != "" && request.getParameter("abv") != "") {
-            aux.setNome(request.getParameter("nome"));
-            aux.setAbv(request.getParameter("abv"));
+        aux.setNome(request.getParameter("nome"));
+        aux.setAbv(request.getParameter("abv"));
+        List<String> erros =  estadoController.validation(aux);
 
+        if (erros.size() == 0) {
             estadoController.save(aux);
 
             vo.setEstado("");
@@ -32,8 +35,9 @@ public class Insere extends HttpServlet {
 
             response.sendRedirect("/views/estado/lista.jsp");
         } else {
-            session.setAttribute("errors", "Impossivel inserir se existir campos vazios");
-            response.sendRedirect("/views/estado/insere.jsp");
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/insere.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }
