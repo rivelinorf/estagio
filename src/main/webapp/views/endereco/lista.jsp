@@ -1,22 +1,22 @@
-<%@ page import="br.com.sonner.estagio.model.Endereco"%>
 <%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO"%>
-<%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="enderecos"
-	class="br.com.sonner.estagio.controller.EnderecoControllerImpl"></jsp:useBean>
 <jsp:useBean id="bairros"
 	class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
 <jsp:useBean id="logradouros"
 	class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
 
 <%
-    EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("filtroEndereco");
-    if (vo == null) {
-        vo = new EnderecoFiltroVO();
-        vo.setCep("");
-        }
+	EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("filtroEndereco");
+	if (vo == null) {
+		vo = new EnderecoFiltroVO();
+		vo.setNumero(null);
+		vo.setCep("");
+		vo.setComplemento("");
+		vo.setLogradouro(null);
+		vo.setBairro(null);
+	}
 %>
 
 <html>
@@ -24,20 +24,64 @@
 <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
+
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-
-		<sge:header titulo="Pesquisa de Endereços" page="endereco"
+		<sge:header titulo="Pesquisa de Enderecos" page="endereco"
 			actionFiltrar="true" actionNovo="/views/endereco/insere.jsp"
 			formId="filter-form" actionFechar="true">
 		</sge:header>
 
-		<div class="div-form" style="width: 60%;">
-			<form action="/pesquisa-endereco" method="get" id="filter-form">
+		<div class="div-form">
+			<form action="/pesquisa-endereco" method="get" id="filter-form"
+				style="width: 50%;">
+
+
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
+						value="<%=vo.getCep()%>">
+				</div>
+				<div class="form-row">
+					<div>Complemento:</div>
+					<input type="text" name="complemento" class="form-control"
+						value="<%=vo.getComplemento()%>">
+				</div>
+				<div class="form-row">
+					<div>Logradouro:</div>
+					<select name="logradouro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${logradouros.all}" var="logradouro">
+							<c:choose>
+								<c:when test="${logradouro.id == filtroEndereco.logradouro}">
+									<option value="${logradouro.id}" selected>${logradouro.tipologradouro.nome}
+										${logradouro.nome}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${logradouro.id}">${logradouro.tipologradouro.nome}
+										${logradouro.nome}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
+				</div>
+				<div class="form-row">
+					<div>Bairro:</div>
+					<select name="bairro" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${bairros.all}" var="bairro">
+							<c:choose>
+								<c:when test="${bairro.id == filtroEndereco.bairro}">
+									<option value="${bairro.id}" selected>${bairro.nome}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${bairro.id}">${bairro.nome}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</select>
 				</div>
 			</form>
 		</div>
@@ -57,16 +101,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${lista}" var="endereco">
+					<c:forEach items="${listaEndereco}" var="endereco">
 						<tr>
-							<td id="botoes" width="150px" style="text-align: center"><a
-								href="/endereco-atualiza?id=${endereco.id}"><button
-										class="main-btn btn-editar">
-										<i class="fas fa-pen-square"></i>
-									</button></a> <a href="/endereco-deleta?id=${endereco.id}"><button
-										class="main-btn btn-excluir">
-										<i class="fas fa-times-circle"></i>
-									</button></a></td>
+							<td id="botoes" width="150px" style="text-align: center">
+								<button class="main-btn btn-editar"
+									onclick="location.href='/endereco/preenche-vo?id=${endereco.id}'">
+									<i class="fas fa-pen-square"></i>
+								</button>
+								<button class="main-btn btn-red" value="${endereco.id}"
+									data-toggle="modal" data-target="#confirm-modal" type="button"
+									onclick="$('#deletar').val(this.value)">
+									<i class="fas fa-times-circle"></i>
+								</button>
+							</td>
 							<td>${endereco.logradouro.tipologradouro.nome}
 								${endereco.logradouro.nome}</td>
 							<td>${endereco.numero}</td>
@@ -101,7 +148,6 @@
 
 			</div>
 		</div>
-
 	</div>
 </body>
 </html>

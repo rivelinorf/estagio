@@ -1,10 +1,16 @@
 package br.com.sonner.estagio.vos;
 
-import br.com.sonner.estagio.model.Cidade;
-
 public class BairroFiltroVO {
+	private Long id;
 	private String nome;
 	private Long cidade;
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}

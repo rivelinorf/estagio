@@ -12,16 +12,48 @@ public class QueryStringEndereco {
 	}
 
 	public static class Builder {
-        private String sql = "SELECT * FROM endereco WHERE 1 ";
+        private String sql = "select * from endereco where 1 ";
+        
+        public Builder numero(Integer numero) {
+        	if(numero != null) {
+        		this.sql += "and numero like '"+ numero +"%'";
+        	}
+        	
+        	return this;
+        }
 
         public Builder cep(String cep) {
             if (cep != "") {
-                this.sql += "and cep LIKE '"+ cep +"%' ";
+                this.sql += "and cep like '"+ cep +"%' ";
+            }
+
+            return this;
+        }
+        
+        public Builder complemento(String complemento) {
+            if (complemento != "") {
+                this.sql += "and complemento like '"+ complemento +"%' ";
+            }
+
+            return this;
+        }
+
+        public Builder bairro(Long bairro) {
+            if (bairro != null) {
+                this.sql += "and endereco_bairro_fk like '"+ bairro +"%' ";
             }
 
             return this;
         }
 		
+        public Builder logradouro(Long logradouro) {
+            if (logradouro != null) {
+                this.sql += "and endereco_logradouro_fk like '"+ logradouro +"%' ";
+            }
+
+            return this;
+        }
+        
 		public QueryStringEndereco build() {
 			return new QueryStringEndereco(this);
 		}

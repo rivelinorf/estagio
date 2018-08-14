@@ -18,15 +18,13 @@ import br.com.sonner.estagio.vos.BairroFiltroVO;
  * Servlet implementation class Insere
  */
 
-@WebServlet("/bairro-insere")
+@WebServlet("/insere-bairro")
 public class Insere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws javax.servlet.ServletException, IOException {
 		
-		System.out.println("entrou");
-
         BairroControllerImpl bairroController = new BairroControllerImpl();
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         BairroFiltroVO vo = new BairroFiltroVO();
