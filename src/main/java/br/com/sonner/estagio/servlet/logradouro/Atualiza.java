@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.servlet.logradouro;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,30 +27,37 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 @WebServlet("/atualiza-logradouro")
 public class Atualiza extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
+        LogradouroFiltroVO vo = new LogradouroFiltroVO();
+        CidadeController cidadeController = new CidadeControllerImpl();
+        TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
+        Logradouro novoLogradouro = new Logradouro();
+        HttpSession session = request.getSession();
 
-		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		CidadeController cidadeController= new CidadeControllerImpl();
-		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-		LogradouroFiltroVO vo = new LogradouroFiltroVO();
-		Logradouro novoLogradouro= new Logradouro();
+        novoLogradouro.setId((Long.valueOf(request.getParameter("id"))));
+        novoLogradouro.setNome(request.getParameter("logradouro"));
+        novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
+        novoLogradouro.setTipologradouro(tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro"))));
+
+        List<String> erros = logradouroController.validation(novoLogradouro);
+
+        if (erros.size() == 0) {
+            logradouroController.update(novoLogradouro);
+            vo.setNome("");
+            vo.setCidade(null);
+            vo.setTipologradouro(null);
+
+            session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+
+            response.sendRedirect("/views/logradouro/lista.jsp");
+
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
 
 
-		novoLogradouro.setId((Long.valueOf(request.getParameter("id"))));
-		novoLogradouro.setNome(request.getParameter("logradouro"));
-		novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
-		novoLogradouro.setTipologradouro(tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro"))));
-
-		logradouroController.update(novoLogradouro);
-
-		vo.setNome("");
-		vo.setCidade(null);
-		vo.setTipologradouro(null);
-
-
-		HttpSession session = request.getSession();
-		((HttpSession) session).setAttribute("listaLogradouro", logradouroController.filtrar(vo));
-
-		response.sendRedirect("/views/logradouro/lista.jsp");
-	}
+    }
 }

@@ -105,6 +105,8 @@
         </table>
     </div>
 
+
+
     <!-- Modal -->
     <div class="modal fade" id="confirm-modal" role="dialog">
         <div class="modal-dialog">

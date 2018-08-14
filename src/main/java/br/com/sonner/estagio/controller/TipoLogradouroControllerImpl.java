@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.dao.TipoLogradouroDAOImpl;
@@ -39,6 +40,20 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
 	public void delete(long id) {
 		this.tDAO.delete(id);
 	}
+
+	@Override
+	public List<String> validation(TipoLogradouro tipoLogradouro) {
+
+		List<String> erros = new ArrayList<>();
+
+		if (tipoLogradouro.getNome().length() == 0) {
+			erros.add("Nao é possivel inserir um Tipo de Logradouro sem nome ");
+		}
+
+		return erros;
+
+	}
+
 
 	public List<TipoLogradouro> filtrar(TipologradouroFiltroVO tipologradourosPesquisados) {
 		return this.tDAO.pesquisaTipoLogradouro((tipologradourosPesquisados.getNome()));

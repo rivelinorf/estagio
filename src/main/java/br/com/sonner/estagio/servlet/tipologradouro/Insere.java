@@ -1,6 +1,8 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
 import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,21 +19,26 @@ import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 @WebServlet("/insere-tipologradouro")
 public class Insere extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, IOException {
-
         TipoLogradouro novo = new TipoLogradouro();
-        TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-
-        novo.setNome(request.getParameter("nome"));
-
-        tipoLogradouroController.save(novo);
-
+        TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
         HttpSession session = request.getSession();
         TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
-        vo.setNome("");
-        session.setAttribute("listaTipologradouro", ((TipoLogradouroControllerImpl) tipoLogradouroController).filtrar(vo));
 
 
-        response.sendRedirect("/views/tipologradouro/lista.jsp");
+        novo.setNome(request.getParameter("nome"));
+        List<String> erros = tipoLogradouroController.validation(novo);
+
+        if (erros.size() == 0) {
+            tipoLogradouroController.save(novo);
+            vo.setNome("");
+
+            session.setAttribute("listaTipologradouro", ( tipoLogradouroController.filtrar(vo)));
+            response.sendRedirect("/views/tipologradouro/lista.jsp");
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
+            requestDispatcher.forward(request, response);
+        }
 
 
     }

@@ -54,7 +54,6 @@
                         <button class="main-btn btn-editar" onclick="location.href='/tipologradouro/preenche-vo?id=${tipologradouro.id}'">
                             <i class="fas fa-pen-square"></i>
                         </button>
-
                         <button class="main-btn btn-red" value="${tipologradouro.id}"
                                 data-toggle="modal" data-target="#confirm-modal" type="button"
                                 onclick="$('#deletar').val(this.value)">
@@ -75,7 +74,7 @@
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar"
                                 data-dismiss="modal"
-                                onclick="location.href = '/deleta-tipologradouro?id='+this.value">Sim
+                                onclick="location.href ='/deleta-tipologradouro?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red"
                                 data-dismiss="modal">Não

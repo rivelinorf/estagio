@@ -7,6 +7,7 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.EstadoFiltroVO;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,26 +15,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/atualiza-tipologradouro")
 public class Atualiza extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
-        TipoLogradouro tipoLogradouro = new TipoLogradouro();
-
-        tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
-        tipoLogradouro.setNome(request.getParameter("tipologradouro"));
-
-        tipoLogradouroController.update(tipoLogradouro);
-
-        HttpSession session = request.getSession();
         TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
-        vo.setNome("");
+        HttpSession session = request.getSession();
+        TipoLogradouro tipoLogradouro = new TipoLogradouro();
+        tipoLogradouro.setNome(request.getParameter("tipologradouro"));
+        tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
 
+        List<String> erros = tipoLogradouroController.validation(tipoLogradouro);
 
-        session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+        if (erros.size() == 0) {
+            tipoLogradouroController.update(tipoLogradouro);
+            vo.setNome("");
 
-        response.sendRedirect("/views/tipologradouro/lista.jsp");
+            session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+
+            response.sendRedirect("/views/tipologradouro/lista.jsp");
+        } else {
+            session.setAttribute("erros", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
     }
 }

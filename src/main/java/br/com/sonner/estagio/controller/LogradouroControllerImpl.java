@@ -1,6 +1,8 @@
 package br.com.sonner.estagio.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
@@ -16,40 +18,59 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 public class LogradouroControllerImpl implements LogradouroController {
 
-	private LogradouroDAO lDAO;
+    private LogradouroDAO logradouroDAO;
 
-	public LogradouroControllerImpl() {
-		this.lDAO = LogradouroDAOImpl.getIntance();
-	}
+    public LogradouroControllerImpl() {
+        this.logradouroDAO = LogradouroDAOImpl.getIntance();
+    }
 
-	@Override
-	public void save(Logradouro logradouro) {
-		this.lDAO.save(logradouro);
-	}
+    @Override
+    public void save(Logradouro logradouro) {
+        this.logradouroDAO.save(logradouro);
+    }
 
-	@Override
-	public List<Logradouro> getAll() {
-		return this.lDAO.getAll();
-	}
+    @Override
+    public List<Logradouro> getAll() {
+        return this.logradouroDAO.getAll();
+    }
 
-	@Override
-	public Logradouro getOne(long id) {
-		return this.lDAO.getOne(id);
-	}
+    @Override
+    public Logradouro getOne(long id) {
+        return this.logradouroDAO.getOne(id);
+    }
 
-	@Override
-	public void update(Logradouro logradouro) {
-		this.lDAO.update(logradouro);
-	}
+    @Override
+    public void update(Logradouro logradouro) {
+        this.logradouroDAO.update(logradouro);
+    }
 
-	@Override
-	public void delete(long id) {
-		this.lDAO.delete(id);
+    @Override
+    public void delete(long id) {
+        this.logradouroDAO.delete(id);
 
-	}
-	public List<Logradouro> filtrar (LogradouroFiltroVO vo) {
-		return this.lDAO.pesquisaLogradouro(vo);
+    }
 
-	}
+    @Override
+    public List<String> validation(Logradouro logradouro) {
+        List<String> erros = new ArrayList<>();
+
+        if (logradouro.getNome().length() == 0) {
+            erros.add("Nao é possivel inserir um logradouro sem nome ");
+        }
+        if (logradouro.getTipologradouro() == null) {
+            erros.add("Impossível ter um logradouro sem um tipo de logradouro selecionada");
+        }
+        if (logradouro.getCidade() == null) {
+            erros.add("Impossível ter um logradouro sem uma cidade selecionada");
+        }
+        return erros;
+    }
+
+
+    public List<Logradouro> filtrar(LogradouroFiltroVO vo) {
+        return this.logradouroDAO.pesquisaLogradouro(vo);
+
+    }
+
 
 }

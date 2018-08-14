@@ -14,7 +14,8 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 @WebServlet("/pesquisa-logradouro")
 public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws  IOException {
+
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
 
