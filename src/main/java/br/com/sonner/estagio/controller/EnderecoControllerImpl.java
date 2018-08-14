@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sonner.estagio.controller.api.EnderecoController;
@@ -46,6 +47,40 @@ public class EnderecoControllerImpl implements EnderecoController {
 	@Override
 	public List<Endereco> filtrar(EnderecoFiltroVO vo) {
 		return this.eDAO.pesquisaEndereco(vo);
+	}
+
+	@Override
+	public List<String> validation(Endereco endereco) {
+		List<String> erros = new ArrayList<>();
+		
+		String aux = Integer.toString(endereco.getNumero());
+		
+        if (aux.length() == 0) {
+            erros.add("Não é possivel ter um endereço sem número");
+        }
+        
+        if (aux.length() == 10) {
+            erros.add("Número não pode exceder 10 caracteres");
+        }
+
+        if (endereco.getCep().length() == 0) {
+            erros.add("Não é possivel ter uma cidade sem CEP");
+        }
+
+        if (endereco.getCep().length() > 10) {
+            erros.add("CEP não pode exceder 10 caracteres");
+        }
+
+        if (endereco.getBairro() == null) {
+            erros.add("Impossível ter uma endereço sem bairro");
+        }
+        
+        if (endereco.getLogradouro() == null) {
+            erros.add("Impossível ter uma endereço sem logradouro");
+        }
+
+        return erros;
+		
 	}
 
 

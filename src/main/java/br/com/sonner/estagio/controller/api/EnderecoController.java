@@ -12,7 +12,7 @@ public interface EnderecoController {
 	void update(Endereco endereco);
 	void delete(long id);
 	List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
-
+    List<String> validation(Endereco endereco);
 	
 	
 

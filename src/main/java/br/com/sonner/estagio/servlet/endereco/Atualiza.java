@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.servlet.endereco;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +33,8 @@ public class Atualiza extends HttpServlet {
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 		Endereco endereco = new Endereco();
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
-
+		HttpSession session = req.getSession();
+		
 		Logradouro logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
 		Bairro bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
 
@@ -42,6 +44,10 @@ public class Atualiza extends HttpServlet {
 		endereco.setComplemento(req.getParameter("complemento"));
 		endereco.setBairro(bairro);
 		endereco.setLogradouro(logradouro);
+		
+		List<String> erros = enderecoController.validation(endereco);
+		
+		if (erros.size() == 0) {
 
 		enderecoController.update(endereco);
 		
@@ -51,10 +57,15 @@ public class Atualiza extends HttpServlet {
 		vo.setBairro(null);
 		vo.setLogradouro(null);
 		
-        HttpSession session = req.getSession();
+        
         session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
 
         res.sendRedirect("/views/endereco/lista.jsp");
+		}else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
+            requestDispatcher.forward(req, res);
+		}
 
 	}
 

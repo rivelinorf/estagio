@@ -24,7 +24,7 @@
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header
-            titulo="Editar estado"
+            titulo="Editar cidade"
             actionSalvar="true"
             formId="edit-form"
             actionFechar="true">
