@@ -10,7 +10,6 @@ import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 public class EnderecoControllerImpl implements EnderecoController {
 
 	private EnderecoDAOImpl eDAO;
-	private static List<Endereco> ENDERECOS_PESQUISADOS;
 
 	public EnderecoControllerImpl() {
 		eDAO = EnderecoDAOImpl.getInstance();

@@ -1,16 +1,18 @@
-<%@ page import="br.com.sonner.estagio.model.Bairro"%>
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO"%>
-<%@ page import="java.util.List"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
-<jsp:useBean id="bairros"
-	class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
 <jsp:useBean id="cidades"
 	class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 
 <%
-	List<Bairro> lista = (List) session.getAttribute("lista-bairro");
+	BairroFiltroVO vo = (BairroFiltroVO) session.getAttribute("filtroBairro");
+
+	if (vo == null) {
+		vo = new BairroFiltroVO();
+		vo.setNome("");
+		vo.setCidade(null);
+	}
 %>
 
 <html>
@@ -26,23 +28,28 @@
 			formId="filter-form" actionFechar="true">
 		</sge:header>
 
-		<div class="div-form" style="width: 60%;">
+		<div class="div-form">
 			<form action="/pesquisa-bairro" method="get" id="filter-form">
 				<div class="form-row">
 					<div>Nome:</div>
 					<input type="text" name="nome" class="form-control"
-						style="background-color: rgb(46, 46, 46)">
+						value="<%=vo.getNome()%>">
 				</div>
-
 
 				<div class="form-row">
 					<div>Cidade:</div>
 					<select name="cidadeID" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option disabled selected>Selecione uma opção...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${cidades.all}" var="cidade">
-							<option value="${cidade.id}">${cidade.nome}</option>
-
+							<c:choose>
+								<c:when test="${cidade.id == filtroBairro.cidade}">
+									<option value="${cidade.id}" selected>${cidade.nome}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${cidade.id}">${cidade.nome}</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</select>
 				</div>
@@ -64,11 +71,15 @@
 					<c:forEach items="${listaBairro}" var="bairro">
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
-							
-							<button class="main-btn btn-editar" onclick="location.href='/preenche-vo?id=${bairro.id}'"><i class="fas fa-pen-square"></i></button>
-							<button class="main-btn btn-red" value="${bairro.id}" data-toggle="modal"
-                                data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
-                                class="fas fa-times-circle"></i></button>
+
+                        <button class="main-btn btn-editar"
+                                onclick="location.href='/bairro/preenche-vo?id=${bairro.id}'"><i
+                                class="fas fa-pen-square"></i></button>
+								<button class="main-btn btn-red" value="${bairro.id}"
+									data-toggle="modal" data-target="#confirm-modal" type="button"
+									onclick="$('#deletar').val(this.value)">
+									<i class="fas fa-times-circle"></i>
+								</button>
 							</td>
 							<td>${bairro.nome}</td>
 							<td>${bairro.cidade.nome}</td>

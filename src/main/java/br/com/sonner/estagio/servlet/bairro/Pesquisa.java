@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
-import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
-import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 @WebServlet("/pesquisa-bairro")
 public class Pesquisa extends HttpServlet {
@@ -28,7 +26,7 @@ public class Pesquisa extends HttpServlet {
 
         vo.setNome(request.getParameter("nome"));
 		
-        if(request.getParameter("cidadeID") != null) {
+        if(request.getParameter("cidadeID") != "") {
             vo.setCidade(Long.valueOf(request.getParameter("cidadeID")));
         }
 

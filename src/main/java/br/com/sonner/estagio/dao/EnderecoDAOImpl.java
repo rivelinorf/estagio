@@ -165,19 +165,18 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 	public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
         try {
             List<Endereco> enderecos = new ArrayList<Endereco>();
-            QueryStringEndereco queryString = new QueryStringEndereco.Builder().cep(vo.getCep()).build();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+            QueryStringEndereco queryString = new QueryStringEndereco.Builder()
+            		.numero(vo.getNumero())
+            		.cep(vo.getCep())
+            		.complemento(vo.getComplemento())
+            		.bairro(vo.getBairro())
+            		.logradouro(vo.getLogradouro())
+            		.build();
             
-       
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-
-                BairroDAOImpl bDAO = BairroDAOImpl.getInstance();
-                Bairro b = bDAO.getOne(rs.getLong("endereco_bairro_fk"));
-
-                LogradouroDAO lDAO = LogradouroDAOImpl.getIntance();
-                Logradouro l = lDAO.getOne(rs.getLong("endereco_logradouro_fk"));
 
                 Endereco e = new Endereco();
                 e.setId(rs.getLong("id"));
@@ -195,7 +194,8 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
             return enderecos;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }		
 		
 	}
