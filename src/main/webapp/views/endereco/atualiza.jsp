@@ -44,7 +44,6 @@
 					<div>Logradouro:</div>
                 <select name="logradouro" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opção...</option>
                     <c:forEach items="${logradouros.all}" var="logradouro">
                         <c:choose>
                             <c:when test="${logradouro.id == enderecoParaEditar.logradouro}">
@@ -71,8 +70,7 @@
 					<div>Bairro:</div>
                 <select name="bairro" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${bairros.all}" var="bairro">
+                     <c:forEach items="${bairros.all}" var="bairro">
                         <c:choose>
                             <c:when test="${bairro.id == enderecoParaEditar.bairro}">
                                 <option value="${bairro.id}" selected>${bairro.nome}</option>

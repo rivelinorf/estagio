@@ -52,36 +52,36 @@ public class EnderecoControllerImpl implements EnderecoController {
 	@Override
 	public List<String> validation(Endereco endereco) {
 		List<String> erros = new ArrayList<>();
-		
-		String aux = Integer.toString(endereco.getNumero());
-		
-        if (aux.length() == 0) {
-            erros.add("Não é possivel ter um endereço sem número");
-        }
-        
-        if (aux.length() == 10) {
-            erros.add("Número não pode exceder 10 caracteres");
-        }
 
-        if (endereco.getCep().length() == 0) {
-            erros.add("Não é possivel ter uma cidade sem CEP");
-        }
+		String aux = "";
 
-        if (endereco.getCep().length() > 10) {
-            erros.add("CEP não pode exceder 10 caracteres");
-        }
+		if (endereco.getNumero() != null) {
+			aux = Integer.toString(endereco.getNumero());
+		}
 
-        if (endereco.getBairro() == null) {
-            erros.add("Impossível ter uma endereço sem bairro");
-        }
-        
-        if (endereco.getLogradouro() == null) {
-            erros.add("Impossível ter uma endereço sem logradouro");
-        }
+		if (aux.length() == 0) {
+			erros.add("Não é possivel ter um endereço sem número");
+		}
 
-        return erros;
-		
+		if (aux.length() == 10) {
+			erros.add("Número não pode exceder 10 caracteres");
+		}
+
+
+		if (endereco.getCep().length() > 10) {
+			erros.add("CEP não pode exceder 10 caracteres");
+		}
+
+		if (endereco.getBairro() == null) {
+			erros.add("Impossível ter uma endereço sem bairro");
+		}
+
+		if (endereco.getLogradouro() == null) {
+			erros.add("Impossível ter uma endereço sem logradouro");
+		}
+
+		return erros;
+
 	}
-
 
 }
