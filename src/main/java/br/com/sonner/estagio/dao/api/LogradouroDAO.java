@@ -19,7 +19,7 @@ public interface LogradouroDAO {
 
 	void delete(Long id);
 	
-	List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO logradouroPesquisados ,Cidade cidade,TipoLogradouro tipologradouro);
+	List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO vo);
 
 
 }

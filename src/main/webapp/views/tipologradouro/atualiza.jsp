@@ -1,32 +1,45 @@
+<%@page import="br.com.sonner.estagio.vos.TipologradouroFiltroVO" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
+<jsp:useBean id="tipologradouroController"
+             class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%
+    TipologradouroFiltroVO vo = (TipologradouroFiltroVO) session.getAttribute("tipologradouro-para-editar");
+
+    if (vo == null) {
+        vo = new TipologradouroFiltroVO();
+        vo.setNome("");
+
+    }
+%>
 <html>
 <head>
-<title>Atualizar</title>
+    <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:useBean id="tipologradouro"
-		class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
-	Altera tipologradouro - ${tipologradouro.nome}
+<jsp:include page="/includes/menu.jsp"></jsp:include>
+<div class="main">
+    <sge:header
+            titulo="Editar Tipo de Logradouro"
+            actionSalvar="true"
+            formId="edit-form"
+            actionFechar="true">
+    </sge:header>
+    <div class="content">
+        <form action="/atualiza-tipologradouro?id=<%=vo.getId()%>" method="post" id="edit-form">
+            <div class="div-form">
+                <div class="form-row">
+                    <div>Nome:</div>
+                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>">
+                </div>
+            </div>
 
-	<form action="/tipologradouro-atualiza" method="post">
-
-		<input type="hidden" name="id" value="${tipologradouro.id}" /> <br> Novo
-		nome: <input type="text" name="nome" value="${tipologradouro.nome}"> <br>
-
-		<br> Novo tipologradouro: <select name="tipologradouroID">
-			<c:forEach items="${tipologradouro.all}" var="tipologradouro">
-				<option value="${tipologradouro.id}">
-				${tipologradouro.nome}
-				</option>
-
-			</c:forEach>
-
-		</select><br> <br>
-
-		<button>Enviar</button>
-	</form>
+        </form>
+    </div>
+</div>
 </body>
 </html>

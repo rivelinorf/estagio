@@ -47,10 +47,10 @@
                 <input type="text" name="cep" class="form-control"
                        id="pesquisa-cidade-cep" value="<%= vo.getCep() %>" style="width: 19.8%;">
             </div>
+
             <div class="form-row">
                 <div>Estado:</div>
-                <select name="estado" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                <select name="estado" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${estados.all}" var="estado">
                         <c:choose>
@@ -62,6 +62,8 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+
+
                 </select>
             </div>
         </form>
@@ -100,6 +102,8 @@
             </tbody>
         </table>
     </div>
+
+
 
     <!-- Modal -->
     <div class="modal fade" id="confirm-modal" role="dialog">

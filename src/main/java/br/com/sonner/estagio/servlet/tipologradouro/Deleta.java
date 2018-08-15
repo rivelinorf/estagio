@@ -10,11 +10,12 @@ import javax.servlet.http.HttpSession;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
+@SuppressWarnings("serial")
 @WebServlet("/deleta-tipologradouro")
 public class Deleta extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
 
 		TipoLogradouroControllerImpl tipologradouroController = new TipoLogradouroControllerImpl();
 		tipologradouroController.delete(Long.valueOf(request.getParameter("id")));
@@ -24,9 +25,9 @@ public class Deleta extends HttpServlet {
 
 		vo.setNome("");
 
-		session.setAttribute("lista", tipologradouroController.filtrar(vo));
+		session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(vo));
 
-		response.sendRedirect("/views/estado/lista.jsp");
+		response.sendRedirect("/views/tipologradouro/lista.jsp");
 
 	}
 }

@@ -125,8 +125,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 	public List<TipoLogradouro> pesquisaTipoLogradouro(String nome) {
 
 		try {
-			QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome)
-					.build();
+			QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouro(nome).build();
 			PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
 
 			ResultSet resultSet = preparedStatement.executeQuery();
