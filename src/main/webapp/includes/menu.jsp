@@ -6,8 +6,15 @@
         }
         $(id).next(".dropdown-content").toggle(220)
     }
+
+    $(document).ready(function () {
+        $(".dropdown-content button").on("click", function () {
+            $(".lds-ring").css({"display": "flex"})
+        })
+    })
 </script>
 
+<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
 <nav>
     <div class="container-nav">
         <div>
