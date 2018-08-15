@@ -13,7 +13,4 @@ public interface EnderecoController {
 	void delete(long id);
 	List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
     List<String> validation(Endereco endereco);
-	
-	
-
 }

@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sonner.estagio.controller.api.BairroController;
@@ -47,8 +48,23 @@ public class BairroControllerImpl implements BairroController {
 		return this.bDAO.pesquisaBairro(vo);
 	}
 
-
-	
-	
+	@Override
+	public List<String> validation(Bairro bairro) {
+		List<String> erros = new ArrayList<>();
+		
+        if (bairro.getNome().length() == 0) {
+            erros.add("Não é possivel ter uma bairro sem nome");
+        }
+        
+        if (bairro.getNome().length() > 50) {
+            erros.add("Nome do bairro não pode exceder 50 caracteres");
+        }
+        
+        if (bairro.getCidade() == null) {
+            erros.add("Impossível ter um bairro sem cidade");
+        }
+		
+		return erros;
+	}
 
 }

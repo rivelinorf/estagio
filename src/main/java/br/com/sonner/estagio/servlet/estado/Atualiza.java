@@ -34,6 +34,7 @@ public class Atualiza extends HttpServlet {
             vo.setEstado("");
             vo.setAbv("");
             session.setAttribute("listaEstado", estadoController.filtrar(vo));
+            session.setAttribute("success", "Estado atualizado com sucesso");
 
             response.sendRedirect("/views/estado/lista.jsp");
         } else {

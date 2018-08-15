@@ -32,6 +32,7 @@ public class Insere extends HttpServlet {
             vo.setEstado("");
             vo.setAbv("");
             session.setAttribute("listaEstado", estadoController.filtrar(vo));
+            session.setAttribute("success", "Estado inserido com sucesso");
 
             response.sendRedirect("/views/estado/lista.jsp");
         } else {
