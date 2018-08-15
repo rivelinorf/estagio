@@ -152,7 +152,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
             QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
                     .logradouro(vo.getNome())
                     .cidade(vo.getCidade())
-                    .cidade(vo.getTipologradouro())
+                    .tipologradouro(vo.getTipologradouro())
                     .build();
 
 
