@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
+import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 @WebServlet("/bairro-deleta")
 public class Deleta extends HttpServlet {
@@ -18,14 +20,28 @@ public class Deleta extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		BairroControllerImpl bairroController = new BairroControllerImpl();
+		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
+		EnderecoFiltroVO enderecoVO = new EnderecoFiltroVO();
 		BairroFiltroVO vo = new BairroFiltroVO();
+		HttpSession session = req.getSession();
 		
-		bairroController.delete(Long.valueOf(req.getParameter("id")));
+		enderecoVO.setBairro(Long.valueOf(req.getParameter("id")));
+		enderecoVO.setCep("");
+		enderecoVO.setComplemento("");
+		enderecoVO.setLogradouro(null);
+		enderecoVO.setNumero(null);
 		
+		if(enderecoController.filtrar(enderecoVO).size() > 0) {
+			session.setAttribute("errors", "Impossível deletar! Bairro possui relacionamento");
+		} else {
+			bairroController.delete(Long.valueOf(req.getParameter("id")));
+			session.setAttribute("errors", "");
+		}
+		
+	
 		vo.setCidade(null);
 		vo.setNome("");
 		
-		HttpSession session = req.getSession();
 		session.setAttribute("listaBairro", bairroController.filtrar(vo));
 
 		res.sendRedirect("/views/bairro/lista.jsp");

@@ -31,19 +31,34 @@ public class Insere extends HttpServlet {
 		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		Endereco endereco = new Endereco();
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
 		HttpSession session = req.getSession();
 
-		Logradouro logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
-		Bairro bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
-
+		String cep = req.getParameter("cep");
+		String complemento = req.getParameter("complemento");
+		Integer numero = null;
+		Logradouro logradouro = null;
+		Bairro bairro = null;
+		
+		if(req.getParameter("numero") != "") {
+			numero = Integer.parseInt(req.getParameter("numero"));
+		}
+		
+		if (req.getParameter("logradouro") != "") {
+			logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
+		}
+		
+		if (req.getParameter("bairro") != "") {
+			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro"))); 
+		}
+		
+		Endereco endereco = new Endereco(numero, cep, complemento, bairro, logradouro);
+		
 		List<String> erros = enderecoController.validation(endereco);
 
 		if (erros.size() == 0) {
 
-			enderecoController.save(new Endereco(Integer.parseInt(req.getParameter("numero")), req.getParameter("cep"),
-					req.getParameter("complemento"), bairro, logradouro));
+			enderecoController.save(endereco);
 
 			vo.setNumero(null);
 			vo.setCep("");

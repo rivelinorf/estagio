@@ -1,7 +1,9 @@
 package br.com.sonner.estagio.servlet.bairro;
 
 import java.io.IOException;
+import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,22 +30,38 @@ public class Atualiza extends HttpServlet {
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		Bairro bairro = new Bairro();
 		BairroFiltroVO vo = new BairroFiltroVO();
+		HttpSession session = req.getSession();
 
-		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		String nome = req.getParameter("nome");
+		Cidade cidade = null;
+
+		if (req.getParameter("cidade") != "") {
+			cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		}
 
 		bairro.setId(Long.valueOf(req.getParameter("id")));
-		bairro.setNome(req.getParameter("nome"));
+		bairro.setNome(nome);
 		bairro.setCidade(cidade);
 
-		bairroController.update(bairro);
+		List<String> erros = bairroController.validation(bairro);
+
+		if (erros.size() == 0) {
+
+			bairroController.update(bairro);
+
+			vo.setCidade(null);
+			vo.setNome("");
+
+			session.setAttribute("listaBairro", bairroController.filtrar(vo));
+
+			res.sendRedirect("/views/bairro/lista.jsp");
+		}
 		
-		vo.setCidade(null);
-		vo.setNome("");
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("listaBairro", bairroController.filtrar(vo));
-		
-		res.sendRedirect("/views/bairro/lista.jsp");
+		else {
+			session.setAttribute("errors", erros);
+			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/atualiza.jsp");
+			requestDispatcher.forward(req, res);
+		}
 
 	}
 

@@ -29,8 +29,9 @@
 				</div>
 				<div class="form-row">
 					<div>Logradouro:</div>
-					<select name="logradouro" class="form-control">
-						<option>Selecione uma opção...</option>
+					<select name="logradouro" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${logradouros.all}" var="logradouro">
 							<option value="${logradouro.id}">
 								${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
@@ -51,8 +52,9 @@
 
 				<div class="form-row">
 					<div>Bairro:</div>
-					<select name="bairro" class="form-control">
-						<option disabled selected>Selecione uma opção...</option>
+					<select name="bairro" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${bairros.all}" var="bairro">
 							<option value="${bairro.id}">${bairro.nome}
 								${bairro.cidade.nome}</option>
