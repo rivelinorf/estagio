@@ -14,13 +14,12 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 @WebServlet("/pesquisa-logradouro")
 public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws  IOException {
-
+            throws IOException {
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
 
-
         vo.setNome(request.getParameter("logradouro"));
+
 
         if (request.getParameter("cidade") != "") {
             vo.setCidade(Long.valueOf(request.getParameter("cidade")));

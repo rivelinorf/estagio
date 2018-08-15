@@ -49,6 +49,8 @@ public class Atualiza extends HttpServlet {
             vo.setTipologradouro(null);
 
             session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+            session.setAttribute("success", "Logradouro atualizada com sucesso");
+
 
             response.sendRedirect("/views/logradouro/lista.jsp");
 

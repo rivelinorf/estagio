@@ -37,8 +37,8 @@ public class Atualiza extends HttpServlet {
 
             response.sendRedirect("/views/tipologradouro/lista.jsp");
         } else {
-            session.setAttribute("erros", erros);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
             requestDispatcher.forward(request, response);
         }
     }

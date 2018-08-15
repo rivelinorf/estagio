@@ -37,7 +37,7 @@ public class Deleta extends HttpServlet {
             cidadeController.delete(Long.valueOf(request.getParameter("id")));
             session.setAttribute("success", "Cidade deletada com sucesso");
         } else {
-            session.setAttribute("errors", "Impossivel deletar!, Cidade possue relacionamento");
+            session.setAttribute("errors", "Impossivel deletar!, Cidade possui relacionamento");
         }
 
         vo.setNome("");

@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="tipologradouroController" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouroCtl" class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="cidadesCtl" class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
+
 
 <%
     LogradouroFiltroVO vo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
@@ -35,9 +37,9 @@
                 <div>Tipo Logradouro:</div>
                 <select name="tipologradouro" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${tipologradouros.all}" var="tipologradouro">
+                    <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>
-                            <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro.id}">
+                            <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro}">
                                 <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -53,25 +55,22 @@
                 <input type="text" name="cidade" class="form-control" value="<%= vo.getNome() %>">
             </div>
 
-            <div class="form-row">
-                <div>Cidade:</div>
-                <select name="cidade" class="form-control" style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opção...</option>
-
-                    <c:forEach items="${cidades.all}" var="cidade">
-                        <c:choose>
-                            <c:when test="${cidade.id == filtroLogradouro.cidade.id}">
-                                <option value="${cidade.id}" selected>${cidade.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${cidade.id}">${cidade.nome}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </select>
-            </div>
-
-
+                <div class="form-row">
+                    <div>Cidade:</div>
+                    <select name="cidade" class="form-control" style="background-color: rgb(46, 46, 46)">
+                        <option value="">Selecione uma opção...</option>
+                        <c:forEach items="${cidadesCtl.all}" var="cidade">
+                            <c:choose>
+                                <c:when test="${cidade.id == filtroLogradouro.cidade}">
+                                    <option value="${cidade.id}" selected>${cidade.nome}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${cidade.id}">${cidade.nome}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
+                </div>
         </form>
     </div>
 </div>

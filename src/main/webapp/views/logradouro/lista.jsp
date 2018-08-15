@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
+<jsp:useBean id="logradouroCtl" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+
 <%
     LogradouroFiltroVO vo = (LogradouroFiltroVO) session.getAttribute("filtroLogradouro");
 
@@ -12,7 +14,8 @@
         vo.setTipologradouro(null);
     }
 %>
-<jsp:useBean id="logradouros" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouroCtl" class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="cidadesCtl" class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -44,7 +47,7 @@
                 <select name="tipologradouro" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${tipologradouros.all}" var="tipologradouro">
+                    <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>
                             <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro}">
                                 <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>
@@ -58,13 +61,12 @@
             </div>
         </form>
 
-
         <div class="form-row">
             <div>Cidade:</div>
             <select name="cidade" class="form-control"
                     style="background-color: rgb(46, 46, 46)">
                 <option value="">Selecione uma opção...</option>
-                <c:forEach items="${cidades.all}" var="cidade">
+                <c:forEach items="${cidadesCtl.all}" var="cidade">
                     <c:choose>
                         <c:when test="${cidade.id == filtroLogradouro.cidade}">
                             <option value="${cidade.id}" selected>${cidade.nome}</option>

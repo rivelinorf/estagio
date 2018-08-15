@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="tipologradouroController"
-             class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouroCtl" class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="cidadesCtl" class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 
 <html>
 <head>
@@ -31,7 +31,7 @@
                     <div>Tipo de Logradouro:</div>
                     <select name="tipologradouroID" class="form-control">
                         <option value="">Selecione uma opção...</option>
-                        <c:forEach items="${tipologradouros.all}" var="tipologradouro">
+                        <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                             <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
                         </c:forEach>
                     </select>
@@ -43,7 +43,7 @@
                     <select name="cidadeID" class="form-control">
                         <option value="">Selecione uma opção...</option>
 
-                        <c:forEach items="${cidades.all}" var="cidade">
+                        <c:forEach items="${cidadesCtl.all}" var="cidade">
                             <option value="${cidade.id}">${cidade.nome}</option>
                         </c:forEach>
                     </select>

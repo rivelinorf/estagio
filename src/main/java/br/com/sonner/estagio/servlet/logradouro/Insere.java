@@ -25,33 +25,34 @@ import java.util.List;
 @WebServlet("/insere-logradouro")
 public class Insere extends HttpServlet {
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		LogradouroController logradouroController = new LogradouroControllerImpl();
-		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		CidadeController cidadeController = new CidadeControllerImpl();
-		LogradouroFiltroVO vo = new LogradouroFiltroVO();
-		HttpSession session = req.getSession();
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+        LogradouroController logradouroController = new LogradouroControllerImpl();
+        TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
+        CidadeController cidadeController = new CidadeControllerImpl();
+        LogradouroFiltroVO vo = new LogradouroFiltroVO();
+        HttpSession session = req.getSession();
 
-		Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
-		TipoLogradouro tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+        Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+        TipoLogradouro tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
-		Logradouro novologradouro = new Logradouro(req.getParameter("nome"), tipoLogradouro, cidade);
+        Logradouro novologradouro = new Logradouro(req.getParameter("nome"), tipoLogradouro, cidade);
 
-		List<String> erros = logradouroController.validation(novologradouro);
+        List<String> erros = logradouroController.validation(novologradouro);
 
-		if(erros.size()==0){
-			logradouroController.save(novologradouro);
+        if (erros.size() == 0) {
+            logradouroController.save(novologradouro);
+            vo.setNome("");
+            vo.setTipologradouro(null);
+            vo.setCidade(null);
+            session.setAttribute("listaLogradouro", ((LogradouroControllerImpl) logradouroController).filtrar(vo));
+            session.setAttribute("success", "Logradouro inserido com sucesso");
 
-			vo.setNome("");
-			vo.setTipologradouro(null);
-			vo.setCidade(null);
-			session.setAttribute("listaLogradouro", ((LogradouroControllerImpl) logradouroController).filtrar(vo));
-			res.sendRedirect("/views/logradouro/lista.jsp");
-		}else{
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/insere.jsp");
-			requestDispatcher.forward(req, res);
-		}
-	}
+            res.sendRedirect("/views/logradouro/lista.jsp");
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/insere.jsp");
+            requestDispatcher.forward(req, res);
+        }
+    }
 
 }

@@ -68,7 +68,6 @@
             </div>
         </form>
         <div class="msg danger">
-            fasdfas
         </div>
     </div>
     <div class="content">

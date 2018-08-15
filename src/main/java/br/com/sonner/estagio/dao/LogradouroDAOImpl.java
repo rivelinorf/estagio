@@ -155,9 +155,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
                     .tipologradouro(vo.getTipologradouro())
                     .build();
 
-
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Logradouro> logradouros = new ArrayList<>();
 
