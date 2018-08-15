@@ -37,7 +37,7 @@
 				id="edit-form" style="width: 100%">
 				<div class="form-row">
 					<div>Número:</div>
-					<input type="text" name="numero" placeholder="Ex.: 111"
+					<input type="number" name="numero" placeholder="Ex.: 111"
 						class="form-control" value="<%=vo.getNumero()%>">
 				</div>
 				<div class="form-row">

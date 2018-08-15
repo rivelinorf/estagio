@@ -6,7 +6,10 @@
 	class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
 <jsp:useBean id="logradouros"
 	class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
-
+<jsp:useBean id="cidades"
+	class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
+<jsp:useBean id="estados"
+	class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -23,10 +26,39 @@
 				style="width: 100%;">
 
 				<div class="form-row">
-					<div>Número:</div>
-					<input type="text" name="numero" placeholder="Ex.: 111"
-						class="form-control">
+					<div>Estado:</div>
+					<select name="estado" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${estados.all}" var="estado">
+							<option value="${estado.id}">${estado.nome}</option>
+						</c:forEach>
+					</select>
 				</div>
+
+				<div class="form-row">
+					<div>Cidade:</div>
+					<select name="cidadeID" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${cidades.all}" var="cidade">
+							<option value="${cidade.id}">${cidade.nome}</option>
+
+						</c:forEach>
+					</select>
+				</div>
+
+				<div class="form-row">
+					<div>Bairro:</div>
+					<select name="bairro" class="form-control"
+						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${bairros.all}" var="bairro">
+							<option value="${bairro.id}">${bairro.nome}</option>
+						</c:forEach>
+					</select>
+				</div>
+
 				<div class="form-row">
 					<div>Logradouro:</div>
 					<select name="logradouro" class="form-control"
@@ -38,6 +70,13 @@
 						</c:forEach>
 					</select>
 				</div>
+
+				<div class="form-row">
+					<div>Número:</div>
+					<input type="number" name="numero" placeholder="Ex.: 111"
+						class="form-control">
+				</div>
+
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" placeholder="Ex.: 00000-000"
@@ -48,18 +87,6 @@
 					<div>Complemento:</div>
 					<input type="text" name="complemento" placeholder="(opcional)"
 						class="form-control">
-				</div>
-
-				<div class="form-row">
-					<div>Bairro:</div>
-					<select name="bairro" class="form-control"
-						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opção...</option>
-						<c:forEach items="${bairros.all}" var="bairro">
-							<option value="${bairro.id}">${bairro.nome}
-								${bairro.cidade.nome}</option>
-						</c:forEach>
-					</select>
 				</div>
 			</form>
 		</div>

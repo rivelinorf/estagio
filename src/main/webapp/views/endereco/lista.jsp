@@ -36,7 +36,11 @@
 			<form action="/pesquisa-endereco" method="get" id="filter-form"
 				style="width: 50%;">
 
-
+				<div class="form-row">
+					<div>Número:</div>
+					<input type="number" name="numero" class="form-control"
+						value="<%=vo.getNumero()%>">
+				</div>
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
