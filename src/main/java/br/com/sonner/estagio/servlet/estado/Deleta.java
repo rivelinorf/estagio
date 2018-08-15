@@ -32,6 +32,7 @@ public class Deleta extends HttpServlet {
         } else {
             estadoController.delete(Long.valueOf(request.getParameter("id")));
             session.setAttribute("errors", "");
+            session.setAttribute("success", "Estado deletado com sucesso");
         }
 
         vo.setEstado("");

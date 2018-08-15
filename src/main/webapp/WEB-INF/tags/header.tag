@@ -36,7 +36,7 @@
     </div>
 </header>
 
-<jsp:include page="/includes/erros.jsp"></jsp:include>
+<jsp:include page="/includes/msg.jsp"></jsp:include>
 
 <script>
     $("#filtrar").on("click", function () {
