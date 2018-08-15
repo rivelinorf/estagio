@@ -35,9 +35,9 @@ public class Pesquisa extends HttpServlet {
             vo.setLogradouro(Long.valueOf(request.getParameter("logradouro")));
         }
         
-        /*if(request.getParameter("numero") != "") {
+        if(request.getParameter("numero") != "") {
             vo.setNumero(Integer.parseInt(request.getParameter("numero")));
-        }*/
+        }
 
 		HttpSession session = request.getSession();
         session.setAttribute("filtroEndereco", vo);

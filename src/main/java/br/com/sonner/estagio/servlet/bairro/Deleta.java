@@ -32,10 +32,10 @@ public class Deleta extends HttpServlet {
 		enderecoVO.setNumero(null);
 		
 		if(enderecoController.filtrar(enderecoVO).size() > 0) {
-			session.setAttribute("errors", "Impossível deletar! Bairro possui relacionamento");
+			session.setAttribute("errors", "Impossível deletar! Bairro possui relacionamentos");
 		} else {
 			bairroController.delete(Long.valueOf(req.getParameter("id")));
-			session.setAttribute("errors", "");
+			session.setAttribute("success", "Bairro deletado com sucesso");
 		}
 		
 	

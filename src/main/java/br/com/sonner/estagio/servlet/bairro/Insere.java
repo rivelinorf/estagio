@@ -46,6 +46,7 @@ public class Insere extends HttpServlet {
 			vo.setNome("");
 			vo.setCidade(null);
 			session.setAttribute("listaBairro", bairroController.filtrar(vo));
+			session.setAttribute("success", "Bairro inserido com sucesso");
 
 			res.sendRedirect("/views/bairro/lista.jsp");
 		} else {

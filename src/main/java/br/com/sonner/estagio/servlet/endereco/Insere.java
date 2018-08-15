@@ -67,6 +67,7 @@ public class Insere extends HttpServlet {
 			vo.setLogradouro(null);
 
 			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+			session.setAttribute("success", "Endereço inserido com sucesso");
 
 			res.sendRedirect("/views/endereco/lista.jsp");
 		} else {

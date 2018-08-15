@@ -19,16 +19,17 @@ public class Deleta extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
-		
+		HttpSession session = req.getSession();
+
 		enderecoController.delete(Long.valueOf(req.getParameter("id")));
-		
+		session.setAttribute("success", "Endereço deletado com sucesso");
+
 		vo.setNumero(null);
 		vo.setCep("");
 		vo.setComplemento("");
 		vo.setLogradouro(null);
 		vo.setBairro(null);
-		
-		HttpSession session = req.getSession();
+
 		session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
 
 		res.sendRedirect("/views/endereco/lista.jsp");

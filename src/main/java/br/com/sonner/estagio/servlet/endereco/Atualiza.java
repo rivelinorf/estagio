@@ -55,8 +55,8 @@ public class Atualiza extends HttpServlet {
 
 		endereco.setId(Long.valueOf(req.getParameter("id")));
 		endereco.setNumero(numero);
-		endereco.setCep(req.getParameter("cep"));
-		endereco.setComplemento(req.getParameter("complemento"));
+		endereco.setCep(cep);
+		endereco.setComplemento(complemento);
 		endereco.setBairro(bairro);
 		endereco.setLogradouro(logradouro);
 
@@ -73,6 +73,8 @@ public class Atualiza extends HttpServlet {
 			vo.setLogradouro(null);
 
 			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+			session.setAttribute("success", "Endereço atualizado com sucesso");
+
 
 			res.sendRedirect("/views/endereco/lista.jsp");
 

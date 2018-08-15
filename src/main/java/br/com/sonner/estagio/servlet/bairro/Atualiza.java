@@ -53,6 +53,7 @@ public class Atualiza extends HttpServlet {
 			vo.setNome("");
 
 			session.setAttribute("listaBairro", bairroController.filtrar(vo));
+			session.setAttribute("success", "Bairro atualizado com sucesso");
 
 			res.sendRedirect("/views/bairro/lista.jsp");
 		}
