@@ -268,3 +268,10 @@ nav {
     margin: auto auto 10px;
     text-align: center;
 }
+
+.fechar {
+    margin-left: 90%;
+
+    cursor: pointer;
+    font-size: 15px;
+}

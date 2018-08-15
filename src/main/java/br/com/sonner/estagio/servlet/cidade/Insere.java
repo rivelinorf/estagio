@@ -38,6 +38,7 @@ public class Insere extends HttpServlet {
             vo.setCep("");
             vo.setEstado(null);
             session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+            session.setAttribute("success", "Cidade inserida com sucesso");
 
             res.sendRedirect("/views/cidade/lista.jsp");
         } else {
