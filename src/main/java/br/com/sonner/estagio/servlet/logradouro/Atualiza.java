@@ -37,13 +37,19 @@ public class Atualiza extends HttpServlet {
 
         novoLogradouro.setId((Long.valueOf(request.getParameter("id"))));
         novoLogradouro.setNome(request.getParameter("logradouro"));
-        novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
         novoLogradouro.setTipologradouro(tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro"))));
+
+
+
+
+        novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
 
         List<String> erros = logradouroController.validation(novoLogradouro);
 
         if (erros.size() == 0) {
             logradouroController.update(novoLogradouro);
+
+
             vo.setNome("");
             vo.setCidade(null);
             vo.setTipologradouro(null);

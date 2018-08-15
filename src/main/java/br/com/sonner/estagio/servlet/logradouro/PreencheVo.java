@@ -15,16 +15,16 @@ public class PreencheVo extends HttpServlet {
 
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
-
-
         Logradouro logradouro = logradouroController.getOne(Long.valueOf(request.getParameter("id")));
+
+        vo.setId(logradouro.getId());
         vo.setNome(logradouro.getNome());
         vo.setCidade(logradouro.getCidade().getId());
         vo.setTipologradouro(logradouro.getTipologradouro().getId());
 
 
         HttpSession session = request.getSession();
-        session.setAttribute("logradouro-para-editar", vo);
+        session.setAttribute("logradouroParaEditar", vo);
 
         response.sendRedirect("/views/logradouro/atualiza.jsp");
     }

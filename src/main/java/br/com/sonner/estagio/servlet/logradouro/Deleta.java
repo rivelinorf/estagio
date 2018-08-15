@@ -20,6 +20,8 @@ public class Deleta extends HttpServlet {
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
         HttpSession session = request.getSession();
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
+
+
         EnderecoFiltroVO enderecoFiltroVO = new EnderecoFiltroVO();
         enderecoFiltroVO.setLogradouro(Long.valueOf(request.getParameter("id")));
 

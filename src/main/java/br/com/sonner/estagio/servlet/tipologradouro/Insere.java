@@ -33,6 +33,8 @@ public class Insere extends HttpServlet {
             vo.setNome("");
 
             session.setAttribute("listaTipologradouro", ( tipoLogradouroController.filtrar(vo)));
+            session.setAttribute("success", "Tipo Logradouro inserido com sucesso");
+
             response.sendRedirect("/views/tipologradouro/lista.jsp");
         } else {
             session.setAttribute("errors", erros);
