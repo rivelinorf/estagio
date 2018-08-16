@@ -115,7 +115,6 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 			return null;
 		}
 

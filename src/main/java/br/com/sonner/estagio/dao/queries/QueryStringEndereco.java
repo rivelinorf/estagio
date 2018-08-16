@@ -16,15 +16,15 @@ public class QueryStringEndereco {
         
         public Builder numero(Integer numero) {
         	if(numero != null) {
-        		this.sql += "and numero like '"+ numero +"%'";
+        		this.sql += "and numero = "+ numero;
         	}
         	
         	return this;
         }
 
         public Builder cep(String cep) {
-            if (cep != "") {
-                this.sql += "and cep like '"+ cep +"%' ";
+            if (cep != null && !cep.isEmpty()) {
+                this.sql += "and cep = '"+ cep +"' ";
             }
 
             return this;

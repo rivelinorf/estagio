@@ -18,7 +18,7 @@
 <nav>
     <div class="container-nav">
         <div>
-            <a href="">
+            <a href="/views/home.jsp">
                 <div class="box-img">
                     <img class="logo"
                          src="<%=request.getContextPath()%>/assets/imgs/logo.png"> <span>Sistema

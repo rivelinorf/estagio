@@ -13,6 +13,7 @@
 		<div class="box-img">
 			<img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
 		</div>
+
 		<div class="form-input">
 			<form action="/usuario-logar" method="post">
 				<input class="input" type="text" name="usuario" placeholder="Usuario"> <br>

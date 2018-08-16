@@ -9,7 +9,6 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +29,16 @@ public class Insere extends HttpServlet {
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
         HttpSession session = req.getSession();
 
-        TipoLogradouro tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
-        //esse get one nao esta trazendo nenhuma cidade
-        Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
-
-        Logradouro novologradouro = new Logradouro(req.getParameter("nome"), tipoLogradouro, cidade);
+        TipoLogradouro tipoLogradouro =  tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+        Cidade cidade =  cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+        Logradouro novologradouro = new Logradouro(req.getParameter("logradouro"), tipoLogradouro, cidade);
 
         List<String> erros = logradouroController.validation(novologradouro);
+
         if (erros.size() == 0) {
             logradouroController.save(novologradouro);
+
             vo.setNome("");
             vo.setTipologradouro(null);
             vo.setCidade(null);

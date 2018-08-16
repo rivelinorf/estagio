@@ -23,7 +23,8 @@ import br.com.sonner.estagio.vos.EnderecoFiltroVO;
  * Servlet implementation class Atualiza
  */
 @WebServlet("/atualiza-endereco")
-public class Atualiza extends HttpServlet {
+public class
+Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

@@ -19,6 +19,11 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <style type="text/css">
+        .form-control {
+            background-color: rgb(46, 46, 46);
+        }
+    </style>
 </head>
 <body>
 
@@ -44,8 +49,7 @@
 
             <div class="form-row">
                 <div>Tipo de Logradouro:</div>
-                <select name="tipologradouro" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                <select name="tipologradouro" class="form-control">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>

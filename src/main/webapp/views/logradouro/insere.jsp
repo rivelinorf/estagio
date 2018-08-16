@@ -23,13 +23,13 @@
 
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="nome" class="form-control">
+                    <input type="text" name="logradouro" class="form-control">
                 </div>
 
 
                 <div class="form-row">
                     <div>Tipo de Logradouro:</div>
-                    <select name="tipologradouroID" class="form-control">
+                    <select name="tipologradouro" class="form-control">
                         <option value="">Selecione uma opção...</option>
                         <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                             <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
@@ -40,7 +40,7 @@
 
                 <div class="form-row">
                     <div>Cidade:</div>
-                    <select name="cidadeID" class="form-control">
+                    <select name="cidade" class="form-control">
                         <option value="">Selecione uma opção...</option>
 
                         <c:forEach items="${cidadesCtl.all}" var="cidade">
