@@ -10,6 +10,8 @@
 	class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 <jsp:useBean id="estados"
 	class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouros"
+	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -38,7 +40,7 @@
 
 				<div class="form-row">
 					<div>Cidade:</div>
-					<select name="cidadeID" class="form-control"
+					<select name="cidade" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
 						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${cidades.all}" var="cidade">
@@ -60,15 +62,18 @@
 				</div>
 
 				<div class="form-row">
-					<div>Logradouro:</div>
-					<select name="logradouro" class="form-control"
-						style="background-color: rgb(46, 46, 46)">
+					<div>Tipo de Logradouro:</div>
+					<select name="tipologradouro" class="form-control">
 						<option value="">Selecione uma opção...</option>
-						<c:forEach items="${logradouros.all}" var="logradouro">
-							<option value="${logradouro.id}">
-								${logradouro.tipologradouro.nome} ${logradouro.nome}</option>
+						<c:forEach items="${tipologradouros.all}" var="tipologradouro">
+							<option value="${tipologradouro.id}">${tipologradouro.nome}</option>
 						</c:forEach>
 					</select>
+				</div>
+
+				<div class="form-row">
+					<div>Logradouro:</div>
+					<input type="text" name="logradouro" class="form-control">
 				</div>
 
 				<div class="form-row">
