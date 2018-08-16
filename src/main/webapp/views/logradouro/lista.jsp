@@ -120,7 +120,7 @@
                     <p>Desja realmente remover o registro do banco?</p>
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar" data-dismiss="modal"
-                                onclick="location.href = '/logradouro-deleta?id='+this.value">Sim
+                                onclick="location.href = '/deleta-logradouro?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red" data-dismiss="modal">Não</button>
                     </div>
@@ -128,6 +128,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

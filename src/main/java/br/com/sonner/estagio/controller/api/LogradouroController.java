@@ -8,7 +8,7 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 public interface LogradouroController {
 
-	void save(Logradouro logradouro);
+	Logradouro save(Logradouro logradouro);
 
 	List<Logradouro> getAll();
 

@@ -44,6 +44,7 @@
     });
 
     $("#salvar").on("click", function () {
+        console.log("#${formId}");
         $("#${formId}").submit();
     })
 

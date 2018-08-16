@@ -37,7 +37,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
     }
 
     @Override
-    public void save(Logradouro logradouro) {
+    public Logradouro save(Logradouro logradouro) {
         String sql = "insert into logradouro (nome,logradouro_cidade_fk,logradouro_tipo_fk) values (?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -48,10 +48,15 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
             stmt.execute();
             stmt.close();
+
+            return logradouro;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
+
 
     @Override
     public List<Logradouro> getAll() {

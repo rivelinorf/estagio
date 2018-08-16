@@ -19,7 +19,7 @@
     </sge:header>
     <div class="content">
         <div class="div-form">
-            <form action="/insere-logradouro" method="post">
+            <form action="/insere-logradouro" method="post" id="insere-form" style="width: 100%;">
 
                 <div class="form-row">
                     <div>Nome:</div>

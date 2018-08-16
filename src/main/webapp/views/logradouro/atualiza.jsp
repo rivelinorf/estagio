@@ -32,7 +32,6 @@
     </sge:header>
     <div class="div-form">
         <form action="/atualiza-logradouro?id=<%= vo.getId() %>" method="post" id="edit-form" style="width: 100%">
-
             <div class="form-row">
                 <div>Tipo Logradouro:</div>
                 <select name="tipologradouro" class="form-control" style="background-color: rgb(46, 46, 46)">
