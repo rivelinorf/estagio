@@ -25,8 +25,9 @@ public class LogradouroControllerImpl implements LogradouroController {
     }
 
     @Override
-    public void save(Logradouro logradouro) {
+    public Logradouro save(Logradouro logradouro) {
         this.logradouroDAO.save(logradouro);
+        return logradouro;
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Atualiza extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
-        CidadeController cidadeController = new CidadeControllerImpl();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
         Logradouro novoLogradouro = new Logradouro();
         HttpSession session = request.getSession();
@@ -40,9 +40,8 @@ public class Atualiza extends HttpServlet {
         novoLogradouro.setTipologradouro(tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro"))));
 
 
-
-
-        novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
+        // o get one nao esta trasendo ninguem
+       // novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
 
         List<String> erros = logradouroController.validation(novoLogradouro);
 

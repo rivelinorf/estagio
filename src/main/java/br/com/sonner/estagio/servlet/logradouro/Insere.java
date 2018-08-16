@@ -32,6 +32,7 @@ public class Insere extends HttpServlet {
 
         TipoLogradouro tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
+        //esse get one nao esta trazendo nenhuma cidade
         Cidade cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
 
         Logradouro novologradouro = new Logradouro(req.getParameter("nome"), tipoLogradouro, cidade);
