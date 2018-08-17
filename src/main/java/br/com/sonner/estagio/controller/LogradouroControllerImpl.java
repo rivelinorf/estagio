@@ -64,11 +64,11 @@ public class LogradouroControllerImpl implements LogradouroController {
             erros.add("Nome do logradouro nao pode exceder  40 caracteres  ");
         }
 
-        if (logradouro.getTipologradouro() == null) {
+        if (logradouro.getTipologradouro().equals(null)) {
             erros.add("Impossível ter um logradouro sem um tipo de logradouro selecionado");
         }
 
-        if (logradouro.getCidade() == null) {
+        if (logradouro.getCidade().equals(null)) {
             erros.add("Impossível ter um logradouro sem uma cidade selecionado");
         }
         return erros;

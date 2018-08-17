@@ -24,7 +24,10 @@ public class Atualiza extends HttpServlet {
         TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
         HttpSession session = request.getSession();
         TipoLogradouro tipoLogradouro = new TipoLogradouro();
+
+
         tipoLogradouro.setNome(request.getParameter("tipologradouro"));
+
         tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
 
         List<String> erros = tipoLogradouroController.validation(tipoLogradouro);

@@ -15,7 +15,7 @@
         vo.setNome("");
         vo.setCidade(null);
         vo.setTipologradouro(null);
-    }
+}
 %>
 <html>
 <head>
@@ -32,6 +32,14 @@
     </sge:header>
     <div class="div-form">
         <form action="/atualiza-logradouro?id=<%= vo.getId() %>" method="post" id="edit-form" style="width: 100%">
+
+
+            <div class="form-row">
+                <div>Nome:</div>
+                <input type="text" name="logradouro" class="form-control" value="<%= vo.getNome() %>">
+            </div>
+
+
             <div class="form-row">
                 <div>Tipo Logradouro:</div>
                 <select name="tipologradouro" class="form-control" style="background-color: rgb(46, 46, 46)">
@@ -50,26 +58,21 @@
             </div>
 
             <div class="form-row">
-                <div>Nome:</div>
-                <input type="text" name="cidade" class="form-control" value="<%= vo.getNome() %>">
+                <div>Cidade:</div>
+                <select name="cidade" class="form-control" style="background-color: rgb(46, 46, 46)">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${cidadesCtl.all}" var="cidade">
+                        <c:choose>
+                            <c:when test="${cidade.id == filtroLogradouro.cidade}">
+                                <option value="${cidade.id}" selected>${cidade.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cidade.id}">${cidade.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
             </div>
-
-                <div class="form-row">
-                    <div>Cidade:</div>
-                    <select name="cidade" class="form-control" style="background-color: rgb(46, 46, 46)">
-                        <option value="">Selecione uma opção...</option>
-                        <c:forEach items="${cidadesCtl.all}" var="cidade">
-                            <c:choose>
-                                <c:when test="${cidade.id == filtroLogradouro.cidade}">
-                                    <option value="${cidade.id}" selected>${cidade.nome}</option>
-                                </c:when>
-                                <c:otherwise>
-                                    <option value="${cidade.id}">${cidade.nome}</option>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </select>
-                </div>
         </form>
     </div>
 </div>

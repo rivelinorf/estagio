@@ -39,15 +39,12 @@ public class Atualiza extends HttpServlet {
         novoLogradouro.setNome(request.getParameter("logradouro"));
         novoLogradouro.setTipologradouro(tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro"))));
 
-
-        // o get one nao esta trasendo ninguem
-       // novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
+        novoLogradouro.setCidade(cidadeController.getOne(Long.valueOf(request.getParameter("cidade"))));
 
         List<String> erros = logradouroController.validation(novoLogradouro);
 
         if (erros.size() == 0) {
             logradouroController.update(novoLogradouro);
-
 
             vo.setNome("");
             vo.setCidade(null);
