@@ -31,8 +31,8 @@ public class QueryStringEndereco {
         }
         
         public Builder complemento(String complemento) {
-            if (complemento != "") {
-                this.sql += "and complemento like '"+ complemento +"%' ";
+            if (complemento != null && !complemento.isEmpty()) {
+                this.sql += "and complemento = '"+ complemento +"' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringEndereco {
 
         public Builder bairro(Long bairro) {
             if (bairro != null) {
-                this.sql += "and endereco_bairro_fk like '"+ bairro +"%' ";
+                this.sql += "and endereco_bairro_fk = "+ bairro ;
             }
 
             return this;
@@ -48,7 +48,7 @@ public class QueryStringEndereco {
 		
         public Builder logradouro(Long logradouro) {
             if (logradouro != null) {
-                this.sql += "and endereco_logradouro_fk like '"+ logradouro +"%' ";
+                this.sql += "and endereco_logradouro_fk ="+ logradouro;
             }
 
             return this;

@@ -79,4 +79,10 @@ public class CidadeControllerImpl implements CidadeController {
     public List<Cidade> filtrar (CidadeFiltroVO vo) {
         return this.cidadeDAO.pesquisaCidade(vo);
     }
+
+	@Override
+	public List<Cidade> getByEstado(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

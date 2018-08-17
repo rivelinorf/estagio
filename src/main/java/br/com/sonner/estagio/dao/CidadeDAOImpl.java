@@ -175,4 +175,10 @@ public class CidadeDAOImpl implements CidadeDAO {
             return null;
         }
     }
+
+	@Override
+	public List<Cidade> getByEstado(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
