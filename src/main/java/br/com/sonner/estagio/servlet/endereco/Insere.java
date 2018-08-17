@@ -70,7 +70,7 @@ public class Insere extends HttpServlet {
 		if (req.getParameter("logradouro") != "") {
 			List<Logradouro> logradouros = logradouroController.getAll();
 			String nomeLogradouro = req.getParameter("logradouro");
-			logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
+
 			for (int i = 0; i < logradouros.size(); i++) {
 				if ((logradouros.get(i).getNome().equals(nomeLogradouro))
 						&& (logradouros.get(i).getCidade().getNome().equals(cidade.getNome()))
