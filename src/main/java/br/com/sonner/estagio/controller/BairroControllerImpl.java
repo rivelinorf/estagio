@@ -67,4 +67,9 @@ public class BairroControllerImpl implements BairroController {
 		return erros;
 	}
 
+	@Override
+	public List<Bairro> getByCidade(Long id) {
+		return this.bDAO.getByCidade(id);
+	}
+
 }

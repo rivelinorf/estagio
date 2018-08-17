@@ -4,6 +4,8 @@ import br.com.sonner.estagio.model.Cidade;
 
 import java.util.List;
 
+import br.com.sonner.estagio.model.Cidade;
+
 public interface CidadeController {
     void save(Cidade cidade);
 
@@ -17,4 +19,5 @@ public interface CidadeController {
 
     List<String> validation(Cidade estado);
 
+    List<Cidade> getByEstado(Long id);
 }
