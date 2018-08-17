@@ -16,4 +16,5 @@ public interface CidadeController {
     void delete(long id);
 
     List<String> validation(Cidade estado);
+
 }

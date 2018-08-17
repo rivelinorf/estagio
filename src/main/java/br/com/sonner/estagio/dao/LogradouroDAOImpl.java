@@ -13,6 +13,7 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +56,7 @@ public class LogradouroDAOImpl implements LogradouroDAO {
             e.printStackTrace();
             return null;
         }
-        
+
     }
 
 
@@ -184,10 +185,10 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
     }
 
-	@Override
-	public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
+    @Override
+    public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro where nome = ? and logradouro_cidade_fk = ? and logradouro_tipo_fk = ?" );
+            PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro where nome = ? and logradouro_cidade_fk = ? and logradouro_tipo_fk = ?");
             stmt.setString(1, nome);
             stmt.setLong(2, cidade.getId());
             stmt.setLong(3, tipoLogradouro.getId());
@@ -213,6 +214,6 @@ public class LogradouroDAOImpl implements LogradouroDAO {
             e.printStackTrace();
             return null;
         }
-	}
+    }
 
 }

@@ -72,9 +72,13 @@ public class Insere extends HttpServlet {
 
 			if (logradouro == null) {
 				logradouro = new Logradouro();
+
+
 				logradouro.setCidade(cidade);
 				logradouro.setNome(nomeLogradouro);
 				logradouro.setTipologradouro(tipoLogradouro);
+
+
 				logradouroController.save(logradouro);
 				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
 				

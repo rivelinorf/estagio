@@ -176,6 +176,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
             ResultSet rs = preparedStatement.executeQuery();
 
+
             while (rs.next()) {
 
                 Endereco e = new Endereco();

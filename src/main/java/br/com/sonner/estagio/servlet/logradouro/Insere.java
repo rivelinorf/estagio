@@ -6,9 +6,11 @@ import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,9 +32,23 @@ public class Insere extends HttpServlet {
         HttpSession session = req.getSession();
 
 
-        TipoLogradouro tipoLogradouro =  tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
-        Cidade cidade =  cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
-        Logradouro novologradouro = new Logradouro(req.getParameter("logradouro"), tipoLogradouro, cidade);
+        Cidade cidade = null;
+        TipoLogradouro tipoLogradouro = null;
+        String logradouro = req.getParameter("logradouro");
+
+        if (req.getParameter("cidade") != null && !req.getParameter("cidade").isEmpty() && !req.getParameter("cidade").equals("-1")) {
+            cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+        }
+
+        if (req.getParameter("tipologradouro") != null && !req.getParameter("tipologradouro").isEmpty()) {
+            tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+        }
+
+
+        Logradouro novologradouro = new Logradouro();
+        novologradouro.setNome(logradouro);
+        novologradouro.setTipologradouro(tipoLogradouro);
+        novologradouro.setCidade(cidade);
 
         List<String> erros = logradouroController.validation(novologradouro);
 
@@ -43,7 +59,7 @@ public class Insere extends HttpServlet {
             vo.setTipologradouro(null);
             vo.setCidade(null);
 
-            session.setAttribute("listaLogradouro", (( logradouroController).filtrar(vo)));
+            session.setAttribute("listaLogradouro", (logradouroController.filtrar(vo)));
             session.setAttribute("success", "Logradouro inserido com sucesso");
 
             res.sendRedirect("/views/logradouro/lista.jsp");

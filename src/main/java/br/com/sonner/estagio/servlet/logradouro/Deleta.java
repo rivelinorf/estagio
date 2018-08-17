@@ -21,17 +21,19 @@ public class Deleta extends HttpServlet {
         HttpSession session = request.getSession();
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 
-
         EnderecoFiltroVO enderecoFiltroVO = new EnderecoFiltroVO();
+
         enderecoFiltroVO.setLogradouro(Long.valueOf(request.getParameter("id")));
+        enderecoFiltroVO.setBairro(null);
+        enderecoFiltroVO.setCep("");
+        enderecoFiltroVO.setComplemento("");
+        enderecoFiltroVO.setNumero(null);
 
-
-        if (enderecoController.filtrar(enderecoFiltroVO).size() == 0) {
+        if (enderecoController.filtrar(enderecoFiltroVO).size() > 0) {
+            session.setAttribute("errors", "Impossivel deletar!, Logradouro possui relacionamento");
+        } else {
             logradouroController.delete(Long.valueOf(request.getParameter("id")));
             session.setAttribute("success", "Logradouro deletado com sucesso");
-        } else {
-            session.setAttribute("errors", "Impossivel deletar!, Logradouro possui relacionamento");
-
         }
 
         vo.setNome("");

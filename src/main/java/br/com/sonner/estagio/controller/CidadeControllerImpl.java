@@ -4,6 +4,9 @@ import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 import java.util.ArrayList;
@@ -76,7 +79,7 @@ public class CidadeControllerImpl implements CidadeController {
         return erros;
     }
 
-    public List<Cidade> filtrar (CidadeFiltroVO vo) {
+    public List<Cidade> filtrar(CidadeFiltroVO vo) {
         return this.cidadeDAO.pesquisaCidade(vo);
     }
 }

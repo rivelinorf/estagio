@@ -5,6 +5,7 @@ import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringCidade;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 import java.sql.Connection;
@@ -175,4 +176,5 @@ public class CidadeDAOImpl implements CidadeDAO {
             return null;
         }
     }
+
 }

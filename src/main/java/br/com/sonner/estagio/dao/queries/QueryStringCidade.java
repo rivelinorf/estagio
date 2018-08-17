@@ -1,7 +1,5 @@
 package br.com.sonner.estagio.dao.queries;
 
-import br.com.sonner.estagio.model.Estado;
-
 public class QueryStringCidade {
     private String sql = "SELECT * FROM cidade WHERE 1 ";
 
@@ -23,6 +21,7 @@ public class QueryStringCidade {
 
             return this;
         }
+
 
         public Builder sigla(String abv) {
             if (abv != "") {

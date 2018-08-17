@@ -1,8 +1,5 @@
 package br.com.sonner.estagio.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
@@ -10,6 +7,9 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogradouroControllerImpl implements LogradouroController {
 
@@ -21,7 +21,7 @@ public class LogradouroControllerImpl implements LogradouroController {
 
     @Override
     public Logradouro save(Logradouro logradouro) {
-        logradouro =  this.logradouroDAO.save(logradouro);
+        logradouro = this.logradouroDAO.save(logradouro);
         return logradouro;
     }
 
@@ -50,20 +50,20 @@ public class LogradouroControllerImpl implements LogradouroController {
     public List<String> validation(Logradouro logradouro) {
         List<String> erros = new ArrayList<>();
 
-        if (logradouro.getNome().length() == 0) {
-            erros.add("Nao é possivel inserir um logradouro sem nome ");
+        if (logradouro.getNome() == null || logradouro.getNome().isEmpty()) {
+            erros.add("O nome  do Logradouro no pode ser vazia");
         }
 
 
         if (logradouro.getNome().length() > 40) {
-            erros.add("Nome do logradouro nao pode exceder  40 caracteres  ");
+            erros.add("O nome do logradouro não pode exceder  40 caracteres  ");
         }
 
-        if (logradouro.getTipologradouro().equals(null)) {
+        if (logradouro.getTipologradouro() == null) {
             erros.add("Impossível ter um logradouro sem um tipo de logradouro selecionado");
         }
 
-        if (logradouro.getCidade().equals(null)) {
+        if (logradouro.getCidade() == null) {
             erros.add("Impossível ter um logradouro sem uma cidade selecionado");
         }
         return erros;
@@ -74,11 +74,11 @@ public class LogradouroControllerImpl implements LogradouroController {
         return this.logradouroDAO.pesquisaLogradouro(vo);
 
     }
-    
+
     public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
-    	Logradouro logradouro = this.logradouroDAO.getByNome(nome, cidade, tipoLogradouro);
-		return logradouro;
-    	
+        Logradouro logradouro = this.logradouroDAO.getByNome(nome, cidade, tipoLogradouro);
+        return logradouro;
+
     }
 
 
