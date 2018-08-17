@@ -53,8 +53,9 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
+        
     }
 
 
@@ -182,5 +183,36 @@ public class LogradouroDAOImpl implements LogradouroDAO {
         }
 
     }
+
+	@Override
+	public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro where nome = ? and logradouro_cidade_fk = ? and logradouro_tipo_fk = ?" );
+            stmt.setString(1, nome);
+            stmt.setLong(2, cidade.getId());
+            stmt.setLong(3, tipoLogradouro.getId());
+
+            ResultSet resultSet = stmt.executeQuery();
+            TipoLogradouroDAO tipoLogradouroDAO = TipoLogradouroDAOImpl.getInstance();
+            CidadeDAO cidadeDAO = CidadeDAOImpl.getInstance();
+
+            Logradouro logradouro = null;
+
+            if (resultSet.first()) {
+                logradouro = new Logradouro();
+                logradouro.setId(resultSet.getLong("id"));
+                logradouro.setNome(resultSet.getString("nome"));
+                logradouro.setCidade(cidadeDAO.getOne(resultSet.getLong("logradouro_cidade_fk")));
+                logradouro.setTipologradouro(tipoLogradouroDAO.getOne(resultSet.getLong("logradouro_tipo_fk")));
+
+                stmt.close();
+            }
+
+            return logradouro;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
 
 }

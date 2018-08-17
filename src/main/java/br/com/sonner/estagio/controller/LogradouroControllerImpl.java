@@ -4,16 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sonner.estagio.controller.api.LogradouroController;
-import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
-import br.com.sonner.estagio.dao.TipoLogradouroDAOImpl;
-import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
-import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 public class LogradouroControllerImpl implements LogradouroController {
@@ -26,7 +21,7 @@ public class LogradouroControllerImpl implements LogradouroController {
 
     @Override
     public Logradouro save(Logradouro logradouro) {
-        this.logradouroDAO.save(logradouro);
+        logradouro =  this.logradouroDAO.save(logradouro);
         return logradouro;
     }
 
@@ -78,6 +73,12 @@ public class LogradouroControllerImpl implements LogradouroController {
     public List<Logradouro> filtrar(LogradouroFiltroVO vo) {
         return this.logradouroDAO.pesquisaLogradouro(vo);
 
+    }
+    
+    public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
+    	Logradouro logradouro = this.logradouroDAO.getByNome(nome, cidade, tipoLogradouro);
+		return logradouro;
+    	
     }
 
 

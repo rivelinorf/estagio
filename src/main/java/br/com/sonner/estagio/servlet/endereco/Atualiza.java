@@ -12,12 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
+import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
+import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 /**
  * Servlet implementation class Atualiza
@@ -32,7 +37,9 @@ Atualiza extends HttpServlet {
 		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		Endereco endereco = new Endereco();
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+		TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
+
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
 		HttpSession session = req.getSession();
 
@@ -41,19 +48,43 @@ Atualiza extends HttpServlet {
 		Integer numero = null;
 		Logradouro logradouro = null;
 		Bairro bairro = null;
+		TipoLogradouro tipoLogradouro = null;
+		Cidade cidade = null;
 
 		if (req.getParameter("numero") != "") {
 			numero = Integer.parseInt(req.getParameter("numero"));
 		}
-
-		if (req.getParameter("logradouro") != "") {
-			logradouro = logradouroController.getOne(Long.valueOf(req.getParameter("logradouro")));
-		}
-
+		
 		if (req.getParameter("bairro") != "") {
 			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
 		}
+		
+		if (req.getParameter("cidade") != "") {
+			cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
+		}
+		
+		if (req.getParameter("tipologradouro") != "") {
+			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
+		}
+		
+		if (req.getParameter("logradouro") != "") {
+			String nomeLogradouro = req.getParameter("logradouro");
+			logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
+
+			if (logradouro == null) {
+				logradouro = new Logradouro();
+				logradouro.setCidade(cidade);
+				logradouro.setNome(nomeLogradouro);
+				logradouro.setTipologradouro(tipoLogradouro);
+				logradouroController.save(logradouro);
+				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
+				
+			}
+		}
+
+
+		Endereco endereco = new Endereco();
 		endereco.setId(Long.valueOf(req.getParameter("id")));
 		endereco.setNumero(numero);
 		endereco.setCep(cep);

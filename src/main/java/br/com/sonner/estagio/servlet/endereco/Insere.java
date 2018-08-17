@@ -48,7 +48,6 @@ public class Insere extends HttpServlet {
 		Bairro bairro = null;
 		TipoLogradouro tipoLogradouro = null;
 		Cidade cidade = null;
-		Boolean logradouroExiste = false;
 
 		if (req.getParameter("numero") != "") {
 			numero = Integer.parseInt(req.getParameter("numero"));
@@ -68,26 +67,16 @@ public class Insere extends HttpServlet {
 		}
 
 		if (req.getParameter("logradouro") != "") {
-			List<Logradouro> logradouros = logradouroController.getAll();
 			String nomeLogradouro = req.getParameter("logradouro");
+			logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
 
-			for (int i = 0; i < logradouros.size(); i++) {
-				if ((logradouros.get(i).getNome().equals(nomeLogradouro))
-						&& (logradouros.get(i).getCidade().getNome().equals(cidade.getNome()))
-						&& (logradouros.get(i).getTipologradouro().getNome().equals(tipoLogradouro.getNome()))
-						){
-					Long logradouroID = logradouros.get(i).getId();
-					logradouro = logradouroController.getOne(logradouroID);
-					logradouroExiste = true;
-
-				}
-			}
-			if (logradouroExiste == false) {
+			if (logradouro == null) {
 				logradouro = new Logradouro();
 				logradouro.setCidade(cidade);
 				logradouro.setNome(nomeLogradouro);
 				logradouro.setTipologradouro(tipoLogradouro);
-				logradouro = logradouroController.save(logradouro);
+				logradouroController.save(logradouro);
+				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
 				
 			}
 		}
