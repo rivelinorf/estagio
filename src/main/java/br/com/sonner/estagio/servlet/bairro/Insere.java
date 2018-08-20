@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 /**
  * Servlet implementation class Insere
@@ -23,6 +25,24 @@ import br.com.sonner.estagio.vos.BairroFiltroVO;
 @WebServlet("/insere-bairro")
 public class Insere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO vo = new CidadeFiltroVO();
+        
+        if (request.getParameter("estado") != "") {
+            vo.setEstado(Long.valueOf(request.getParameter("estado")));
+    		vo.setNome("");
+    		vo.setSigla("");
+    		vo.setCep("");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("filtroCidade", vo);
+        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+
+        response.sendRedirect("/views/bairro/insere.jsp");
+    }
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws javax.servlet.ServletException, IOException {

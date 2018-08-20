@@ -21,8 +21,9 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 /**
  * Servlet implementation class Atualiza
@@ -31,6 +32,42 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 public class
 Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+        
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        BairroFiltroVO bairrovo = new BairroFiltroVO();
+        
+		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
+            cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
+            cidadevo.setNome("");
+    		cidadevo.setSigla("");
+    		cidadevo.setCep("");
+        }
+		
+        if(request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+        	Long id = Long.valueOf(request.getParameter("cidade"));
+        	Cidade cidade = cidadeController.getOne(id);
+           
+        	bairrovo.setCidade(cidade.getId());
+            bairrovo.setNome("");
+            
+            cidadevo.setEstado(cidade.getEstado().getId());
+            cidadevo.setNome("");
+    		cidadevo.setSigla("");
+    		cidadevo.setCep("");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("filtroCidade", cidadevo);
+        session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
+        session.setAttribute("filtroBairro", bairrovo);
+        session.setAttribute("listaBairro", bairroController.filtrar(bairrovo));
+
+        response.sendRedirect("/views/endereco/atualiza.jsp");
+    }
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -57,12 +94,9 @@ Atualiza extends HttpServlet {
 		
 		if (req.getParameter("bairro") != "") {
 			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
+			cidade = cidadeController.getOne(bairro.getCidade().getId());
 		}
-		
-		if (req.getParameter("cidade") != "") {
-			cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidade")));
-		}
-		
+				
 		if (req.getParameter("tipologradouro") != "") {
 			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
@@ -74,6 +108,7 @@ Atualiza extends HttpServlet {
 
 			if (logradouro == null) {
 				logradouro = new Logradouro();
+				
 				logradouro.setCidade(cidade);
 				logradouro.setNome(nomeLogradouro);
 				logradouro.setTipologradouro(tipoLogradouro);

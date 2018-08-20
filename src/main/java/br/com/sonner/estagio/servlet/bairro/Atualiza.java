@@ -16,6 +16,7 @@ import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 /**
  * Servlet implementation class Atualiza
@@ -23,6 +24,24 @@ import br.com.sonner.estagio.vos.BairroFiltroVO;
 @WebServlet("/atualiza-bairro")
 public class Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO vo = new CidadeFiltroVO();
+        
+        if (request.getParameter("estado") != "") {
+            vo.setEstado(Long.valueOf(request.getParameter("estado")));
+    		vo.setNome("");
+    		vo.setSigla("");
+    		vo.setCep("");
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("filtroCidade", vo);
+        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+
+        response.sendRedirect("/views/bairro/atualiza.jsp");
+    }
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 

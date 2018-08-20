@@ -19,5 +19,4 @@ public interface CidadeController {
 
     List<String> validation(Cidade estado);
 
-    List<Cidade> getByEstado(Long id);
 }

@@ -12,5 +12,5 @@ public interface BairroDAO {
 	void delete(long id);
 	Bairro getOne(long id);
 	List<Bairro> pesquisaBairro(BairroFiltroVO vo);
-	List<Bairro> getByCidade(Long id);
+
 }

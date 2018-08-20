@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
+import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
@@ -31,12 +34,16 @@ public class PreencheVo extends HttpServlet {
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+		BairroControllerImpl bairroControllerImpl = new BairroControllerImpl();
+		BairroFiltroVO bairrovo = new BairroFiltroVO();
 		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
 		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
+        BairroControllerImpl bairroController = new BairroControllerImpl();
 
 		Endereco endereco = enderecoController.getOne(Long.valueOf(request.getParameter("id")));
 		Logradouro logradouro = logradouroController.getOne(endereco.getLogradouro().getId());
+		Bairro bairro = bairroControllerImpl.getOne(endereco.getBairro().getId());
 		Cidade cidade = cidadeController.getOne(endereco.getLogradouro().getCidade().getId());
 		
         cidadevo.setId(cidade.getId());
@@ -49,6 +56,10 @@ public class PreencheVo extends HttpServlet {
         logradourovo.setNome(logradouro.getNome());
         logradourovo.setCidade(logradouro.getCidade().getId());
         logradourovo.setTipologradouro(logradouro.getTipologradouro().getId());
+        
+        bairrovo.setId(bairro.getId());
+        bairrovo.setNome(bairro.getNome());
+        bairrovo.setCidade(bairro.getCidade().getId());
 
 		vo.setId(endereco.getId());
 		vo.setNumero(endereco.getNumero());
@@ -59,9 +70,13 @@ public class PreencheVo extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("cidadeParaEditar", cidadevo);
-		session.setAttribute("logradouroParaEditar", logradourovo);
+		session.setAttribute("filtroCidade", cidadevo);
+		session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
+		session.setAttribute("filtroLogradouro", logradourovo);
+		session.setAttribute("filtroBairro", bairrovo);
+        session.setAttribute("listaBairro", bairroController.filtrar(bairrovo));
 		session.setAttribute("enderecoParaEditar", vo);
+		
 
 		response.sendRedirect("/views/endereco/atualiza.jsp");
 	}

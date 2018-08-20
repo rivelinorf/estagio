@@ -21,5 +21,4 @@ public interface CidadeDAO {
 
     List<Cidade> pesquisaCidade(CidadeFiltroVO vo);
 
-    List<Cidade> getByEstado(Long id);
 }

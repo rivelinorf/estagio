@@ -13,5 +13,5 @@ public interface BairroController {
 	void delete(long id);
 	List<Bairro> filtrar(BairroFiltroVO bairrosPesquisados);
 	List<String> validation(Bairro bairro);
-	List<Bairro> getByCidade(Long id);
+
 }
