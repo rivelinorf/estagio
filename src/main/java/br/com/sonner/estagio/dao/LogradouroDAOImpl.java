@@ -158,8 +158,8 @@ public class LogradouroDAOImpl implements LogradouroDAO {
         try {
             QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
                     .logradouro(vo.getNome())
-                    .cidade(vo.getCidade())
                     .tipologradouro(vo.getTipologradouro())
+                    .cidade(vo.getCidade())
                     .build();
 
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
