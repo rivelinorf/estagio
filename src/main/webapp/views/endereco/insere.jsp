@@ -16,7 +16,7 @@
 	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 
 <%
-	CidadeFiltroVO cidadevo = (CidadeFiltroVO) session.getAttribute("filtroCidade");
+	CidadeFiltroVO cidadevo = (CidadeFiltroVO) session.getAttribute("filtroCidade_insereEndereco");
 
 	if (cidadevo == null) {
 		cidadevo = new CidadeFiltroVO();
@@ -28,7 +28,7 @@
 %>
 
 <%
-	BairroFiltroVO bairrovo = (BairroFiltroVO) session.getAttribute("filtroBairro");
+	BairroFiltroVO bairrovo = (BairroFiltroVO) session.getAttribute("filtroBairro_insereEndereco");
 
 	if (bairrovo == null) {
 		bairrovo = new BairroFiltroVO();
@@ -59,7 +59,7 @@
 					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
-							<c:when test="${estado.id == filtroCidade.estado}">
+							<c:when test="${estado.id == filtroCidade_insereEndereco.estado}">
 								<option value="${estado.id}" selected>${estado.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -76,9 +76,9 @@
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/insere-endereco?cidade='+this.value">
 					<option value="">Selecione uma opção...</option>
-					<c:forEach items="${listaCidade}" var="cidade">
+					<c:forEach items="${listaCidade_insereEndereco}" var="cidade">
 						<c:choose>
-							<c:when test="${cidade.id == filtroBairro.cidade}">
+							<c:when test="${cidade.id == filtroBairro_insereEndereco.cidade}">
 								<option value="${cidade.id}" selected>${cidade.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -101,7 +101,7 @@
 					<select name="bairro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
 						<option value="">Selecione uma opção...</option>
-						<c:forEach items="${listaBairro}" var="bairro">
+						<c:forEach items="${listaBairro_insereEndereco}" var="bairro">
 							<option value="${bairro.id}">${bairro.nome}</option>
 						</c:forEach>
 					</select>

@@ -9,7 +9,7 @@
 	class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 
 <%
-	CidadeFiltroVO vo = (CidadeFiltroVO) session.getAttribute("filtroCidade");
+	CidadeFiltroVO vo = (CidadeFiltroVO) session.getAttribute("filtroCidade_insere");
 
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
@@ -26,7 +26,7 @@
 </head>
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
-	
+
 	<div class="main">
 		<sge:header titulo="Inserir novo Bairro" actionSalvar="true"
 			formId="insere-form" actionFechar="true">
@@ -38,11 +38,12 @@
 			<div class="form-row">
 				<div>Estado:</div>
 				<select name="estado" class="form-control"
-					style="background-color: rgb(46, 46, 46)" id="estadoid" onclick="location.href = '/insere-bairro?estado='+this.value">
+					style="background-color: rgb(46, 46, 46)" id="estadoid"
+					onclick="location.href = '/insere-bairro?estado='+this.value">
 					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
-							<c:when test="${estado.id == filtroCidade.estado}">
+							<c:when test="${estado.id == filtroCidade_insere.estado}">
 								<option value="${estado.id}" selected>${estado.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -55,15 +56,15 @@
 		</form>
 
 		<div class="div-form">
-					<form action="/insere-bairro" method="post" id="insere-form"
-						style="width: 100%;">
+			<form action="/insere-bairro" method="post" id="insere-form"
+				style="width: 100%;">
 
 				<div class="form-row">
 					<div>Cidade:</div>
 					<select name="cidadeID" class="form-control"
-								style="background-color: rgb(46, 46, 46)">
+						style="background-color: rgb(46, 46, 46)">
 						<option value="">Selecione uma opção...</option>
-						<c:forEach items="${listaCidade}" var="cidade">
+						<c:forEach items="${listaCidade_insere}" var="cidade">
 							<option value="${cidade.id}">${cidade.nome}</option>
 
 						</c:forEach>
@@ -76,7 +77,7 @@
 				</div>
 			</form>
 		</div>
-	
-			</div>
+
+	</div>
 </body>
 </html>

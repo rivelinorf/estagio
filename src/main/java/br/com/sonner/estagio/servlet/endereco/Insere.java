@@ -24,6 +24,7 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 /**
  * Servlet implementation class Insere
@@ -31,42 +32,60 @@ import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 @WebServlet("/insere-endereco")
 public class Insere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
-        
-        BairroControllerImpl bairroController = new BairroControllerImpl();
-        BairroFiltroVO bairrovo = new BairroFiltroVO();
-        
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+
+		BairroControllerImpl bairroController = new BairroControllerImpl();
+		BairroFiltroVO bairrovo = new BairroFiltroVO();
+
+		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+
+		HttpSession session = request.getSession();
+
 		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
-            cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
-            cidadevo.setNome("");
-    		cidadevo.setSigla("");
-    		cidadevo.setCep("");
-        }
-		
-        if(request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
-        	Long id = Long.valueOf(request.getParameter("cidade"));
-        	Cidade cidade = cidadeController.getOne(id);
-           
-        	bairrovo.setCidade(cidade.getId());
-            bairrovo.setNome("");
-            
-            cidadevo.setEstado(cidade.getEstado().getId());
-            cidadevo.setNome("");
-    		cidadevo.setSigla("");
-    		cidadevo.setCep("");
-        }
+			cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
+			cidadevo.setNome("");
+			cidadevo.setSigla("");
+			cidadevo.setCep("");
 
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroCidade", cidadevo);
-        session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
-        session.setAttribute("filtroBairro", bairrovo);
-        session.setAttribute("listaBairro", bairroController.filtrar(bairrovo));
+			bairrovo.setCidade(null);
+			bairrovo.setNome("");
 
-        response.sendRedirect("/views/endereco/insere.jsp");
-    }
+			logradourovo.setNome("");
+			logradourovo.setCidade(null);
+			logradourovo.setTipologradouro(null);
+
+			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+
+		}
+
+		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+			Long id = Long.valueOf(request.getParameter("cidade"));
+			Cidade cidade = cidadeController.getOne(id);
+
+			bairrovo.setCidade(cidade.getId());
+			bairrovo.setNome("");
+
+			cidadevo.setEstado(cidade.getEstado().getId());
+			cidadevo.setNome("");
+			cidadevo.setSigla("");
+			cidadevo.setCep("");
+
+			logradourovo.setNome("");
+			logradourovo.setCidade(null);
+			logradourovo.setTipologradouro(null);
+
+		}
+
+		session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+		session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+
+		response.sendRedirect("/views/endereco/insere.jsp");
+	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -78,6 +97,8 @@ public class Insere extends HttpServlet {
 
 		EnderecoFiltroVO vo = new EnderecoFiltroVO();
 		HttpSession session = req.getSession();
+		BairroFiltroVO bairrovo = new BairroFiltroVO();
+		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
 		String cep = req.getParameter("cep");
 		String complemento = req.getParameter("complemento");
@@ -96,7 +117,6 @@ public class Insere extends HttpServlet {
 			cidade = cidadeController.getOne(bairro.getCidade().getId());
 		}
 
-
 		if (req.getParameter("tipologradouro") != "") {
 			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
@@ -109,15 +129,13 @@ public class Insere extends HttpServlet {
 			if (logradouro == null) {
 				logradouro = new Logradouro();
 
-
 				logradouro.setCidade(cidade);
 				logradouro.setNome(nomeLogradouro);
 				logradouro.setTipologradouro(tipoLogradouro);
 
-
 				logradouroController.save(logradouro);
 				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
-				
+
 			}
 		}
 
@@ -134,13 +152,28 @@ public class Insere extends HttpServlet {
 
 			enderecoController.save(endereco);
 
+			vo.setId(null);
 			vo.setNumero(null);
 			vo.setCep("");
 			vo.setComplemento("");
 			vo.setBairro(null);
 			vo.setLogradouro(null);
 
+			bairrovo.setCidade(null);
+			bairrovo.setNome("");
+			bairrovo.setId(null);
+
+			cidadevo.setEstado(null);
+			cidadevo.setNome("");
+			cidadevo.setSigla("");
+			cidadevo.setCep("");
+			cidadevo.setId(null);
+
 			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+			session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+			session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
 			session.setAttribute("success", "Endereço inserido com sucesso");
 
 			res.sendRedirect("/views/endereco/lista.jsp");
