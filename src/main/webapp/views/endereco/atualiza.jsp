@@ -53,6 +53,56 @@
 </head>
 <body>
 
+		<script>
+		function mascaraInteiro(){
+	        if (event.keyCode < 48 || event.keyCode > 57){
+	                event.returnValue = false;
+	                return false;
+	        }
+	        return true;
+		}
+		function MascaraCep(cep){
+            if(mascaraInteiro(cep)==false){
+            event.returnValue = false;
+   	 	}       
+    		return formataCampo(cep, '00.000-000', event);
+		}
+		
+		
+		function formataCampo(campo, Mascara, evento) { 
+	        var boleanoMascara; 
+
+	        var Digitato = evento.keyCode;
+	        exp = /\-|\.|\/|\(|\)| /g
+	        campoSoNumeros = campo.value.toString().replace( exp, "" ); 
+
+	        var posicaoCampo = 0;    
+	        var NovoValorCampo="";
+	        var TamanhoMascara = campoSoNumeros.length;; 
+
+	        if (Digitato != 8) { // backspace 
+	                for(i=0; i<= TamanhoMascara; i++) { 
+	                        boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
+	                                                                || (Mascara.charAt(i) == "/")) 
+	                        boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
+	                                                                || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
+	                        if (boleanoMascara) { 
+	                                NovoValorCampo += Mascara.charAt(i); 
+	                                  TamanhoMascara++;
+	                        }else { 
+	                                NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
+	                                posicaoCampo++; 
+	                          }              
+	                  }      
+	                campo.value = NovoValorCampo;
+	                  return true; 
+	        }else { 
+	                return true; 
+	        }
+		}
+	
+		</script>
+
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 		<sge:header titulo="Editar endereço" actionSalvar="true"
@@ -104,7 +154,7 @@
 		</form>
 
 		<div class="div-form">
-			<form action="/atualiza-endereco?id=<%=vo.getId()%>" method="post"
+			<form name="form1" action="/atualiza-endereco?id=<%=vo.getId()%>" method="post"
 				id="edit-form" style="width: 100%">
 
 				<div class="form-row">
@@ -158,8 +208,9 @@
 
 				<div class="form-row">
 					<div>CEP:</div>
-					<input type="text" name="cep" placeholder="Ex.: 00000-000"
-						class="form-control" value="<%=vo.getCep()%>">
+					<input type="text" name="cep" placeholder="Ex.: 00.000-000"
+						class="form-control" value="<%=vo.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
+						maxlength="10">
 				</div>
 
 				<div class="form-row">

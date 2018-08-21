@@ -68,8 +68,8 @@ public class EnderecoControllerImpl implements EnderecoController {
 		}
 
 
-		if (endereco.getCep().length() > 10) {
-			erros.add("CEP não pode exceder 10 caracteres");
+		if (endereco.getCep().length() < 10 && endereco.getCep().length() > 0) {
+			erros.add("CEP inválido");
 		}
 
 		if (endereco.getBairro() == null) {
