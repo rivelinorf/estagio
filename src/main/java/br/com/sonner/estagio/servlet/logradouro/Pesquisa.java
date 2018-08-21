@@ -29,9 +29,6 @@ public class Pesquisa extends HttpServlet {
            vo.setCidade(Long.valueOf(request.getParameter("cidade")));
         }
 
-
-
-
         HttpSession session = request.getSession();
         session.setAttribute("filtroLogradouro", vo);
         session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
