@@ -40,7 +40,7 @@
 				<select name="estado" class="form-control"
 					style="background-color: rgb(46, 46, 46)" id="estadoid"
 					onclick="location.href = '/insere-bairro?estado='+this.value">
-		
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
 							<c:when test="${estado.id == filtroCidade_insere.estado}">
@@ -63,7 +63,7 @@
 					<div>Cidade:</div>
 					<select name="cidadeID" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-		
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${listaCidade_insere}" var="cidade">
 							<option value="${cidade.id}">${cidade.nome}</option>
 
