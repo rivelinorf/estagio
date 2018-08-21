@@ -42,11 +42,6 @@
         <form action="/pesquisa-logradouro" method="get" id="filter-form">
 
             <div class="form-row">
-                <div>Logradouro:</div>
-                <input type="text" name="logradouro" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-logradouro-nome" value="<%= vo.getNome() %>">
-            </div>
-            <div class="form-row">
                 <div>Tipo de Logradouro:</div>
                 <select name="tipologradouro" class="form-control">
                     <option value="">Selecione uma opção...</option>
@@ -63,6 +58,11 @@
                 </select>
             </div>
 
+            <div class="form-row">
+                <div>Logradouro:</div>
+                <input type="text" name="logradouro" class="form-control" style="background-color: rgb(46,46,46)"
+                       id="pesquisa-logradouro-nome" value="<%= vo.getNome() %>">
+            </div>
 
             <div class="form-row">
                 <div>Cidade:</div>
@@ -89,8 +89,8 @@
             <thead>
             <tr>
                 <th></th>
-                <th>Logradouro</th>
                 <th>Tipo de Logradouro</th>
+                <th>Logradouro</th>
                 <th>Cidade</th>
             </tr>
             </thead>
@@ -105,8 +105,8 @@
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)"><i
                                 class="fas fa-times-circle"></i></button>
                     </td>
-                    <td>${logradouro.nome}</td>
                     <td>${logradouro.tipologradouro.nome}</td>
+                    <td>${logradouro.nome}</td>
                     <td>${logradouro.cidade.nome}</td>
                 </tr>
             </c:forEach>

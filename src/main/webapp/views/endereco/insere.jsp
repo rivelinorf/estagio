@@ -113,7 +113,6 @@
 				<select name="estado" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/insere-endereco?estado='+this.value">
-					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
 							<c:when test="${estado.id == filtroCidade_insereEndereco.estado}">
@@ -132,7 +131,7 @@
 				<select name="cidade" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/insere-endereco?cidade='+this.value">
-					<option value="">Selecione uma opção...</option>
+
 					<c:forEach items="${listaCidade_insereEndereco}" var="cidade">
 						<c:choose>
 							<c:when test="${cidade.id == filtroBairro_insereEndereco.cidade}">
@@ -157,7 +156,7 @@
 					<div>Bairro:</div>
 					<select name="bairro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opção...</option>
+
 						<c:forEach items="${listaBairro_insereEndereco}" var="bairro">
 							<option value="${bairro.id}">${bairro.nome}</option>
 						</c:forEach>
@@ -167,7 +166,7 @@
 				<div class="form-row">
 					<div>Tipo de Logradouro:</div>
 					<select name="tipologradouro" class="form-control">
-						<option value="">Selecione uma opção...</option>
+
 						<c:forEach items="${tipologradouros.all}" var="tipologradouro">
 							<option value="${tipologradouro.id}">${tipologradouro.nome}</option>
 						</c:forEach>

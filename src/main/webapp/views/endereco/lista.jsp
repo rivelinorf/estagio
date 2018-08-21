@@ -31,9 +31,59 @@
 			actionFiltrar="true" actionNovo="/views/endereco/insere.jsp"
 			formId="filter-form" actionFechar="true">
 		</sge:header>
+		
+				<script>
+		function mascaraInteiro(){
+	        if (event.keyCode < 48 || event.keyCode > 57){
+	                event.returnValue = false;
+	                return false;
+	        }
+	        return true;
+		}
+		function MascaraCep(cep){
+            if(mascaraInteiro(cep)==false){
+            event.returnValue = false;
+   	 	}       
+    		return formataCampo(cep, '00.000-000', event);
+		}
+		
+		
+		function formataCampo(campo, Mascara, evento) { 
+	        var boleanoMascara; 
+
+	        var Digitato = evento.keyCode;
+	        exp = /\-|\.|\/|\(|\)| /g
+	        campoSoNumeros = campo.value.toString().replace( exp, "" ); 
+
+	        var posicaoCampo = 0;    
+	        var NovoValorCampo="";
+	        var TamanhoMascara = campoSoNumeros.length;; 
+
+	        if (Digitato != 8) { // backspace 
+	                for(i=0; i<= TamanhoMascara; i++) { 
+	                        boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
+	                                                                || (Mascara.charAt(i) == "/")) 
+	                        boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
+	                                                                || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
+	                        if (boleanoMascara) { 
+	                                NovoValorCampo += Mascara.charAt(i); 
+	                                  TamanhoMascara++;
+	                        }else { 
+	                                NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
+	                                posicaoCampo++; 
+	                          }              
+	                  }      
+	                campo.value = NovoValorCampo;
+	                  return true; 
+	        }else { 
+	                return true; 
+	        }
+		}
+	
+		</script>
 
 		<div class="div-form">
-			<form action="/pesquisa-endereco" method="get" id="filter-form"
+			<form name="form1" action="/pesquisa-endereco" method="get" id="filter-form"
 				style="width: 50%;">
 
 				<div class="form-row">
@@ -44,7 +94,8 @@
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
-						value="<%=vo.getCep()%>">
+						value="<%=vo.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
+						maxlength="10">
 				</div>
 				<div class="form-row">
 					<div>Complemento:</div>

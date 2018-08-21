@@ -44,6 +44,7 @@ public class Insere extends HttpServlet {
 		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
 
 		HttpSession session = request.getSession();
+				
 
 		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
 			cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
