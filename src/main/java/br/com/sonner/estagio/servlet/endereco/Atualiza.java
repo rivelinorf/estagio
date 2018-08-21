@@ -24,6 +24,7 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 /**
  * Servlet implementation class Atualiza
@@ -40,11 +41,29 @@ Atualiza extends HttpServlet {
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
         
+        EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
+        
+        LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+        
 		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
             cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
             cidadevo.setNome("");
     		cidadevo.setSigla("");
     		cidadevo.setCep("");
+    		
+    		enderecovo.setBairro(null);
+    		enderecovo.setCep("");
+    		enderecovo.setComplemento("");
+    		enderecovo.setNumero(null);
+    		enderecovo.setLogradouro(null);
+    		    		
+        	bairrovo.setCidade(null);
+            bairrovo.setNome("");
+            bairrovo.setId(null);
+    		
+            logradourovo.setNome("");
+            logradourovo.setCidade(null);
+            logradourovo.setTipologradouro(null);
         }
 		
         if(request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
@@ -53,18 +72,31 @@ Atualiza extends HttpServlet {
            
         	bairrovo.setCidade(cidade.getId());
             bairrovo.setNome("");
+            bairrovo.setId(null);
             
             cidadevo.setEstado(cidade.getEstado().getId());
             cidadevo.setNome("");
     		cidadevo.setSigla("");
     		cidadevo.setCep("");
+    		
+            logradourovo.setNome("");
+            logradourovo.setCidade(null);
+            logradourovo.setTipologradouro(null);
+            
+    		enderecovo.setBairro(bairrovo.getId());
+    		enderecovo.setCep("");
+    		enderecovo.setComplemento("");
+    		enderecovo.setNumero(null);
+    		enderecovo.setLogradouro(null);
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("filtroCidade", cidadevo);
-        session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
-        session.setAttribute("filtroBairro", bairrovo);
-        session.setAttribute("listaBairro", bairroController.filtrar(bairrovo));
+        session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+        session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+        session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+        session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
+        session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+		session.setAttribute("enderecoParaEditar", enderecovo);
 
         response.sendRedirect("/views/endereco/atualiza.jsp");
     }

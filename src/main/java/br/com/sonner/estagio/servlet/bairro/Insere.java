@@ -29,17 +29,25 @@ public class Insere extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO vo = new CidadeFiltroVO();
+        BairroFiltroVO bairrovo = new BairroFiltroVO();
         
         if (request.getParameter("estado") != "") {
             vo.setEstado(Long.valueOf(request.getParameter("estado")));
     		vo.setNome("");
     		vo.setSigla("");
     		vo.setCep("");
+    		
+    		
+    		bairrovo.setCidade(null);
+    		bairrovo.setId(null);
+    		bairrovo.setNome("");
+    		
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("filtroCidade", vo);
-        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+        
+        session.setAttribute("filtroCidade_insere", vo);
+        session.setAttribute("listaCidade_insere", cidadeController.filtrar(vo));
 
         response.sendRedirect("/views/bairro/insere.jsp");
     }
@@ -52,6 +60,7 @@ public class Insere extends HttpServlet {
 		BairroFiltroVO vo = new BairroFiltroVO();
 		HttpSession session = req.getSession();
 		Cidade cidade = null;
+		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
 		if (req.getParameter("cidadeID") != "") {
 			cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
@@ -65,7 +74,16 @@ public class Insere extends HttpServlet {
 
 			vo.setNome("");
 			vo.setCidade(null);
+			
+            cidadevo.setEstado(null);
+            cidadevo.setNome("");
+    		cidadevo.setSigla("");
+    		cidadevo.setCep("");
+    		cidadevo.setId(null);
+			
 			session.setAttribute("listaBairro", bairroController.filtrar(vo));
+	        session.setAttribute("filtroCidade_insere", cidadevo);
+	        session.setAttribute("listaCidade_insere", cidadeController.filtrar(cidadevo));
 			session.setAttribute("success", "Bairro inserido com sucesso");
 
 			res.sendRedirect("/views/bairro/lista.jsp");

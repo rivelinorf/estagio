@@ -44,9 +44,9 @@ public class PreencheVo extends HttpServlet {
     	vo.setCidade(bairro.getCidade().getId());
     	
     	HttpSession session = request.getSession();
-    	session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
+    	session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(cidadevo));
     	session.setAttribute("bairroParaEditar", vo);
-    	session.setAttribute("filtroCidade", cidadevo);
+    	session.setAttribute("filtroCidade_atualiza", cidadevo);
     	
     	response.sendRedirect("/views/bairro/atualiza.jsp");
     }

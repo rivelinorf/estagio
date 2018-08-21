@@ -20,7 +20,7 @@
 %>
 
 <%
-	CidadeFiltroVO cidadevo = (CidadeFiltroVO) session.getAttribute("filtroCidade");
+	CidadeFiltroVO cidadevo = (CidadeFiltroVO) session.getAttribute("filtroCidade_atualiza");
 
 	if (cidadevo == null) {
 		cidadevo = new CidadeFiltroVO();
@@ -29,7 +29,6 @@
 		cidadevo.setCep("");
 		cidadevo.setEstado(null);
 	}
-
 %>
 
 <html>
@@ -46,21 +45,23 @@
 		<form action="/atualiza-bairro" method="get" id="filter-form"
 			style="width: 100%;">
 			<div class="form-row">
-                <div>Estado:</div>
-                <select name="estado" class="form-control"
-                        style="background-color: rgb(46, 46, 46)" onclick="location.href = '/atualiza-bairro?estado='+this.value">
-                    <c:forEach items="${estados.all}" var="estado">
-                        <c:choose>
-                            <c:when test="${estado.id == filtroCidade.estado}">
-                                <option value="${estado.id}" selected>${estado.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${estado.id}">${estado.nome}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </select>
-            </div>
+				<div>Estado:</div>
+				<select name="estado" class="form-control"
+					style="background-color: rgb(46, 46, 46)"
+					onclick="location.href = '/atualiza-bairro?estado='+this.value">
+					<option value="">Selecione uma opção...</option>
+					<c:forEach items="${estados.all}" var="estado">
+						<c:choose>
+							<c:when test="${estado.id == filtroCidade_atualiza.estado}">
+								<option value="${estado.id}" selected>${estado.nome}</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${estado.id}">${estado.nome}</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</select>
+			</div>
 		</form>
 
 		<div class="div-form">
@@ -71,9 +72,10 @@
 					<div>Cidade:</div>
 					<select name="cidade" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<c:forEach items="${listaCidade}" var="cidade">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${listaCidade_atualiza}" var="cidade">
 							<c:choose>
-								<c:when test="${cidade.id == bairroParaEditar.cidade}">
+								<c:when test="${cidade.id == filtroCidade_atualiza.id}">
 									<option value="${cidade.id}" selected>${cidade.nome}</option>
 								</c:when>
 								<c:otherwise>

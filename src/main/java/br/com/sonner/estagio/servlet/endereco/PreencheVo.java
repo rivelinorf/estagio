@@ -70,11 +70,11 @@ public class PreencheVo extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("filtroCidade", cidadevo);
-		session.setAttribute("listaCidade", cidadeController.filtrar(cidadevo));
-		session.setAttribute("filtroLogradouro", logradourovo);
-		session.setAttribute("filtroBairro", bairrovo);
-        session.setAttribute("listaBairro", bairroController.filtrar(bairrovo));
+		session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+		session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+		session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+		session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+        session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
 		session.setAttribute("enderecoParaEditar", vo);
 		
 
