@@ -20,9 +20,16 @@ public class Pesquisa extends HttpServlet {
 
         vo.setNome(request.getParameter("logradouro"));
 
-        if (request.getParameter("tipologradouro") != "") {
+
+        if (request.getParameter("tipologradouro")!="") {
             vo.setTipologradouro(Long.valueOf(request.getParameter("tipologradouro")));
         }
+
+        if(request.getParameter("cidade")!=""){
+           vo.setCidade(Long.valueOf(request.getParameter("cidade")));
+        }
+
+
 
 
         HttpSession session = request.getSession();

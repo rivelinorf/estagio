@@ -46,7 +46,6 @@
                 <input type="text" name="logradouro" class="form-control" style="background-color: rgb(46,46,46)"
                        id="pesquisa-logradouro-nome" value="<%= vo.getNome() %>">
             </div>
-
             <div class="form-row">
                 <div>Tipo de Logradouro:</div>
                 <select name="tipologradouro" class="form-control">
@@ -63,25 +62,26 @@
                     </c:forEach>
                 </select>
             </div>
-        </form>
 
-        <div class="form-row">
-            <div>Cidade:</div>
-            <select name="cidade" class="form-control"
-                    style="background-color: rgb(46, 46, 46)">
-                <option value="">Selecione uma opção...</option>
-                <c:forEach items="${cidadesCtl.all}" var="cidade">
-                    <c:choose>
-                        <c:when test="${cidade.id == filtroLogradouro.cidade}">
-                            <option value="${cidade.id}" selected>${cidade.nome}</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${cidade.id}">${cidade.nome}</option>
-                        </c:otherwise>
-                    </c:choose>
-                </c:forEach>
-            </select>
-        </div>
+
+            <div class="form-row">
+                <div>Cidade:</div>
+                <select name="cidade" class="form-control "
+                        style="background-color: rgb(46, 46, 46)">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${cidadesCtl.all}" var="cidade">
+                        <c:choose>
+                            <c:when test="${cidade.id == filtroLogradouro.cidade}">
+                                <option value="${cidade.id}" selected>${cidade.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cidade.id}">${cidade.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+        </form>
     </div>
 
     <div class="content">

@@ -32,7 +32,7 @@ public class QueryStringLogradouro {
         }
 
         public Builder tipologradouro(Long tipologradouro) {
-            if (tipologradouro != null) {
+            if (tipologradouro != null ) {
                 this.sql += "and logradouro_tipo_fk LIKE '" + tipologradouro + "%' ";
             }
 
