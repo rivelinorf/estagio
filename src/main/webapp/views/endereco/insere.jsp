@@ -129,12 +129,12 @@
 				<div class="form-row">
 					<div>Número:</div>
 					<input type="number" name="numero" placeholder="Ex.: 111"
-						class="form-control">
+						class="form-control"  maxlength="4">
 				</div>
 
 				<div class="form-row">
 					<div>CEP:</div>
-					<input type="text" name="cep" placeholder="Ex.: 00.000-000"
+					<input type="text" name="cep" placeholder="Ex: 00.000-000"
 						class="form-control" onKeyPress="MascaraCep(form1.cep);"
 						maxlength="10">
 				</div>

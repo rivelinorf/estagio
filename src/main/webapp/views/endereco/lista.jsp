@@ -42,7 +42,7 @@
 				<div class="form-row">
 					<div>Número:</div>
 					<input type="number" name="numero" class="form-control"
-						value="<%=vo.getNumero()%>">
+						value="<%=vo.getNumero()%>" maxlength="4" >
 				</div>
 				<div class="form-row">
 					<div>CEP:</div>
