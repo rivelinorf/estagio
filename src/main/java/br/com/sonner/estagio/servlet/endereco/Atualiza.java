@@ -91,23 +91,10 @@ public class Atualiza extends HttpServlet {
 			session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
 			session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
 			session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
-			session.setAttribute("enderecoParaEditar", enderecovo);
+
 
 		}
 
-		if (cidadevo.getEstado() == null) {
-			session.setAttribute("filtroCidade_atualizaEndereco", null);
-			session.setAttribute("listaCidade_atualizaEndereco", null);
-
-			if (bairrovo.getCidade() == null) {
-
-				session.setAttribute("filtroBairro_atualizaEndereco", null);
-				session.setAttribute("listaBairro_atualizaEndereco", null);
-				session.setAttribute("filtroLogradouro_atualizaEndereco", null);
-				session.setAttribute("enderecoParaEditar", null);
-			}
-
-		}
 
 		response.sendRedirect("/views/endereco/atualiza.jsp");
 	}

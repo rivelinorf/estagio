@@ -59,7 +59,7 @@
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Editar endereço" actionSalvar="true"
+		<sge:header titulo="Editar endereço" actionSalvar="true" actionLimpar="/atualiza-endereco"
 			formId="edit-form" actionFechar="true">
 		</sge:header>
 

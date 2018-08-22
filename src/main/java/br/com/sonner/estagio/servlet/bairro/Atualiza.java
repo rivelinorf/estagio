@@ -45,8 +45,9 @@ public class Atualiza extends HttpServlet {
         }
         
         if (vo.getEstado() == null) {
+        	
 
-        session.setAttribute("bairroParaEditar", null);
+
         session.setAttribute("filtroCidade_atualiza", null);
         session.setAttribute("listaCidade_atualiza", null);
         }

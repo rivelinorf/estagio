@@ -28,10 +28,6 @@
 				<i class="fas fa-plus-circle"></i> Novo
 			</button>
 		</c:if>
-		<c:if test="${not empty actionLimpar}">
-			<button class="main-btn" onclick="location.href='${actionLimpar}'">
-			</button>
-		</c:if>
 		<c:if test="${actionSalvar && not empty formId}">
 			<button class="main-btn" id="salvar">
 				<i class="fas fa-save"></i> Salvar
@@ -40,7 +36,7 @@
 		<c:if test="${not empty formId}">
 			<c:choose>
 				<c:when test="${not empty actionLimpar}">
-					<button class="main-btn" onclick="location.href='${actionLimpar}'">
+					<button class="main-btn" id="limpar" onclick="location.href='${actionLimpar}'">
 						<i class="fas fa-eraser"></i> Limpar
 					</button>
 				</c:when>

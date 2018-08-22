@@ -24,7 +24,6 @@ import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 /**
  * Servlet implementation class Insere
