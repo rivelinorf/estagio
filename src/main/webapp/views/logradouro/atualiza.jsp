@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
@@ -20,6 +21,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
@@ -43,7 +45,7 @@
             <div class="form-row">
                 <div>Tipo Logradouro:</div>
                 <select name="tipologradouro" class="form-control" style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opÃ§Ã£o...</option>
+                    <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>
                             <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro}">
@@ -60,7 +62,7 @@
             <div class="form-row">
                 <div>Cidade:</div>
                 <select name="cidade" class="form-control" style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opÃ§Ã£o...</option>
+                    <option value="">Selecione uma opção...</option>
                     <c:forEach items="${cidadesCtl.all}" var="cidade">
                         <c:choose>
                             <c:when test="${cidade.id == filtroLogradouro.cidade}">

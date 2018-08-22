@@ -30,76 +30,74 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
  * Servlet implementation class Atualiza
  */
 @WebServlet("/atualiza-endereco")
-public class
-Atualiza extends HttpServlet {
+public class Atualiza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
-        
-        BairroControllerImpl bairroController = new BairroControllerImpl();
-        BairroFiltroVO bairrovo = new BairroFiltroVO();
-        
-        EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
-        
-        LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
-        
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+
+		BairroControllerImpl bairroController = new BairroControllerImpl();
+		BairroFiltroVO bairrovo = new BairroFiltroVO();
+
+		EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
+
+		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+
+		cidadevo.setEstado(null);
+		cidadevo.setNome("");
+		cidadevo.setSigla("");
+		cidadevo.setCep("");
+		cidadevo.setId(null);
+
+		enderecovo.setBairro(null);
+		enderecovo.setCep("");
+		enderecovo.setComplemento("");
+		enderecovo.setNumero(null);
+		enderecovo.setLogradouro(null);
+		enderecovo.setId(null);
+
+		bairrovo.setCidade(null);
+		bairrovo.setNome("");
+		bairrovo.setId(null);
+
+		logradourovo.setNome("");
+		logradourovo.setCidade(null);
+		logradourovo.setTipologradouro(null);
+
+		HttpSession session = request.getSession();
+
 		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
-            cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
-            cidadevo.setNome("");
-    		cidadevo.setSigla("");
-    		cidadevo.setCep("");
-    		
-    		enderecovo.setBairro(null);
-    		enderecovo.setCep("");
-    		enderecovo.setComplemento("");
-    		enderecovo.setNumero(null);
-    		enderecovo.setLogradouro(null);
-    		    		
-        	bairrovo.setCidade(null);
-            bairrovo.setNome("");
-            bairrovo.setId(null);
-    		
-            logradourovo.setNome("");
-            logradourovo.setCidade(null);
-            logradourovo.setTipologradouro(null);
-        }
-		
-        if(request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
-        	Long id = Long.valueOf(request.getParameter("cidade"));
-        	Cidade cidade = cidadeController.getOne(id);
-           
-        	bairrovo.setCidade(cidade.getId());
-            bairrovo.setNome("");
-            bairrovo.setId(null);
-            
-            cidadevo.setEstado(cidade.getEstado().getId());
-            cidadevo.setNome("");
-    		cidadevo.setSigla("");
-    		cidadevo.setCep("");
-    		
-            logradourovo.setNome("");
-            logradourovo.setCidade(null);
-            logradourovo.setTipologradouro(null);
-            
-    		enderecovo.setBairro(bairrovo.getId());
-    		enderecovo.setCep("");
-    		enderecovo.setComplemento("");
-    		enderecovo.setNumero(null);
-    		enderecovo.setLogradouro(null);
-        }
+			cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
 
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-        session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
-        session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
-        session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
-        session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
-		session.setAttribute("enderecoParaEditar", enderecovo);
+			session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+			session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
 
-        response.sendRedirect("/views/endereco/atualiza.jsp");
-    }
+		}
+
+		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+			Long id = Long.valueOf(request.getParameter("cidade"));
+			Cidade cidade = cidadeController.getOne(id);
+
+			bairrovo.setCidade(cidade.getId());
+
+			cidadevo.setEstado(cidade.getEstado().getId());
+
+			enderecovo.setBairro(bairrovo.getId());
+
+			session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+			session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+			session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+			session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
+			session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+
+
+		}
+
+
+		response.sendRedirect("/views/endereco/atualiza.jsp");
+	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -123,33 +121,32 @@ Atualiza extends HttpServlet {
 		if (req.getParameter("numero") != "") {
 			numero = Integer.parseInt(req.getParameter("numero"));
 		}
-		
+
 		if (req.getParameter("bairro") != "") {
 			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
 			cidade = cidadeController.getOne(bairro.getCidade().getId());
 		}
-				
+
 		if (req.getParameter("tipologradouro") != "") {
 			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
 		}
-		
+
 		if (req.getParameter("logradouro") != "") {
 			String nomeLogradouro = req.getParameter("logradouro");
 			logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
 
 			if (logradouro == null) {
 				logradouro = new Logradouro();
-				
+
 				logradouro.setCidade(cidade);
 				logradouro.setNome(nomeLogradouro);
 				logradouro.setTipologradouro(tipoLogradouro);
 				logradouroController.save(logradouro);
 				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
-				
+
 			}
 		}
-
 
 		Endereco endereco = new Endereco();
 		endereco.setId(Long.valueOf(req.getParameter("id")));
@@ -173,7 +170,6 @@ Atualiza extends HttpServlet {
 
 			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
 			session.setAttribute("success", "Endereço atualizado com sucesso");
-
 
 			res.sendRedirect("/views/endereco/lista.jsp");
 

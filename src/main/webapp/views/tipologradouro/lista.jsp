@@ -1,5 +1,6 @@
 <%@page import="br.com.sonner.estagio.vos.TipologradouroFiltroVO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="tipologradouroController"
@@ -16,6 +17,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
@@ -75,7 +77,7 @@
                                 onclick="location.href ='/deleta-tipologradouro?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red"
-                                data-dismiss="modal">NÃ£o
+                                data-dismiss="modal">Não
                         </button>
                     </div>
                 </div>

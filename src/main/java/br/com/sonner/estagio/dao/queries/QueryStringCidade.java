@@ -41,7 +41,7 @@ public class QueryStringCidade {
 
         public Builder estado(Long estado) {
             if (estado != null) {
-                this.sql += "and cidade_estado_fk LIKE '"+ estado +"%' ";
+                this.sql += "and cidade_estado_fk = "+ estado;
             }
 
             return this;

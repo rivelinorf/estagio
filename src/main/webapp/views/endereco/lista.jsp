@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
 <jsp:useBean id="bairros"
@@ -22,72 +23,24 @@
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
+<script type="text/javascript" src="/assets/js/MascaraValidacao.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 		<sge:header titulo="Pesquisa de Enderecos" page="endereco"
-			actionFiltrar="true" actionNovo="/views/endereco/insere.jsp"
+			actionFiltrar="true" actionNovo="/insere-endereco"
 			formId="filter-form" actionFechar="true">
 		</sge:header>
-		
-				<script>
-		function mascaraInteiro(){
-	        if (event.keyCode < 48 || event.keyCode > 57){
-	                event.returnValue = false;
-	                return false;
-	        }
-	        return true;
-		}
-		function MascaraCep(cep){
-            if(mascaraInteiro(cep)==false){
-            event.returnValue = false;
-   	 	}       
-    		return formataCampo(cep, '00.000-000', event);
-		}
-		
-		
-		function formataCampo(campo, Mascara, evento) { 
-	        var boleanoMascara; 
-
-	        var Digitato = evento.keyCode;
-	        exp = /\-|\.|\/|\(|\)| /g
-	        campoSoNumeros = campo.value.toString().replace( exp, "" ); 
-
-	        var posicaoCampo = 0;    
-	        var NovoValorCampo="";
-	        var TamanhoMascara = campoSoNumeros.length;; 
-
-	        if (Digitato != 8) { // backspace 
-	                for(i=0; i<= TamanhoMascara; i++) { 
-	                        boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
-	                                                                || (Mascara.charAt(i) == "/")) 
-	                        boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
-	                                                                || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
-	                        if (boleanoMascara) { 
-	                                NovoValorCampo += Mascara.charAt(i); 
-	                                  TamanhoMascara++;
-	                        }else { 
-	                                NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
-	                                posicaoCampo++; 
-	                          }              
-	                  }      
-	                campo.value = NovoValorCampo;
-	                  return true; 
-	        }else { 
-	                return true; 
-	        }
-		}
-	
-		</script>
 
 		<div class="div-form">
-			<form name="form1" action="/pesquisa-endereco" method="get" id="filter-form"
-				style="width: 50%;">
+			<form name="form1" action="/pesquisa-endereco" method="get"
+				id="filter-form" style="width: 50%;">
 
 				<div class="form-row">
-					<div>NÃºmero:</div>
+					<div>Número:</div>
 					<input type="number" name="numero" class="form-control"
 						value="<%=vo.getNumero()%>">
 				</div>
@@ -106,7 +59,7 @@
 					<div>Logradouro:</div>
 					<select name="logradouro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${logradouros.all}" var="logradouro">
 							<c:choose>
 								<c:when test="${logradouro.id == filtroEndereco.logradouro}">
@@ -125,7 +78,7 @@
 					<div>Bairro:</div>
 					<select name="bairro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${bairros.all}" var="bairro">
 							<c:choose>
 								<c:when test="${bairro.id == filtroEndereco.bairro}">
@@ -147,7 +100,7 @@
 					<tr>
 						<th></th>
 						<th>Logradouro</th>
-						<th>NÃºmero</th>
+						<th>Número</th>
 						<th>CEP</th>
 						<th>Complemento</th>
 						<th>Bairro</th>
@@ -196,7 +149,7 @@
 								onclick="location.href = '/endereco-deleta?id='+this.value">Sim
 							</button>
 							<button type="button" class="main-btn btn-red"
-								data-dismiss="modal">NÃ£o</button>
+								data-dismiss="modal">Não</button>
 						</div>
 					</div>
 				</div>

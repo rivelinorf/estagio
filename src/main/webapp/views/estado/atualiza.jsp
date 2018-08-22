@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="estados" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
@@ -17,6 +18,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
@@ -34,8 +36,8 @@
                     <div>Nome:</div>
                     <input type="text" name="estado" class="form-control" value="<%= vo.getEstado() %>"></div>
                 <div class="form-row">
-                    <div>AbreviaÃ§Ã£o:</div>
-                    <input type="text" name="abv" class="form-control" value="<%= vo.getAbv() %>"></div>
+                    <div>Abreviação:</div>
+                    <input type="text" name="abv" class="form-control" value="<%= vo.getAbv() %>" maxlength="2"></div>
             </div>
         </form>
     </div>

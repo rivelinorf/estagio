@@ -15,8 +15,8 @@ public class QueryStringBairro {
 		 private String sql = "SELECT * FROM bairro WHERE 1 ";;
 
         public Builder bairro(String nome) {
-            if (nome != ""){
-                this.sql += "and nome LIKE '"+ nome +"%' ";
+            if (nome != null && !nome.isEmpty()){
+                this.sql += "and nome = '"+ nome+"'";
             }
 
             return this;
@@ -24,7 +24,7 @@ public class QueryStringBairro {
 		
         public Builder cidade(Long cidade) {
             if (cidade != null) {
-                this.sql += "and bairro_cidade_fk LIKE '"+ cidade +"%' ";
+                this.sql += "and bairro_cidade_fk ="+ cidade;
             }
 
             return this;

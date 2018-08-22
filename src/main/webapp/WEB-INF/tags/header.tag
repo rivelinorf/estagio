@@ -4,6 +4,8 @@
 <%@ attribute name="actionFiltrar" required="false"
 	type="java.lang.Boolean"%>
 <%@ attribute name="actionNovo" required="false" type="java.lang.String"%>
+<%@ attribute name="actionLimpar" required="false"
+	type="java.lang.String"%>
 <%@ attribute name="actionSalvar" required="false"
 	type="java.lang.Boolean"%>
 <%@ attribute name="actionFechar" required="false"
@@ -32,10 +34,20 @@
 			</button>
 		</c:if>
 		<c:if test="${not empty formId}">
-			<button class="main-btn" id="limpar">
-				<i class="fas fa-eraser"></i> Limpar
-			</button>
+			<c:choose>
+				<c:when test="${not empty actionLimpar}">
+					<button class="main-btn" id="limpar" onclick="location.href='${actionLimpar}'">
+						<i class="fas fa-eraser"></i> Limpar
+					</button>
+				</c:when>
+				<c:otherwise>
+					<button class="main-btn" id="limpar">
+						<i class="fas fa-eraser"></i> Limpar
+					</button>
+				</c:otherwise>
+			</c:choose>
 		</c:if>
+
 
 		<c:if test="${actionFechar}">
 			<button class="main-btn" onclick="location.href='/views/home.jsp'">

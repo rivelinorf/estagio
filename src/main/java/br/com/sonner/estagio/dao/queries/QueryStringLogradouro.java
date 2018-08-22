@@ -25,7 +25,7 @@ public class QueryStringLogradouro {
 
         public Builder cidade(Long cidade) {
             if (cidade != null ) {
-                this.sql += "and logradouro_cidade_fk LIKE '" + cidade + "%' ";
+                this.sql += "and logradouro_cidade_fk = " + cidade;
             }
 
             return this;
@@ -33,7 +33,7 @@ public class QueryStringLogradouro {
 
         public Builder tipologradouro(Long tipologradouro) {
             if (tipologradouro != null ) {
-                this.sql += "and logradouro_tipo_fk LIKE '" + tipologradouro + "%' ";
+                this.sql += "and logradouro_tipo_fk = " + tipologradouro;
             }
 
             return this;
