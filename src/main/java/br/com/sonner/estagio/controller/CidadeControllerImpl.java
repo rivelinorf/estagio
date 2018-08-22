@@ -65,8 +65,8 @@ public class CidadeControllerImpl implements CidadeController {
             erros.add("Não é possivel ter uma cidade sem CEP");
         }
 
-        if (cidade.getCep().length() > 10) {
-            erros.add("Sigla da cidade não pode exceder 10 caracteres");
+        if (cidade.getCep().length() < 10 && cidade.getCep().length() > 0) {
+            erros.add("Cep invalido");
         }
 
         if (cidade.getEstado() == null) {

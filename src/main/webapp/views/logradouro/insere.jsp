@@ -42,6 +42,7 @@
                     <div>Cidade:</div>
                     <select name="cidade" class="form-control">
                         <option value="-1">Selecione uma opção...</option>
+
                         <c:forEach items="${cidadesCtl.all}" var="cidade">
                             <option value="${cidade.id}">${cidade.nome}</option>
                         </c:forEach>

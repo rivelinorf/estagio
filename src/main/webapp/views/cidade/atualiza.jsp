@@ -45,7 +45,10 @@
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						value="<%=vo.getCep()%>" style="width: 20.2%;"
+
 						onKeyPress="MascaraCep(form1.cep);" maxlength="10">
+
+						onKeyPress="MascaraCep(form1.cep);" maxlength="10"placeholder="Ex.: 00.000-000">
 				</div>
 				<div class="form-row">
 					<div>Estado:</div>
