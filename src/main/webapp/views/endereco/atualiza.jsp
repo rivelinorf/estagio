@@ -2,7 +2,8 @@
 <%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO"%>
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO"%>
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -18,7 +19,8 @@
 	class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 <%
 	EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
-	LogradouroFiltroVO logradourovo = (LogradouroFiltroVO) session.getAttribute("filtroLogradouro_atualizaEndereco");
+	LogradouroFiltroVO logradourovo = (LogradouroFiltroVO) session
+			.getAttribute("filtroLogradouro_atualizaEndereco");
 	BairroFiltroVO bairrovo = (BairroFiltroVO) session.getAttribute("filtroBairro_atualizaEndereco");
 	CidadeFiltroVO cidadevo = (CidadeFiltroVO) session.getAttribute("filtroCidade_atualizaEndereco");
 
@@ -50,62 +52,14 @@
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
+<script type="text/javascript" src="/assets/js/MascaraValidacao.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 
-		<script>
-		function mascaraInteiro(){
-	        if (event.keyCode < 48 || event.keyCode > 57){
-	                event.returnValue = false;
-	                return false;
-	        }
-	        return true;
-		}
-		function MascaraCep(cep){
-            if(mascaraInteiro(cep)==false){
-            event.returnValue = false;
-   	 	}       
-    		return formataCampo(cep, '00.000-000', event);
-		}
-		
-		
-		function formataCampo(campo, Mascara, evento) { 
-	        var boleanoMascara; 
-
-	        var Digitato = evento.keyCode;
-	        exp = /\-|\.|\/|\(|\)| /g
-	        campoSoNumeros = campo.value.toString().replace( exp, "" ); 
-
-	        var posicaoCampo = 0;    
-	        var NovoValorCampo="";
-	        var TamanhoMascara = campoSoNumeros.length;; 
-
-	        if (Digitato != 8) { // backspace 
-	                for(i=0; i<= TamanhoMascara; i++) { 
-	                        boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
-	                                                                || (Mascara.charAt(i) == "/")) 
-	                        boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
-	                                                                || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
-	                        if (boleanoMascara) { 
-	                                NovoValorCampo += Mascara.charAt(i); 
-	                                  TamanhoMascara++;
-	                        }else { 
-	                                NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
-	                                posicaoCampo++; 
-	                          }              
-	                  }      
-	                campo.value = NovoValorCampo;
-	                  return true; 
-	        }else { 
-	                return true; 
-	        }
-		}
-	
-		</script>
-
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Editar endereÃ§o" actionSalvar="true"
+		<sge:header titulo="Editar endereço" actionSalvar="true"
 			formId="edit-form" actionFechar="true">
 		</sge:header>
 
@@ -117,10 +71,11 @@
 				<select name="estado" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/atualiza-endereco?estado='+this.value">
-					<option value="">Selecione uma opÃ§Ã£o...</option>
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
-							<c:when test="${estado.id == filtroCidade_atualizaEndereco.estado}">
+							<c:when
+								test="${estado.id == filtroCidade_atualizaEndereco.estado}">
 								<option value="${estado.id}" selected>${estado.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -136,10 +91,11 @@
 				<select name="cidade" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/atualiza-endereco?cidade='+this.value">
-					<option value="">Selecione uma opÃ§Ã£o...</option>
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${listaCidade_atualizaEndereco}" var="cidade">
 						<c:choose>
-							<c:when test="${cidade.id == filtroBairro_atualizaEndereco.cidade}">
+							<c:when
+								test="${cidade.id == filtroBairro_atualizaEndereco.cidade}">
 								<option value="${cidade.id}" selected>${cidade.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -154,14 +110,14 @@
 		</form>
 
 		<div class="div-form">
-			<form name="form1" action="/atualiza-endereco?id=<%=vo.getId()%>" method="post"
-				id="edit-form" style="width: 100%">
+			<form name="form1" action="/atualiza-endereco?id=<%=vo.getId()%>"
+				method="post" id="edit-form" style="width: 100%">
 
 				<div class="form-row">
 					<div>Bairro:</div>
 					<select name="bairro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${listaBairro_atualizaEndereco}" var="bairro">
 							<c:choose>
 								<c:when test="${bairro.id == filtroBairro_atualizaEndereco.id}">
@@ -179,7 +135,7 @@
 					<div>Tipo de Logradouro:</div>
 					<select name="tipologradouro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${tipologradouros.all}" var="tipologradouro">
 							<c:choose>
 								<c:when
@@ -201,7 +157,7 @@
 				</div>
 
 				<div class="form-row">
-					<div>NÃºmero:</div>
+					<div>Número:</div>
 					<input type="number" name="numero" placeholder="Ex.: 111"
 						class="form-control" value="<%=vo.getNumero()%>">
 				</div>
@@ -209,8 +165,8 @@
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" placeholder="Ex.: 00.000-000"
-						class="form-control" value="<%=vo.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
-						maxlength="10">
+						class="form-control" value="<%=vo.getCep()%>"
+						onKeyPress="MascaraCep(form1.cep);" maxlength="10">
 				</div>
 
 				<div class="form-row">

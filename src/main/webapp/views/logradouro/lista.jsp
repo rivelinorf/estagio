@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="logradouroCtl" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
@@ -19,6 +20,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <style type="text/css">
         .form-control {
             background-color: rgb(46, 46, 46);
@@ -44,7 +46,7 @@
             <div class="form-row">
                 <div>Tipo de Logradouro:</div>
                 <select name="tipologradouro" class="form-control">
-                    <option value="">Selecione uma opÃ§Ã£o...</option>
+                    <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>
                             <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro}">
@@ -68,7 +70,7 @@
                 <div>Cidade:</div>
                 <select name="cidade" class="form-control "
                         style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opÃ§Ã£o...</option>
+                    <option value="">Selecione uma opção...</option>
                     <c:forEach items="${cidadesCtl.all}" var="cidade">
                         <c:choose>
                             <c:when test="${cidade.id == filtroLogradouro.cidade}">
@@ -126,7 +128,7 @@
                         <button type="button" class="main-btn btn-black" id="deletar" data-dismiss="modal"
                                 onclick="location.href = '/deleta-logradouro?id='+this.value">Sim
                         </button>
-                        <button type="button" class="main-btn btn-red" data-dismiss="modal">NÃ£o</button>
+                        <button type="button" class="main-btn btn-red" data-dismiss="modal">Não</button>
                     </div>
                 </div>
             </div>

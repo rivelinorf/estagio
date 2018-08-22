@@ -41,27 +41,24 @@ public class Insere extends HttpServlet {
 		BairroControllerImpl bairroController = new BairroControllerImpl();
 		BairroFiltroVO bairrovo = new BairroFiltroVO();
 
-		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
-
 		HttpSession session = request.getSession();
-				
+
+		cidadevo.setCep("");
+		cidadevo.setEstado(null);
+		cidadevo.setId(null);
+		cidadevo.setNome("");
+		cidadevo.setSigla("");
+
+		bairrovo.setCidade(null);
+		bairrovo.setId(null);
+		bairrovo.setNome("");
 
 		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
 			cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
-			cidadevo.setNome("");
-			cidadevo.setSigla("");
-			cidadevo.setCep("");
-
-			bairrovo.setCidade(null);
-			bairrovo.setNome("");
-
-			logradourovo.setNome("");
-			logradourovo.setCidade(null);
-			logradourovo.setTipologradouro(null);
 
 			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
 			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
-
+			
 		}
 
 		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
@@ -69,21 +66,30 @@ public class Insere extends HttpServlet {
 			Cidade cidade = cidadeController.getOne(id);
 
 			bairrovo.setCidade(cidade.getId());
-			bairrovo.setNome("");
 
 			cidadevo.setEstado(cidade.getEstado().getId());
-			cidadevo.setNome("");
-			cidadevo.setSigla("");
-			cidadevo.setCep("");
 
-			logradourovo.setNome("");
-			logradourovo.setCidade(null);
-			logradourovo.setTipologradouro(null);
+			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+
+			session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+			session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
 
 		}
 
-		session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-		session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+		if (cidadevo.getEstado() == null) {
+
+			session.setAttribute("listaCidade_insereEndereco", null);
+			session.setAttribute("filtroCidade_insereEndereco", null);
+			
+
+			if (bairrovo.getCidade() == null) {
+
+				session.setAttribute("listaBairro_insereEndereco", null);
+				session.setAttribute("filtroBairro_insereEndereco",null);
+			}
+
+		}
 
 		response.sendRedirect("/views/endereco/insere.jsp");
 	}

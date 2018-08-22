@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="estadoController" class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
@@ -16,6 +17,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 
@@ -37,9 +39,9 @@
                 <input type="text" name="estado" class="form-control" style="background-color: rgb(46,46,46)"
                        id="pesquisa-estado-nome" value="<%= vo.getEstado() %>"></div>
             <div class="form-row">
-                <div>AbreviaÃ§Ã£o:</div>
+                <div>Abreviação:</div>
                 <input type="text" name="abv" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-estado-abv" value="<%= vo.getAbv() %>"></div>
+                       id="pesquisa-estado-abv" value="<%= vo.getAbv() %>" maxlength="2"></div>
         </form>
     </div>
     <div class="content">
@@ -48,7 +50,7 @@
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>AbreviaÃ§Ã£o</th>
+                <th>Abreviação</th>
             </tr>
             </thead>
             <tbody>
@@ -81,7 +83,7 @@
                         <button type="button" class="main-btn btn-black" id="deletar" data-dismiss="modal"
                                 onclick="location.href = '/estado-deleta?id='+this.value">Sim
                         </button>
-                        <button type="button" class="main-btn btn-red" data-dismiss="modal">NÃ£o</button>
+                        <button type="button" class="main-btn btn-red" data-dismiss="modal">Não</button>
                     </div>
                 </div>
             </div>

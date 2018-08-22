@@ -28,23 +28,28 @@ public class Atualiza extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO vo = new CidadeFiltroVO();
-        BairroFiltroVO bairrovo = new BairroFiltroVO();
         
-        if (request.getParameter("estado") != "") {
+		vo.setCep("");
+		vo.setEstado(null);
+		vo.setId(null);
+		vo.setNome("");
+		vo.setSigla("");
+		
+		HttpSession session = request.getSession();
+        
+        if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
             vo.setEstado(Long.valueOf(request.getParameter("estado")));
-    		vo.setNome("");
-    		vo.setSigla("");
-    		vo.setCep("");
-    		
-    		bairrovo.setCidade(null);
-    		bairrovo.setId(null);
-    		bairrovo.setNome("");
-        }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("bairroParaEditar", bairrovo);
-        session.setAttribute("filtroCidade_atualiza", vo);
-        session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(vo));
+   		    session.setAttribute("filtroCidade_atualiza", vo);
+            session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(vo));
+        }
+        
+        if (vo.getEstado() == null) {
+
+        session.setAttribute("bairroParaEditar", null);
+        session.setAttribute("filtroCidade_atualiza", null);
+        session.setAttribute("listaCidade_atualiza", null);
+        }
 
         response.sendRedirect("/views/bairro/atualiza.jsp");
     }

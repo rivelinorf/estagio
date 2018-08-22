@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -9,7 +10,7 @@
 	class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
 
 <%
-	CidadeFiltroVO vo = (CidadeFiltroVO) session.getAttribute("filtroCidade_insere");
+	CidadeFiltroVO vo = (CidadeFiltroVO) session.getAttribute("filtroCidade_insereBairro");
 
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
@@ -23,12 +24,13 @@
 <html>
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 
 	<div class="main">
-		<sge:header titulo="Inserir novo Bairro" actionSalvar="true"
+		<sge:header titulo="Inserir novo Bairro" actionSalvar="true" actionLimpar="/insere-bairro"
 			formId="insere-form" actionFechar="true">
 		</sge:header>
 
@@ -40,10 +42,10 @@
 				<select name="estado" class="form-control"
 					style="background-color: rgb(46, 46, 46)" id="estadoid"
 					onclick="location.href = '/insere-bairro?estado='+this.value">
-					<option value="">Selecione uma opÃ§Ã£o...</option>
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
-							<c:when test="${estado.id == filtroCidade_insere.estado}">
+							<c:when test="${estado.id == filtroCidade_insereBairro.estado}">
 								<option value="${estado.id}" selected>${estado.nome}</option>
 							</c:when>
 							<c:otherwise>
@@ -63,8 +65,8 @@
 					<div>Cidade:</div>
 					<select name="cidadeID" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
-						<c:forEach items="${listaCidade_insere}" var="cidade">
+						<option value="">Selecione uma opção...</option>
+						<c:forEach items="${listaCidade_insereBairro}" var="cidade">
 							<option value="${cidade.id}">${cidade.nome}</option>
 
 						</c:forEach>

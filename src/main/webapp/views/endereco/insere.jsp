@@ -1,6 +1,7 @@
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO"%>
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@page contentType="text/html; charset=iso-8859-1"
+	pageEncoding="iso-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags"%>
@@ -41,69 +42,15 @@
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
 
-<script type="text/javascript" src="MascaraValidacao.js"></script>
+<script type="text/javascript" src="/assets/js/MascaraValidacao.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir novo Endereco" actionSalvar="true"
+		<sge:header titulo="Inserir novo Endereco" actionSalvar="true" actionLimpar="/insere-endereco"
 			formId="insere-form" actionFechar="true">
 		</sge:header>
-
-		<script>
-		function mascaraInteiro(){
-	        if (event.keyCode < 48 || event.keyCode > 57){
-	                event.returnValue = false;
-	                return false;
-	        }
-	        return true;
-		}
-		function MascaraCep(cep){
-            if(mascaraInteiro(cep)==false){
-            event.returnValue = false;
-   	 	}       
-    		return formataCampo(cep, '00.000-000', event);
-		}
-		
-		function ValidaCep(cep){
-	        exp = /\d{2}\.\d{3}\-\d{3}/
-	        if(!exp.test(cep.value))
-	                alert('Numero de Cep Invalido!');               
-		}
-		
-		function formataCampo(campo, Mascara, evento) { 
-	        var boleanoMascara; 
-
-	        var Digitato = evento.keyCode;
-	        exp = /\-|\.|\/|\(|\)| /g
-	        campoSoNumeros = campo.value.toString().replace( exp, "" ); 
-
-	        var posicaoCampo = 0;    
-	        var NovoValorCampo="";
-	        var TamanhoMascara = campoSoNumeros.length;; 
-
-	        if (Digitato != 8) { // backspace 
-	                for(i=0; i<= TamanhoMascara; i++) { 
-	                        boleanoMascara  = ((Mascara.charAt(i) == "-") || (Mascara.charAt(i) == ".")
-	                                                                || (Mascara.charAt(i) == "/")) 
-	                        boleanoMascara  = boleanoMascara || ((Mascara.charAt(i) == "(") 
-	                                                                || (Mascara.charAt(i) == ")") || (Mascara.charAt(i) == " ")) 
-	                        if (boleanoMascara) { 
-	                                NovoValorCampo += Mascara.charAt(i); 
-	                                  TamanhoMascara++;
-	                        }else { 
-	                                NovoValorCampo += campoSoNumeros.charAt(posicaoCampo); 
-	                                posicaoCampo++; 
-	                          }              
-	                  }      
-	                campo.value = NovoValorCampo;
-	                  return true; 
-	        }else { 
-	                return true; 
-	        }
-	}
-	
-		</script>
 
 		<form action="/insere-endereco" method="get" id="filter-form"
 			style="width: 100%;">
@@ -113,6 +60,7 @@
 				<select name="estado" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/insere-endereco?estado='+this.value">
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${estados.all}" var="estado">
 						<c:choose>
 							<c:when test="${estado.id == filtroCidade_insereEndereco.estado}">
@@ -131,7 +79,7 @@
 				<select name="cidade" class="form-control"
 					style="background-color: rgb(46, 46, 46)"
 					onclick="location.href = '/insere-endereco?cidade='+this.value">
-					<option value="">Selecione uma opÃ§Ã£o...</option>
+					<option value="">Selecione uma opção...</option>
 					<c:forEach items="${listaCidade_insereEndereco}" var="cidade">
 						<c:choose>
 							<c:when test="${cidade.id == filtroBairro_insereEndereco.cidade}">
@@ -156,7 +104,7 @@
 					<div>Bairro:</div>
 					<select name="bairro" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${listaBairro_insereEndereco}" var="bairro">
 							<option value="${bairro.id}">${bairro.nome}</option>
 						</c:forEach>
@@ -166,7 +114,7 @@
 				<div class="form-row">
 					<div>Tipo de Logradouro:</div>
 					<select name="tipologradouro" class="form-control">
-						<option value="">Selecione uma opÃ§Ã£o...</option>
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${tipologradouros.all}" var="tipologradouro">
 							<option value="${tipologradouro.id}">${tipologradouro.nome}</option>
 						</c:forEach>
@@ -179,7 +127,7 @@
 				</div>
 
 				<div class="form-row">
-					<div>NÃºmero:</div>
+					<div>Número:</div>
 					<input type="number" name="numero" placeholder="Ex.: 111"
 						class="form-control">
 				</div>
