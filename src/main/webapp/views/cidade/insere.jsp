@@ -24,16 +24,17 @@
 				id="insere-form" style="width: 100%;">
 				<div class="form-row">
 					<div>Nome:</div>
-					<input type="text" name="nome" class="form-control">
+					<input type="text" name="nome" class="form-control" maxlength="50"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 				<div class="form-row">
-					<div>Sigla:</div>
-					<input type="text" name="sigla" class="form-control"
-						style="width: 20.2%;" maxlength="2">
+					<div>Código:</div>
+					<input type="text" name="codigo" class="form-control"
+						style="width: 20.2%;" maxlength="2" onKeyPress="mascaraInteiro()">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						style="width: 20.2%" onKeyPress="MascaraCep(form1.cep);"
-						maxlength="10"placeholder="Ex.: 00.000-000">
+						maxlength="10" placeholder="Ex.: 00.000-000">
 				</div>
 				<div class="form-row">
 					<div>Estado:</div>

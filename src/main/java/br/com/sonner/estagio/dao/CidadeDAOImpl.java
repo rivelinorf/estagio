@@ -146,7 +146,7 @@ public class CidadeDAOImpl implements CidadeDAO {
 	public List<Cidade> pesquisaCidade(CidadeFiltroVO vo) {
 		try {
 			QueryStringCidade queryString = new QueryStringCidade.Builder().cidade(vo.getNome()).cep(vo.getCep())
-					.sigla(vo.getSigla()).estado(vo.getEstado()).build();
+					.codigo(vo.getCod()).estado(vo.getEstado()).build();
 
 			PreparedStatement statement = connection.prepareStatement(queryString.getSql());
 			ResultSet resultSet = statement.executeQuery();

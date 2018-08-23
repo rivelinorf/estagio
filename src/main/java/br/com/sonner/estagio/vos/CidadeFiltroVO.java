@@ -4,7 +4,7 @@ public class CidadeFiltroVO {
     private Long id;
     private String nome;
     private String cep;
-    private String sigla;
+    private String codigo;
     private Long estado;
 
     public Long getId() {
@@ -31,12 +31,12 @@ public class CidadeFiltroVO {
         this.cep = cep;
     }
 
-    public String getSigla() {
-        return sigla;
+    public String getCod() {
+        return codigo;
     }
 
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setCod(String codigo) {
+        this.codigo = codigo;
     }
 
     public Long getEstado() {

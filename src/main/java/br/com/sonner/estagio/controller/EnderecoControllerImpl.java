@@ -71,6 +71,10 @@ public class EnderecoControllerImpl implements EnderecoController {
 		if (endereco.getCep().length() < 10 && endereco.getCep().length() > 0) {
 			erros.add("CEP inválido");
 		}
+		
+		if (endereco.getCep().length() == 0) {
+			erros.add("Não é possível ter um endereço sem CEP");
+		}
 
 		if (endereco.getBairro() == null) {
 			erros.add("Impossível ter uma endereço sem bairro");

@@ -26,7 +26,7 @@
 	if (cidadevo == null) {
 		cidadevo = new CidadeFiltroVO();
 		cidadevo.setNome("");
-		cidadevo.setSigla("");
+		cidadevo.setCod("");
 		cidadevo.setCep("");
 		cidadevo.setEstado(null);
 	}
@@ -40,8 +40,9 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Editar bairro" actionSalvar="true" actionLimpar="/atualiza-bairro"
-			formId="edit-form" actionFechar="true">
+		<sge:header titulo="Editar bairro" actionSalvar="true"
+			actionLimpar="/bairro/preenche-vo" formId="edit-form"
+			actionFechar="true">
 		</sge:header>
 
 		<form action="/atualiza-bairro" method="get" id="filter-form"
@@ -90,8 +91,9 @@
 
 				<div class="form-row">
 					<div>Nome:</div>
-					<input type="text" name="nome" class="form-control"
-						value="<%=bairrovo.getNome()%>">
+					<input type="text" name="nome" class="form-control" maxlength="50"
+						value="<%=bairrovo.getNome()%>"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 
 			</form>

@@ -41,7 +41,7 @@ public class Deleta extends HttpServlet {
         }
 
         vo.setNome("");
-        vo.setSigla("");
+        vo.setCod("");
         vo.setCep("");
         vo.setEstado(null);
 

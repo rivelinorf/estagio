@@ -26,16 +26,17 @@
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 		<sge:header titulo="Pesquisa de Bairros" page="bairro"
-			actionFiltrar="true" actionNovo="/insere-bairro"
-			formId="filter-form" actionFechar="true">
+			actionFiltrar="true" actionNovo="/insere-bairro" formId="filter-form"
+			actionFechar="true">
 		</sge:header>
 
 		<div class="div-form">
 			<form action="/pesquisa-bairro" method="get" id="filter-form">
 				<div class="form-row">
 					<div>Nome:</div>
-					<input type="text" name="nome" class="form-control"
-						value="<%=vo.getNome()%>">
+					<input type="text" name="nome" class="form-control" maxlength="50"
+						value="<%=vo.getNome()%>"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 
 				<div class="form-row">
@@ -74,9 +75,10 @@
 						<tr>
 							<td id="botoes" width="150px" style="text-align: center">
 
-                        <button class="main-btn btn-editar"
-                                onclick="location.href='/bairro/preenche-vo?id=${bairro.id}'"><i
-                                class="fas fa-pen-square"></i></button>
+								<button class="main-btn btn-editar"
+									onclick="location.href='/bairro/preenche-vo?id=${bairro.id}'">
+									<i class="fas fa-pen-square"></i>
+								</button>
 								<button class="main-btn btn-red" value="${bairro.id}"
 									data-toggle="modal" data-target="#confirm-modal" type="button"
 									onclick="$('#deletar').val(this.value)">

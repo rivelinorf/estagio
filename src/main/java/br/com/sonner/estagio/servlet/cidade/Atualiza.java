@@ -29,7 +29,7 @@ public class Atualiza extends HttpServlet {
         novaCidade.setId(Long.valueOf(request.getParameter("id")));
         novaCidade.setNome(request.getParameter("cidade"));
         novaCidade.setCep(request.getParameter("cep"));
-        novaCidade.setCod(request.getParameter("sigla"));
+        novaCidade.setCod(request.getParameter("codigo"));
         novaCidade.setEstado(estadoController.getOne(Long.valueOf(request.getParameter("estado"))));
 
         List<String> erros = cidadeController.validation(novaCidade);
@@ -38,7 +38,7 @@ public class Atualiza extends HttpServlet {
             cidadeController.update(novaCidade);
 
             vo.setNome("");
-            vo.setSigla("");
+            vo.setCod("");
             vo.setCep("");
             vo.setEstado(null);
 

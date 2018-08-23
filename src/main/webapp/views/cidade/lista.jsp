@@ -10,7 +10,7 @@
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 		vo.setCep("");
 		vo.setEstado(null);
 	}
@@ -33,22 +33,23 @@
 		</sge:header>
 		<div class="div-form">
 			<form name="form1" action=" /pesquisa-cidade" method="get"
-				id="filter-form" style="width: 50%;">
+				id="filter-form" style="width: 60%;">
 				<div class="form-row">
 					<div>Cidade:</div>
 					<input type="text" name="cidade" class="form-control"
-						id="pesquisa-cidade-nome" value="<%=vo.getNome()%>">
+						maxlength="50" id="pesquisa-cidade-nome" value="<%=vo.getNome()%>"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 				<div class="form-row">
-					<div>Sigla:</div>
-					<input type="text" name="sigla" class="form-control"
-						id="pesquisa-cidade-sigla" value="<%=vo.getSigla()%>"
-						style="width: 10.8%" maxlength="2">
+					<div>Código:</div>
+					<input type="text" name="codigo" class="form-control"
+						id="pesquisa-cidade-sigla" value="<%=vo.getCod()%>"
+						style="width: 20.2%" maxlength="2" onKeyPress="mascaraInteiro()">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						id="pesquisa-cidade-cep" value="<%=vo.getCep()%>"
 						onKeyPress="MascaraCep(form1.cep);" maxlength="10"
-						style="width: 29.0%;"placeholder="Ex.: 00.000-000">
+						style="width: 20.2%;" placeholder="Ex.: 00.000-000">
 				</div>
 
 
@@ -80,7 +81,7 @@
 					<tr>
 						<th></th>
 						<th>Cidade</th>
-						<th>Sigla</th>
+						<th>Código</th>
 						<th>Cep</th>
 						<th>Estado</th>
 					</tr>

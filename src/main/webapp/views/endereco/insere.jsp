@@ -22,7 +22,7 @@
 	if (cidadevo == null) {
 		cidadevo = new CidadeFiltroVO();
 		cidadevo.setNome("");
-		cidadevo.setSigla("");
+		cidadevo.setCod("");
 		cidadevo.setCep("");
 		cidadevo.setEstado(null);
 	}
@@ -48,8 +48,9 @@
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
-		<sge:header titulo="Inserir novo Endereco" actionSalvar="true" actionLimpar="/insere-endereco"
-			formId="insere-form" actionFechar="true">
+		<sge:header titulo="Inserir novo Endereco" actionSalvar="true"
+			actionLimpar="/insere-endereco" formId="insere-form"
+			actionFechar="true">
 		</sge:header>
 
 		<form action="/insere-endereco" method="get" id="filter-form"
@@ -129,7 +130,7 @@
 				<div class="form-row">
 					<div>Número:</div>
 					<input type="number" name="numero" placeholder="Ex.: 111"
-						class="form-control"  maxlength="4">
+						class="form-control">
 				</div>
 
 				<div class="form-row">
@@ -141,7 +142,7 @@
 
 				<div class="form-row">
 					<div>Complemento:</div>
-					<input type="text" name="complemento" placeholder="(opcional)"
+					<input type="text" name="complemento" placeholder="(opcional)" maxlength="50"
 						class="form-control">
 				</div>
 			</form>

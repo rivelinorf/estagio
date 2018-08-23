@@ -22,30 +22,36 @@ public class Pesquisa extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-        EnderecoFiltroVO vo = new EnderecoFiltroVO();
+		EnderecoFiltroVO vo = new EnderecoFiltroVO();
 
-        vo.setCep(request.getParameter("cep"));
-        vo.setComplemento(request.getParameter("complemento"));
-		
-        if(request.getParameter("bairro") != "") {
-            vo.setBairro(Long.valueOf(request.getParameter("bairro")));
-        }
-        
-        if(request.getParameter("logradouro") != "") {
-            vo.setLogradouro(Long.valueOf(request.getParameter("logradouro")));
-        }
-        
-        if(request.getParameter("numero") != "") {
-            vo.setNumero(Integer.parseInt(request.getParameter("numero")));
-        }
+		vo.setCep(request.getParameter("cep"));
+		vo.setComplemento(request.getParameter("complemento"));
+
+		if (request.getParameter("bairro") != "" && request.getParameter("bairro") != null) {
+			vo.setBairro(Long.valueOf(request.getParameter("bairro")));
+		}
+
+		if (request.getParameter("logradouro") != "" && request.getParameter("logradouro") != null) {
+			vo.setLogradouro(Long.valueOf(request.getParameter("logradouro")));
+		}
+
+		if (request.getParameter("numero") != "" && request.getParameter("numero") != null) {
+			vo.setNumero(Integer.parseInt(request.getParameter("numero")));
+		}
 
 		HttpSession session = request.getSession();
-        session.setAttribute("filtroEndereco", vo);
-        session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
 
-        response.sendRedirect("/views/endereco/lista.jsp");
+		if (vo.getCep() == null && vo.getComplemento() == null && vo.getBairro() == null && vo.getLogradouro() == null
+				&& vo.getNumero() == null) {
+			session.setAttribute("filtroEndereco", null);
+			session.setAttribute("listaEndereco", null);
+		} else {
+			session.setAttribute("filtroEndereco", vo);
+			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+		}
+
+		response.sendRedirect("/views/endereco/lista.jsp");
 
 	}
 
 }
-
