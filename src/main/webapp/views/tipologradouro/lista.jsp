@@ -35,7 +35,7 @@
                 <div>Tipo de Logradouro:</div>
                 <input type="text" name="tipologradouro" class="form-control"
                        style="background-color: rgb(46, 46, 46)"
-                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>">
+                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>"onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
             </div>
         </form>
     </div>
