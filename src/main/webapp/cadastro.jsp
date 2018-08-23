@@ -16,7 +16,7 @@
 		<h1>Cadastro de Usuario</h1>
 		<div class="form-input">
 			<form action="/usuario-insere" method="post">
-				<input class="input" type="text" name="nome" placeholder="nome"><br>
+				<input class="input" type="text" name="email" placeholder="insira seu email"><br>
 				<br> <input class="input" type="text" name="usuario" placeholder="insira seu usuario"> <br>
 				<br> <input class="input" type="password" name="senha" placeholder="insira sua senha"> <br>
 				<br> <input class="login" type="submit" value="Cadastrar"><br>

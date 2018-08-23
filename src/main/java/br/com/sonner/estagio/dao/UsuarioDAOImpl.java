@@ -27,14 +27,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public void save(Usuario usuario) {
-        String sql = "insert into usuario (usuario, senha, nome) values (?, ?, ?)";
+        String sql = "insert into usuario (usuario, senha, email) values (?, ?, ?)";
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql);
 
             statement.setString(1, usuario.getUsuario());
             statement.setString(2, usuario.getSenha());
-            statement.setString(3, usuario.getNome());
+            statement.setString(3, usuario.getEmail());
 
             statement.execute();
             statement.close();
@@ -59,8 +59,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 aux = new Usuario();
 
                 aux.setId(rs.getLong("id"));
-                aux.setNome(rs.getString("nome"));
                 aux.setUsuario(rs.getString("usuario"));
+                aux.setSenha(rs.getString("senha"));
 
                 rs.close();
                 statement.close();

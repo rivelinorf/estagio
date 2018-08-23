@@ -12,27 +12,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-@SuppressWarnings("serial")
 @WebServlet("/usuario-logar")
 public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UsuarioController usuarioController = new UsuarioControllerImpl();
+        HttpSession sessao = request.getSession();
 
-        String usuario = request.getParameter("usuario");
-        String senha = request.getParameter("senha");
+        String usuario = null;
+        String senha = null;
 
-        RequestDispatcher rd = null;
+        if (request.getParameter("usuario") != null) {
+            usuario = request.getParameter("usuario");
+        }
+
+        if (request.getParameter("senha") != null) {
+            senha = request.getParameter("senha");
+        }
+
 
         Usuario user = new Usuario();
         user.setUsuario(usuario);
         user.setSenha(senha);
 
-        UsuarioController usuarioController = new UsuarioControllerImpl();
-        user = usuarioController.efetuaLogin(user);
-        HttpSession sessao = request.getSession();
-        sessao.setAttribute("USER", user);
-
-        if (user != null) {
+        List<String> erros = usuarioController.validationLog(user);
+        RequestDispatcher rd;
+        if (erros.size() == 0) {
+            user = usuarioController.efetuaLogin(user);
+            sessao.setAttribute("USER", user);
             rd = request.getRequestDispatcher("/views/home.jsp");
             rd.forward(request, response);
         } else {
