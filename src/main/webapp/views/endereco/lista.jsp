@@ -41,18 +41,29 @@
 
 				<div class="form-row">
 					<div>Número:</div>
-					<input type="number" name="numero" class="form-control"
-						value="<%=vo.getNumero()%>">
+					<%
+						if (vo.getNumero() == null) {
+					%>
+					<input type="text" name="numero" placeholder="Ex.: 111"
+						class="form-control" maxlength="4">
+					<%
+						} else {
+					%>
+					<input type="text" name="numero" placeholder="Ex.: 111"
+						class="form-control" maxlength="4" value="<%=vo.getNumero()%>">
+					<%
+						}
+					%>
 				</div>
 				<div class="form-row">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						value="<%=vo.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
-						maxlength="10">
+						maxlength="10" placeholder="Ex.: 00.000-000">
 				</div>
 				<div class="form-row">
 					<div>Complemento:</div>
-					<input type="text" name="complemento" class="form-control"
+					<input type="text" name="complemento" class="form-control" maxlength="50"
 						value="<%=vo.getComplemento()%>">
 				</div>
 				<div class="form-row">

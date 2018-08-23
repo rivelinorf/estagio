@@ -13,23 +13,31 @@ import java.io.IOException;
 
 @WebServlet("/pesquisa-cidade")
 public class Pesquisa extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-        CidadeFiltroVO vo = new CidadeFiltroVO();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+		CidadeFiltroVO vo = new CidadeFiltroVO();
 
-        vo.setNome(request.getParameter("cidade"));
-        vo.setCep(request.getParameter("cep"));
-        vo.setSigla(request.getParameter("sigla"));
-        System.out.println(request.getParameter("estado"));
+		vo.setNome(request.getParameter("cidade"));
+		vo.setCep(request.getParameter("cep"));
+		vo.setCod(request.getParameter("codigo"));
 
-        if (request.getParameter("estado") != "") {
-            vo.setEstado(Long.valueOf(request.getParameter("estado")));
-        }
+		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
+			vo.setEstado(Long.valueOf(request.getParameter("estado")));
+		}
 
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroCidade", vo);
-        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+		HttpSession session = request.getSession();
 
-        response.sendRedirect("/views/cidade/lista.jsp");
-    }
+		if (vo.getNome() == null && vo.getCep() == null && vo.getCod() == null && vo.getEstado() == null) {
+			session.setAttribute("filtroCidade", null);
+			session.setAttribute("listaCidade", null);
+		}
+
+		else {
+			session.setAttribute("filtroCidade", vo);
+			session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+		}
+
+		response.sendRedirect("/views/cidade/lista.jsp");
+	}
 }

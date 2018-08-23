@@ -33,7 +33,7 @@ public class Atualiza extends HttpServlet {
 		vo.setEstado(null);
 		vo.setId(null);
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 		
 		HttpSession session = request.getSession();
         
@@ -44,14 +44,6 @@ public class Atualiza extends HttpServlet {
             session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(vo));
         }
         
-        if (vo.getEstado() == null) {
-        	
-
-
-        session.setAttribute("filtroCidade_atualiza", null);
-        session.setAttribute("listaCidade_atualiza", null);
-        }
-
         response.sendRedirect("/views/bairro/atualiza.jsp");
     }
 

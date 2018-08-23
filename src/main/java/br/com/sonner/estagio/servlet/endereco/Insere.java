@@ -46,7 +46,7 @@ public class Insere extends HttpServlet {
 		cidadevo.setEstado(null);
 		cidadevo.setId(null);
 		cidadevo.setNome("");
-		cidadevo.setSigla("");
+		cidadevo.setCod("");
 
 		bairrovo.setCidade(null);
 		bairrovo.setId(null);
@@ -57,7 +57,7 @@ public class Insere extends HttpServlet {
 
 			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
 			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
-			
+
 		}
 
 		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
@@ -80,12 +80,11 @@ public class Insere extends HttpServlet {
 
 			session.setAttribute("listaCidade_insereEndereco", null);
 			session.setAttribute("filtroCidade_insereEndereco", null);
-			
 
 			if (bairrovo.getCidade() == null) {
 
 				session.setAttribute("listaBairro_insereEndereco", null);
-				session.setAttribute("filtroBairro_insereEndereco",null);
+				session.setAttribute("filtroBairro_insereEndereco", null);
 			}
 
 		}
@@ -114,21 +113,22 @@ public class Insere extends HttpServlet {
 		TipoLogradouro tipoLogradouro = null;
 		Cidade cidade = null;
 
-		if (req.getParameter("numero") != "") {
+		if (req.getParameter("numero") != "" && req.getParameter("numero") != null) {
 			numero = Integer.parseInt(req.getParameter("numero"));
 		}
 
-		if (req.getParameter("bairro") != "") {
+		if (req.getParameter("bairro") != "" && req.getParameter("bairro") != null) {
 			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
 			cidade = cidadeController.getOne(bairro.getCidade().getId());
 		}
 
-		if (req.getParameter("tipologradouro") != "") {
+		if (req.getParameter("tipologradouro") != "" && req.getParameter("tipologradouro") != null) {
 			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
 		}
 
-		if (req.getParameter("logradouro") != "") {
+		if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null && cidade != null
+				&& tipoLogradouro != null) {
 			String nomeLogradouro = req.getParameter("logradouro");
 			logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
 
@@ -171,7 +171,7 @@ public class Insere extends HttpServlet {
 
 			cidadevo.setEstado(null);
 			cidadevo.setNome("");
-			cidadevo.setSigla("");
+			cidadevo.setCod("");
 			cidadevo.setCep("");
 			cidadevo.setId(null);
 

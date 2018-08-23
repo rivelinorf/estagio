@@ -57,8 +57,8 @@ public class CidadeControllerImpl implements CidadeController {
             erros.add("Não é possivel ter cidade sem sigla");
         }
 
-        if (cidade.getCod().length() > 5) {
-            erros.add("Sigla da cidade não pode exceder 5 caracteres");
+        if (cidade.getCod().length() > 2) {
+            erros.add("Sigla da cidade não pode exceder 2 caracteres");
         }
 
         if (cidade.getCep().length() == 0) {

@@ -30,12 +30,12 @@
         <div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Configurações</button>
             <div class="dropdown-content">
-                <a href="/views/endereco/lista.jsp"><button type="button" class="main-btn btn-menu drop-btn" id="endereco">Endereco</button></a>
-                <a href="/views/estado/lista.jsp"><button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button></a>
-                <a href="/views/cidade/lista.jsp"> <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button></a>
-                <a href="/views/tipologradouro/lista.jsp"><button type="button" class="main-btn btn-menu drop-btn tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
-                <a href="/views/logradouro/lista.jsp"><button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro</button></a>
-                <a href="/views/bairro/lista.jsp"><button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button></a>
+                <a href="/pesquisa-endereco"><button type="button" class="main-btn btn-menu drop-btn" id="endereco">Endereco</button></a>
+                <a href="/pesquisa-estado"><button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button></a>
+                <a href="/pesquisa-cidade"> <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button></a>
+                <a href="/pesquisa-tipologradouro"><button type="button" class="main-btn btn-menu drop-btn tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
+                <a href="/pesquisa-logradouro"><button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro</button></a>
+                <a href="/pesquisa-bairro"><button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button></a>
             </div>
         </div>
     </div>

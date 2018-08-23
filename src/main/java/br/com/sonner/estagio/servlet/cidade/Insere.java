@@ -27,14 +27,14 @@ public class Insere extends HttpServlet {
         HttpSession session = req.getSession();
 
         Estado estado = estadoController.getOne(Long.valueOf(req.getParameter("estado")));
-        Cidade novaCidade = new Cidade(req.getParameter("nome"), req.getParameter("sigla"), req.getParameter("cep"), estado);
+        Cidade novaCidade = new Cidade(req.getParameter("nome"), req.getParameter("codigo"), req.getParameter("cep"), estado);
         List<String> erros = cidadeController.validation(novaCidade);
 
         if (erros.size() == 0) {
             cidadeController.save(novaCidade);
 
             vo.setNome("");
-            vo.setSigla("");
+            vo.setCod("");
             vo.setCep("");
             vo.setEstado(null);
             session.setAttribute("listaCidade", cidadeController.filtrar(vo));

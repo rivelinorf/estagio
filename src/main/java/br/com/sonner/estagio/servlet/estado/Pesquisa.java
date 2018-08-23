@@ -13,17 +13,26 @@ import java.io.IOException;
 
 @WebServlet("/pesquisa-estado")
 public class Pesquisa extends HttpServlet {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EstadoControllerImpl estadoController = new EstadoControllerImpl();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		EstadoControllerImpl estadoController = new EstadoControllerImpl();
 
-        EstadoFiltroVO vo = new EstadoFiltroVO();
-        vo.setEstado(request.getParameter("estado"));
-        vo.setAbv(request.getParameter("abv"));
+		EstadoFiltroVO vo = new EstadoFiltroVO();
+		vo.setEstado(request.getParameter("estado"));
+		vo.setAbv(request.getParameter("abv"));
 
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroEstado", vo);
-        session.setAttribute("listaEstado", estadoController.filtrar(vo));
+		HttpSession session = request.getSession();
 
-        response.sendRedirect("/views/estado/lista.jsp");
-    }
+		if (vo.getEstado() == null && vo.getAbv() == null) {
+			session.setAttribute("filtroEstado", null);
+			session.setAttribute("listaEstado", null);
+
+		} else {
+
+			session.setAttribute("filtroEstado", vo);
+			session.setAttribute("listaEstado", estadoController.filtrar(vo));
+		}
+
+		response.sendRedirect("/views/estado/lista.jsp");
+	}
 }

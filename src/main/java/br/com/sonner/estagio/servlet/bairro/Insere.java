@@ -35,7 +35,7 @@ public class Insere extends HttpServlet {
 		vo.setEstado(null);
 		vo.setId(null);
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 
 		HttpSession session = request.getSession();
 
@@ -83,7 +83,7 @@ public class Insere extends HttpServlet {
 
 			cidadevo.setEstado(null);
 			cidadevo.setNome("");
-			cidadevo.setSigla("");
+			cidadevo.setCod("");
 			cidadevo.setCep("");
 			cidadevo.setId(null);
 

@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
-
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 import javax.servlet.ServletException;
@@ -14,16 +13,24 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 @WebServlet("/pesquisa-tipologradouro")
 public class Pesquisa extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TipoLogradouroControllerImpl tipologradouroController = new TipoLogradouroControllerImpl();
-        
-        TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
-        vo.setNome(request.getParameter("tipologradouro"));
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroTipologradouro", vo);
-        session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(vo));
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		TipoLogradouroControllerImpl tipologradouroController = new TipoLogradouroControllerImpl();
 
-        response.sendRedirect("/views/tipologradouro/lista.jsp");
-    }
+		TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
+		vo.setNome(request.getParameter("tipologradouro"));
+
+		HttpSession session = request.getSession();
+
+		if (vo.getNome() == null) {
+			session.setAttribute("filtroTipologradouro", null);
+			session.setAttribute("listaTipologradouro", null);
+		} else {
+
+			session.setAttribute("filtroTipologradouro", vo);
+			session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(vo));
+		}
+
+		response.sendRedirect("/views/tipologradouro/lista.jsp");
+	}
 }

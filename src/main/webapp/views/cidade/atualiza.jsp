@@ -12,7 +12,7 @@
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 		vo.setCep("");
 		vo.setEstado(null);
 	}
@@ -36,16 +36,19 @@
 				<div class="form-row">
 					<div>Nome:</div>
 					<input type="text" name="cidade" class="form-control"
-						value="<%=vo.getNome()%>">
+						maxlength="50" value="<%=vo.getNome()%>"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 				<div class="form-row">
-					<div>Sigla:</div>
-					<input type="text" name="sigla" class="form-control"
-						value="<%=vo.getSigla()%>" style="width: 20.2%;" maxlength="2">
+					<div>Código:</div>
+					<input type="text" name="codigo" class="form-control"
+						value="<%=vo.getCod()%>" style="width: 20.2%;" maxlength="2"
+						onKeyPress="mascaraInteiro()">
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						value="<%=vo.getCep()%>" style="width: 20.2%;"
-						onKeyPress="MascaraCep(form1.cep);" maxlength="10">
+						onKeyPress="MascaraCep(form1.cep);" maxlength="10"
+						placeholder="Ex.: 00.000-000">
 				</div>
 				<div class="form-row">
 					<div>Estado:</div>

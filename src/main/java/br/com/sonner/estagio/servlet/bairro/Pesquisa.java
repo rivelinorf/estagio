@@ -22,19 +22,25 @@ public class Pesquisa extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		BairroControllerImpl bairroController = new BairroControllerImpl();
-        BairroFiltroVO vo = new BairroFiltroVO();
+		BairroFiltroVO vo = new BairroFiltroVO();
 
-        vo.setNome(request.getParameter("nome"));
-		
-        if(request.getParameter("cidadeID") != "") {
-            vo.setCidade(Long.valueOf(request.getParameter("cidadeID")));
-        }
+		vo.setNome(request.getParameter("nome"));
+
+		if (request.getParameter("cidadeID") != "" && request.getParameter("cidadeID") != null) {
+			vo.setCidade(Long.valueOf(request.getParameter("cidadeID")));
+		}
 
 		HttpSession session = request.getSession();
-        session.setAttribute("filtroBairro", vo);
-        session.setAttribute("listaBairro", bairroController.filtrar(vo));
 
-        response.sendRedirect("/views/bairro/lista.jsp");
+		if (vo.getCidade() == null && vo.getNome() == null) {
+			session.setAttribute("filtroBairro", null);
+			session.setAttribute("listaBairro", null);
+		} else {
+			session.setAttribute("filtroBairro", vo);
+			session.setAttribute("listaBairro", bairroController.filtrar(vo));
+		}
+
+		response.sendRedirect("/views/bairro/lista.jsp");
 
 	}
 

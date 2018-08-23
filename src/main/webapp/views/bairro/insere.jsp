@@ -15,7 +15,7 @@
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 		vo.setCep("");
 		vo.setEstado(null);
 	}
@@ -25,18 +25,20 @@
 <head>
 <jsp:include page="/includes/head.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="/assets/js/MascaraValidacao.js"></script>
 </head>
 <body>
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 
 	<div class="main">
-		<sge:header titulo="Inserir novo Bairro" actionSalvar="true" actionLimpar="/insere-bairro"
-			formId="insere-form" actionFechar="true">
+		<sge:header titulo="Inserir novo Bairro" actionSalvar="true"
+			actionLimpar="/insere-bairro" formId="insere-form"
+			actionFechar="true">
 		</sge:header>
 
 
-		<form action="/insere-bairro" method="get" id="filter-form"
-			style="width: 100%;">
+		<form name="form1" action="/insere-bairro" method="get"
+			id="filter-form" style="width: 100%;">
 			<div class="form-row">
 				<div>Estado:</div>
 				<select name="estado" class="form-control"
@@ -75,7 +77,8 @@
 
 				<div class="form-row">
 					<div>Nome:</div>
-					<input type="text" name="nome" class="form-control">
+					<input type="text" name="nome" class="form-control" maxlength="50"
+						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
 				</div>
 			</form>
 		</div>

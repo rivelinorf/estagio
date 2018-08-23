@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.servlet.logradouro;
 
 import java.io.IOException;
-import javax.servlet.ServletException;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,29 +13,31 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 @WebServlet("/pesquisa-logradouro")
 public class Pesquisa extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-        LogradouroFiltroVO vo = new LogradouroFiltroVO();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
+		LogradouroFiltroVO vo = new LogradouroFiltroVO();
 
-        vo.setNome(request.getParameter("logradouro"));
+		vo.setNome(request.getParameter("logradouro"));
 
+		if (request.getParameter("tipologradouro") != "" && request.getParameter("tipologradouro") != null) {
+			vo.setTipologradouro(Long.valueOf(request.getParameter("tipologradouro")));
+		}
 
-        if (request.getParameter("tipologradouro")!="") {
-            vo.setTipologradouro(Long.valueOf(request.getParameter("tipologradouro")));
-        }
+		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+			vo.setCidade(Long.valueOf(request.getParameter("cidade")));
+		}
 
-        if(request.getParameter("cidade")!=""){
-           vo.setCidade(Long.valueOf(request.getParameter("cidade")));
-        }
+		HttpSession session = request.getSession();
 
+		if (vo.getNome() == null && vo.getTipologradouro() == null && vo.getCidade() == null) {
+			session.setAttribute("filtroLogradouro", null);
+			session.setAttribute("listaLogradouro", null);
+		} else {
 
+			session.setAttribute("filtroLogradouro", vo);
+			session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+		}
 
-
-        HttpSession session = request.getSession();
-        session.setAttribute("filtroLogradouro", vo);
-        session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
-
-        response.sendRedirect("/views/logradouro/lista.jsp");
-    }
+		response.sendRedirect("/views/logradouro/lista.jsp");
+	}
 }

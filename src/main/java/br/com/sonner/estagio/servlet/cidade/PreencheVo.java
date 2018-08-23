@@ -22,7 +22,7 @@ public class PreencheVo extends HttpServlet {
         vo.setId(cidade.getId());
         vo.setNome(cidade.getNome());
         vo.setCep(cidade.getCep());
-        vo.setSigla(cidade.getCod());
+        vo.setCod(cidade.getCod());
         vo.setEstado(cidade.getEstado().getId());
 
 
