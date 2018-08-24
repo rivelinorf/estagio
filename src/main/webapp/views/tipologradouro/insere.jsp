@@ -22,7 +22,7 @@
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="nome" class="form-control"onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;"></div>
+                    <input type="text" name="nome" class="form-control"></div>
             </div>
         </form>
     </div>

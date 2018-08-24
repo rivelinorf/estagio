@@ -36,7 +36,7 @@
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>"onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
+                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>">
                 </div>
             </div>
 
