@@ -38,7 +38,7 @@
 					<div>Cidade:</div>
 					<input type="text" name="cidade" class="form-control"
 						maxlength="50" id="pesquisa-cidade-nome" value="<%=vo.getNome()%>"
-						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
+						onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
 				</div>
 				<div class="form-row">
 					<div>Código:</div>
