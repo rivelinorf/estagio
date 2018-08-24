@@ -36,17 +36,17 @@ public class Login extends HttpServlet {
         user.setUsuario(usuario);
         user.setSenha(senha);
 
-        List<String> erros = usuarioController.validationLog(user);
+        //List<String> erros = usuarioController.validationLog(user);
         RequestDispatcher rd;
-        if (erros.size() == 0) {
+       // if (erros.size() == 0) {
             user = usuarioController.efetuaLogin(user);
             sessao.setAttribute("USER", user);
             rd = request.getRequestDispatcher("/views/home.jsp");
             rd.forward(request, response);
-        } else {
+        /*} else {
             request.setAttribute("msg", "Usuário ou senha inválidos");
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
-        }
+        }*/
     }
 }

@@ -15,6 +15,7 @@ import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
@@ -52,7 +53,6 @@ public class Insere extends HttpServlet {
 			session.setAttribute("listaCidade_insereBairro", null);
 			session.setAttribute("filtroCidade_insereBairro", null);
 
-
 		}
 
 		response.sendRedirect("/views/bairro/insere.jsp");
@@ -76,23 +76,46 @@ public class Insere extends HttpServlet {
 		List<String> erros = bairroController.validation(bairro);
 
 		if (erros.size() == 0) {
-			bairroController.save(bairro);
 
 			vo.setNome("");
 			vo.setCidade(null);
+			vo.setId(null);
+			
+			vo.setCidade(bairro.getCidade().getId());
+			vo.setId(bairro.getId());
+			vo.setNome(bairro.getNome());
 
-			cidadevo.setEstado(null);
-			cidadevo.setNome("");
-			cidadevo.setCod("");
-			cidadevo.setCep("");
-			cidadevo.setId(null);
+			List<Bairro> verifica = bairroController.filtrar(vo);
 
-			session.setAttribute("listaBairro", bairroController.filtrar(vo));
-			session.setAttribute("filtroCidade_insereBairro", cidadevo);
-			session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(cidadevo));
-			session.setAttribute("success", "Bairro inserido com sucesso");
+			if (verifica.size() == 0) {
 
-			res.sendRedirect("/views/bairro/lista.jsp");
+				bairroController.save(bairro);
+
+				vo.setNome("");
+				vo.setCidade(null);
+				vo.setId(null);
+
+				cidadevo.setEstado(null);
+				cidadevo.setNome("");
+				cidadevo.setCod("");
+				cidadevo.setCep("");
+				cidadevo.setId(null);
+
+				session.setAttribute("listaBairro", bairroController.filtrar(vo));
+				session.setAttribute("filtroCidade_insereBairro", cidadevo);
+				session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(cidadevo));
+				session.setAttribute("success", "Bairro inserido com sucesso");
+
+				res.sendRedirect("/views/bairro/lista.jsp");
+			} else {
+				
+				String existe = "Bairro já cadastrado!";
+				
+				session.setAttribute("errors", existe);
+				session.setAttribute("filtroCidade_insereBairro", null);
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
+				requestDispatcher.forward(req, res);
+			}
 		} else {
 			session.setAttribute("errors", erros);
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");

@@ -1,15 +1,15 @@
 package br.com.sonner.estagio.vos;
 
 public class EstadoFiltroVO {
-    private long id;
+    private Long id;
     private String estado;
     private String abv;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

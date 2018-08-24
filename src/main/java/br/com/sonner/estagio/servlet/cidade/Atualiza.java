@@ -19,38 +19,76 @@ import java.util.List;
 
 @WebServlet("/atualiza-cidade")
 public class Atualiza extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-        CidadeFiltroVO vo = new CidadeFiltroVO();
-        EstadoController estadoController = new EstadoControllerImpl();
-        Cidade novaCidade = new Cidade();
-        HttpSession session = request.getSession();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+		CidadeFiltroVO vo = new CidadeFiltroVO();
+		EstadoController estadoController = new EstadoControllerImpl();
+		Cidade novaCidade = new Cidade();
+		HttpSession session = request.getSession();
 
-        novaCidade.setId(Long.valueOf(request.getParameter("id")));
-        novaCidade.setNome(request.getParameter("cidade"));
-        novaCidade.setCep(request.getParameter("cep"));
-        novaCidade.setCod(request.getParameter("codigo"));
-        novaCidade.setEstado(estadoController.getOne(Long.valueOf(request.getParameter("estado"))));
+		novaCidade.setId(Long.valueOf(request.getParameter("id")));
+		novaCidade.setNome(request.getParameter("cidade"));
+		novaCidade.setCep(request.getParameter("cep"));
+		novaCidade.setCod(request.getParameter("codigo"));
+		novaCidade.setEstado(estadoController.getOne(Long.valueOf(request.getParameter("estado"))));
 
-        List<String> erros = cidadeController.validation(novaCidade);
+		List<String> erros = cidadeController.validation(novaCidade);
 
-        if (erros.size() == 0) {
-            cidadeController.update(novaCidade);
+		if (erros.size() == 0) {
+			vo.setNome("");
+			vo.setCod("");
+			vo.setCep("");
+			vo.setEstado(null);
+			vo.setId(null);
 
-            vo.setNome("");
-            vo.setCod("");
-            vo.setCep("");
-            vo.setEstado(null);
+			vo.setNome(novaCidade.getNome());
+			vo.setEstado(novaCidade.getEstado().getId());
 
-            session.setAttribute("listaCidade", cidadeController.filtrar(vo));
-            session.setAttribute("success", "Cidade atualizada com sucesso");
+			List<Cidade> verificacidade = cidadeController.filtrar(vo);
 
-            response.sendRedirect("/views/cidade/lista.jsp");
-        } else {
-            session.setAttribute("errors", erros);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
-            requestDispatcher.forward(request, response);
-        }
+			vo.setCep(novaCidade.getCep());
 
-    }
+			CidadeFiltroVO cidadeantiga = (CidadeFiltroVO) session.getAttribute("cidadeParaEditar");
+
+			vo.setNome("");
+			vo.setEstado(null);
+
+			List<Cidade> verificacep = cidadeController.filtrar(vo);
+
+			if (verificacidade.size() == 0 && verificacep.size() == 0) {
+
+				cidadeController.update(novaCidade);
+
+				vo.setNome("");
+				vo.setCod("");
+				vo.setCep("");
+				vo.setEstado(null);
+
+				session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+				session.setAttribute("success", "Cidade atualizada com sucesso");
+
+				response.sendRedirect("/views/cidade/lista.jsp");
+
+			} else {
+
+				String existe = "";
+				if (verificacidade.size() > 0) {
+
+					existe = "Cidade já cadastrada!";
+				} else {
+					existe = "CEP já utilizado";
+				}
+				session.setAttribute("errors", existe);
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
+				requestDispatcher.forward(request, response);
+			}
+
+		} else {
+			session.setAttribute("errors", erros);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
+			requestDispatcher.forward(request, response);
+		}
+
+	}
 }

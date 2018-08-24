@@ -159,19 +159,46 @@ public class Atualiza extends HttpServlet {
 
 		if (erros.size() == 0) {
 
-			enderecoController.update(endereco);
-
+			vo.setId(null);
 			vo.setNumero(null);
 			vo.setCep("");
 			vo.setComplemento("");
 			vo.setBairro(null);
 			vo.setLogradouro(null);
 
-			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
-			session.setAttribute("success", "Endereço atualizado com sucesso");
+			vo.setNumero(endereco.getNumero());
+			vo.setCep(endereco.getCep());
+			vo.setComplemento(endereco.getComplemento());
+			vo.setBairro(endereco.getBairro().getId());
+			vo.setLogradouro(endereco.getLogradouro().getId());
 
-			res.sendRedirect("/views/endereco/lista.jsp");
+			List<Endereco> verifica = enderecoController.filtrar(vo);
 
+			if (verifica.size() == 0) {
+
+				enderecoController.update(endereco);
+
+				vo.setNumero(null);
+				vo.setCep("");
+				vo.setComplemento("");
+				vo.setBairro(null);
+				vo.setLogradouro(null);
+
+				session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+				session.setAttribute("success", "Endereço atualizado com sucesso");
+
+				res.sendRedirect("/views/endereco/lista.jsp");
+
+			}
+
+			else {
+
+				String existe = "Endereço já cadastrado!";
+
+				session.setAttribute("errors", existe);
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
+				requestDispatcher.forward(req, res);
+			}
 		}
 
 		else {

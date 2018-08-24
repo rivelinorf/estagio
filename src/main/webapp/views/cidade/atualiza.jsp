@@ -12,7 +12,7 @@
 	if (vo == null) {
 		vo = new CidadeFiltroVO();
 		vo.setNome("");
-		vo.setSigla("");
+		vo.setCod("");
 		vo.setCep("");
 		vo.setEstado(null);
 	}

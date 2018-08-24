@@ -156,8 +156,6 @@ public class Insere extends HttpServlet {
 
 		if (erros.size() == 0) {
 
-			enderecoController.save(endereco);
-
 			vo.setId(null);
 			vo.setNumero(null);
 			vo.setCep("");
@@ -165,24 +163,57 @@ public class Insere extends HttpServlet {
 			vo.setBairro(null);
 			vo.setLogradouro(null);
 
-			bairrovo.setCidade(null);
-			bairrovo.setNome("");
-			bairrovo.setId(null);
+			vo.setNumero(endereco.getNumero());
+			vo.setCep(endereco.getCep());
+			vo.setComplemento(endereco.getComplemento());
+			vo.setBairro(endereco.getBairro().getId());
+			vo.setLogradouro(endereco.getLogradouro().getId());
 
-			cidadevo.setEstado(null);
-			cidadevo.setNome("");
-			cidadevo.setCod("");
-			cidadevo.setCep("");
-			cidadevo.setId(null);
+			List<Endereco> verifica = enderecoController.filtrar(vo);
 
-			session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
-			session.setAttribute("filtroCidade_insereEndereco", cidadevo);
-			session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
-			session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-			session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
-			session.setAttribute("success", "Endereço inserido com sucesso");
+			if (verifica.size() == 0) {
 
-			res.sendRedirect("/views/endereco/lista.jsp");
+				enderecoController.save(endereco);
+
+				vo.setId(null);
+				vo.setNumero(null);
+				vo.setCep("");
+				vo.setComplemento("");
+				vo.setBairro(null);
+				vo.setLogradouro(null);
+
+				bairrovo.setCidade(null);
+				bairrovo.setNome("");
+				bairrovo.setId(null);
+
+				cidadevo.setEstado(null);
+				cidadevo.setNome("");
+				cidadevo.setCod("");
+				cidadevo.setCep("");
+				cidadevo.setId(null);
+
+				session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+				session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+				session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+				session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+				session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+				session.setAttribute("success", "Endereço inserido com sucesso");
+
+				res.sendRedirect("/views/endereco/lista.jsp");
+			}
+
+			else {
+
+				String existe = "Endereço já cadastrado!";
+
+				session.setAttribute("errors", existe);
+				session.setAttribute("filtroCidade_insereEndereco", null);
+				session.setAttribute("filtroBairro_insereEndereco", null);
+				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/insere.jsp");
+				requestDispatcher.forward(req, res);
+
+			}
+
 		} else {
 			session.setAttribute("errors", erros);
 			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/insere.jsp");
