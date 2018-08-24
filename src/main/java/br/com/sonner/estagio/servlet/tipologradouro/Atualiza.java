@@ -53,7 +53,7 @@ public class Atualiza extends HttpServlet {
                 String existe = "Tipo de logradouro já cadastrado!";
 
                 session.setAttribute("errors", existe);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
                 requestDispatcher.forward(request, response);
             }
 

@@ -48,7 +48,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${listaTipologradouro}" var="tipologradouro" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+            <c:forEach items="${listaTipologradouro}" var="tipologradouro">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar" onclick="location.href='/tipologradouro/preenche-vo?id=${tipologradouro.id}'">
