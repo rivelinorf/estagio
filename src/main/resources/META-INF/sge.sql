@@ -18,7 +18,7 @@ create table usuario (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         usuario VARCHAR(10),
         senha VARCHAR(10),
-        nome VARCHAR(50)
+        email VARCHAR(50)
 );
 
 create table if not exists estado (

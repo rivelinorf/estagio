@@ -3,6 +3,7 @@ package br.com.sonner.estagio.servlet.usuario;
 import br.com.sonner.estagio.controller.UsuarioControllerImpl;
 import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
+import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,35 +19,21 @@ import java.util.List;
 public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UsuarioController usuarioController = new UsuarioControllerImpl();
+        Usuario user = new Usuario();
         HttpSession sessao = request.getSession();
 
-        String usuario = null;
-        String senha = null;
-
-        if (request.getParameter("usuario") != null) {
-            usuario = request.getParameter("usuario");
-        }
-
-        if (request.getParameter("senha") != null) {
-            senha = request.getParameter("senha");
-        }
+        user.setUsuario(request.getParameter("usuario"));
+        user.setSenha(request.getParameter("senha"));
 
 
-        Usuario user = new Usuario();
-        user.setUsuario(usuario);
-        user.setSenha(senha);
-
-        //List<String> erros = usuarioController.validationLog(user);
-        RequestDispatcher rd;
-       // if (erros.size() == 0) {
-            user = usuarioController.efetuaLogin(user);
+        if (usuarioController.efetuaLogin(user) != null) {
             sessao.setAttribute("USER", user);
-            rd = request.getRequestDispatcher("/views/home.jsp");
-            rd.forward(request, response);
-        /*} else {
-            request.setAttribute("msg", "Usuário ou senha inválidos");
-            rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
-        }*/
+            response.sendRedirect("/views/home.jsp");
+
+        } else {
+            request.setAttribute("erros", "Usuário ou senha inválidos");
+            response.sendRedirect("index.jsp");
+        }
+
     }
 }

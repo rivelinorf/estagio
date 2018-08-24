@@ -3,6 +3,7 @@
 	pageEncoding="iso-8859-1"%>
 <html>
 <head>
+    <jsp:include page="/includes/head.jsp"></jsp:include>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/cadastro.css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -23,5 +24,6 @@
 			</form>
 		</div>
 	</div>
+	<jsp:include page="/includes/msg.jsp"></jsp:include>
 </body>
 </html>
