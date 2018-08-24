@@ -36,7 +36,7 @@
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>">
+                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
                 </div>
             </div>
 
