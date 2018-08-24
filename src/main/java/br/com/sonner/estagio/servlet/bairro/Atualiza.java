@@ -76,30 +76,37 @@ public class Atualiza extends HttpServlet {
 			vo.setId(null);
 
 			vo.setCidade(bairro.getCidade().getId());
-			vo.setId(bairro.getId());
 			vo.setNome(bairro.getNome());
-
-			BairroFiltroVO bairroantigo = (BairroFiltroVO) session.getAttribute("bairroParaEditar");
 
 			List<Bairro> verifica = bairroController.filtrar(vo);
 			if (verifica.size() == 0) {
 
 				bairroController.update(bairro);
-				
+
 				vo.setCidade(null);
 				vo.setNome("");
 				session.setAttribute("listaBairro", bairroController.filtrar(vo));
 				session.setAttribute("success", "Bairro atualizado com sucesso");
 				res.sendRedirect("/views/bairro/lista.jsp");
 
-
 			} else {
 
-				String existe = "Bairro já cadastrado!";
+				BairroFiltroVO bairroantigo = (BairroFiltroVO) session.getAttribute("bairroParaEditar");
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/atualiza.jsp");
-				requestDispatcher.forward(req, res);
+				if (vo.getCidade().equals(bairroantigo.getCidade()) && vo.getNome().equals(bairroantigo.getNome())) {
+					vo.setCidade(null);
+					vo.setNome("");
+					session.setAttribute("listaBairro", bairroController.filtrar(vo));
+					res.sendRedirect("/views/bairro/lista.jsp");
+
+				} else {
+
+					String existe = "Bairro já cadastrado!";
+
+					session.setAttribute("errors", existe);
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/atualiza.jsp");
+					requestDispatcher.forward(req, res);
+				}
 			}
 		}
 

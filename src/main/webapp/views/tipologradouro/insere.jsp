@@ -22,7 +22,7 @@
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="nome" class="form-control"></div>
+                    <input type="text" name="nome" class="form-control" onkeypress="return validString(String.fromCharCode(window.event.keyCode))"></div>
             </div>
         </form>
     </div>

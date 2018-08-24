@@ -25,6 +25,7 @@ public class Insere extends HttpServlet {
 		TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
 		HttpSession session = request.getSession();
 		TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
+		novo.setNome("");;
 
 		if (request.getParameter("nome") != "" && request.getParameter("nome") != null) {
 
