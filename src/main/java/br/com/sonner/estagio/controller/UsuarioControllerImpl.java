@@ -46,7 +46,7 @@ public class UsuarioControllerImpl implements UsuarioController {
 
         List<Usuario> listaUsuarios = this.filtrar(vo);
 
-        if (listaUsuarios != null) {
+        if (listaUsuarios.size() > 0) {
             erros.add("Usuario ja cadastrado");
         }
 
