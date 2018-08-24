@@ -70,8 +70,19 @@ public class Atualiza extends HttpServlet {
 				session.setAttribute("success", "Logradouro atualizada com sucesso");
 				response.sendRedirect("/views/logradouro/lista.jsp");
 			}
-			
+
 			else {
+				LogradouroFiltroVO logradouroantigo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
+
+				if (vo.getCidade().equals(logradouroantigo.getCidade())
+						&& vo.getNome().equals(logradouroantigo.getNome())) {
+					vo.setNome("");
+					vo.setCidade(null);
+					vo.setTipologradouro(null);
+
+					session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+				}
+
 				String existe = "Logradouro já cadastrado!";
 
 				session.setAttribute("errors", existe);

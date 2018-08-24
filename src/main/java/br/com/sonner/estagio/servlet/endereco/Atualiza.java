@@ -193,11 +193,31 @@ public class Atualiza extends HttpServlet {
 
 			else {
 
-				String existe = "Endereço já cadastrado!";
+				EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
-				requestDispatcher.forward(req, res);
+				if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
+						&& vo.getComplemento().equals(enderecoantigo.getComplemento())
+						&& vo.getLogradouro().equals(enderecoantigo.getLogradouro())
+						&& vo.getBairro().equals(enderecoantigo.getBairro())) {
+
+					vo.setNumero(null);
+					vo.setCep("");
+					vo.setComplemento("");
+					vo.setBairro(null);
+					vo.setLogradouro(null);
+
+					session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+
+					res.sendRedirect("/views/endereco/lista.jsp");
+
+				} else {
+
+					String existe = "Endereço já cadastrado!";
+
+					session.setAttribute("errors", existe);
+					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
+					requestDispatcher.forward(req, res);
+				}
 			}
 		}
 

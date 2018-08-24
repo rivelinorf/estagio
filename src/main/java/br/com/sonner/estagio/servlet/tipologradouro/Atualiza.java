@@ -48,11 +48,27 @@ public class Atualiza extends HttpServlet {
 
 				response.sendRedirect("/views/tipologradouro/lista.jsp");
 			} else {
-				String existe = "Tipo de logradouro já cadastrado!";
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
-				requestDispatcher.forward(request, response);
+				TipologradouroFiltroVO tlantigo = (TipologradouroFiltroVO) session
+						.getAttribute("tipologradouro-para-editar");
+				
+				
+				if (vo.getNome().equals(tlantigo.getNome())) {
+
+					vo.setNome("");
+
+					session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+
+					response.sendRedirect("/views/tipologradouro/lista.jsp");
+
+				} else {
+					String existe = "Tipo de logradouro já cadastrado!";
+
+					session.setAttribute("errors", existe);
+					RequestDispatcher requestDispatcher = request
+							.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
+					requestDispatcher.forward(request, response);
+				}
 			}
 
 		} else {

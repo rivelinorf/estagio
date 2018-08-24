@@ -23,6 +23,8 @@ public class Insere extends HttpServlet {
 		EstadoControllerImpl estadoController = new EstadoControllerImpl();
 		HttpSession session = request.getSession();
 		EstadoFiltroVO vo = new EstadoFiltroVO();
+		aux.setNome("");
+		aux.setAbv("");
 
 		if (request.getParameter("nome") != null && request.getParameter("nome") != "") {
 			aux.setNome(request.getParameter("nome"));
