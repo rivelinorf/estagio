@@ -16,70 +16,85 @@ import java.util.List;
 
 @WebServlet("/atualiza-estado")
 public class Atualiza extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		EstadoControllerImpl estadoController = new EstadoControllerImpl();
-		EstadoFiltroVO vo = new EstadoFiltroVO();
-		HttpSession session = request.getSession();
-		Estado estado = new Estado();
-		if (request.getParameter("estado") != null && request.getParameter("estado") != "") {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        EstadoControllerImpl estadoController = new EstadoControllerImpl();
+        HttpSession session = request.getSession();
+        Estado estado = new Estado();
+        EstadoFiltroVO vo = new EstadoFiltroVO(), voSession = (EstadoFiltroVO) session.getAttribute("estado-para-editar");
 
-			estado.setNome(request.getParameter("estado"));
-		}
-		if (request.getParameter("abv") != "" && request.getParameter("abv") != null) {
+        if ( voSession.getEstado().equals(request.getParameter("estado")) && voSession.getAbv().equals(request.getParameter("abv"))) {
+            response.sendRedirect("/views/estado/lista.jsp");
+            return;
+        }
 
-			estado.setAbv(request.getParameter("abv"));
-		}
-		estado.setId(Long.valueOf(request.getParameter("id")));
+        estado.setNome("");
+        estado.setAbv("");
 
-		List<String> erros = estadoController.validation(estado);
+        if (request.getParameter("estado") != null && request.getParameter("estado") != "") {
 
-		if (erros.size() == 0) {
+            estado.setNome(request.getParameter("estado"));
+        }
+        if (request.getParameter("abv") != "" && request.getParameter("abv") != null) {
 
-			vo.setEstado("");
-			vo.setAbv("");
-			vo.setId(null);
+            estado.setAbv(request.getParameter("abv"));
+        }
+        estado.setId(Long.valueOf(request.getParameter("id")));
 
-			vo.setEstado(estado.getNome());
+        List<String> erros = estadoController.validation(estado);
 
-			List<Estado> verificaestado = estadoController.filtrar(vo);
+        if (erros.size() == 0) {
 
-			vo.setEstado(null);
-			vo.setAbv(estado.getAbv());
+            vo.setEstado("");
+            vo.setAbv("");
+            vo.setId(null);
 
-			List<Estado> verificaabv = estadoController.filtrar(vo);
+            vo.setEstado(estado.getNome());
 
-			if (verificaestado.size() == 0 && verificaabv.size() == 0) {
+            List<Estado> verificaestado = estadoController.filtrar(vo);
 
-				estadoController.update(estado);
+            if (vo.getEstado().equals(voSession.getEstado())) {
+                verificaestado.clear();
+            }
 
-				vo.setEstado("");
-				vo.setAbv("");
-				session.setAttribute("listaEstado", estadoController.filtrar(vo));
-				session.setAttribute("success", "Estado atualizado com sucesso");
+            vo.setEstado(null);
+            vo.setAbv(estado.getAbv());
 
-				response.sendRedirect("/views/estado/lista.jsp");
-			}
+            List<Estado> verificaabv = estadoController.filtrar(vo);
 
-			else {
+            if (vo.getAbv().equals(voSession.getAbv())) {
+                verificaabv.clear();
+            }
 
-				String existe = "";
+            if (verificaestado.size() == 0 && verificaabv.size() == 0) {
 
-				if (verificaestado.size() > 0) {
-					existe = "Estado já cadastrado!";
+                estadoController.update(estado);
 
-				} else {
-					existe = "Abreviação já cadastrada!";
+                vo.setEstado("");
+                vo.setAbv("");
+                session.setAttribute("listaEstado", estadoController.filtrar(vo));
+                session.setAttribute("success", "Estado atualizado com sucesso");
 
-				}
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
-				requestDispatcher.forward(request, response);
-			}
-		} else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
-			requestDispatcher.forward(request, response);
-		}
-	}
+                response.sendRedirect("/views/estado/lista.jsp");
+            } else {
+
+                String existe = "";
+
+                if (verificaestado.size() > 0) {
+                    existe = "Estado já cadastrado!";
+
+                } else {
+                    existe = "Abreviação já cadastrada!";
+
+                }
+                session.setAttribute("errors", existe);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
+                requestDispatcher.forward(request, response);
+            }
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
+    }
 }

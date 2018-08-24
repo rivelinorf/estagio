@@ -1,10 +1,7 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
-import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.vos.EstadoFiltroVO;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
 import javax.servlet.RequestDispatcher;
@@ -19,46 +16,51 @@ import java.util.List;
 
 @WebServlet("/atualiza-tipologradouro")
 public class Atualiza extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
-		TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
-		HttpSession session = request.getSession();
-		TipoLogradouro tipoLogradouro = new TipoLogradouro();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
+        HttpSession session = request.getSession();
+        TipologradouroFiltroVO vo = new TipologradouroFiltroVO(), voSession = (TipologradouroFiltroVO) session.getAttribute("tipologradouro-para-editar");
+        TipoLogradouro tipoLogradouro = new TipoLogradouro();
 
-		tipoLogradouro.setNome(request.getParameter("tipologradouro"));
+        if (voSession.getNome().equals(request.getParameter("tipologradouro"))) {
+            response.sendRedirect("/views/tipologradouro/lista.jsp");
+            return;
+        }
 
-		tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
+        tipoLogradouro.setNome(request.getParameter("tipologradouro"));
 
-		List<String> erros = tipoLogradouroController.validation(tipoLogradouro);
+        tipoLogradouro.setId(Long.valueOf(request.getParameter("id")));
 
-		if (erros.size() == 0) {
+        List<String> erros = tipoLogradouroController.validation(tipoLogradouro);
 
-			vo.setNome("");
-			vo.setNome(tipoLogradouro.getNome());
+        if (erros.size() == 0) {
 
-			List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
+            vo.setNome("");
+            vo.setNome(tipoLogradouro.getNome());
 
-			if (verifica.size() == 0) {
+            List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
 
-				tipoLogradouroController.update(tipoLogradouro);
-				vo.setNome("");
+            if (verifica.size() == 0) {
 
-				session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+                tipoLogradouroController.update(tipoLogradouro);
+                vo.setNome("");
 
-				response.sendRedirect("/views/tipologradouro/lista.jsp");
-			} else {
-				String existe = "Tipo de logradouro já cadastrado!";
+                session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
-				requestDispatcher.forward(request, response);
-			}
+                response.sendRedirect("/views/tipologradouro/lista.jsp");
+            } else {
+                String existe = "Tipo de logradouro já cadastrado!";
 
-		} else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
-			requestDispatcher.forward(request, response);
-		}
-	}
+                session.setAttribute("errors", existe);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
+                requestDispatcher.forward(request, response);
+            }
+
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
+    }
 }

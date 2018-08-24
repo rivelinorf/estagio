@@ -22,10 +22,15 @@ public class Atualiza extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		CidadeFiltroVO vo = new CidadeFiltroVO();
+		HttpSession session = request.getSession();
+		CidadeFiltroVO vo = new CidadeFiltroVO(), voSession = (CidadeFiltroVO) session.getAttribute("cidadeParaEditar");
 		EstadoController estadoController = new EstadoControllerImpl();
 		Cidade novaCidade = new Cidade();
-		HttpSession session = request.getSession();
+
+		if (voSession.getEstado().equals(Long.valueOf(request.getParameter("estado"))) && voSession.getCep().equals(request.getParameter("cep")) && voSession.getCod().equals(request.getParameter("codigo")) &&  voSession.getNome().equals(request.getParameter("cidade"))) {
+			response.sendRedirect("/views/cidade/lista.jsp");
+			return;
+		}
 
 		novaCidade.setId(Long.valueOf(request.getParameter("id")));
 		novaCidade.setNome(request.getParameter("cidade"));
@@ -47,14 +52,20 @@ public class Atualiza extends HttpServlet {
 
 			List<Cidade> verificacidade = cidadeController.filtrar(vo);
 
-			vo.setCep(novaCidade.getCep());
+            if (vo.getNome().equals(voSession.getNome()) && vo.getEstado().equals(voSession.getEstado())) {
+                verificacidade.clear();
+            }
 
-			CidadeFiltroVO cidadeantiga = (CidadeFiltroVO) session.getAttribute("cidadeParaEditar");
+			vo.setCep(novaCidade.getCep());
 
 			vo.setNome("");
 			vo.setEstado(null);
 
 			List<Cidade> verificacep = cidadeController.filtrar(vo);
+
+			if (vo.getCep().equals(voSession.getCep())) {
+			    verificacep.clear();
+            }
 
 			if (verificacidade.size() == 0 && verificacep.size() == 0) {
 

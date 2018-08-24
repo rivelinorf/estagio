@@ -25,7 +25,7 @@
 				<div class="form-row">
 					<div>Nome:</div>
 					<input type="text" name="nome" class="form-control" maxlength="50"
-						onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
+						onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
 				</div>
 				<div class="form-row">
 					<div>Código:</div>
@@ -40,6 +40,7 @@
 					<div>Estado:</div>
 					<select name="estado" class="form-control"
 						style="background-color: rgb(46, 46, 46)">
+						<option value="">Selecione uma opção...</option>
 						<c:forEach items="${estados.all}" var="estado">
 							<option value="${estado.id}">${estado.nome}</option>
 						</c:forEach>

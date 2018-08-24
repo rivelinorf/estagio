@@ -35,7 +35,7 @@
 						<div>Nome:</div>
 						<input type="text" name="estado" class="form-control"
 							value="<%=vo.getEstado()%>" maxlength="50"
-							onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;">
+							onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
 					</div>
 					<div class="form-row">
 						<div>Abreviação:</div>
