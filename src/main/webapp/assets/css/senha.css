@@ -1,74 +1,66 @@
 @charset "UTF-8";
 
 body {
-	background-color: rgb(51, 51, 51);
-	background-size: cover;
-	background-position: center;
-	font-family: 'Gruppo', cursive;
+    background-size: cover;
+    background: rgb(51, 51, 51) center;
+    font-family: 'Gruppo', cursive;
 }
 
 h1 {
-	color: #428d3a;
-	font-family: 'Gruppo', cursive;
+    font-family: 'Gruppo', cursive;
 }
 
 .container {
-	width: 420px;
-	height: 480px;
-	margin: 150px auto auto;
-	text-align: center;
-	font-family: 'Gruppo', cursive;
+    font-family: 'Gruppo', cursive;
+    width: 420px;
+    height: 480px;
+    margin: 150px auto auto;
+    text-align: center;
+
 }
 
 .borda-login {
-	border: 1px solid gray;
-	border-radius: 4px;
-}
-
-.input {
-	border: none;
-	border-bottom: 1px solid #fff;
-	background: transparent;
-	outline: none;
-	height: 20px;
-	color: #fff;
-	font-size: 26px;
-	font-family: 'Gruppo', cursive;
+    border: 1px solid gray;
+    border-radius: 4px;
 }
 
 .login {
-	display: block;
-	margin: auto;
-	width: 50%;
-	padding: 20px;
-	margin-top: 5px;
-	border-radius: 3px;
-	cursor: pointer;
-	background-color: #428d3a;
-	border-style: none;
-	color: white;
-	transition: background-color 0.5s;
-	font-size: 26px;
-	font-family: 'Gruppo', cursive;
+    display: block;
+    width: 50%;
+    padding: 20px;
+    margin: 5px auto auto;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #428d3a;
+    border-style: none;
+    color: white;
+    transition: background-color 0.5s;
+    font-size: 26px;
+    font-family: 'Gruppo', cursive;
 }
 
 .login:hover {
-	background-color: #73d216;
+    background-color: #73d216;
 }
 
 .login:active {
-	position: relative;
-	top: 10px;
-	box-shadow: none;
+    position: relative;
+    top: 10px;
+    box-shadow: none;
 }
 
 .link {
-	text-decoration: none;
-	font-size: 26px;
-	line-height: 25px;
-	color: #f3f3f3;
+    text-decoration: none;
+    font-size: 26px;
+    line-height: 25px;
+    color: #f3f3f3;
 }
 
 .link:hover {
-	color: #73d216;
+    color: #73d216;
+}
+
+#form-cadastro input {
+    height: 50px;
+    width: 100%;
 }

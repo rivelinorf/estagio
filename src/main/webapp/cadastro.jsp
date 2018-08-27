@@ -1,12 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@page contentType="text/html; charset=iso-8859-1"
-        pageEncoding="iso-8859-1" %>
+
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
     <link rel="stylesheet"
           href="<%=request.getContextPath()%>/assets/css/cadastro.css">
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
 </head>
 <body>
@@ -26,7 +25,9 @@
             <div class="form-row">
                 <input class="form-control" type="password" name="senha" placeholder="insira sua senha">
             </div>
-            <br> <button class="main-btn btn-green">Cadastrar</button><br>
+            <br>
+            <button class="main-btn btn-green">Cadastrar</button>
+            <br>
         </div>
     </form>
 
