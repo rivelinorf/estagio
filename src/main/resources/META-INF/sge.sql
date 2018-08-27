@@ -21,6 +21,14 @@ create table usuario (
         email VARCHAR(50)
 );
 
+create table tokens(
+        id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        tokens_usuario_fk bigint not null,
+        constraint  tokens_usuario_fk foreign  key (tokens_usuario_fk) references usuario(id)
+
+)Engine = innodb;
+
+
 create table if not exists estado (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
