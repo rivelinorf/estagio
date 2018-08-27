@@ -23,8 +23,10 @@ create table usuario (
 
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        tokens_usuario_fk bigint not null,
-        constraint  tokens_usuario_fk foreign  key (tokens_usuario_fk) references usuario(id)
+        usuario VARCHAR(10),
+        senha VARCHAR(10),
+        email VARCHAR(50),
+        token varchar (80)
 
 )Engine = innodb;
 
