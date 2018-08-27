@@ -11,7 +11,8 @@ body {
 .container {
     font-family: 'Gruppo', cursive;
     width: 420px;
-    height: 580px;
+    /*height: 580px;*/
+    padding-bottom: 15px;
     margin: 150px auto auto;
     text-align: center;
 }

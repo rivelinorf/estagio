@@ -25,9 +25,9 @@
             <br>
         </div>
     </form>
-    <jsp:include page="/includes/msg.jsp"></jsp:include>
     <a class="link" href="<%=request.getContextPath()%>/senha.jsp">Esqueceu sua senha ?</a><br><br>
     <a class="link" href="<%=request.getContextPath()%>/cadastro.jsp">Cadastrar-se</a>
+    <jsp:include page="/includes/msg.jsp"></jsp:include>
 </div>
 </body>
 </html>

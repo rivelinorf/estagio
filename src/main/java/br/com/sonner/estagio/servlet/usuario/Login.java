@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("/views/home.jsp");
 
         } else {
-            request.setAttribute("erros", "Usuário ou senha inválidos");
+            request.getSession().setAttribute("errors", "Usuário ou senha inválidos");
             response.sendRedirect("index.jsp");
         }
 
