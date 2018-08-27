@@ -26,7 +26,7 @@ create table tokens(
         usuario VARCHAR(10),
         senha VARCHAR(10),
         email VARCHAR(50),
-        token varchar (80)
+        token VARCHAR (80)
 
 )Engine = innodb;
 

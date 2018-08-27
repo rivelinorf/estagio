@@ -20,7 +20,10 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Override
     public void save(Usuario usuario) {
         this.usuarioDAO.save(usuario);
+    }
 
+    public void update(Usuario usuario) {
+        this.usuarioDAO.update(usuario);
     }
 
     @Override
@@ -53,6 +56,19 @@ public class UsuarioControllerImpl implements UsuarioController {
         return erros;
     }
 
+    public List<String> redefSenha(String newPass, String confimPass) {
+        List<String> erros = new ArrayList<>();
+
+        if (!newPass.equals(confimPass)) {
+            erros.add("Senhas diferentes");
+        }
+
+        if (newPass.length() < 8 || confimPass.length() < 8) {
+            erros.add("As senhas necessitam ter mais que 8 caracteres");
+        }
+
+        return erros;
+    }
 
 
     @Override

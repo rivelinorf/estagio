@@ -11,14 +11,14 @@
     <div class="box-img">
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
     </div>
-    <h1>Resetar senha</h1>
-    <form action="/esqueci-senha" method="post" id="form-cadastro">
+    <h1>Redefinir Senha</h1>
+    <form action="/redefinir-senha?token=${param.token}" method="post" id="form-cadastro">
         <div class="div-form">
             <div class="form-row">
-                <input class="form-control" type="text" name="user" placeholder="Insira seu usuario">
+                <input class="form-control" type="password" name="newPass" placeholder="Insira nova senha">
             </div>
             <div class="form-row">
-                <input class="form-control" type="email" name="email" placeholder="Insira seu email">
+                <input class="form-control" type="password" name="confirmPass" placeholder="Confirme a nova senha">
             </div>
             <br>
             <input class="main-btn btn-green" type="submit" value="Enviar"

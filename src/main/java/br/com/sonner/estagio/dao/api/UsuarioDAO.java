@@ -11,4 +11,6 @@ public interface UsuarioDAO {
     Usuario efetuaLogin(Usuario usuario);
 
     List<Usuario> pesquisaUsuario(UsuarioFiltroVo vo);
+
+    void update(Usuario usuario);
 }

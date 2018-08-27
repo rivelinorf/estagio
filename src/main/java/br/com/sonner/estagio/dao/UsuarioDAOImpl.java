@@ -17,7 +17,7 @@ import java.util.List;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
     private Connection connection;
-    public static UsuarioDAO USUARIO_DAO;
+    private static UsuarioDAO USUARIO_DAO;
 
     private UsuarioDAOImpl() {
         this.connection = Conn.getConnection();
@@ -113,5 +113,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
 
     }
+
+    @Override
+    public void update(Usuario usuario) {
+        String sql = "update usuario set senha=? where id=?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, usuario.getSenha());
+            statement.setLong(2, usuario.getId());
+
+            statement.execute();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
