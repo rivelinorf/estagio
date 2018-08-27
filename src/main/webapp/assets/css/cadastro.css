@@ -8,7 +8,7 @@ body {
 }
 
 h1 {
-	color: #428d3a;
+	/*color: #428d3a;*/
 	font-family: 'Gruppo', cursive;
 }
 
@@ -60,4 +60,8 @@ h1 {
 
 .link:hover {
 	color: #73d216;
+}
+
+#form-cadastro input {
+	width: 100%;
 }

@@ -59,8 +59,6 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
-
-
         <c:if test="${actionFechar}">
             <button class="main-btn" onclick="location.href='/views/home.jsp'">
                 <i class="fas fa-window-close"></i> Fechar

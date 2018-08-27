@@ -15,7 +15,7 @@
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
     </div>
     <h1>Cadastro de Usuario</h1>
-    <form action="/usuario-insere" method="post">
+    <form action="/usuario-insere" method="post" id="form-cadastro">
         <div class="div-form">
             <div class="form-row">
                 <input class="form-control" type="text" name="email" placeholder="insira seu email">
@@ -26,7 +26,7 @@
             <div class="form-row">
                 <input class="form-control" type="password" name="senha" placeholder="insira sua senha">
             </div>
-            <br> <input class="login" type="submit" value="Cadastrar"><br>
+            <br> <button class="main-btn btn-green">Cadastrar</button><br>
         </div>
     </form>
 

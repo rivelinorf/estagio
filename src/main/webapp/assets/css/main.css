@@ -227,7 +227,15 @@ nav {
     background-color: blue;
 }
 
-.btn-editar:hover, .btn-red:hover, .btn-cancelar:hover, .btn-black:hover {
+.btn-green {
+    background-color: green;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.btn-editar:hover, .btn-red:hover, .btn-cancelar:hover, .btn-black:hover, .btn-green:hover {
     background-color: rgb(30, 30, 30);
 }
 
