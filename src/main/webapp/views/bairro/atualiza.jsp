@@ -47,6 +47,7 @@
 
 		<form action="/atualiza-bairro" method="get" id="filter-form"
 			style="width: 100%;">
+			<input type="hidden" value="<%=bairrovo.getId()%>" id="id">
 			<div class="form-row">
 				<div>Estado:</div>
 				<select name="estado" class="form-control"

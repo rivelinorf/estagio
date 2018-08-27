@@ -112,7 +112,7 @@
 		<div class="div-form">
 			<form name="form1" action="/atualiza-endereco?id=<%=vo.getId()%>"
 				method="post" id="edit-form" style="width: 100%">
-
+				<input type="hidden" value="<%=vo.getId()%>" id="id">
 				<div class="form-row">
 					<div>Bairro:</div>
 					<select name="bairro" class="form-control"

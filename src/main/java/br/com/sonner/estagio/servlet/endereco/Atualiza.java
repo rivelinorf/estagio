@@ -1,7 +1,11 @@
 package br.com.sonner.estagio.servlet.endereco;
 
-import java.io.IOException;
-import java.util.List;
+import br.com.sonner.estagio.controller.*;
+import br.com.sonner.estagio.model.*;
+import br.com.sonner.estagio.vos.BairroFiltroVO;
+import br.com.sonner.estagio.vos.CidadeFiltroVO;
+import br.com.sonner.estagio.vos.EnderecoFiltroVO;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,223 +14,219 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import br.com.sonner.estagio.controller.BairroControllerImpl;
-import br.com.sonner.estagio.controller.CidadeControllerImpl;
-import br.com.sonner.estagio.controller.EnderecoControllerImpl;
-import br.com.sonner.estagio.controller.LogradouroControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.model.Bairro;
-import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.Endereco;
-import br.com.sonner.estagio.model.Logradouro;
-import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.vos.BairroFiltroVO;
-import br.com.sonner.estagio.vos.CidadeFiltroVO;
-import br.com.sonner.estagio.vos.EnderecoFiltroVO;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Servlet implementation class Atualiza
  */
 @WebServlet("/atualiza-endereco")
 public class Atualiza extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
-		BairroControllerImpl bairroController = new BairroControllerImpl();
-		BairroFiltroVO bairrovo = new BairroFiltroVO();
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        BairroFiltroVO bairrovo = new BairroFiltroVO();
 
-		EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
+        EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
 
-		LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+        LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
 
-		cidadevo.setEstado(null);
-		cidadevo.setNome("");
-		cidadevo.setCod("");
-		cidadevo.setCep("");
-		cidadevo.setId(null);
+        cidadevo.setEstado(null);
+        cidadevo.setNome("");
+        cidadevo.setCod("");
+        cidadevo.setCep("");
+        cidadevo.setId(null);
 
-		enderecovo.setBairro(null);
-		enderecovo.setCep("");
-		enderecovo.setComplemento("");
-		enderecovo.setNumero(null);
-		enderecovo.setLogradouro(null);
-		enderecovo.setId(null);
+        enderecovo.setBairro(null);
+        enderecovo.setCep("");
+        enderecovo.setComplemento("");
+        enderecovo.setNumero(null);
+        enderecovo.setLogradouro(null);
+        enderecovo.setId(null);
 
-		bairrovo.setCidade(null);
-		bairrovo.setNome("");
-		bairrovo.setId(null);
+        bairrovo.setCidade(null);
+        bairrovo.setNome("");
+        bairrovo.setId(null);
 
-		logradourovo.setNome("");
-		logradourovo.setCidade(null);
-		logradourovo.setTipologradouro(null);
+        logradourovo.setNome("");
+        logradourovo.setCidade(null);
+        logradourovo.setTipologradouro(null);
 
-		HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
-			cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
+        if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
+            cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
 
-			session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-			session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
 
-		}
+        }
 
-		if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
-			Long id = Long.valueOf(request.getParameter("cidade"));
-			Cidade cidade = cidadeController.getOne(id);
+        if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+            Long id = Long.valueOf(request.getParameter("cidade"));
+            Cidade cidade = cidadeController.getOne(id);
 
-			bairrovo.setCidade(cidade.getId());
+            bairrovo.setCidade(cidade.getId());
 
-			cidadevo.setEstado(cidade.getEstado().getId());
+            cidadevo.setEstado(cidade.getEstado().getId());
 
-			enderecovo.setBairro(bairrovo.getId());
+            enderecovo.setBairro(bairrovo.getId());
 
-			session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-			session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
-			session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
-			session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
-			session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+            session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+            session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
+            session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
 
-		}
+        }
 
-		response.sendRedirect("/views/endereco/atualiza.jsp");
-	}
+        response.sendRedirect("/views/endereco/atualiza.jsp");
+    }
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-		BairroControllerImpl bairroController = new BairroControllerImpl();
-		EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
+        LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-		EnderecoFiltroVO vo = new EnderecoFiltroVO();
-		HttpSession session = req.getSession();
+        EnderecoFiltroVO vo = new EnderecoFiltroVO();
+        HttpSession session = req.getSession();
 
-		String cep = req.getParameter("cep");
-		String complemento = req.getParameter("complemento");
-		Integer numero = null;
-		Logradouro logradouro = null;
-		Bairro bairro = null;
-		TipoLogradouro tipoLogradouro = null;
-		Cidade cidade = null;
+        String cep = req.getParameter("cep");
+        String complemento = req.getParameter("complemento");
+        Integer numero = null;
+        Logradouro logradouro = null;
+        Bairro bairro = null;
+        TipoLogradouro tipoLogradouro = null;
+        Cidade cidade = null;
 
-		if (req.getParameter("numero") != "" && req.getParameter("numero") != null) {
-			numero = Integer.parseInt(req.getParameter("numero"));
-		}
+        if (req.getParameter("numero") != "" && req.getParameter("numero") != null) {
+            numero = Integer.parseInt(req.getParameter("numero"));
+        }
 
-		if (req.getParameter("bairro") != "" && req.getParameter("bairro") != null) {
-			bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
-			cidade = cidadeController.getOne(bairro.getCidade().getId());
-		}
+        if (req.getParameter("bairro") != "" && req.getParameter("bairro") != null) {
+            bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
+            cidade = cidadeController.getOne(bairro.getCidade().getId());
+        }
 
-		if (req.getParameter("tipologradouro") != "" && req.getParameter("tipologradouro") != null) {
-			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+        if (req.getParameter("tipologradouro") != "" && req.getParameter("tipologradouro") != null) {
+            tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
 
-		}
+        }
 
-		if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null && cidade != null
-				&& tipoLogradouro != null) {
-			String nomeLogradouro = req.getParameter("logradouro");
-			logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
+        if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null && cidade != null
+                && tipoLogradouro != null) {
+            String nomeLogradouro = req.getParameter("logradouro");
 
-			if (logradouro == null) {
-				logradouro = new Logradouro();
+            LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
 
-				logradouro.setCidade(cidade);
-				logradouro.setNome(nomeLogradouro);
-				logradouro.setTipologradouro(tipoLogradouro);
-				logradouroController.save(logradouro);
-				logradouro = logradouroController.getByNome(nomeLogradouro, cidade, tipoLogradouro);
+            logradourovo.setCidade(cidade.getId());
+            logradourovo.setNome(nomeLogradouro);
+            logradourovo.setTipologradouro(tipoLogradouro.getId());
 
-			}
-		}
+            List<Logradouro> validation = logradouroController.filtrar(logradourovo);
 
-		Endereco endereco = new Endereco();
-		endereco.setId(Long.valueOf(req.getParameter("id")));
-		endereco.setNumero(numero);
-		endereco.setCep(cep);
-		endereco.setComplemento(complemento);
-		endereco.setBairro(bairro);
-		endereco.setLogradouro(logradouro);
+            if (validation.size() == 0) {
+                logradouro = new Logradouro();
 
-		List<String> erros = enderecoController.validation(endereco);
+                logradouro.setCidade(cidade);
+                logradouro.setNome(nomeLogradouro);
+                logradouro.setTipologradouro(tipoLogradouro);
 
-		if (erros.size() == 0) {
+                logradouroController.save(logradouro);
 
-			vo.setId(null);
-			vo.setNumero(null);
-			vo.setCep("");
-			vo.setComplemento("");
-			vo.setBairro(null);
-			vo.setLogradouro(null);
+                validation = logradouroController.filtrar(logradourovo);
 
-			vo.setNumero(endereco.getNumero());
-			vo.setCep(endereco.getCep());
-			vo.setComplemento(endereco.getComplemento());
-			vo.setBairro(endereco.getBairro().getId());
-			vo.setLogradouro(endereco.getLogradouro().getId());
+            }
 
-			List<Endereco> verifica = enderecoController.filtrar(vo);
+            logradouro = validation.get(0);
 
-			if (verifica.size() == 0) {
+        }
 
-				enderecoController.update(endereco);
 
-				vo.setNumero(null);
-				vo.setCep("");
-				vo.setComplemento("");
-				vo.setBairro(null);
-				vo.setLogradouro(null);
+        Endereco endereco = new Endereco();
+        endereco.setId(Long.valueOf(req.getParameter("id")));
+        endereco.setNumero(numero);
+        endereco.setCep(cep);
+        endereco.setComplemento(complemento);
+        endereco.setBairro(bairro);
+        endereco.setLogradouro(logradouro);
 
-				session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
-				session.setAttribute("success", "Endereço atualizado com sucesso");
+        List<String> erros = enderecoController.validation(endereco);
 
-				res.sendRedirect("/views/endereco/lista.jsp");
+        if (erros.size() == 0) {
 
-			}
+            vo.setId(null);
+            vo.setNumero(null);
+            vo.setCep("");
+            vo.setComplemento("");
+            vo.setBairro(null);
+            vo.setLogradouro(null);
 
-			else {
+            vo.setNumero(endereco.getNumero());
+            vo.setCep(endereco.getCep());
+            vo.setComplemento(endereco.getComplemento());
+            vo.setBairro(endereco.getBairro().getId());
+            vo.setLogradouro(endereco.getLogradouro().getId());
 
-				EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
+            List<Endereco> verifica = enderecoController.filtrar(vo);
 
-				if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
-						&& vo.getComplemento().equals(enderecoantigo.getComplemento())
-						&& vo.getLogradouro().equals(enderecoantigo.getLogradouro())
-						&& vo.getBairro().equals(enderecoantigo.getBairro())) {
+            if (verifica.size() == 0) {
 
-					vo.setNumero(null);
-					vo.setCep("");
-					vo.setComplemento("");
-					vo.setBairro(null);
-					vo.setLogradouro(null);
+                enderecoController.update(endereco);
 
-					session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+                vo.setNumero(null);
+                vo.setCep("");
+                vo.setComplemento("");
+                vo.setBairro(null);
+                vo.setLogradouro(null);
 
-					res.sendRedirect("/views/endereco/lista.jsp");
+                session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+                session.setAttribute("success", "Endereço atualizado com sucesso");
 
-				} else {
+                res.sendRedirect("/views/endereco/lista.jsp");
 
-					String existe = "Endereço já cadastrado!";
+            } else {
 
-					session.setAttribute("errors", existe);
-					RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
-					requestDispatcher.forward(req, res);
-				}
-			}
-		}
+                EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
 
-		else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
-			requestDispatcher.forward(req, res);
-		}
+                if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
+                        && vo.getComplemento().equals(enderecoantigo.getComplemento())
+                        && vo.getLogradouro().equals(enderecoantigo.getLogradouro())
+                        && vo.getBairro().equals(enderecoantigo.getBairro())) {
 
-	}
+                    vo.setNumero(null);
+                    vo.setCep("");
+                    vo.setComplemento("");
+                    vo.setBairro(null);
+                    vo.setLogradouro(null);
+
+                    session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+
+                    res.sendRedirect("/views/endereco/lista.jsp");
+
+                } else {
+
+                    String existe = "Endereço já cadastrado!";
+
+                    session.setAttribute("errors", existe);
+                    RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
+                    requestDispatcher.forward(req, res);
+                }
+            }
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
+            requestDispatcher.forward(req, res);
+        }
+
+    }
 
 }

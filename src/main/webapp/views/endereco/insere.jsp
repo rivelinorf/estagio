@@ -129,7 +129,7 @@
 
 				<div class="form-row">
 					<div>Número:</div>
-					<input type="number" name="numero" placeholder="Ex.: 111"
+					<input type="text" name="numero" placeholder="Ex.: 111" onKeyPress="mascaraInteiro()" maxlength="4"
 						class="form-control">
 				</div>
 

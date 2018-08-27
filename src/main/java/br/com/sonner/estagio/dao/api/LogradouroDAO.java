@@ -20,8 +20,5 @@ public interface LogradouroDAO {
 	void delete(Long id);
 	
 	List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO vo);
-	
-	Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro);
-
 
 }

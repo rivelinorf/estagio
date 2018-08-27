@@ -75,11 +75,4 @@ public class LogradouroControllerImpl implements LogradouroController {
 
     }
 
-    public Logradouro getByNome(String nome, Cidade cidade, TipoLogradouro tipoLogradouro) {
-        Logradouro logradouro = this.logradouroDAO.getByNome(nome, cidade, tipoLogradouro);
-        return logradouro;
-
-    }
-
-
 }
