@@ -29,12 +29,13 @@
     <sge:header
             titulo="Editar logradouro"
             actionSalvar="true"
+            actionLimpar="/logradouro/preenche-vo"
             formId="edit-form"
             actionFechar="true">
     </sge:header>
     <div class="div-form">
         <form action="/atualiza-logradouro?id=<%= vo.getId() %>" method="post" id="edit-form" style="width: 100%">
-
+            <input type="hidden" value="<%=vo.getId()%>" id="id">
 
             <div class="form-row">
                 <div>Nome:</div>
@@ -48,7 +49,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouroCtl.all}" var="tipologradouro">
                         <c:choose>
-                            <c:when test="${tipologradouro.id == filtroLogradouro.tipologradouro}">
+                            <c:when test="${tipologradouro.id == logradouroParaEditar.tipologradouro}">
                                 <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -65,7 +66,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${cidadesCtl.all}" var="cidade">
                         <c:choose>
-                            <c:when test="${cidade.id == filtroLogradouro.cidade}">
+                            <c:when test="${cidade.id == logradouroParaEditar.cidade}">
                                 <option value="${cidade.id}" selected>${cidade.nome}</option>
                             </c:when>
                             <c:otherwise>

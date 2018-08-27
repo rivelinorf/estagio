@@ -28,10 +28,12 @@
     <sge:header
             titulo="Editar Tipo de Logradouro"
             actionSalvar="true"
+            actionLimpar="/tipologradouro/preenche-vo"
             formId="edit-form"
             actionFechar="true">
     </sge:header>
     <div class="content">
+        <input type="hidden" value="<%=vo.getId()%>" id="id">
         <form action="/atualiza-tipologradouro?id=<%=vo.getId()%>" method="post" id="edit-form">
             <div class="div-form">
                 <div class="form-row">
