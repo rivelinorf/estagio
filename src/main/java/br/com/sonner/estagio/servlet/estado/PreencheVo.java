@@ -16,7 +16,6 @@ import java.io.IOException;
 public class PreencheVo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
         EstadoFiltroVO vo = new EstadoFiltroVO();
 
@@ -24,7 +23,6 @@ public class PreencheVo extends HttpServlet {
         vo.setId(estado.getId());
         vo.setEstado(estado.getNome());
         vo.setAbv(estado.getAbv());
-
 
         HttpSession session = request.getSession();
         session.setAttribute("estado-para-editar", vo);
