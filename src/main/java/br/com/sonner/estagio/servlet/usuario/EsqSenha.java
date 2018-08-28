@@ -28,9 +28,24 @@ public class EsqSenha extends HttpServlet {
         UsuarioControllerImpl usuarioController = new UsuarioControllerImpl();
         UsuarioFiltroVo usuarioFiltroVo = new UsuarioFiltroVo();
 
-        usuarioFiltroVo.setEmail(request.getParameter("email"));
-        usuarioFiltroVo.setUsuario(request.getParameter("user"));
+        String email = null;
+        String usuario = null;
 
+        if (request.getParameter("email") != null && !request.getParameter("email").isEmpty()) {
+            email = request.getParameter("email");
+
+        }
+
+        if (request.getParameter("user") != null && !request.getParameter("user").isEmpty()) {
+            usuario = request.getParameter("user");
+
+        }
+
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setEmail(email);
+        novoUsuario.setUsuario(usuario);
+
+       // List<String> erros = usuarioController.validation(novoUsuario);
         List<Usuario> users = usuarioController.filtrar(usuarioFiltroVo);
 
         if (users.size() > 0) {
@@ -82,4 +97,5 @@ public class EsqSenha extends HttpServlet {
             response.sendRedirect("/senha.jsp");
         }
     }
+
 }

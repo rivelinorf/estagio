@@ -12,7 +12,7 @@
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
     </div>
     <h1>Resetar senha</h1>
-    <form action="/esqueci-senha" method="post" id="form-cadastro">
+    <form action="/esqueci-senha" method="post" id="form-cadastro" style="margin-top: 15px">
         <div class="div-form">
             <div class="form-row">
                 <input class="form-control" type="text" name="user" placeholder="Insira seu usuario">
