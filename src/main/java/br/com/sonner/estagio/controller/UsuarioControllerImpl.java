@@ -39,8 +39,20 @@ public class UsuarioControllerImpl implements UsuarioController {
             erros.add("O email nao pode ser vazio");
         }
 
+        if (usuario.getSenha().length() > 30) {
+            erros.add("A senha necessita ter menos que 30 caracteres");
+        }
+
         if (usuario.getSenha().length() < 8) {
             erros.add("A senha necessita ter mais que 8 caracteres");
+        }
+
+        if (usuario.getUsuario().length() > 25) {
+            erros.add("Usuario nao pode ter mais que 25 caracteres");
+        }
+
+        if (usuario.getUsuario().length() < 4) {
+            erros.add("Usuario nao pode ter menos que 4 caracteres");
         }
 
         UsuarioFiltroVo vo = new UsuarioFiltroVo();

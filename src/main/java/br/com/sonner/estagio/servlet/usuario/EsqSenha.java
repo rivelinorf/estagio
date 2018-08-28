@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -32,7 +33,7 @@ public class EsqSenha extends HttpServlet {
 
         List<Usuario> users = usuarioController.filtrar(usuarioFiltroVo);
 
-        if(users.size() > 0) {
+        if (users.size() > 0) {
             try {
                 String uniqueID = UUID.randomUUID().toString();
                 String host = "smtp.gmail.com";
@@ -40,7 +41,10 @@ public class EsqSenha extends HttpServlet {
                 String pass = "sonner123";
                 String to = request.getParameter("email");
                 String subject = "Email de redefinir senha";
-                String messageText = "http://10.1.1.185:8899/redefinir.jsp?token="+uniqueID;
+
+                InetAddress ip = InetAddress.getLocalHost();
+
+                String messageText = request.getRequestURL().toString().replace(request.getRequestURI().toString(), "") + "/redefinir.jsp?token=" + uniqueID;
 
                 Properties props = System.getProperties();
 
