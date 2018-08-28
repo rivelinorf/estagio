@@ -7,6 +7,7 @@ drop table tipoLogradouro;
 drop table cidade;
 drop table estado;
 drop table usuario;
+drop table tokens;
 
 create database sge;
 use sge;
@@ -23,8 +24,8 @@ create table usuario (
 
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
+        usuario_id BIGINT,
         usuario VARCHAR(10),
-        senha VARCHAR(10),
         email VARCHAR(50),
         token VARCHAR (80)
 
@@ -109,6 +110,7 @@ select * from tipoLogradouro;
 select * from cidade;
 select * from estado;
 select * from usuario;
+select * from tokens;
 
 -- selecionar com innerJoin
 select cidade.id, cidade.nome as cidade, estado.nome as estado from cidade inner join estado on cidade.cidade_estado_fk=estado.id;
