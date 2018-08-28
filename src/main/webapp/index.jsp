@@ -12,7 +12,7 @@
     <div class="box-img">
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
     </div>
-    <form action="/usuario-logar" method="post" id="form-cadastro">
+    <form action="/usuario-logar" method="post" id="form-cadastro" style="margin-top: 15px">
         <div class="div-form">
             <div class="form-row">
                 <input class="form-control" type="text" name="usuario" placeholder="Usuario">
@@ -27,7 +27,9 @@
     </form>
     <a class="link" href="<%=request.getContextPath()%>/senha.jsp">Esqueceu sua senha ?</a><br><br>
     <a class="link" href="<%=request.getContextPath()%>/cadastro.jsp">Cadastrar-se</a>
-    <jsp:include page="/includes/msg.jsp"></jsp:include>
+    <div style="margin-top: 40px">
+        <jsp:include page="/includes/msg.jsp"></jsp:include>
+    </div>
 </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="msg error">
     <div class="fechar"><i class="fas fa-window-close"></i></div>
-    <div style="margin-top: -20px">
+    <div>
         <c:forEach var="erro" items="${errors}">
             ${erro}<br>
         </c:forEach>
@@ -9,7 +9,7 @@
 </div>
 <div class="msg success">
     <div class="fechar"><i class="fas fa-window-close"></i></div>
-    <div style="margin-top: -20px">
+    <div>
         ${success}
     </div>
 </div>
