@@ -40,7 +40,7 @@ public class EsqSenha extends HttpServlet {
                 String pass = "sonner123";
                 String to = request.getParameter("email");
                 String subject = "Email de redefinir senha";
-                String messageText = "http://10.1.1.185:8899/redefinir.jsp?token="+uniqueID;
+                String messageText = "http://localhost:8899/redefinir.jsp?token="+uniqueID;
 
                 Properties props = System.getProperties();
 

@@ -96,8 +96,11 @@ public class Atualiza extends HttpServlet {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
 
+
         EnderecoFiltroVO vo = new EnderecoFiltroVO();
         HttpSession session = req.getSession();
+
+        EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
 
         String cep = req.getParameter("cep");
         String complemento = req.getParameter("complemento");
@@ -178,6 +181,13 @@ public class Atualiza extends HttpServlet {
 
             List<Endereco> verifica = enderecoController.filtrar(vo);
 
+            if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
+                    && !vo.getComplemento().equals(enderecoantigo.getComplemento())
+                    && vo.getLogradouro().equals(enderecoantigo.getLogradouro())
+                    && vo.getBairro().equals(enderecoantigo.getBairro())){
+                verifica.clear();
+            }
+
             if (verifica.size() == 0) {
 
                 enderecoController.update(endereco);
@@ -194,8 +204,6 @@ public class Atualiza extends HttpServlet {
                 res.sendRedirect("/views/endereco/lista.jsp");
 
             } else {
-
-                EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
 
                 if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
                         && vo.getComplemento().equals(enderecoantigo.getComplemento())
