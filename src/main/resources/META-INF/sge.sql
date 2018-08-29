@@ -17,15 +17,15 @@ ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_general_ci;
 
 create table usuario (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        usuario VARCHAR(10),
-        senha VARCHAR(10),
+        usuario VARCHAR(25),
+        senha VARCHAR(30),
         email VARCHAR(50)
 );
 
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         usuario_id BIGINT,
-        usuario VARCHAR(10),
+        usuario VARCHAR(25),
         email VARCHAR(50),
         token VARCHAR (80)
 

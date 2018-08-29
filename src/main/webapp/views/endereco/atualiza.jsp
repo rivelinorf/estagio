@@ -172,7 +172,7 @@
 				<div class="form-row">
 					<div>Complemento:</div>
 					<input type="text" name="complemento" class="form-control" maxlength="50"
-						class="form-control" value="<%=vo.getComplemento()%>">
+						class="form-control" value="<%=vo.getComplemento()%>" placeholder="(opcional)">
 				</div>
 
 

@@ -60,7 +60,7 @@ public class EnderecoControllerImpl implements EnderecoController {
 		}
 
 		if (aux.length() == 0) {
-			erros.add("Não é possivel ter um endereço sem número");
+			erros.add("Não é possível ter um endereço sem número");
 		}
 
 		if (aux.length() == 10) {
