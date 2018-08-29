@@ -36,31 +36,31 @@ public class UsuarioControllerImpl implements UsuarioController {
         List<String> erros = new ArrayList<>();
 
         if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
-            erros.add("O email nao pode ser vazio");
+            erros.add("O email não pode ser vazio");
         }
 
         if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
-            erros.add("A senha nao pode ser vazia");
+            erros.add("A senha não pode ser vazia");
         }
 
         if (usuario.getUsuario() == null || usuario.getUsuario().isEmpty()) {
-            erros.add("O usuario nao pode ser vazio");
+            erros.add("O usuário não pode ser vazio");
         }
 
         if (usuario.getSenha() != null && usuario.getSenha().length() > 30) {
-            erros.add("A senha nao pode  ter menos que 30 caracteres");
+            erros.add("A senha não pode ter mais que 30 caracteres");
         }
 
-        if (usuario.getSenha() != null && usuario.getSenha().length() > 8) {
-            erros.add("A senha nao pode  ter mais que 8 caracteres");
+        if (usuario.getSenha() != null && usuario.getSenha().length() < 8) {
+            erros.add("A senha não pode ter menos que 8 caracteres");
         }
 
         if (usuario.getUsuario() != null && usuario.getUsuario().length() > 25) {
-            erros.add("Usuario nao pode ter mais que 25 caracteres");
+            erros.add("Usuário não pode ter mais que 25 caracteres");
         }
 
         if (usuario.getUsuario() != null && usuario.getUsuario().length() < 4) {
-            erros.add("Usuario nao pode ter menos que 4 caracteres");
+            erros.add("Usuário não pode ter menos que 4 caracteres");
         }
 
         UsuarioFiltroVo vo = new UsuarioFiltroVo();
@@ -70,7 +70,7 @@ public class UsuarioControllerImpl implements UsuarioController {
         List<Usuario> listaUsuarios = this.filtrar(vo);
 
         if (listaUsuarios.size() > 0) {
-            erros.add("Usuario ja cadastrado");
+            erros.add("Usuário já cadastrado");
         }
 
         return erros;
