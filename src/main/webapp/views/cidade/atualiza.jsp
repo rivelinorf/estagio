@@ -34,6 +34,7 @@
     <div class="div-form">
         <form name="form1" action=" /atualiza-cidade?id=<%=vo.getId()%>"
               method="post" id="edit-form" style="width: 100%">
+            <input type="hidden" value="<%=vo.getId()%>" id="id">
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="cidade" class="form-control"
