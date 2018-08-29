@@ -1,20 +1,20 @@
 package br.com.sonner.estagio.dao.api;
 
-import java.util.List;
-
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
+import java.util.List;
+
 public interface EnderecoDAO {
-	void save(Endereco endereco);
+    void save(Endereco endereco);
 
-	List<Endereco> getAll();
+    List<Endereco> getAll();
 
-	void update(Endereco endereco);
+    void update(Endereco endereco);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	Endereco getOne(Long id);
-	
-	List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo);
+    Endereco getOne(Long id);
+
+    List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo);
 }

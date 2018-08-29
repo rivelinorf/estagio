@@ -1,6 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
-	pageEncoding="iso-8859-1"%>
+        pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="logradouroCtl" class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
@@ -20,7 +20,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <style type="text/css">
         .form-control {
             background-color: rgb(46, 46, 46);

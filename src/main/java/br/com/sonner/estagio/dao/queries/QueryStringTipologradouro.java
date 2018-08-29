@@ -15,11 +15,12 @@ public class QueryStringTipologradouro {
         private String sql = "SELECT * FROM tipoLogradouro WHERE 1 ";
 
         public Builder tipologradouro(String nome) {
-            if (nome != ""){
-                this.sql += "and nome LIKE '"+ nome +"%' ";
+            if (nome != "") {
+                this.sql += "and nome LIKE '" + nome + "%' ";
             }
             return this;
         }
+
         public QueryStringTipologradouro build() {
             return new QueryStringTipologradouro(this);
         }

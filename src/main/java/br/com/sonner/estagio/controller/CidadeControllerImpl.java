@@ -1,13 +1,13 @@
 package br.com.sonner.estagio.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CidadeControllerImpl implements CidadeController {
     private CidadeDAO cidadeDAO;

@@ -2,10 +2,8 @@ package br.com.sonner.estagio.servlet.usuario;
 
 import br.com.sonner.estagio.controller.TokenControllerImpl;
 import br.com.sonner.estagio.controller.UsuarioControllerImpl;
-import br.com.sonner.estagio.controller.api.TokenController;
 import br.com.sonner.estagio.model.Usuario;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +13,7 @@ import java.util.List;
 
 @WebServlet("/redefinir-senha")
 public class RedefSenha extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UsuarioControllerImpl usuarioController = new UsuarioControllerImpl();
 
         String newPass = request.getParameter("newPass");

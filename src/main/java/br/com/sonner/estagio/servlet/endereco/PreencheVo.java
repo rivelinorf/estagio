@@ -24,13 +24,10 @@ import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 @WebServlet("/endereco/preenche-vo")
 public class PreencheVo extends HttpServlet {
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
@@ -40,7 +37,7 @@ public class PreencheVo extends HttpServlet {
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
         EnderecoFiltroVO vo = new EnderecoFiltroVO();
         BairroControllerImpl bairroController = new BairroControllerImpl();
-        Endereco endereco = new Endereco();
+        Endereco endereco;
         HttpSession session = request.getSession();
 
         endereco = enderecoController.getOne(Long.valueOf(request.getParameter("id")));

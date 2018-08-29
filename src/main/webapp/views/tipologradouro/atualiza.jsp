@@ -1,6 +1,6 @@
 <%@page import="br.com.sonner.estagio.vos.TipologradouroFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
-	pageEncoding="iso-8859-1"%>
+        pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
@@ -20,7 +20,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 </head>
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
@@ -38,7 +38,8 @@
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
-                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>"
+                           onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
                 </div>
             </div>
 

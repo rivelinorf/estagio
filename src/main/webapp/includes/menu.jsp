@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <script>
     function showOpt(id) {
-        for (var i = 0; i<$(".dropdown-content").length; i++) {
-            $('.dropdown-content:eq('+i+')').hide(220)
+        for (var i = 0; i < $(".dropdown-content").length; i++) {
+            $('.dropdown-content:eq(' + i + ')').hide(220)
         }
         $(id).next(".dropdown-content").toggle(220)
     }
@@ -14,7 +14,12 @@
     })
 </script>
 
-<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+<div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <nav>
     <div class="container-nav">
         <div>
@@ -30,12 +35,27 @@
         <div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Configurações</button>
             <div class="dropdown-content">
-                <a href="/pesquisa-endereco"><button type="button" class="main-btn btn-menu drop-btn" id="endereco">Endereco</button></a>
-                <a href="/pesquisa-estado"><button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button></a>
-                <a href="/pesquisa-cidade"> <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button></a>
-                <a href="/pesquisa-tipologradouro"><button type="button" class="main-btn btn-menu drop-btn tipologradouro" id=tipologradouro>Tipo de Logradouro</button></a>
-                <a href="/pesquisa-logradouro"><button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro</button></a>
-                <a href="/pesquisa-bairro"><button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button></a>
+                <a href="/pesquisa-endereco">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="endereco">Endereco</button>
+                </a>
+                <a href="/pesquisa-estado">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button>
+                </a>
+                <a href="/pesquisa-cidade">
+                    <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button>
+                </a>
+                <a href="/pesquisa-tipologradouro">
+                    <button type="button" class="main-btn btn-menu drop-btn tipologradouro" id=tipologradouro>Tipo de
+                        Logradouro
+                    </button>
+                </a>
+                <a href="/pesquisa-logradouro">
+                    <button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro
+                    </button>
+                </a>
+                <a href="/pesquisa-bairro">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button>
+                </a>
             </div>
         </div>
     </div>

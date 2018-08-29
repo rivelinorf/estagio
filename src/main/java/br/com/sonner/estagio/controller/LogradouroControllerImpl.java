@@ -3,9 +3,7 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Logradouro;
-import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 import java.util.ArrayList;

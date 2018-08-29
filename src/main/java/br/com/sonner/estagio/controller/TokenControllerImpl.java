@@ -1,16 +1,9 @@
 package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.TokenController;
-import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.dao.TokenDAOImpl;
-import br.com.sonner.estagio.dao.UsuarioDAOImpl;
 import br.com.sonner.estagio.dao.api.TokenDAO;
-import br.com.sonner.estagio.dao.api.UsuarioDAO;
 import br.com.sonner.estagio.model.Usuario;
-import br.com.sonner.estagio.vos.UsuarioFiltroVo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TokenControllerImpl implements TokenController {
 

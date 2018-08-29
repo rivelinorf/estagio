@@ -1,19 +1,19 @@
 package br.com.sonner.estagio.dao.api;
 
-import java.util.List;
-
 import br.com.sonner.estagio.model.TipoLogradouro;
 
+import java.util.List;
+
 public interface TipoLogradouroDAO {
-	void save(TipoLogradouro tipoLogradouro);
+    void save(TipoLogradouro tipoLogradouro);
 
-	List<TipoLogradouro> getAll();
+    List<TipoLogradouro> getAll();
 
-	TipoLogradouro getOne(Long id);
+    TipoLogradouro getOne(Long id);
 
-	void update(TipoLogradouro tipoLogradouro);
+    void update(TipoLogradouro tipoLogradouro);
 
-	void delete(Long id);
+    void delete(Long id);
 
-	List<TipoLogradouro> pesquisaTipoLogradouro(String nome);
+    List<TipoLogradouro> pesquisaTipoLogradouro(String nome);
 }

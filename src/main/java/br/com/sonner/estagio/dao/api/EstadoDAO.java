@@ -6,9 +6,14 @@ import java.util.List;
 
 public interface EstadoDAO {
     void save(Estado estado);
+
     List<Estado> getAll();
+
     Estado getOne(long id);
+
     void update(Estado estado);
+
     void delete(long id);
+
     List<Estado> pesquisaEstado(String nome, String abv);
 }

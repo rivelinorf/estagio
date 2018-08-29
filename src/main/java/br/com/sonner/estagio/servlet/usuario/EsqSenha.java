@@ -10,13 +10,11 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -24,7 +22,7 @@ import java.util.UUID;
 
 @WebServlet("/esqueci-senha")
 public class EsqSenha extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         UsuarioControllerImpl usuarioController = new UsuarioControllerImpl();
         UsuarioFiltroVo usuarioFiltroVo = new UsuarioFiltroVo();
 
@@ -45,7 +43,7 @@ public class EsqSenha extends HttpServlet {
         novoUsuario.setEmail(email);
         novoUsuario.setUsuario(usuario);
 
-       // List<String> erros = usuarioController.validation(novoUsuario);
+
         List<Usuario> users = usuarioController.filtrar(usuarioFiltroVo);
 
         if (users.size() > 0) {
@@ -57,7 +55,6 @@ public class EsqSenha extends HttpServlet {
                 String to = request.getParameter("email");
                 String subject = "Email de redefinir senha";
 
-                InetAddress ip = InetAddress.getLocalHost();
 
                 String messageText = request.getRequestURL().toString().replace(request.getRequestURI().toString(), "") + "/redefinir.jsp?token=" + uniqueID;
 

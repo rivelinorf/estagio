@@ -1,20 +1,17 @@
 package br.com.sonner.estagio.servlet.tipologradouro;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
+import br.com.sonner.estagio.controller.LogradouroControllerImpl;
+import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
+import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-import br.com.sonner.estagio.controller.LogradouroControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.LogradouroController;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
-import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
-
-@SuppressWarnings("serial")
 @WebServlet("/deleta-tipologradouro")
 public class Deleta extends HttpServlet {
 

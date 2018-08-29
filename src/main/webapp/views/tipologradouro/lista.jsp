@@ -1,6 +1,6 @@
 <%@page import="br.com.sonner.estagio.vos.TipologradouroFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
-	pageEncoding="iso-8859-1"%>
+        pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="tipologradouroController"
@@ -17,7 +17,7 @@
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 </head>
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
@@ -35,7 +35,8 @@
                 <div>Tipo de Logradouro:</div>
                 <input type="text" name="tipologradouro" class="form-control"
                        style="background-color: rgb(46, 46, 46)"
-                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>"
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
         </form>
     </div>
@@ -51,7 +52,8 @@
             <c:forEach items="${listaTipologradouro}" var="tipologradouro">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
-                        <button class="main-btn btn-editar" onclick="location.href='/tipologradouro/preenche-vo?id=${tipologradouro.id}'">
+                        <button class="main-btn btn-editar"
+                                onclick="location.href='/tipologradouro/preenche-vo?id=${tipologradouro.id}'">
                             <i class="fas fa-pen-square"></i>
                         </button>
                         <button class="main-btn btn-red" value="${tipologradouro.id}"
