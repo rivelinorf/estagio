@@ -51,12 +51,12 @@ public class LogradouroControllerImpl implements LogradouroController {
         List<String> erros = new ArrayList<>();
 
         if (logradouro.getNome() == null || logradouro.getNome().isEmpty()) {
-            erros.add("O nome  do Logradouro no pode ser vazia");
+            erros.add("O nome do logradouro não pode ser vazio");
         }
 
 
-        if (logradouro.getNome().length() > 40) {
-            erros.add("O nome do logradouro não pode exceder  40 caracteres  ");
+        if (logradouro.getNome().length() > 50) {
+            erros.add("O nome do logradouro não pode exceder 50 caracteres  ");
         }
 
         if (logradouro.getTipologradouro() == null) {
@@ -64,7 +64,7 @@ public class LogradouroControllerImpl implements LogradouroController {
         }
 
         if (logradouro.getCidade() == null) {
-            erros.add("Impossível ter um logradouro sem uma cidade selecionado");
+            erros.add("Impossível ter um logradouro sem uma cidade selecionada");
         }
         return erros;
     }

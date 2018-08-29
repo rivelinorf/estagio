@@ -58,15 +58,15 @@ public class CidadeControllerImpl implements CidadeController {
         }
 
         if (cidade.getCod().length() > 2) {
-            erros.add("Sigla da cidade não pode exceder 2 caracteres");
+            erros.add("Código da cidade não pode exceder 2 caracteres");
         }
 
         if (cidade.getCep().length() == 0) {
-            erros.add("Não é possivel ter uma cidade sem CEP");
+            erros.add("Não é possível ter uma cidade sem CEP");
         }
 
         if (cidade.getCep().length() < 10 && cidade.getCep().length() > 0) {
-            erros.add("Cep invalido");
+            erros.add("Cep inválido");
         }
 
         if (cidade.getEstado() == null) {

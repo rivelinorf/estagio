@@ -63,6 +63,10 @@ public class UsuarioControllerImpl implements UsuarioController {
             erros.add("Usuário não pode ter menos que 4 caracteres");
         }
 
+        if (usuario.getEmail() != null && usuario.getEmail().length() < 50) {
+            erros.add("O email não pode ter mais que 50 caracteres");
+        }
+
         UsuarioFiltroVo vo = new UsuarioFiltroVo();
         vo.setEmail(usuario.getEmail());
         vo.setUsuario(usuario.getUsuario());
@@ -84,7 +88,7 @@ public class UsuarioControllerImpl implements UsuarioController {
         }
 
         if (newPass.length() < 8 || confimPass.length() < 8) {
-            erros.add("As senhas necessitam ter mais que 8 caracteres");
+            erros.add("As senhas necessitam ter no mínimo 8 caracteres");
         }
 
         return erros;

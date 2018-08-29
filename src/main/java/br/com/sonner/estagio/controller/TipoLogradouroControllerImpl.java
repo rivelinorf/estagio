@@ -48,11 +48,11 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
         List<String> erros = new ArrayList<>();
 
         if (tipoLogradouro.getNome().length() == 0) {
-            erros.add("Nao é possivel inserir um Tipo de Logradouro sem nome ");
+            erros.add("Nao é possível inserir um tipo de logradouro sem nome ");
         }
 
         if (tipoLogradouro.getNome().length() > 20) {
-            erros.add("O Tipo de Logradouro nao pode exceder 40 caracteres ");
+            erros.add("O tipo de logradouro não pode exceder 20 caracteres ");
         }
 
         return erros;

@@ -45,7 +45,7 @@ public class EstadoControllerImpl implements EstadoController {
         List<String> erros = new ArrayList<>();
 
         if (estado.getNome().length() == 0) {
-             erros.add("Não é possivel ter um estado sem nome");
+             erros.add("Não é possível ter um estado sem nome");
         }
 
         if (estado.getNome().length() > 50) {
@@ -53,7 +53,7 @@ public class EstadoControllerImpl implements EstadoController {
         }
 
         if (estado.getAbv().length() == 0) {
-            erros.add("Não é possivel ter um estado sem abreviação");
+            erros.add("Não é possível ter um estado sem abreviação");
         }
 
         if (estado.getAbv().length() > 5) {

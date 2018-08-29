@@ -35,7 +35,7 @@
                 <div>Tipo de Logradouro:</div>
                 <input type="text" name="tipologradouro" class="form-control"
                        style="background-color: rgb(46, 46, 46)"
-                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>">
+                       id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
         </form>
     </div>
@@ -70,7 +70,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>Desja realmente remover o registro do banco?</p>
+                    <p>Deseja realmente remover o registro do banco?</p>
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar"
                                 data-dismiss="modal"

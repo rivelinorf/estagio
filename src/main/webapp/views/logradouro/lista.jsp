@@ -123,7 +123,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
-                    <p>Desja realmente remover o registro do banco?</p>
+                    <p>Deseja realmente remover o registro do banco?</p>
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar" data-dismiss="modal"
                                 onclick="location.href = '/deleta-logradouro?id='+this.value">Sim
