@@ -12,7 +12,7 @@ public class QueryStringBairro {
 	}
 
 	public static class Builder {
-		private String sql = "SELECT * FROM bairro WHERE 1 ";;
+		private String sql = "SELECT * FROM bairro WHERE 1 order by nome";;
 
 		public Builder bairro(String nome) {
 			if (nome != null && nome != "") {

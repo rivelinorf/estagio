@@ -12,7 +12,7 @@ public class QueryStringEndereco {
 	}
 
 	public static class Builder {
-		private String sql = "SELECT * FROM endereco WHERE 1 ";
+		private String sql = "SELECT * FROM endereco WHERE 1 order by";
 
 		public Builder numero(Integer numero) {
 			if (numero != null) {

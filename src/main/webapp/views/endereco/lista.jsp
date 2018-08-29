@@ -79,7 +79,7 @@
 								</c:when>
 								<c:otherwise>
 									<option value="${logradouro.id}">${logradouro.tipologradouro.nome}
-										${logradouro.nome}</option>
+										${logradouro.nome}, ${logradouro.cidade.nome}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
