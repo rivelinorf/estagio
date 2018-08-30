@@ -1,7 +1,6 @@
 package br.com.sonner.estagio.controller.api;
 
 import br.com.sonner.estagio.model.Estado;
-import br.com.sonner.estagio.vos.EstadoFiltroVO;
 
 import java.util.List;
 

@@ -3,13 +3,10 @@ package br.com.sonner.estagio.servlet.cidade;
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.CidadeController;
-import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

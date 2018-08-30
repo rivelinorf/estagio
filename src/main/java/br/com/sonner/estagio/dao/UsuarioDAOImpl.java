@@ -2,9 +2,7 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.UsuarioDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringLogradouro;
 import br.com.sonner.estagio.dao.queries.QueryStringUsuario;
-import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.Usuario;
 import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 
@@ -130,7 +128,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             e.printStackTrace();
         }
     }
-
 
 
 }

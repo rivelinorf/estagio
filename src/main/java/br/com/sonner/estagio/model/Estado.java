@@ -6,7 +6,7 @@ public class Estado {
     private String abv;
 
     public Estado() {
-        this.nome= "teste";
+        this.nome = "teste";
     }
 
     public Estado(String nome, String abv) {

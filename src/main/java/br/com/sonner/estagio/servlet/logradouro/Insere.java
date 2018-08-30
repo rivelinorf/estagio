@@ -6,7 +6,6 @@ import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
@@ -24,7 +23,7 @@ import java.util.List;
 @WebServlet("/insere-logradouro")
 public class Insere extends HttpServlet {
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
         TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
@@ -53,32 +52,32 @@ public class Insere extends HttpServlet {
         List<String> erros = logradouroController.validation(novologradouro);
 
         if (erros.size() == 0) {
-        	
-        	vo.setCidade(novologradouro.getCidade().getId());
-        	vo.setNome(novologradouro.getNome());
-        	vo.setTipologradouro(novologradouro.getTipologradouro().getId());
-        	
-        	List<Logradouro> verifica = logradouroController.filtrar(vo);
-        	
-        	if(verifica.size() == 0) {
-        	
-            logradouroController.save(novologradouro);
 
-            vo.setNome("");
-            vo.setTipologradouro(null);
-            vo.setCidade(null);
+            vo.setCidade(novologradouro.getCidade().getId());
+            vo.setNome(novologradouro.getNome());
+            vo.setTipologradouro(novologradouro.getTipologradouro().getId());
 
-            session.setAttribute("listaLogradouro", (logradouroController.filtrar(vo)));
-            session.setAttribute("success", "Logradouro inserido com sucesso");
+            List<Logradouro> verifica = logradouroController.filtrar(vo);
 
-            res.sendRedirect("/views/logradouro/lista.jsp");}
-        	else {
-        		String existe = "Logradouro já cadastrado!";
-        		
+            if (verifica.size() == 0) {
+
+                logradouroController.save(novologradouro);
+
+                vo.setNome("");
+                vo.setTipologradouro(null);
+                vo.setCidade(null);
+
+                session.setAttribute("listaLogradouro", (logradouroController.filtrar(vo)));
+                session.setAttribute("success", "Logradouro inserido com sucesso");
+
+                res.sendRedirect("/views/logradouro/lista.jsp");
+            } else {
+                String existe = "Logradouro já cadastrado!";
+
                 session.setAttribute("errors", existe);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/insere.jsp");
                 requestDispatcher.forward(req, res);
-        	}
+            }
         } else {
             session.setAttribute("errors", erros);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/insere.jsp");

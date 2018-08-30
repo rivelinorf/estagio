@@ -2,8 +2,8 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
-import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.dao.queries.QueryStringEstado;
+import br.com.sonner.estagio.model.Estado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,7 +53,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 
             List<Estado> estados = new ArrayList<>();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 Estado aux = new Estado();
 
                 aux.setId(resultSet.getLong("id"));
@@ -79,7 +79,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 
             Estado aux = null;
 
-            if(resultSet.first()) {
+            if (resultSet.first()) {
                 aux = new Estado();
 
                 aux.setId(resultSet.getLong("id"));

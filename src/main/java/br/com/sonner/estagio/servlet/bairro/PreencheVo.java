@@ -18,46 +18,43 @@ import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 @WebServlet("/bairro/preenche-vo")
 public class PreencheVo extends HttpServlet {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		BairroControllerImpl bairroController = new BairroControllerImpl();
-		BairroFiltroVO vo = new BairroFiltroVO();
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
-		HttpSession session = request.getSession();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        BairroFiltroVO vo = new BairroFiltroVO();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
-		Bairro bairro = new Bairro();
+        HttpSession session = request.getSession();
 
-		if (request.getParameter("id") != "" && request.getParameter("id") != null) {
-			bairro = bairroController.getOne(Long.valueOf(request.getParameter("id")));
-			vo.setId(bairro.getId());
-			vo.setNome(bairro.getNome());
-			vo.setCidade(bairro.getCidade().getId());
-		} else {
-			vo = (BairroFiltroVO) session.getAttribute("bairroParaEditar");
-			bairro.setId(vo.getId());
-			bairro.setCidade(cidadeController.getOne(vo.getCidade()));
-			bairro.setNome(vo.getNome());
-		}
-		Cidade cidade = cidadeController.getOne(bairro.getCidade().getId());
+        Bairro bairro = new Bairro();
 
-		cidadevo.setId(cidade.getId());
-		cidadevo.setNome(cidade.getNome());
-		cidadevo.setCep(cidade.getCep());
-		cidadevo.setCod(cidade.getCod());
-		cidadevo.setEstado(cidade.getEstado().getId());
+        if (request.getParameter("id") != "" && request.getParameter("id") != null) {
+            bairro = bairroController.getOne(Long.valueOf(request.getParameter("id")));
+            vo.setId(bairro.getId());
+            vo.setNome(bairro.getNome());
+            vo.setCidade(bairro.getCidade().getId());
+        } else {
+            vo = (BairroFiltroVO) session.getAttribute("bairroParaEditar");
+            bairro.setId(vo.getId());
+            bairro.setCidade(cidadeController.getOne(vo.getCidade()));
+            bairro.setNome(vo.getNome());
+        }
+        Cidade cidade = cidadeController.getOne(bairro.getCidade().getId());
 
-		session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(cidadevo));
-		session.setAttribute("bairroParaEditar", vo);
-		session.setAttribute("filtroCidade_atualiza", cidadevo);
+        cidadevo.setId(cidade.getId());
+        cidadevo.setNome(cidade.getNome());
+        cidadevo.setCep(cidade.getCep());
+        cidadevo.setCod(cidade.getCod());
+        cidadevo.setEstado(cidade.getEstado().getId());
 
-		response.sendRedirect("/views/bairro/atualiza.jsp");
-	}
+        session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(cidadevo));
+        session.setAttribute("bairroParaEditar", vo);
+        session.setAttribute("filtroCidade_atualiza", cidadevo);
+
+        response.sendRedirect("/views/bairro/atualiza.jsp");
+    }
 
 }

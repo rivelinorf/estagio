@@ -19,108 +19,105 @@ import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
-/**
- * Servlet implementation class Insere
- */
 
 @WebServlet("/insere-bairro")
 public class Insere extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		CidadeFiltroVO vo = new CidadeFiltroVO();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        CidadeFiltroVO vo = new CidadeFiltroVO();
 
-		vo.setCep("");
-		vo.setEstado(null);
-		vo.setId(null);
-		vo.setNome("");
-		vo.setCod("");
+        vo.setCep("");
+        vo.setEstado(null);
+        vo.setId(null);
+        vo.setNome("");
+        vo.setCod("");
 
-		HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-		if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
-			vo.setEstado(Long.valueOf(request.getParameter("estado")));
+        if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
+            vo.setEstado(Long.valueOf(request.getParameter("estado")));
 
-			session.setAttribute("filtroCidade_insereBairro", vo);
-			session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(vo));
+            session.setAttribute("filtroCidade_insereBairro", vo);
+            session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(vo));
 
-		}
+        }
 
-		if (vo.getEstado() == null) {
+        if (vo.getEstado() == null) {
 
-			session.setAttribute("listaCidade_insereBairro", null);
-			session.setAttribute("filtroCidade_insereBairro", null);
+            session.setAttribute("listaCidade_insereBairro", null);
+            session.setAttribute("filtroCidade_insereBairro", null);
 
-		}
+        }
 
-		response.sendRedirect("/views/bairro/insere.jsp");
-	}
+        response.sendRedirect("/views/bairro/insere.jsp");
+    }
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws javax.servlet.ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws javax.servlet.ServletException, IOException {
 
-		BairroControllerImpl bairroController = new BairroControllerImpl();
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		BairroFiltroVO vo = new BairroFiltroVO();
-		HttpSession session = req.getSession();
-		Cidade cidade = null;
-		CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+        BairroControllerImpl bairroController = new BairroControllerImpl();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        BairroFiltroVO vo = new BairroFiltroVO();
+        HttpSession session = req.getSession();
+        Cidade cidade = null;
+        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
-		if (req.getParameter("cidadeID") != "") {
-			cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
-		}
-		String nome = req.getParameter("nome");
-		Bairro bairro = new Bairro(nome, cidade);
-		List<String> erros = bairroController.validation(bairro);
+        if (req.getParameter("cidadeID") != "") {
+            cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeID")));
+        }
+        String nome = req.getParameter("nome");
+        Bairro bairro = new Bairro(nome, cidade);
+        List<String> erros = bairroController.validation(bairro);
 
-		if (erros.size() == 0) {
+        if (erros.size() == 0) {
 
-			vo.setNome("");
-			vo.setCidade(null);
-			vo.setId(null);
-			
-			vo.setCidade(bairro.getCidade().getId());
-			vo.setId(bairro.getId());
-			vo.setNome(bairro.getNome());
+            vo.setNome("");
+            vo.setCidade(null);
+            vo.setId(null);
 
-			List<Bairro> verifica = bairroController.filtrar(vo);
+            vo.setCidade(bairro.getCidade().getId());
+            vo.setId(bairro.getId());
+            vo.setNome(bairro.getNome());
 
-			if (verifica.size() == 0) {
+            List<Bairro> verifica = bairroController.filtrar(vo);
 
-				bairroController.save(bairro);
+            if (verifica.size() == 0) {
 
-				vo.setNome("");
-				vo.setCidade(null);
-				vo.setId(null);
+                bairroController.save(bairro);
 
-				cidadevo.setEstado(null);
-				cidadevo.setNome("");
-				cidadevo.setCod("");
-				cidadevo.setCep("");
-				cidadevo.setId(null);
+                vo.setNome("");
+                vo.setCidade(null);
+                vo.setId(null);
 
-				session.setAttribute("listaBairro", bairroController.filtrar(vo));
-				session.setAttribute("filtroCidade_insereBairro", cidadevo);
-				session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(cidadevo));
-				session.setAttribute("success", "Bairro inserido com sucesso");
+                cidadevo.setEstado(null);
+                cidadevo.setNome("");
+                cidadevo.setCod("");
+                cidadevo.setCep("");
+                cidadevo.setId(null);
 
-				res.sendRedirect("/views/bairro/lista.jsp");
-			} else {
-				
-				String existe = "Bairro já cadastrado!";
-				
-				session.setAttribute("errors", existe);
-				session.setAttribute("filtroCidade_insereBairro", null);
-				RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
-				requestDispatcher.forward(req, res);
-			}
-		} else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
-			requestDispatcher.forward(req, res);
-		}
+                session.setAttribute("listaBairro", bairroController.filtrar(vo));
+                session.setAttribute("filtroCidade_insereBairro", cidadevo);
+                session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(cidadevo));
+                session.setAttribute("success", "Bairro inserido com sucesso");
 
-	}
+                res.sendRedirect("/views/bairro/lista.jsp");
+            } else {
+
+                String existe = "Bairro já cadastrado!";
+
+                session.setAttribute("errors", existe);
+                session.setAttribute("filtroCidade_insereBairro", null);
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
+                requestDispatcher.forward(req, res);
+            }
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
+            requestDispatcher.forward(req, res);
+        }
+
+    }
 }

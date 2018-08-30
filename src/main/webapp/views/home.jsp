@@ -7,10 +7,10 @@
     <jsp:include page="/includes/head.jsp"></jsp:include>
 </head>
 <body>
-    <jsp:include page="/includes/menu.jsp"></jsp:include>
+<jsp:include page="/includes/menu.jsp"></jsp:include>
 
-    <div class="main">
-        "Graficos"
-    </div>
+<div class="main">
+    "Graficos"
+</div>
 </body>
 </html>

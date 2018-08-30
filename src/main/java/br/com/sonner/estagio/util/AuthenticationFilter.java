@@ -11,7 +11,7 @@ import java.io.IOException;
 @WebFilter(filterName = "authenticationFilter")
 public class AuthenticationFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -21,7 +21,7 @@ public class AuthenticationFilter implements Filter {
         Usuario usuario = (Usuario) request.getSession().getAttribute("USER");
 
         if (usuario == null) {
-            ((HttpServletResponse)servletResponse).sendRedirect("/index.jsp");
+            ((HttpServletResponse) servletResponse).sendRedirect("/index.jsp");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }

@@ -16,52 +16,52 @@ import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
-@SuppressWarnings("serial")
 @WebServlet("/insere-tipologradouro")
 public class Insere extends HttpServlet {
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException, IOException {
-		TipoLogradouro novo = new TipoLogradouro();
-		TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
-		HttpSession session = request.getSession();
-		TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
-		novo.setNome("");;
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        TipoLogradouro novo = new TipoLogradouro();
+        TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
+        HttpSession session = request.getSession();
+        TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
+        novo.setNome("");
 
-		if (request.getParameter("nome") != "" && request.getParameter("nome") != null) {
 
-			novo.setNome(request.getParameter("nome"));
-		}
-		List<String> erros = tipoLogradouroController.validation(novo);
+        if (request.getParameter("nome") != "" && request.getParameter("nome") != null) {
 
-		if (erros.size() == 0) {
+            novo.setNome(request.getParameter("nome"));
+        }
+        List<String> erros = tipoLogradouroController.validation(novo);
 
-			vo.setNome("");
-			vo.setNome(novo.getNome());
+        if (erros.size() == 0) {
 
-			List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
+            vo.setNome("");
+            vo.setNome(novo.getNome());
 
-			if (verifica.size() == 0) {
+            List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
 
-				tipoLogradouroController.save(novo);
-				vo.setNome("");
+            if (verifica.size() == 0) {
 
-				session.setAttribute("listaTipologradouro", (tipoLogradouroController.filtrar(vo)));
-				session.setAttribute("success", "Tipo Logradouro inserido com sucesso");
+                tipoLogradouroController.save(novo);
+                vo.setNome("");
 
-				response.sendRedirect("/views/tipologradouro/lista.jsp");
-			} else {
-				String existe = "Tipo de logradouro já cadastrado!";
+                session.setAttribute("listaTipologradouro", (tipoLogradouroController.filtrar(vo)));
+                session.setAttribute("success", "Tipo Logradouro inserido com sucesso");
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
-				requestDispatcher.forward(request, response);
+                response.sendRedirect("/views/tipologradouro/lista.jsp");
+            } else {
+                String existe = "Tipo de logradouro já cadastrado!";
 
-			}
-		} else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
-			requestDispatcher.forward(request, response);
-		}
+                session.setAttribute("errors", existe);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
+                requestDispatcher.forward(request, response);
 
-	}
+            }
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/tipologradouro/insere.jsp");
+            requestDispatcher.forward(request, response);
+        }
+
+    }
 }

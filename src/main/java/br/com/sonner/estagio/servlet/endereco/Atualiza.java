@@ -17,15 +17,12 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Servlet implementation class Atualiza
- */
 @WebServlet("/atualiza-endereco")
 public class Atualiza extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
@@ -184,7 +181,7 @@ public class Atualiza extends HttpServlet {
             if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
                     && !vo.getComplemento().equals(enderecoantigo.getComplemento())
                     && vo.getLogradouro().equals(enderecoantigo.getLogradouro())
-                    && vo.getBairro().equals(enderecoantigo.getBairro())){
+                    && vo.getBairro().equals(enderecoantigo.getBairro())) {
                 verifica.clear();
             }
 

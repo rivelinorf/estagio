@@ -23,7 +23,7 @@ public class Atualiza extends HttpServlet {
         Estado estado = new Estado();
         EstadoFiltroVO vo = new EstadoFiltroVO(), voSession = (EstadoFiltroVO) session.getAttribute("estado-para-editar");
 
-        if ( voSession.getEstado().equals(request.getParameter("estado")) && voSession.getAbv().equals(request.getParameter("abv"))) {
+        if (voSession.getEstado().equals(request.getParameter("estado")) && voSession.getAbv().equals(request.getParameter("abv"))) {
             response.sendRedirect("/views/estado/lista.jsp");
             return;
         }
@@ -78,7 +78,7 @@ public class Atualiza extends HttpServlet {
                 response.sendRedirect("/views/estado/lista.jsp");
             } else {
 
-                String existe = "";
+                String existe;
 
                 if (verificaestado.size() > 0) {
                     existe = "Estado já cadastrado!";

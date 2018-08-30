@@ -22,79 +22,77 @@ import java.util.List;
 @WebServlet("/atualiza-logradouro")
 public class Atualiza extends HttpServlet {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-		LogradouroFiltroVO vo = new LogradouroFiltroVO();
-		CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-		TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-		HttpSession session = request.getSession();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
+        LogradouroFiltroVO vo = new LogradouroFiltroVO();
+        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
+        HttpSession session = request.getSession();
 
-		Cidade cidade = null;
-		TipoLogradouro tipoLogradouro = null;
-		String logradouro = request.getParameter("logradouro");
+        Cidade cidade = null;
+        TipoLogradouro tipoLogradouro = null;
+        String logradouro = request.getParameter("logradouro");
 
-		if (request.getParameter("cidade") != null && !request.getParameter("cidade").isEmpty()
-				&& !request.getParameter("cidade").equals("-1")) {
-			cidade = cidadeController.getOne(Long.valueOf(request.getParameter("cidade")));
-		}
+        if (request.getParameter("cidade") != null && !request.getParameter("cidade").isEmpty()
+                && !request.getParameter("cidade").equals("-1")) {
+            cidade = cidadeController.getOne(Long.valueOf(request.getParameter("cidade")));
+        }
 
-		if (request.getParameter("tipologradouro") != null && !request.getParameter("tipologradouro").isEmpty()) {
-			tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro")));
-		}
+        if (request.getParameter("tipologradouro") != null && !request.getParameter("tipologradouro").isEmpty()) {
+            tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(request.getParameter("tipologradouro")));
+        }
 
-		Logradouro novoLogradouro = new Logradouro();
-		novoLogradouro.setId((Long.valueOf(request.getParameter("id"))));
-		novoLogradouro.setNome(logradouro);
-		novoLogradouro.setTipologradouro(tipoLogradouro);
-		novoLogradouro.setCidade(cidade);
+        Logradouro novoLogradouro = new Logradouro();
+        novoLogradouro.setId((Long.valueOf(request.getParameter("id"))));
+        novoLogradouro.setNome(logradouro);
+        novoLogradouro.setTipologradouro(tipoLogradouro);
+        novoLogradouro.setCidade(cidade);
 
-		List<String> erros = logradouroController.validation(novoLogradouro);
+        List<String> erros = logradouroController.validation(novoLogradouro);
 
-		if (erros.size() == 0) {
+        if (erros.size() == 0) {
 
-			vo.setCidade(novoLogradouro.getCidade().getId());
-			vo.setNome(novoLogradouro.getNome());
-			vo.setTipologradouro(novoLogradouro.getTipologradouro().getId());
+            vo.setCidade(novoLogradouro.getCidade().getId());
+            vo.setNome(novoLogradouro.getNome());
+            vo.setTipologradouro(novoLogradouro.getTipologradouro().getId());
 
-			List<Logradouro> verifica = logradouroController.filtrar(vo);
+            List<Logradouro> verifica = logradouroController.filtrar(vo);
 
-			if (verifica.size() == 0) {
-				logradouroController.update(novoLogradouro);
+            if (verifica.size() == 0) {
+                logradouroController.update(novoLogradouro);
 
-				vo.setNome("");
-				vo.setCidade(null);
-				vo.setTipologradouro(null);
+                vo.setNome("");
+                vo.setCidade(null);
+                vo.setTipologradouro(null);
 
-				session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
-				session.setAttribute("success", "Logradouro atualizada com sucesso");
-				response.sendRedirect("/views/logradouro/lista.jsp");
-			}
+                session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+                session.setAttribute("success", "Logradouro atualizada com sucesso");
+                response.sendRedirect("/views/logradouro/lista.jsp");
+            } else {
+                LogradouroFiltroVO logradouroantigo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
 
-			else {
-				LogradouroFiltroVO logradouroantigo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
+                if (vo.getCidade().equals(logradouroantigo.getCidade())
+                        && vo.getNome().equals(logradouroantigo.getNome())) {
+                    vo.setNome("");
+                    vo.setCidade(null);
+                    vo.setTipologradouro(null);
 
-				if (vo.getCidade().equals(logradouroantigo.getCidade())
-						&& vo.getNome().equals(logradouroantigo.getNome())) {
-					vo.setNome("");
-					vo.setCidade(null);
-					vo.setTipologradouro(null);
+                    session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+                }
 
-					session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
-				}
+                String existe = "Logradouro já cadastrado!";
 
-				String existe = "Logradouro já cadastrado!";
+                session.setAttribute("errors", existe);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+                requestDispatcher.forward(request, response);
+            }
 
-				session.setAttribute("errors", existe);
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
-				requestDispatcher.forward(request, response);
-			}
+        } else {
+            session.setAttribute("errors", erros);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+            requestDispatcher.forward(request, response);
+        }
 
-		} else {
-			session.setAttribute("errors", erros);
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
-			requestDispatcher.forward(request, response);
-		}
-
-	}
+    }
 }

@@ -1,12 +1,12 @@
 package br.com.sonner.estagio.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.sonner.estagio.controller.api.EnderecoController;
 import br.com.sonner.estagio.dao.EnderecoDAOImpl;
 import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnderecoControllerImpl implements EnderecoController {
 

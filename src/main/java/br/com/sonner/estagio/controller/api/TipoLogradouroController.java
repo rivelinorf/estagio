@@ -1,25 +1,21 @@
 package br.com.sonner.estagio.controller.api;
 
-import java.util.List;
-
-import br.com.sonner.estagio.model.Estado;
-import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
 
+import java.util.List;
+
 public interface TipoLogradouroController {
-	void save(TipoLogradouro tipoLogradouro);
+    void save(TipoLogradouro tipoLogradouro);
 
-	List<TipoLogradouro> getAll();
+    List<TipoLogradouro> getAll();
 
-	TipoLogradouro getOne(long id);
+    TipoLogradouro getOne(long id);
 
-	void update(TipoLogradouro tipoLogradouro);
+    void update(TipoLogradouro tipoLogradouro);
 
-	void delete(long id);
+    void delete(long id);
 
-	List<String> validation(TipoLogradouro tipoLogradouro);
-
-
+    List<String> validation(TipoLogradouro tipoLogradouro);
 
 
 }

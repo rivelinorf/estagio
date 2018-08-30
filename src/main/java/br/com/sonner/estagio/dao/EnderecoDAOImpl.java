@@ -1,10 +1,8 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.connection.Conn;
-import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringBairro;
 import br.com.sonner.estagio.dao.queries.QueryStringEndereco;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
@@ -142,7 +140,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             Endereco e = null;
 
             if (rs.first()) {
-            	e = new Endereco();
+                e = new Endereco();
                 e.setId(rs.getLong("id"));
                 e.setNumero(rs.getInt("numero"));
                 e.setCep(rs.getString("cep"));
@@ -161,18 +159,18 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     }
 
-	@Override
-	public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
+    @Override
+    public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
         try {
             List<Endereco> enderecos = new ArrayList<Endereco>();
             QueryStringEndereco queryString = new QueryStringEndereco.Builder()
-            		.numero(vo.getNumero())
-            		.cep(vo.getCep())
-            		.complemento(vo.getComplemento())
-            		.bairro(vo.getBairro())
-            		.logradouro(vo.getLogradouro())
-            		.build();
-            
+                    .numero(vo.getNumero())
+                    .cep(vo.getCep())
+                    .complemento(vo.getComplemento())
+                    .bairro(vo.getBairro())
+                    .logradouro(vo.getLogradouro())
+                    .build();
+
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -197,8 +195,8 @@ public class EnderecoDAOImpl implements EnderecoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
-        }		
-		
-	}
+        }
+
+    }
 
 }

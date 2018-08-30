@@ -1,42 +1,42 @@
 package br.com.sonner.estagio.model;
 
 public class Bairro {
-	private long id;
-	private String nome;
+    private long id;
+    private String nome;
 
-	private Cidade cidade;
-	
-	public Bairro() {
-		
-	}
-	
-	public Bairro(String nome, Cidade cidade) {
-		this.nome = nome;
-		this.cidade = cidade;
-	}
+    private Cidade cidade;
 
-	public long getId() {
-		return id;
-	}
+    public Bairro() {
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Bairro(String nome, Cidade cidade) {
+        this.nome = nome;
+        this.cidade = cidade;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Cidade getCidade() {
-		return cidade;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
 }

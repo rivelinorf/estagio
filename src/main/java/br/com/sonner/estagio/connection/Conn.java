@@ -1,15 +1,9 @@
 package br.com.sonner.estagio.connection;
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Date;
 import java.util.Properties;
 
 public class Conn {

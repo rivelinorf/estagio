@@ -45,7 +45,7 @@ public class EstadoControllerImpl implements EstadoController {
         List<String> erros = new ArrayList<>();
 
         if (estado.getNome().length() == 0) {
-             erros.add("Não é possível ter um estado sem nome");
+            erros.add("Não é possível ter um estado sem nome");
         }
 
         if (estado.getNome().length() > 50) {

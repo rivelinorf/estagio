@@ -1,7 +1,9 @@
 package br.com.sonner.estagio.servlet.logradouro;
+
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
