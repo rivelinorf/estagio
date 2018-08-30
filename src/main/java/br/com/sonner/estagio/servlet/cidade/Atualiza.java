@@ -31,6 +31,8 @@ public class Atualiza extends HttpServlet {
             return;
         }
 
+        session.setAttribute("filtroCidade", null);
+
         novaCidade.setId(Long.valueOf(request.getParameter("id")));
         novaCidade.setNome(request.getParameter("cidade"));
         novaCidade.setCep(request.getParameter("cep"));

@@ -19,7 +19,6 @@ import java.io.IOException;
 public class Deleta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
-        CidadeFiltroVO vo = new CidadeFiltroVO();
         HttpSession session = request.getSession();
 
         BairroControllerImpl bairroController = new BairroControllerImpl();
@@ -37,12 +36,7 @@ public class Deleta extends HttpServlet {
             session.setAttribute("errors", "Impossivel deletar!, Cidade possui relacionamento");
         }
 
-        vo.setNome("");
-        vo.setCod("");
-        vo.setCep("");
-        vo.setEstado(null);
-
-        session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+        session.setAttribute("listaCidade", cidadeController.filtrar((CidadeFiltroVO) session.getAttribute("filtroCidade")));
 
         response.sendRedirect("/views/cidade/lista.jsp");
 

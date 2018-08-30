@@ -1,5 +1,5 @@
-<%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -60,7 +60,7 @@
             <div>Estado:</div>
             <select name="estado" class="form-control"
                     style="background-color: rgb(46, 46, 46)"
-                    onclick="location.href = '/insere-endereco?estado='+this.value">
+                    onchange="location.href = '/insere-endereco?estado='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${estados.all}" var="estado">
                     <c:choose>
@@ -79,7 +79,7 @@
             <div>Cidade:</div>
             <select name="cidade" class="form-control"
                     style="background-color: rgb(46, 46, 46)"
-                    onclick="location.href = '/insere-endereco?cidade='+this.value">
+                    onchange="location.href = '/insere-endereco?cidade='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${listaCidade_insereEndereco}" var="cidade">
                     <c:choose>

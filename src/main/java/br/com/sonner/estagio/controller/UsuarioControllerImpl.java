@@ -63,7 +63,7 @@ public class UsuarioControllerImpl implements UsuarioController {
             erros.add("Usuário não pode ter menos que 4 caracteres");
         }
 
-        if (usuario.getEmail() != null && usuario.getEmail().length() < 50) {
+        if (usuario.getEmail() != null && usuario.getEmail().length() > 50) {
             erros.add("O email não pode ter mais que 50 caracteres");
         }
 

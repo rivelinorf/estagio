@@ -28,6 +28,8 @@ public class Atualiza extends HttpServlet {
             return;
         }
 
+        session.setAttribute("filtroEstado", null);
+
         estado.setNome("");
         estado.setAbv("");
 
