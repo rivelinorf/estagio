@@ -198,6 +198,7 @@ public class Insere extends HttpServlet {
                 session.setAttribute("filtroBairro_insereEndereco", bairrovo);
                 session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
                 session.setAttribute("success", "Endereço inserido com sucesso");
+                session.setAttribute("filtroEndereco", null);
 
                 res.sendRedirect("/views/endereco/lista.jsp");
             } else {

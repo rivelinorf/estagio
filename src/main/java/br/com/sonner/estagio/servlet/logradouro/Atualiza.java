@@ -68,6 +68,7 @@ public class Atualiza extends HttpServlet {
 
                 session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
                 session.setAttribute("success", "Logradouro atualizada com sucesso");
+                session.setAttribute("filtroLogradouro", null);
                 response.sendRedirect("/views/logradouro/lista.jsp");
             } else {
                 LogradouroFiltroVO logradouroantigo = (LogradouroFiltroVO) session.getAttribute("logradouroParaEditar");
@@ -79,13 +80,16 @@ public class Atualiza extends HttpServlet {
                     vo.setTipologradouro(null);
 
                     session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+                    session.setAttribute("filtroLogradouro", null);
+                    response.sendRedirect("/views/logradouro/lista.jsp");
+                } else {
+
+                    String existe = "Logradouro já cadastrado!";
+
+                    session.setAttribute("errors", existe);
+                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
+                    requestDispatcher.forward(request, response);
                 }
-
-                String existe = "Logradouro já cadastrado!";
-
-                session.setAttribute("errors", existe);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/logradouro/atualiza.jsp");
-                requestDispatcher.forward(request, response);
             }
 
         } else {

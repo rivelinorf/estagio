@@ -17,7 +17,7 @@ public class Deleta extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-        LogradouroFiltroVO vo = new LogradouroFiltroVO();
+
         HttpSession session = request.getSession();
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 
@@ -36,11 +36,8 @@ public class Deleta extends HttpServlet {
             session.setAttribute("success", "Logradouro deletado com sucesso");
         }
 
-        vo.setNome("");
-        vo.setCidade(null);
-        vo.setTipologradouro(null);
 
-        session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+        session.setAttribute("listaLogradouro", logradouroController.filtrar((LogradouroFiltroVO) session.getAttribute("filtroLogradouro")));
 
         response.sendRedirect("/views/logradouro/lista.jsp");
     }

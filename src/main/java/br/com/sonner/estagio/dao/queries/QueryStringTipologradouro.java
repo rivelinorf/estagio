@@ -16,7 +16,7 @@ public class QueryStringTipologradouro {
 
         public Builder tipologradouro(String nome) {
             if (nome != "") {
-                this.sql += "and nome LIKE '" + nome + "%' ";
+                this.sql += "and nome = '" + nome + "' ";
             }
             return this;
         }
