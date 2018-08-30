@@ -171,6 +171,21 @@ public class Insere extends HttpServlet {
 
             List<Endereco> verifica = enderecoController.filtrar(vo);
 
+
+            if (verifica.size() > 0 && vo.getComplemento() == "") {
+                int compl = 0;
+
+                for (int i = 0; i < verifica.size(); i++) {
+                    if (verifica.get(i).getComplemento().equals("")) {
+                        compl = compl + 1;
+                    }
+                }
+                if (compl == 0) {
+                    verifica.clear();
+                }
+            }
+
+
             if (verifica.size() == 0) {
 
                 enderecoController.save(endereco);
@@ -198,7 +213,6 @@ public class Insere extends HttpServlet {
                 session.setAttribute("filtroBairro_insereEndereco", bairrovo);
                 session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
                 session.setAttribute("success", "Endereço inserido com sucesso");
-                session.setAttribute("filtroEndereco", null);
 
                 res.sendRedirect("/views/endereco/lista.jsp");
             } else {

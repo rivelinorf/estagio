@@ -177,13 +177,21 @@ public class Atualiza extends HttpServlet {
             vo.setLogradouro(endereco.getLogradouro().getId());
 
             List<Endereco> verifica = enderecoController.filtrar(vo);
+            vo.setId(endereco.getId());
 
-            if (vo.getBairro().equals(enderecoantigo.getBairro()) && vo.getCep().equals(enderecoantigo.getCep())
-                    && !vo.getComplemento().equals(enderecoantigo.getComplemento())
-                    && vo.getLogradouro().equals(enderecoantigo.getLogradouro())
-                    && vo.getBairro().equals(enderecoantigo.getBairro())) {
-                verifica.clear();
+            if (verifica.size() > 0 && vo.getComplemento() == "") {
+                int compl = 0;
+
+                for (int i = 0; i < verifica.size(); i++) {
+                    if (verifica.get(i).getComplemento().equals("")) {
+                        compl = compl + 1;
+                    }
+                }
+                if (compl == 0) {
+                    verifica.clear();
+                }
             }
+
 
             if (verifica.size() == 0) {
 
@@ -194,6 +202,7 @@ public class Atualiza extends HttpServlet {
                 vo.setComplemento("");
                 vo.setBairro(null);
                 vo.setLogradouro(null);
+                vo.setId(null);
 
                 session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
                 session.setAttribute("success", "Endereço atualizado com sucesso");
@@ -213,6 +222,7 @@ public class Atualiza extends HttpServlet {
                     vo.setComplemento("");
                     vo.setBairro(null);
                     vo.setLogradouro(null);
+                    vo.setId(null);
 
                     session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
                     session.setAttribute("filtroEndereco", null);
