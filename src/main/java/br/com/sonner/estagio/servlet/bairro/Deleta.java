@@ -22,7 +22,9 @@ public class Deleta extends HttpServlet {
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
         EnderecoFiltroVO enderecoVO = new EnderecoFiltroVO();
 
+
         HttpSession session = req.getSession();
+        BairroFiltroVO voSession = (BairroFiltroVO) session.getAttribute("filtroBairro");
 
         enderecoVO.setBairro(Long.valueOf(req.getParameter("id")));
         enderecoVO.setCep("");
@@ -37,9 +39,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("success", "Bairro deletado com sucesso");
         }
 
+        if(voSession == null){
+            voSession = new BairroFiltroVO();
+        }
 
-
-        session.setAttribute("listaBairro", bairroController.filtrar((BairroFiltroVO) session.getAttribute("filtroBairro")));
+        session.setAttribute("listaBairro", bairroController.filtrar(voSession));
 
         res.sendRedirect("/views/bairro/lista.jsp");
     }
