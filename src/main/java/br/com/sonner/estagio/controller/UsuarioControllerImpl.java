@@ -69,11 +69,19 @@ public class UsuarioControllerImpl implements UsuarioController {
         }
 
         UsuarioFiltroVo vo = new UsuarioFiltroVo();
+        vo.setUsuario("");
         vo.setEmail(usuario.getEmail());
-        vo.setUsuario(usuario.getUsuario());
 
         List<Usuario> listaUsuarios = this.filtrar(vo);
 
+        if (listaUsuarios.size() > 0) {
+            erros.add("Email já cadastrado");
+        }
+
+        vo.setEmail("");
+        vo.setUsuario(usuario.getUsuario());
+
+        listaUsuarios = this.filtrar(vo);
         if (listaUsuarios.size() > 0) {
             erros.add("Usuário já cadastrado");
         }

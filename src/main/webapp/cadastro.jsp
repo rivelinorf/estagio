@@ -17,7 +17,7 @@
     <form action="/usuario-insere" method="post" id="form-cadastro">
         <div class="div-form">
             <div class="form-row">
-                <input class="form-control" type="text" name="email" placeholder="insira seu email">
+                <input class="form-control" type="email" name="email" placeholder="insira seu email">
             </div>
             <div class="form-row">
                 <input class="form-control" type="text" name="usuario" placeholder="insira seu usuario">

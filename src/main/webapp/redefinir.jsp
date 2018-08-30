@@ -23,7 +23,7 @@
             <br>
             <input class="main-btn btn-green" type="submit" value="Enviar"
                    style="width: 296px">
-
+            <br>
         </div>
     </form>
     <jsp:include page="/includes/msg.jsp"></jsp:include>
