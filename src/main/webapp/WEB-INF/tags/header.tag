@@ -79,4 +79,12 @@
         $("#${formId}").submit();
 
     })
+
+    $("#olho").on("click", function () {
+        $("#senha").attr("type", "text");
+    });
+
+    $("#olho").mouseup(function () {
+        $("#senha").attr("type", "password");
+    });
 </script>

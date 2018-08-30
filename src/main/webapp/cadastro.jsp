@@ -1,6 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
+<script>
+    $( "#olho" ).on("click",function() {
+    $("#senha").attr("type", "text");
+    });
+</script>
+
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
     <link rel="stylesheet"
@@ -22,8 +28,9 @@
             <div class="form-row">
                 <input class="form-control" type="text" name="usuario" placeholder="insira seu usuario">
             </div>
-            <div class="form-row">
-                <input class="form-control" type="password" name="senha" placeholder="insira sua senha">
+            <div class="form-row ">
+                <input class="form-control " type="password" name="senha" placeholder="insira sua senha">
+                <button type="button"><i class="fas fa-eye"></i></button>
             </div>
             <br>
             <button class="main-btn btn-green">Cadastrar</button>
