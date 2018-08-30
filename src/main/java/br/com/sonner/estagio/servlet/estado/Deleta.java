@@ -19,6 +19,7 @@ public class Deleta extends HttpServlet {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadeFiltroVO = new CidadeFiltroVO();
         HttpSession session = request.getSession();
+        EstadoFiltroVO estadoFiltroVO = (EstadoFiltroVO) session.getAttribute("filtroEstado");
 
         cidadeFiltroVO.setNome("");
         cidadeFiltroVO.setCep("");
@@ -32,8 +33,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("success", "Estado deletado com sucesso");
         }
 
+        if (estadoFiltroVO == null) {
+            estadoFiltroVO = new EstadoFiltroVO();
+        }
 
-        session.setAttribute("listaEstado", estadoController.filtrar((EstadoFiltroVO) session.getAttribute("filtroEstado")));
+        session.setAttribute("listaEstado", estadoController.filtrar(estadoFiltroVO));
         response.sendRedirect("/views/estado/lista.jsp");
     }
 }

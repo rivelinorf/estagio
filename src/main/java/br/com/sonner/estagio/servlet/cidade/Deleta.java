@@ -20,7 +20,7 @@ public class Deleta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         HttpSession session = request.getSession();
-
+        CidadeFiltroVO cidadeFiltroVO = (CidadeFiltroVO) session.getAttribute("filtroCidade");
         BairroControllerImpl bairroController = new BairroControllerImpl();
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 
@@ -36,10 +36,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("errors", "Impossivel deletar!, Cidade possui relacionamento");
         }
 
-        session.setAttribute("listaCidade", cidadeController.filtrar((CidadeFiltroVO) session.getAttribute("filtroCidade")));
+        if (cidadeFiltroVO == null) {
+            cidadeFiltroVO = new CidadeFiltroVO();
+        }
 
+        session.setAttribute("listaCidade", cidadeController.filtrar(cidadeFiltroVO));
         response.sendRedirect("/views/cidade/lista.jsp");
-
-
     }
 }

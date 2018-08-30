@@ -22,7 +22,7 @@ public class Deleta extends HttpServlet {
 
         LogradouroFiltroVO logradouroFiltroVO = new LogradouroFiltroVO();
         HttpSession session = request.getSession();
-
+        TipologradouroFiltroVO tipologradouroFiltroVO = (TipologradouroFiltroVO) session.getAttribute("filtroTipologradouro");
 
         logradouroFiltroVO.setNome("");
         logradouroFiltroVO.setTipologradouro(Long.valueOf(request.getParameter("id")));
@@ -36,8 +36,12 @@ public class Deleta extends HttpServlet {
 
         }
 
-        session.setAttribute("listaTipologradouro", tipologradouroController.filtrar((TipologradouroFiltroVO) session.getAttribute("filtroTipologradouro")));
-        response.sendRedirect("/views/tipologradouro/lista.jsp");
+        if (tipologradouroFiltroVO == null) {
+            tipologradouroFiltroVO = new TipologradouroFiltroVO();
+            tipologradouroFiltroVO.setNome("");
+        }
 
+        session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(tipologradouroFiltroVO));
+        response.sendRedirect("/views/tipologradouro/lista.jsp");
     }
 }

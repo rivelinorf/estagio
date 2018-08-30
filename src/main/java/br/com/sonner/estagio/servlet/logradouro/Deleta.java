@@ -19,6 +19,7 @@ public class Deleta extends HttpServlet {
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
 
         HttpSession session = request.getSession();
+        LogradouroFiltroVO logradouroFiltroVO = (LogradouroFiltroVO) session.getAttribute("filtroLogradouro");
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 
         EnderecoFiltroVO enderecoFiltroVO = new EnderecoFiltroVO();
@@ -36,8 +37,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("success", "Logradouro deletado com sucesso");
         }
 
+        if (logradouroFiltroVO == null) {
+            logradouroFiltroVO = new LogradouroFiltroVO();
+        }
 
-        session.setAttribute("listaLogradouro", logradouroController.filtrar((LogradouroFiltroVO) session.getAttribute("filtroLogradouro")));
+        session.setAttribute("listaLogradouro", logradouroController.filtrar(logradouroFiltroVO));
 
         response.sendRedirect("/views/logradouro/lista.jsp");
     }

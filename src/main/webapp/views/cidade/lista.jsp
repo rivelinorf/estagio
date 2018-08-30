@@ -33,7 +33,7 @@
     </sge:header>
     <div class="div-form">
         <form name="form1" action=" /pesquisa-cidade" method="get"
-              id="filter-form" style="width: 60%;">
+              id="filter-form">
             <div class="form-row">
                 <div>Cidade:</div>
                 <input type="text" name="cidade" class="form-control"

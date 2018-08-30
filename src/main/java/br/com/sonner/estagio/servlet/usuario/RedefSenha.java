@@ -32,7 +32,7 @@ public class RedefSenha extends HttpServlet {
             response.sendRedirect("/index.jsp");
         } else {
             request.getSession().setAttribute("errors", erros);
-            response.sendRedirect("/redefinir.jsp");
+            response.sendRedirect("/redefinir.jsp?token=" + request.getParameter("token"));
         }
     }
 }

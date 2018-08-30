@@ -2,6 +2,7 @@ package br.com.sonner.estagio.servlet.usuario;
 
 import br.com.sonner.estagio.controller.TokenControllerImpl;
 import br.com.sonner.estagio.controller.UsuarioControllerImpl;
+import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
 import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 

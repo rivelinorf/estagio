@@ -11,7 +11,7 @@ drop table tokens;
 
 create database sge;
 use sge;
-ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_general_ci;
+ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_bin;
 
 -- tabelas
 
@@ -25,7 +25,7 @@ create table usuario (
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         usuario_id BIGINT,
-        usuario VARCHAR(25),
+        usuario VARCHAR(10),
         email VARCHAR(50),
         token VARCHAR (80)
 
@@ -80,6 +80,15 @@ create table if not exists endereco (
         constraint endereco_bairro_fk foreign key (endereco_bairro_fk) references bairro(id)        
 )ENGINE = innodb;
 
+
+ALTER TABLE `endereco` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `bairro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `logradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `tipoLogradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `cidade` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `estado` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `usuario` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+
 -- inserindo dados
 insert into estado (nome, abv) values ("SAO PAULO", "SP");
 insert into estado (nome, abv) values ("MINAS GERAIS", "MG");
@@ -100,7 +109,6 @@ delete from tipoLogradouro;
 delete from cidade;
 delete from estado;
 delete from usuario;
-
 
 -- selecionar tudo
 select * from endereco;

@@ -8,6 +8,7 @@ import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UsuarioControllerImpl implements UsuarioController {
 
@@ -83,7 +84,7 @@ public class UsuarioControllerImpl implements UsuarioController {
     public List<String> redefSenha(String newPass, String confimPass) {
         List<String> erros = new ArrayList<>();
 
-        if (!newPass.equals(confimPass)) {
+        if (!Objects.equals(newPass, confimPass)) {
             erros.add("Senhas diferentes");
         }
 
@@ -99,6 +100,5 @@ public class UsuarioControllerImpl implements UsuarioController {
     public List<Usuario> filtrar(UsuarioFiltroVo vo) {
         return this.usuarioDAO.pesquisaUsuario(vo);
     }
-
 
 }

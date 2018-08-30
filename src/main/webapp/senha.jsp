@@ -6,7 +6,21 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
 </head>
+
+<script>
+    $(document).ready(function () {
+        $(".enviar").on("click", function () {
+            $(".lds-ring").css({"display": "flex"})
+        })
+    })
+</script>
 <body>
+<div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <div class="container borda-login">
     <div class="box-img">
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
@@ -21,7 +35,7 @@
                 <input class="form-control" type="email" name="email" placeholder="Insira seu email">
             </div>
             <br>
-            <input class="main-btn btn-green" type="submit" value="Enviar"
+            <input class="main-btn btn-green enviar" type="submit" value="Enviar"
                    style="width: 296px">
             <br>
         </div>
