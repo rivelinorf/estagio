@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringBairro {
-	private String sql = "SELECT * FROM cidade WHERE 1 ";
+	private String sql = "SELECT * FROM bairro WHERE 1 ";
 
 	public String getSql() {
 		return sql;
@@ -12,19 +12,18 @@ public class QueryStringBairro {
 	}
 
 	public static class Builder {
-		private String sql = "SELECT * FROM bairro WHERE 1 order by nome";;
+		private String sql = "SELECT * FROM bairro WHERE 1 ";
 
 		public Builder bairro(String nome) {
-			if (nome != null && nome != "") {
+			if (nome != "" && nome != null) {
 				this.sql += "and nome = '" + nome + "'";
 			}
-
 			return this;
 		}
 
 		public Builder cidade(Long cidade) {
 			if (cidade != null) {
-				this.sql += "and bairro_cidade_fk = '" + cidade + "' ";
+				this.sql += "and bairro_cidade_fk = '" + cidade + "'";
 			}
 
 			return this;
@@ -34,5 +33,4 @@ public class QueryStringBairro {
 			return new QueryStringBairro(this);
 		}
 	}
-
 }

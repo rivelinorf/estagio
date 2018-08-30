@@ -75,7 +75,7 @@
 							<c:choose>
 								<c:when test="${logradouro.id == filtroEndereco.logradouro}">
 									<option value="${logradouro.id}" selected>${logradouro.tipologradouro.nome}
-										${logradouro.nome}</option>
+										${logradouro.nome}, ${logradouro.cidade.nome}</option>
 								</c:when>
 								<c:otherwise>
 									<option value="${logradouro.id}">${logradouro.tipologradouro.nome}
