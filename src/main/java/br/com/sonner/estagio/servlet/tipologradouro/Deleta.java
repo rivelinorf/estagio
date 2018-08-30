@@ -19,7 +19,7 @@ public class Deleta extends HttpServlet {
             throws IOException {
         TipoLogradouroControllerImpl tipologradouroController = new TipoLogradouroControllerImpl();
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-        TipologradouroFiltroVO vo = new TipologradouroFiltroVO();
+
         LogradouroFiltroVO logradouroFiltroVO = new LogradouroFiltroVO();
         HttpSession session = request.getSession();
 
@@ -32,13 +32,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("success", "Tipo logradouro deletado com sucesso");
 
         } else {
-            session.setAttribute("errors", "Impossivel deletar!, Tipo logradouro possui relacionamento");
+            session.setAttribute("errors", "Impossivel deletar! Tipo logradouro possui relacionamento");
 
         }
 
-        vo.setNome("");
-
-        session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(vo));
+        session.setAttribute("listaTipologradouro", tipologradouroController.filtrar((TipologradouroFiltroVO) session.getAttribute("filtroTipologradouro")));
         response.sendRedirect("/views/tipologradouro/lista.jsp");
 
     }

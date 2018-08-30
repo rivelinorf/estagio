@@ -102,6 +102,7 @@ public class Insere extends HttpServlet {
                 session.setAttribute("filtroCidade_insereBairro", cidadevo);
                 session.setAttribute("listaCidade_insereBairro", cidadeController.filtrar(cidadevo));
                 session.setAttribute("success", "Bairro inserido com sucesso");
+                session.setAttribute("filtroBairro", null);
 
                 res.sendRedirect("/views/bairro/lista.jsp");
             } else {

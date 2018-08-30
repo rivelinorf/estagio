@@ -197,6 +197,7 @@ public class Atualiza extends HttpServlet {
 
                 session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
                 session.setAttribute("success", "Endereço atualizado com sucesso");
+                session.setAttribute("filtroEndereco", null);
 
                 res.sendRedirect("/views/endereco/lista.jsp");
 
@@ -214,6 +215,7 @@ public class Atualiza extends HttpServlet {
                     vo.setLogradouro(null);
 
                     session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+                    session.setAttribute("filtroEndereco", null);
 
                     res.sendRedirect("/views/endereco/lista.jsp");
 

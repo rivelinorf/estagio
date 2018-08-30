@@ -24,6 +24,7 @@ public class Atualiza extends HttpServlet {
         TipoLogradouro tipoLogradouro = new TipoLogradouro();
 
         if (voSession.getNome().equals(request.getParameter("tipologradouro"))) {
+            session.setAttribute("filtroTipologradouro", null);
             response.sendRedirect("/views/tipologradouro/lista.jsp");
             return;
         }
@@ -47,6 +48,7 @@ public class Atualiza extends HttpServlet {
                 vo.setNome("");
 
                 session.setAttribute("listaTipologradouro", tipoLogradouroController.filtrar(vo));
+                session.setAttribute("filtroTipologradouro", null);
 
                 response.sendRedirect("/views/tipologradouro/lista.jsp");
             } else {

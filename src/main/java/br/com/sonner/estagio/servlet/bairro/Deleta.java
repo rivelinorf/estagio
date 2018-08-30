@@ -21,7 +21,7 @@ public class Deleta extends HttpServlet {
         BairroControllerImpl bairroController = new BairroControllerImpl();
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
         EnderecoFiltroVO enderecoVO = new EnderecoFiltroVO();
-        BairroFiltroVO vo = new BairroFiltroVO();
+
         HttpSession session = req.getSession();
 
         enderecoVO.setBairro(Long.valueOf(req.getParameter("id")));
@@ -38,10 +38,8 @@ public class Deleta extends HttpServlet {
         }
 
 
-        vo.setCidade(null);
-        vo.setNome("");
 
-        session.setAttribute("listaBairro", bairroController.filtrar(vo));
+        session.setAttribute("listaBairro", bairroController.filtrar((BairroFiltroVO) session.getAttribute("filtroBairro")));
 
         res.sendRedirect("/views/bairro/lista.jsp");
     }
