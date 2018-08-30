@@ -52,7 +52,7 @@
             <div>Estado:</div>
             <select name="estado" class="form-control"
                     style="background-color: rgb(46, 46, 46)"
-                    onclick="location.href = '/atualiza-bairro?estado='+this.value">
+                    onchange="location.href = '/atualiza-bairro?estado='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${estados.all}" var="estado">
                     <c:choose>

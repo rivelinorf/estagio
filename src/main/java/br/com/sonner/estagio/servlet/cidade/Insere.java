@@ -53,6 +53,8 @@ public class Insere extends HttpServlet {
 
         List<String> erros = cidadeController.validation(novaCidade);
 
+        session.setAttribute("filtroCidade", null);
+
         if (erros.size() == 0) {
 
             vo.setNome("");

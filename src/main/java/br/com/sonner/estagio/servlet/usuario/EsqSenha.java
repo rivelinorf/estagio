@@ -26,27 +26,15 @@ public class EsqSenha extends HttpServlet {
         UsuarioControllerImpl usuarioController = new UsuarioControllerImpl();
         UsuarioFiltroVo usuarioFiltroVo = new UsuarioFiltroVo();
 
-        String email = null;
-        String usuario = null;
+        String email = request.getParameter("email");
+        String usuario = request.getParameter("user");
 
-        if (request.getParameter("email") != null && !request.getParameter("email").isEmpty()) {
-            email = request.getParameter("email");
-
-        }
-
-        if (request.getParameter("user") != null && !request.getParameter("user").isEmpty()) {
-            usuario = request.getParameter("user");
-
-        }
-
-        Usuario novoUsuario = new Usuario();
-        novoUsuario.setEmail(email);
-        novoUsuario.setUsuario(usuario);
-
+        usuarioFiltroVo.setEmail(email);
+        usuarioFiltroVo.setUsuario(usuario);
 
         List<Usuario> users = usuarioController.filtrar(usuarioFiltroVo);
 
-        if (users.size() > 0) {
+        if (users.size() > 0 && email != "" && usuario != "") {
             try {
                 String uniqueID = UUID.randomUUID().toString();
                 String host = "smtp.gmail.com";

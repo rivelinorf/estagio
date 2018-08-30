@@ -31,7 +31,10 @@ public class Insere extends HttpServlet {
         if (request.getParameter("abv") != "" && request.getParameter("abv") != null) {
             aux.setAbv(request.getParameter("abv"));
         }
+
         List<String> erros = estadoController.validation(aux);
+
+        session.setAttribute("filtroEstado", null);
 
         if (erros.size() == 0) {
 

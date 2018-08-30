@@ -19,7 +19,6 @@ public class Deleta extends HttpServlet {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadeFiltroVO = new CidadeFiltroVO();
         HttpSession session = request.getSession();
-        EstadoFiltroVO vo = new EstadoFiltroVO();
 
         cidadeFiltroVO.setNome("");
         cidadeFiltroVO.setCep("");
@@ -30,13 +29,11 @@ public class Deleta extends HttpServlet {
             session.setAttribute("errors", "Impossivel deletar!, Estado possue relacionamento");
         } else {
             estadoController.delete(Long.valueOf(request.getParameter("id")));
-            session.setAttribute("errors", "");
             session.setAttribute("success", "Estado deletado com sucesso");
         }
 
-        vo.setEstado("");
-        vo.setAbv("");
-        session.setAttribute("listaEstado", estadoController.filtrar(vo));
+
+        session.setAttribute("listaEstado", estadoController.filtrar((EstadoFiltroVO) session.getAttribute("filtroEstado")));
         response.sendRedirect("/views/estado/lista.jsp");
     }
 }

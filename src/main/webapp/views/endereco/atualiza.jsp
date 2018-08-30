@@ -70,7 +70,7 @@
             <div>Estado:</div>
             <select name="estado" class="form-control"
                     style="background-color: rgb(46, 46, 46)"
-                    onclick="location.href = '/atualiza-endereco?estado='+this.value">
+                    onchange="location.href = '/atualiza-endereco?estado='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${estados.all}" var="estado">
                     <c:choose>
@@ -90,7 +90,7 @@
             <div>Cidade:</div>
             <select name="cidade" class="form-control"
                     style="background-color: rgb(46, 46, 46)"
-                    onclick="location.href = '/atualiza-endereco?cidade='+this.value">
+                    onchange="location.href = '/atualiza-endereco?cidade='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${listaCidade_atualizaEndereco}" var="cidade">
                     <c:choose>
