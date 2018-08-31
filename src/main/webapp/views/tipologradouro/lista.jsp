@@ -30,13 +30,13 @@
                 actionFechar="true">
     </sge:header>
     <div class="div-form" style="width: 60%;">
-        <form action="/pesquisa-tipologradouro" method="get" id="filter-form">
+        <form action="/pesquisa-tipologradouro" method="get" id="filter-form" style="width: 1000px;">
             <div class="form-row">
                 <div>Tipo de Logradouro:</div>
                 <input type="text" name="tipologradouro" class="form-control"
                        style="background-color: rgb(46, 46, 46)"
                        id="pesquisa-tipologradouro-nome" value="<%=vo.getNome()%>"
-                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
         </form>
     </div>

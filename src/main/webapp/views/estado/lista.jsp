@@ -30,20 +30,20 @@
     </sge:header>
     <div class="div-form">
         <form action="/pesquisa-estado" method="get" id="filter-form"
-              style="width: 50%;">
+              style="width: 1000px;">
             <div class="form-row">
                 <div>Estado:</div>
                 <input type="text" name="estado" class="form-control"
                        style="background-color: rgb(46, 46, 46)" maxlength="50"
                        id="pesquisa-estado-nome" value="<%=vo.getEstado()%>"
-                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
             <div class="form-row">
                 <div>Abreviação:</div>
                 <input type="text" name="abv" class="form-control"
                        style="background-color: rgb(46, 46, 46)" id="pesquisa-estado-abv"
                        value="<%=vo.getAbv()%>" maxlength="2"
-                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
         </form>
     </div>

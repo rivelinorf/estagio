@@ -59,8 +59,8 @@
         <div class="form-row">
             <div>Estado:</div>
             <select name="estado" class="form-control"
-                    style="background-color: rgb(46, 46, 46)"
-                    onchange="location.href = '/insere-endereco?estado='+this.value">
+
+                    onchange="location.href = '/insere-endereco?estado='+this.value" style="width: 20.35%;">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${estados.all}" var="estado">
                     <c:choose>
@@ -73,12 +73,10 @@
                     </c:choose>
                 </c:forEach>
             </select>
-        </div>
 
-        <div class="form-row">
             <div>Cidade:</div>
             <select name="cidade" class="form-control"
-                    style="background-color: rgb(46, 46, 46)"
+                    style="width: 20.35%;"
                     onchange="location.href = '/insere-endereco?cidade='+this.value">
                 <option value="">Selecione uma opção...</option>
                 <c:forEach items="${listaCidade_insereEndereco}" var="cidade">
@@ -104,17 +102,15 @@
             <div class="form-row">
                 <div>Bairro:</div>
                 <select name="bairro" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                        style="width: 20.35%;" >
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${listaBairro_insereEndereco}" var="bairro">
                         <option value="${bairro.id}">${bairro.nome}</option>
                     </c:forEach>
                 </select>
-            </div>
 
-            <div class="form-row">
                 <div>Tipo de Logradouro:</div>
-                <select name="tipologradouro" class="form-control">
+                <select name="tipologradouro" class="form-control" style="width: 20.35%;" >
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouros.all}" var="tipologradouro">
                         <option value="${tipologradouro.id}">${tipologradouro.nome}</option>

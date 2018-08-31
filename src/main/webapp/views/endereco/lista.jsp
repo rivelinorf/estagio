@@ -37,7 +37,7 @@
 
 		<div class="div-form">
 			<form name="form1" action="/pesquisa-endereco" method="get"
-				id="filter-form" style="width: 50%;">
+				id="filter-form" style="width: 1000px;">
 
 				<div class="form-row">
 					<div>Número:</div>
@@ -45,26 +45,25 @@
 						if (vo.getNumero() == null) {
 					%>
 					<input type="text" name="numero" placeholder="Ex.: 111"
-						class="form-control" maxlength="4">
+						class="form-control" maxlength="4" style="width: 150px;">
 					<%
 						} else {
 					%>
 					<input type="text" name="numero" placeholder="Ex.: 111"
-						class="form-control" maxlength="4" value="<%=vo.getNumero()%>">
+						class="form-control" maxlength="4" value="<%=vo.getNumero()%>" style="width: 150px;">
 					<%
 						}
 					%>
-				</div>
-				<div class="form-row">
+
 					<div>CEP:</div>
 					<input type="text" name="cep" class="form-control"
 						value="<%=vo.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
-						maxlength="10" placeholder="Ex.: 00.000-000">
+						maxlength="10" placeholder="Ex.: 00.000-000" style="width: 150px;">
 				</div>
 				<div class="form-row">
 					<div>Complemento:</div>
 					<input type="text" name="complemento" class="form-control" maxlength="50"
-						value="<%=vo.getComplemento()%>">
+						value="<%=vo.getComplemento()%>" style="width: 460px;">
 				</div>
 				<div class="form-row">
 					<div>Logradouro:</div>

@@ -41,7 +41,7 @@
     </sge:header>
 
     <div class="div-form" style="width: 60%;">
-        <form action="/pesquisa-logradouro" method="get" id="filter-form">
+        <form action="/pesquisa-logradouro" method="get" id="filter-form" style="width: 1000px;">
 
             <div class="form-row">
                 <div>Tipo de Logradouro:</div>
@@ -63,7 +63,7 @@
             <div class="form-row">
                 <div>Logradouro:</div>
                 <input type="text" name="logradouro" class="form-control" style="background-color: rgb(46,46,46)"
-                       id="pesquisa-logradouro-nome" value="<%= vo.getNome() %>">
+                       id="pesquisa-logradouro-nome" value="<%= vo.getNome() %>" style="width: 460px;">
             </div>
 
             <div class="form-row">

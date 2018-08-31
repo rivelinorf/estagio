@@ -33,7 +33,7 @@
     </sge:header>
     <div class="div-form">
         <form name="form1" action=" /pesquisa-cidade" method="get"
-              id="filter-form">
+              id="filter-form" style="width: 1000px;">
             <div class="form-row">
                 <div>Cidade:</div>
                 <input type="text" name="cidade" class="form-control"
@@ -44,19 +44,19 @@
                 <div>Código:</div>
                 <input type="text" name="codigo" class="form-control"
                        id="pesquisa-cidade-sigla" value="<%=vo.getCod()%>"
-                       style="width: 20.2%" maxlength="2" onKeyPress="mascaraInteiro()">
+                       style="width: 150px" maxlength="2" onKeyPress="mascaraInteiro()">
                 <div>CEP:</div>
                 <input type="text" name="cep" class="form-control"
                        id="pesquisa-cidade-cep" value="<%=vo.getCep()%>"
                        onKeyPress="MascaraCep(form1.cep);" maxlength="10"
-                       style="width: 20.2%;" placeholder="Ex.: 00.000-000">
+                       style="width: 150px;" placeholder="Ex.: 00.000-000">
             </div>
 
 
             <div class="form-row">
                 <div>Estado:</div>
                 <select name="estado" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                        style="background-color: rgb(46, 46, 46)" style="width: 460px;">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${estados.all}" var="estado">
                         <c:choose>

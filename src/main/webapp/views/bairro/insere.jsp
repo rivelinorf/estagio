@@ -38,7 +38,7 @@
 
 
     <form name="form1" action="/insere-bairro" method="get"
-          id="filter-form" style="width: 100%;">
+          id="filter-form" style="width: 60%; margin: auto">
         <div class="form-row">
             <div>Estado:</div>
             <select name="estado" class="form-control"
@@ -61,7 +61,7 @@
 
     <div class="div-form">
         <form action="/insere-bairro" method="post" id="insere-form"
-              style="width: 100%;">
+              style="width: 60%; margin: auto">
 
             <div class="form-row">
                 <div>Cidade:</div>

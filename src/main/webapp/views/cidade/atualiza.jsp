@@ -44,11 +44,11 @@
             <div class="form-row">
                 <div>Código:</div>
                 <input type="text" name="codigo" class="form-control"
-                       value="<%=vo.getCod()%>" style="width: 20.2%;" maxlength="2"
+                       value="<%=vo.getCod()%>" style="width: 20.35%;" maxlength="2"
                        onKeyPress="mascaraInteiro()">
                 <div>CEP:</div>
                 <input type="text" name="cep" class="form-control"
-                       value="<%=vo.getCep()%>" style="width: 20.2%;"
+                       value="<%=vo.getCep()%>" style="width: 20.35%;"
                        onKeyPress="MascaraCep(form1.cep);" maxlength="10"
                        placeholder="Ex.: 00.000-000">
             </div>

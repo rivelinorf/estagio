@@ -18,8 +18,8 @@
             formId="insere-form"
             actionFechar="true">
     </sge:header>
-    <div class="content">
-        <form action="/insere-tipologradouro" method="post" id="insere-form">
+    <div class="div-form">
+        <form action="/insere-tipologradouro" method="post" id="insere-form" style="width: 60%; margin: auto">
             <div class="div-form">
                 <div class="form-row">
                     <div>Nome:</div>
@@ -28,6 +28,7 @@
             </div>
         </form>
     </div>
+
 </div>
 </body>
 </html>

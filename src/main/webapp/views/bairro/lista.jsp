@@ -31,12 +31,12 @@
     </sge:header>
 
     <div class="div-form">
-        <form action="/pesquisa-bairro" method="get" id="filter-form">
+        <form action="/pesquisa-bairro" method="get" id="filter-form" style="width: 1000px;">
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="nome" class="form-control" maxlength="50"
                        value="<%=vo.getNome()%>"
-                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
 
             <div class="form-row">

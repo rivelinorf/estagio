@@ -46,7 +46,7 @@
     </sge:header>
 
     <form action="/atualiza-bairro" method="get" id="filter-form"
-          style="width: 100%;">
+          style="width: 60%; margin: auto">
         <input type="hidden" value="<%=bairrovo.getId()%>" id="id">
         <div class="form-row">
             <div>Estado:</div>
@@ -70,7 +70,7 @@
 
     <div class="div-form">
         <form action="/atualiza-bairro?id=<%=bairrovo.getId()%>"
-              method="post" id="edit-form" style="width: 100%">
+              method="post" id="edit-form" style="width: 60%; margin: auto">
 
             <div class="form-row">
                 <div>Cidade:</div>

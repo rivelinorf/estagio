@@ -32,19 +32,19 @@
             formId="edit-form"
             actionFechar="true">
     </sge:header>
-    <div class="content">
-        <input type="hidden" value="<%=vo.getId()%>" id="id">
-        <form action="/atualiza-tipologradouro?id=<%=vo.getId()%>" method="post" id="edit-form">
-            <div class="div-form">
-                <div class="form-row">
-                    <div>Nome:</div>
-                    <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>"
-                           onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
-                </div>
-            </div>
 
-        </form>
-    </div>
+    <input type="hidden" value="<%=vo.getId()%>" id="id">
+    <form action="/atualiza-tipologradouro?id=<%=vo.getId()%>" method="post" id="edit-form">
+        <div class="div-form" style="width: 60%; margin: auto">
+            <div class="form-row">
+                <div>Nome:</div>
+                <input type="text" name="tipologradouro" class="form-control" value="<%=vo.getNome()%>"
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
+            </div>
+        </div>
+
+    </form>
 </div>
+
 </body>
 </html>

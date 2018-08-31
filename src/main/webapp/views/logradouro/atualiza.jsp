@@ -34,7 +34,8 @@
             actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form action="/atualiza-logradouro?id=<%= vo.getId() %>" method="post" id="edit-form" style="width: 100%">
+        <form action="/atualiza-logradouro?id=<%= vo.getId() %>" method="post" id="edit-form"
+              style="width: 60%; margin: auto">
             <input type="hidden" value="<%=vo.getId()%>" id="id">
 
             <div class="form-row">
