@@ -17,4 +17,6 @@ public interface EnderecoDAO {
     Endereco getOne(Long id);
 
     List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo);
+
+    List<Endereco> pesquisaEnderecoLike(EnderecoFiltroVO vo);
 }

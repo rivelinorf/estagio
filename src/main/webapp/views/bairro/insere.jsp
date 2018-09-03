@@ -1,4 +1,6 @@
+<%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Estado" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -18,6 +20,26 @@
         vo.setCod("");
         vo.setCep("");
         vo.setEstado(null);
+    }
+%>
+
+<%
+    BairroFiltroVO bairrovo = (BairroFiltroVO) session.getAttribute("bairroParaInserir");
+
+    if (bairrovo == null) {
+        bairrovo = new BairroFiltroVO();
+        bairrovo.setNome("");
+        bairrovo.setCidade(null);
+    }
+%>
+
+<%
+    Estado estado = (Estado) session.getAttribute("estado");
+    if (estado == null){
+        estado = new Estado();
+        estado.setAbv("");
+        estado.setNome("");
+
     }
 %>
 
@@ -62,6 +84,7 @@
     <div class="div-form">
         <form action="/insere-bairro" method="post" id="insere-form"
               style="width: 60%; margin: auto">
+            <input type="hidden" value="<%=estado.getId()%>" name="estadoSession">
 
             <div class="form-row">
                 <div>Cidade:</div>
@@ -69,7 +92,14 @@
                         style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${listaCidade_insereBairro}" var="cidade">
-                        <option value="${cidade.id}">${cidade.nome}</option>
+                        <c:choose>
+                            <c:when test="${cidade.id == filtroCidade_insereBairro.id}">
+                                <option value="${cidade.id}" selected>${cidade.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cidade.id}">${cidade.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
 
                     </c:forEach>
                 </select>
@@ -78,6 +108,7 @@
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="nome" class="form-control" maxlength="50"
+                       value="<%=bairrovo.getNome()%>"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
         </form>

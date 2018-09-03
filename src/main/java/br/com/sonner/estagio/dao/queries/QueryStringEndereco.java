@@ -54,6 +54,30 @@ public class QueryStringEndereco {
             return this;
         }
 
+        public Builder numeroLike(Integer numero) {
+            if (numero != null) {
+                this.sql += "and numero like '" + numero + "%' ";
+            }
+
+            return this;
+        }
+
+        public Builder complementoLike(String complemento) {
+            if (complemento != "" && complemento != null) {
+                this.sql += "and UPPER(complemento) like '" + complemento.toUpperCase() + "%' ";
+            }
+
+            return this;
+        }
+
+        public Builder cepLike(String cep) {
+            if (cep != "" && cep != null) {
+                this.sql += "and UPPER(cep) like '" + cep.toUpperCase() + "%' ";
+            }
+
+            return this;
+        }
+
         public QueryStringEndereco build() {
             return new QueryStringEndereco(this);
         }

@@ -199,4 +199,44 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     }
 
+    @Override
+    public List<Endereco> pesquisaEnderecoLike(EnderecoFiltroVO vo) {
+        try {
+            List<Endereco> enderecos = new ArrayList<Endereco>();
+            QueryStringEndereco queryString = new QueryStringEndereco.Builder()
+                    .numeroLike(vo.getNumero())
+                    .cepLike(vo.getCep())
+                    .complementoLike(vo.getComplemento())
+                    .bairro(vo.getBairro())
+                    .logradouro(vo.getLogradouro())
+                    .build();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+            ResultSet rs = preparedStatement.executeQuery();
+
+
+            while (rs.next()) {
+
+                Endereco e = new Endereco();
+                e.setId(rs.getLong("id"));
+                e.setNumero(rs.getInt("numero"));
+                e.setCep(rs.getString("cep"));
+                e.setComplemento(rs.getString("complemento"));
+                e.setBairro(BairroDAOImpl.getInstance().getOne(rs.getLong("endereco_bairro_fk")));
+                e.setLogradouro(LogradouroDAOImpl.getIntance().getOne(rs.getLong("endereco_logradouro_fk")));
+
+                enderecos.add(e);
+            }
+
+            rs.close();
+            preparedStatement.close();
+
+            return enderecos;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
 }

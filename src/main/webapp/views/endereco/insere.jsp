@@ -1,5 +1,9 @@
-<%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Estado" %>
+<%@ page import="br.com.sonner.estagio.model.Cidade" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -37,6 +41,52 @@
         bairrovo.setCidade(null);
     }
 %>
+
+<%
+    Estado estado = (Estado) session.getAttribute("estado");
+    if (estado == null) {
+        estado = new Estado();
+        estado.setAbv("");
+        estado.setNome("");
+
+    }
+%>
+
+<%
+    Cidade cidade = (Cidade) session.getAttribute("cidade");
+    if (cidade == null) {
+        cidade = new Cidade();
+        cidade.setCep("");
+        cidade.setCod("");
+        cidade.setEstado(null);
+        cidade.setNome("");
+    }
+%>
+
+<%
+    EnderecoFiltroVO vo = (EnderecoFiltroVO) session.getAttribute("enderecoParaInserir");
+    if (vo == null) {
+        vo = new EnderecoFiltroVO();
+        vo.setNumero(null);
+        vo.setCep("");
+        vo.setComplemento("");
+        vo.setLogradouro(null);
+        vo.setBairro(null);
+    }
+
+    LogradouroFiltroVO logradourovo = (LogradouroFiltroVO) session
+            .getAttribute("filtroLogradouro_insereEndereco");
+
+
+    if (logradourovo == null) {
+        logradourovo = new LogradouroFiltroVO();
+        logradourovo.setNome("");
+        logradourovo.setCidade(null);
+        logradourovo.setTipologradouro(null);
+    }
+
+%>
+
 
 <html>
 <head>
@@ -99,10 +149,14 @@
         <form name="form1" action="/insere-endereco" method="post"
               id="insere-form" style="width: 100%;">
 
+            <input type="hidden" value="<%=estado.getId()%>" name="estadoSession">
+            <input type="hidden" value="<%=cidade.getId() == null ? ("") : (cidade.getId()) %>" name="cidadeSession">
+
+
             <div class="form-row">
                 <div>Bairro:</div>
                 <select name="bairro" class="form-control"
-                        style="width: 20.35%;" >
+                        style="width: 20.35%;">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${listaBairro_insereEndereco}" var="bairro">
                         <option value="${bairro.id}">${bairro.nome}</option>
@@ -110,7 +164,7 @@
                 </select>
 
                 <div>Tipo de Logradouro:</div>
-                <select name="tipologradouro" class="form-control" style="width: 20.35%;" >
+                <select name="tipologradouro" class="form-control" style="width: 20.35%;">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouros.all}" var="tipologradouro">
                         <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
@@ -120,26 +174,36 @@
 
             <div class="form-row">
                 <div>Logradouro:</div>
-                <input type="text" name="logradouro" class="form-control">
+                <input type="text" name="logradouro" class="form-control"
+                       value="<%=logradourovo.getNome()%>">
             </div>
 
             <div class="form-row">
                 <div>Número:</div>
-                <input type="text" name="numero" placeholder="Ex.: 111" onKeyPress="mascaraInteiro()" maxlength="4"
-                       class="form-control">
-            </div>
+                <%
+                    if (vo.getNumero() == null) {
+                %>
+                <input type="text" name="numero" placeholder="Ex.: 111"
+                       class="form-control" maxlength="4" style="width: 20.35%;">
+                <%
+                } else {
+                %>
+                <input type="text" name="numero" placeholder="Ex.: 111"
+                       class="form-control" maxlength="4" value="<%=vo.getNumero()%>" style="width: 20.35%;">
+                <%
+                    }
+                %>
 
-            <div class="form-row">
                 <div>CEP:</div>
-                <input type="text" name="cep" placeholder="Ex: 00.000-000"
-                       class="form-control" onKeyPress="MascaraCep(form1.cep);"
-                       maxlength="10">
+                <input type="text" name="cep" placeholder="Ex.: 00.000-000"
+                       class="form-control" value="<%=vo.getCep()%>"
+                       onKeyPress="MascaraCep(form1.cep);" maxlength="10" style="width: 20.35%;">
             </div>
 
             <div class="form-row">
                 <div>Complemento:</div>
-                <input type="text" name="complemento" placeholder="(opcional)" maxlength="50"
-                       class="form-control">
+                <input type="text" name="complemento" class="form-control" maxlength="50"
+                       class="form-control" value="<%=vo.getComplemento()%>" placeholder="(opcional)">
             </div>
         </form>
     </div>
