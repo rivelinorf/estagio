@@ -105,6 +105,7 @@ public class Insere extends HttpServlet {
 
         } else {
             session.setAttribute("errors", erros);
+            session.setAttribute("campoCidade", novaCidade);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/cidade/insere.jsp");
             requestDispatcher.forward(req, res);
         }

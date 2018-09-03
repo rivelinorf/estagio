@@ -42,10 +42,8 @@ public class Atualiza extends HttpServlet {
         List<String> erros = cidadeController.validation(novaCidade);
 
         if (erros.size() == 0) {
-            vo.setNome("");
             vo.setCod("");
             vo.setCep("");
-            vo.setEstado(null);
             vo.setId(null);
 
             vo.setNome(novaCidade.getNome());
@@ -97,7 +95,14 @@ public class Atualiza extends HttpServlet {
             }
 
         } else {
+            vo.setId(Long.valueOf(request.getParameter("id")));
+            vo.setNome(request.getParameter("cidade"));
+            vo.setCod(request.getParameter("codigo"));
+            vo.setCep(request.getParameter("cep"));
+            vo.setEstado(Long.valueOf(request.getParameter("estado")));
+
             session.setAttribute("errors", erros);
+            session.setAttribute("cidadeParaEditar", vo);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
             requestDispatcher.forward(request, response);
         }

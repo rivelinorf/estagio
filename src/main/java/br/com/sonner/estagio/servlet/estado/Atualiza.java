@@ -47,7 +47,6 @@ public class Atualiza extends HttpServlet {
 
         if (erros.size() == 0) {
 
-            vo.setEstado("");
             vo.setAbv("");
             vo.setId(null);
 
@@ -94,6 +93,11 @@ public class Atualiza extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
         } else {
+            vo.setEstado(request.getParameter("estado"));
+            vo.setAbv(request.getParameter("abv"));
+            vo.setId(Long.valueOf(request.getParameter("id")));
+
+            session.setAttribute("estado-para-editar", vo);
             session.setAttribute("errors", erros);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/atualiza.jsp");
             requestDispatcher.forward(request, response);

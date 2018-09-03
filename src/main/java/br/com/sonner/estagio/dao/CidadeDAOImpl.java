@@ -181,7 +181,7 @@ public class CidadeDAOImpl implements CidadeDAO {
             PreparedStatement statement = connection.prepareStatement(queryString.getSql());
             ResultSet resultSet = statement.executeQuery();
 
-            List<Cidade> cidades = new ArrayList<>();
+             List<Cidade> cidades = new ArrayList<>();
 
             while (resultSet.next()) {
                 Cidade aux = new Cidade();

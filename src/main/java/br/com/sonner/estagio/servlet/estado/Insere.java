@@ -80,6 +80,7 @@ public class Insere extends HttpServlet {
 
         } else {
             session.setAttribute("errors", erros);
+            session.setAttribute("campoEstado", aux);
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/estado/insere.jsp");
             requestDispatcher.forward(request, response);
         }

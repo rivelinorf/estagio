@@ -32,7 +32,7 @@ public class QueryStringEstado {
 
         public Builder estadoLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and nome LIKE '" + nome + "%' ";
+                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringEstado {
 
         public Builder abvLike(String abv) {
             if (abv != "" && abv != null) {
-                this.sql += "and abv LIKE '"+ abv +"%' ";
+                this.sql += "and UPPER(abv )LIKE '"+ abv.toUpperCase() +"%' ";
             }
 
             return this;

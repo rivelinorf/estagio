@@ -62,7 +62,7 @@
         </div>
     </div>
     <footer class="container-nav">
-        <a href="">
+        <a href="/views/home.jsp">
             <div class="box-img">
                 <img class="user-img"
                      src="<%= request.getContextPath() %>/assets/imgs/usuario.png"> <span>Bem
