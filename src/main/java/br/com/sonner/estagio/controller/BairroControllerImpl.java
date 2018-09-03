@@ -67,5 +67,10 @@ public class BairroControllerImpl implements BairroController {
         return erros;
     }
 
+    @Override
+    public List<Bairro> filtrarLike(BairroFiltroVO vo) {
+        return this.bDAO.pesquisaBairroLike(vo);
+    }
+
 
 }

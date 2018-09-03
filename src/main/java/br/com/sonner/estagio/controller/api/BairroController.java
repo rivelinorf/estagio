@@ -20,4 +20,6 @@ public interface BairroController {
 
     List<String> validation(Bairro bairro);
 
+    List<Bairro> filtrarLike(BairroFiltroVO bairrosPesquisados);
+
 }

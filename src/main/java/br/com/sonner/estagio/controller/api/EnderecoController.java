@@ -19,4 +19,6 @@ public interface EnderecoController {
     List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
 
     List<String> validation(Endereco endereco);
+
+    List<Endereco> filtrarLike(EnderecoFiltroVO enderecosPesquisados);
 }

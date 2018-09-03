@@ -40,6 +40,7 @@ public class Atualiza extends HttpServlet {
 
             session.setAttribute("filtroCidade_atualiza", vo);
             session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(vo));
+
         }
 
         response.sendRedirect("/views/bairro/atualiza.jsp");

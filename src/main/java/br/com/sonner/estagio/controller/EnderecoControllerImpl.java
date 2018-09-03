@@ -87,4 +87,9 @@ public class EnderecoControllerImpl implements EnderecoController {
 
     }
 
+    @Override
+    public List<Endereco> filtrarLike(EnderecoFiltroVO vo) {
+        return this.eDAO.pesquisaEnderecoLike(vo);
+    }
+
 }

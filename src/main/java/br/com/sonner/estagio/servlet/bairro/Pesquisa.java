@@ -33,6 +33,7 @@ public class Pesquisa extends HttpServlet {
         } else {
             session.setAttribute("filtroBairro", vo);
             session.setAttribute("listaBairro", bairroController.filtrar(vo));
+            session.setAttribute("listaBairro", bairroController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/bairro/lista.jsp");

@@ -42,7 +42,7 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("listaEndereco", null);
         } else {
             session.setAttribute("filtroEndereco", vo);
-            session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+            session.setAttribute("listaEndereco", enderecoController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/endereco/lista.jsp");

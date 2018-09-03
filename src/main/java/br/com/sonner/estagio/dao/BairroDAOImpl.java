@@ -172,5 +172,32 @@ public class BairroDAOImpl implements BairroDAO {
         }
     }
 
+    @Override
+    public List<Bairro> pesquisaBairroLike(BairroFiltroVO vo) {
+        try {
+            QueryStringBairro queryString = new QueryStringBairro.Builder().bairroLike(vo.getNome()).cidade(vo.getCidade())
+                    .build();
+
+            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Bairro> bairros = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Bairro aux = new Bairro();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("bairro_cidade_fk")));
+
+                bairros.add(aux);
+            }
+
+            return bairros;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
