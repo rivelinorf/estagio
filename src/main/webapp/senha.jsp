@@ -31,9 +31,6 @@
             <div class="form-row">
                 <input class="form-control" type="text" name="user" placeholder="Insira seu usuario">
             </div>
-            <div class="form-row">
-                <input class="form-control" type="email" name="email" placeholder="Insira seu email">
-            </div>
             <br>
             <input class="main-btn btn-green enviar" type="submit" value="Enviar"
                    style="width: 296px">

@@ -87,7 +87,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public List<Usuario> pesquisaUsuario(UsuarioFiltroVo vo) {
         try {
             QueryStringUsuario queryString = new QueryStringUsuario.Builder()
-                    .usuario(vo.getUsuario(), vo.getEmail())
+                    .usuario(vo.getUsuario())
+                    .email(vo.getEmail())
                     .build();
 
             PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());

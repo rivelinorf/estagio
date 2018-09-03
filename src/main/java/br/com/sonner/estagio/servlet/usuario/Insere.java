@@ -61,6 +61,5 @@ public class Insere extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/cadastro.jsp");
             requestDispatcher.forward(req, res);
         }
-
     }
 }

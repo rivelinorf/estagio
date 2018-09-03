@@ -2,7 +2,6 @@ package br.com.sonner.estagio.servlet.usuario;
 
 import br.com.sonner.estagio.controller.TokenControllerImpl;
 import br.com.sonner.estagio.controller.UsuarioControllerImpl;
-import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
 import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 
@@ -27,25 +26,23 @@ public class EsqSenha extends HttpServlet {
         UsuarioControllerImpl usuarioController = new UsuarioControllerImpl();
         UsuarioFiltroVo usuarioFiltroVo = new UsuarioFiltroVo();
 
-        String email = request.getParameter("email");
         String usuario = request.getParameter("user");
 
-        usuarioFiltroVo.setEmail(email);
         usuarioFiltroVo.setUsuario(usuario);
 
         List<Usuario> users = usuarioController.filtrar(usuarioFiltroVo);
 
-        if (users.size() > 0 && email != "" && usuario != "") {
+        if (users.size() > 0 && usuario != "") {
             try {
                 String uniqueID = UUID.randomUUID().toString();
                 String host = "smtp.gmail.com";
                 String user = "sge.sonner.contact@gmail.com";
                 String pass = "sonner123";
-                String to = request.getParameter("email");
+                String to = users.get(0).getEmail();
                 String subject = "Email de redefinir senha";
 
 
-                String messageText = request.getRequestURL().toString().replace(request.getRequestURI().toString(), "") + "/redefinir.jsp?token=" + uniqueID;
+                String messageText = "Olá, seu link para redefinir a senha é: " + request.getRequestURL().toString().replace(request.getRequestURI().toString(), "") + "/redefinir.jsp?token=" + uniqueID;
 
                 Properties props = System.getProperties();
 
@@ -79,9 +76,8 @@ public class EsqSenha extends HttpServlet {
 
             response.sendRedirect("/senha.jsp");
         } else {
-            request.getSession().setAttribute("errors", "Usuario ou email não encontrado");
+            request.getSession().setAttribute("errors", "Usuario não encontrado");
             response.sendRedirect("/senha.jsp");
         }
     }
-
 }

@@ -8,4 +8,3 @@
 <script src="<%=request.getContextPath()%>/assets/lib/bootstrap/js/bootstrap.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/main.css">
 <script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>

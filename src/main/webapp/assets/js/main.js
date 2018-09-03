@@ -6,11 +6,11 @@ var validString = function (text) {
 }
 
 $(document).ready(function () {
-    $(".olho").on("mousedown", function () {
+    $(".olho i").on("mousedown", function () {
         $(this).prev(".senha").attr("type", "text");
     });
 
-    $(".olho").on("mouseup", function () {
+    $(".olho i").on("mouseup", function () {
         $(this).prev(".senha").attr("type", "password");
     });
 })

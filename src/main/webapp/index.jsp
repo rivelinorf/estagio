@@ -17,9 +17,9 @@
             <div class="form-row">
                 <input class="form-control" type="text" name="usuario" placeholder="Usuario">
             </div>
-            <div class="form-row">
+            <div class="form-row olho">
                 <input class="form-control senha" type="password" name="senha" placeholder="Senha">
-                <button type="button" class="olho"><i class="fas fa-eye"></i></button>
+                <i class="fas fa-eye"></i>
             </div>
             <br>
             <button class="main-btn btn-green" style="width: 291px;">login</button>

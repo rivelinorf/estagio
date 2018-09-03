@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet("/pesquisa-estado")
 public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws  IOException {
+            throws IOException {
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
 
         EstadoFiltroVO vo = new EstadoFiltroVO();
@@ -27,9 +27,8 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("listaEstado", null);
 
         } else {
-
             session.setAttribute("filtroEstado", vo);
-            session.setAttribute("listaEstado", estadoController.filtrar(vo));
+            session.setAttribute("listaEstado", estadoController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/estado/lista.jsp");

@@ -14,14 +14,14 @@
     <h1>Redefinir Senha</h1>
     <form action="/redefinir-senha?token=${param.token}" method="post" id="form-cadastro">
         <div class="div-form">
-            <div class="form-row">
+            <div class="form-row olho">
                 <input class="form-control senha" type="password" name="newPass" placeholder="Insira nova senha">
-                <button type="button" class="olho"><i class="fas fa-eye "></i></button>
+                <i class="fas fa-eye "></i>
             </div>
-            <div class="form-row">
+            <div class="form-row olho">
                 <input class="form-control senha" type="password" name="confirmPass"
                        placeholder="Confirme a nova senha">
-                <button type="button" class="olho"><i class="fas fa-eye"></i></button>
+                <i class="fas fa-eye"></i>
             </div>
             <br>
             <input class="main-btn btn-green" type="submit" value="Enviar"

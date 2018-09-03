@@ -15,12 +15,17 @@ public class QueryStringUsuario {
     public static class Builder {
         private String sql = "SELECT * FROM usuario WHERE 1 ";
 
-        public Builder usuario(String usuario, String email) {
-            if (usuario != "") {
-                this.sql += "  and usuario = '" + usuario + "'";
+        public Builder usuario(String usuario) {
+            if (usuario != "" && usuario != null) {
+                this.sql += "and usuario = '" + usuario + "'";
             }
-            if (email != "") {
-                this.sql += " and email = '" + email + "'";
+
+            return this;
+        }
+
+        public Builder email(String email) {
+            if (email != "" && email != null) {
+                this.sql += "and email = '" + email + "'";
             }
 
             return this;

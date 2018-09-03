@@ -152,4 +152,30 @@ public class EstadoDAOImpl implements EstadoDAO {
             return null;
         }
     }
+
+    public List<Estado> pesquisaEstadoLike(String nome, String abv) {
+        try {
+            QueryStringEstado queryString = new QueryStringEstado.Builder().estadoLike(nome).abvLike(abv).build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Estado> estados = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Estado aux = new Estado();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setAbv(resultSet.getString("abv"));
+
+                estados.add(aux);
+            }
+
+            return estados;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

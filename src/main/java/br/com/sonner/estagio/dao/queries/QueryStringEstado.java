@@ -30,6 +30,22 @@ public class QueryStringEstado {
             return this;
         }
 
+        public Builder estadoLike(String nome) {
+            if (nome != "" && nome != null) {
+                this.sql += "and nome LIKE '" + nome + "%' ";
+            }
+
+            return this;
+        }
+
+        public Builder abvLike(String abv) {
+            if (abv != "" && abv != null) {
+                this.sql += "and abv LIKE '"+ abv +"%' ";
+            }
+
+            return this;
+        }
+
         public QueryStringEstado build() {
             return new QueryStringEstado(this);
         }

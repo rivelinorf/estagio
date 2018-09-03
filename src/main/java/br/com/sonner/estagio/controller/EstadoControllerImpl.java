@@ -66,4 +66,8 @@ public class EstadoControllerImpl implements EstadoController {
     public List<Estado> filtrar(EstadoFiltroVO estadosPesquisados) {
         return this.estadoDAO.pesquisaEstado(estadosPesquisados.getEstado(), estadosPesquisados.getAbv());
     }
+
+    public List<Estado> filtrarLike(EstadoFiltroVO estadosPesquisados) {
+        return this.estadoDAO.pesquisaEstadoLike(estadosPesquisados.getEstado(), estadosPesquisados.getAbv());
+    }
 }

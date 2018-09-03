@@ -316,7 +316,6 @@ nav {
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #fff transparent transparent transparent;
-
 }
 
 .lds-ring div:nth-child(1) {
@@ -338,4 +337,18 @@ nav {
     100% {
         transform: rotate(360deg);
     }
+}
+
+.olho {
+    position: relative;
+    /*border-style: solid;*/
+}
+
+.olho i {
+    position: absolute;
+    right: 5px;
+    top: 25%;
+    border-style: none;
+    cursor: pointer;
+    color: rgb(120, 120, 120);
 }

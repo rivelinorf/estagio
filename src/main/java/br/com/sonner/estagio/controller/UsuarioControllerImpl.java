@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.dao.UsuarioDAOImpl;
 import br.com.sonner.estagio.dao.api.UsuarioDAO;
 import br.com.sonner.estagio.model.Usuario;
+import br.com.sonner.estagio.util.EmailValidator;
 import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 
 import java.util.ArrayList;
@@ -35,9 +36,14 @@ public class UsuarioControllerImpl implements UsuarioController {
     @Override
     public List<String> validation(Usuario usuario) {
         List<String> erros = new ArrayList<>();
+        EmailValidator emailValidator = new EmailValidator();
 
         if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
             erros.add("O email não pode ser vazio");
+        }
+
+        if (!emailValidator.validateEmail(usuario.getEmail())) {
+            erros.add("Email invalido!");
         }
 
         if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
