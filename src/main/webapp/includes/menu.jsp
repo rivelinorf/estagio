@@ -1,4 +1,6 @@
+<%@ page import="br.com.sonner.estagio.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% Usuario usuario = (Usuario) request.getSession().getAttribute("USER"); %>
 <script>
     function showOpt(id) {
         for (var i = 0; i < $(".dropdown-content").length; i++) {
@@ -63,8 +65,8 @@
         <a href="">
             <div class="box-img">
                 <img class="user-img"
-                     src="<%=request.getContextPath()%>/assets/imgs/user.jpg"> <span>Bem
-				vindo: Matheus</span>
+                     src="<%= request.getContextPath() %>/assets/imgs/usuario.png"> <span>Bem
+				vindo: <%= usuario.getUsuario() %></span>
             </div>
         </a>
         <a href="/usuario-logout">

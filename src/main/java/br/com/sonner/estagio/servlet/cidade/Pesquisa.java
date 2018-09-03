@@ -32,7 +32,7 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("listaCidade", null);
         } else {
             session.setAttribute("filtroCidade", vo);
-            session.setAttribute("listaCidade", cidadeController.filtrar(vo));
+            session.setAttribute("listaCidade", cidadeController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/cidade/lista.jsp");

@@ -21,4 +21,5 @@ public interface CidadeDAO {
 
     List<Cidade> pesquisaCidade(CidadeFiltroVO vo);
 
+    List<Cidade> pesquisaCidadeLike(CidadeFiltroVO vo);
 }

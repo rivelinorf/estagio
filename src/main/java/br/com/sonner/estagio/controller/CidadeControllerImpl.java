@@ -80,4 +80,8 @@ public class CidadeControllerImpl implements CidadeController {
         return this.cidadeDAO.pesquisaCidade(vo);
     }
 
+    public List<Cidade> filtrarLike(CidadeFiltroVO vo) {
+        return this.cidadeDAO.pesquisaCidadeLike(vo);
+    }
+
 }

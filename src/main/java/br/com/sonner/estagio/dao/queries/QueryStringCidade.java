@@ -46,6 +46,30 @@ public class QueryStringCidade {
             return this;
         }
 
+        public Builder cidadeLike(String nome) {
+            if (nome != "" && nome != null) {
+                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+            }
+
+            return this;
+        }
+
+        public Builder codigoLike(String abv) {
+            if (abv != "" && abv != null) {
+                this.sql += "and UPPER(codigo) LIKE '" + abv.toUpperCase() + "%' ";
+            }
+
+            return this;
+        }
+
+        public Builder cepLike(String cep) {
+            if (cep != "" && cep != null) {
+                this.sql += "and UPPER(cep) LIKE '" + cep.toUpperCase() + "%' ";
+            }
+
+            return this;
+        }
+
         public QueryStringCidade build() {
             return new QueryStringCidade(this);
         }

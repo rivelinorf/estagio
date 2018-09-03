@@ -172,5 +172,34 @@ public class CidadeDAOImpl implements CidadeDAO {
         }
     }
 
+    @Override
+    public List<Cidade> pesquisaCidadeLike(CidadeFiltroVO vo) {
+        try {
+            QueryStringCidade queryString = new QueryStringCidade.Builder().cidadeLike(vo.getNome()).cepLike(vo.getCep())
+                    .codigoLike(vo.getCod()).estado(vo.getEstado()).build();
+
+            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
+            ResultSet resultSet = statement.executeQuery();
+
+            List<Cidade> cidades = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Cidade aux = new Cidade();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setCod(resultSet.getString("codigo"));
+                aux.setCep(resultSet.getString("cep"));
+                aux.setEstado(EstadoDAOImpl.getInstance().getOne(resultSet.getLong("cidade_estado_fk")));
+
+                cidades.add(aux);
+            }
+
+            return cidades;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
