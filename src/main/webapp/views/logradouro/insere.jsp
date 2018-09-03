@@ -1,9 +1,21 @@
+<%@ page import="br.com.sonner.estagio.model.Logradouro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="tipologradouroCtl" class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 <jsp:useBean id="cidadesCtl" class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 
+
+<%
+    Logradouro campoLogradouro = (Logradouro) session.getAttribute("campoLogradouro");
+
+    if (campoLogradouro == null) {
+        campoLogradouro = new Logradouro();
+        campoLogradouro.setNome("");
+        campoLogradouro.setTipologradouro(null);
+        campoLogradouro.setCidade(null);
+    }
+%>
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -23,7 +35,8 @@
 
             <div class="form-row">
                 <div>Nome:</div>
-                <input type="text" name="logradouro" class="form-control">
+                <input type="text" name="logradouro" class="form-control" value="<%= campoLogradouro.getNome() %>"
+                       maxlength="60" onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
 
 
@@ -53,4 +66,5 @@
 
 </body>
 </html>
+<% session.setAttribute("campoLogradouro", null); %>
 

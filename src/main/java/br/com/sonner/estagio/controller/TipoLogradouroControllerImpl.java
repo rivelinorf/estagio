@@ -60,8 +60,11 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
     }
 
 
-    public List<TipoLogradouro> filtrar(TipologradouroFiltroVO tipologradourosPesquisados) {
-        return this.tDAO.pesquisaTipoLogradouro((tipologradourosPesquisados.getNome()));
+    public List<TipoLogradouro> filtrar(TipologradouroFiltroVO vo) {
+        return this.tDAO.pesquisaTipoLogradouro((vo.getNome()));
     }
 
+    public List<TipoLogradouro> filtrarLike(TipologradouroFiltroVO vo) {
+        return this.tDAO.pesquisaTipoLogradouroLike(vo);
+    }
 }

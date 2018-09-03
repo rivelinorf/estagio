@@ -29,6 +29,10 @@ public class Insere extends HttpServlet {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         LogradouroFiltroVO vo = new LogradouroFiltroVO();
         HttpSession session = req.getSession();
+        Logradouro aux = new Logradouro();
+        aux.setCidade(null);
+        aux.setTipologradouro(null);
+        aux.setNome("");
 
 
         Cidade cidade = null;
@@ -80,6 +84,7 @@ public class Insere extends HttpServlet {
             }
         } else {
             session.setAttribute("errors", erros);
+            session.setAttribute("campoLogradouro", aux);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/logradouro/insere.jsp");
             requestDispatcher.forward(req, res);
         }

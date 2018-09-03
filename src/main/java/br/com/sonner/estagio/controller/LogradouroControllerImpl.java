@@ -73,4 +73,7 @@ public class LogradouroControllerImpl implements LogradouroController {
 
     }
 
+    public List<Logradouro> filtrarLike(LogradouroFiltroVO vo) {
+        return this.logradouroDAO.pesquisaLogradouroLike(vo);
+    }
 }

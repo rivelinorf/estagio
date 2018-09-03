@@ -4,6 +4,7 @@ import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -146,5 +147,29 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public List<TipoLogradouro> pesquisaTipoLogradouroLike(TipologradouroFiltroVO vo) {
+        try {
+            QueryStringTipologradouro queryString = new QueryStringTipologradouro.Builder().tipologradouroLike(vo.getNome()).build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<TipoLogradouro> tipologradouros = new ArrayList<>();
+
+            while (resultSet.next()) {
+                TipoLogradouro aux = new TipoLogradouro();
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                tipologradouros.add(aux);
+            }
+            return tipologradouros;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 }

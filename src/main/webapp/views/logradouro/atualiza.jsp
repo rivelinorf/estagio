@@ -40,7 +40,8 @@
 
             <div class="form-row">
                 <div>Nome:</div>
-                <input type="text" name="logradouro" class="form-control" value="<%= vo.getNome() %>">
+                <input type="text" name="logradouro" class="form-control" value="<%= vo.getNome() %>"
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
 
 

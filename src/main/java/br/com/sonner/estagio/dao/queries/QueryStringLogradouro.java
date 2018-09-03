@@ -37,6 +37,14 @@ public class QueryStringLogradouro {
             return this;
         }
 
+        public Builder logradouroLike(String nome) {
+            if (nome != "" && nome != null) {
+                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+            }
+            return this;
+        }
+
+
         public QueryStringLogradouro build() {
             return new QueryStringLogradouro(this);
         }

@@ -1,5 +1,5 @@
 <%@ page import="br.com.sonner.estagio.model.Usuario" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <% Usuario usuario = (Usuario) request.getSession().getAttribute("USER"); %>
 <script>
     function showOpt(id) {
@@ -64,9 +64,8 @@
     <footer class="container-nav">
         <a href="/views/home.jsp">
             <div class="box-img">
-                <img class="user-img"
-                     src="<%= request.getContextPath() %>/assets/imgs/usuario.png"> <span>Bem
-				vindo: <%= usuario.getUsuario() %></span>
+                <img class="user-img" src="<%=usuario.getFoto()%>"> <span>Bem
+				vindo: <%=usuario.getUsuario()%></span>
             </div>
         </a>
         <a href="/usuario-logout">

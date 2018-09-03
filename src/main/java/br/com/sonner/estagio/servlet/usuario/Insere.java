@@ -26,6 +26,8 @@ public class Insere extends HttpServlet {
         String email = null;
         String usuario = null;
         String senha = null;
+        String foto = req.getParameter("foto");
+
 
 
         if (req.getParameter("email") != null && !req.getParameter("email").isEmpty()) {
@@ -44,9 +46,11 @@ public class Insere extends HttpServlet {
 
         Usuario novousuario = new Usuario();
 
+        novousuario.setFoto(foto);
         novousuario.setEmail(email);
         novousuario.setUsuario(usuario);
         novousuario.setSenha(senha);
+
 
 
         List<String> erros = usuarioController.validation(novousuario);

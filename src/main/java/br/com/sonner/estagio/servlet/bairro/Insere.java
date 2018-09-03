@@ -105,7 +105,6 @@ public class Insere extends HttpServlet {
         vo.setId(bairro.getId());
         vo.setNome(bairro.getNome());
 
-
         if (erros.size() == 0) {
 
             List<Bairro> verifica = bairroController.filtrar(vo);

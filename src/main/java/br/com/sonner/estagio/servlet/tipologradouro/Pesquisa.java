@@ -28,7 +28,7 @@ public class Pesquisa extends HttpServlet {
         } else {
 
             session.setAttribute("filtroTipologradouro", vo);
-            session.setAttribute("listaTipologradouro", tipologradouroController.filtrar(vo));
+            session.setAttribute("listaTipologradouro", tipologradouroController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/tipologradouro/lista.jsp");

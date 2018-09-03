@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.dao.api;
 
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface TipoLogradouroDAO {
     void delete(Long id);
 
     List<TipoLogradouro> pesquisaTipoLogradouro(String nome);
+
+    List<TipoLogradouro> pesquisaTipoLogradouroLike(TipologradouroFiltroVO vo);
 }

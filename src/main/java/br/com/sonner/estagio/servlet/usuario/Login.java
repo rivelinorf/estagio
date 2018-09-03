@@ -22,8 +22,10 @@ public class Login extends HttpServlet {
         user.setSenha(request.getParameter("senha"));
 
 
-        if (usuarioController.efetuaLogin(user) != null) {
-            sessao.setAttribute("USER", user);
+        Usuario usuario = usuarioController.efetuaLogin(user);
+
+        if (usuario != null) {
+            sessao.setAttribute("USER", usuario);
             response.sendRedirect("/views/home.jsp");
 
         } else {

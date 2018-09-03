@@ -3,6 +3,7 @@ package br.com.sonner.estagio.model;
 public class Usuario {
     private long id;
     private String usuario;
+    private String foto;
     private String senha;
     private String email;
 
@@ -31,12 +32,19 @@ public class Usuario {
         this.senha = senha;
     }
 
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

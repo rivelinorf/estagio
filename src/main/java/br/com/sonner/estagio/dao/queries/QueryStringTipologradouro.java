@@ -21,6 +21,14 @@ public class QueryStringTipologradouro {
             return this;
         }
 
+        public Builder tipologradouroLike(String nome) {
+            if (nome != "") {
+                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+            }
+            return this;
+        }
+
+
         public QueryStringTipologradouro build() {
             return new QueryStringTipologradouro(this);
         }

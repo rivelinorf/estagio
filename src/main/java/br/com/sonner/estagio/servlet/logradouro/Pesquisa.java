@@ -34,7 +34,7 @@ public class Pesquisa extends HttpServlet {
         } else {
 
             session.setAttribute("filtroLogradouro", vo);
-            session.setAttribute("listaLogradouro", logradouroController.filtrar(vo));
+            session.setAttribute("listaLogradouro", logradouroController.filtrarLike(vo));
         }
 
         response.sendRedirect("/views/logradouro/lista.jsp");

@@ -185,4 +185,34 @@ public class LogradouroDAOImpl implements LogradouroDAO {
 
     }
 
+    @Override
+    public List<Logradouro> pesquisaLogradouroLike(LogradouroFiltroVO vo) {
+        try {
+            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
+                    .logradouroLike(vo.getNome())
+                    .tipologradouro(vo.getTipologradouro())
+                    .cidade(vo.getCidade())
+                    .build();
+            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Logradouro> logradouros = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Logradouro aux = new Logradouro();
+
+                aux.setId(resultSet.getLong("id"));
+                aux.setNome(resultSet.getString("nome"));
+                aux.setTipologradouro(TipoLogradouroDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_tipo_fk")));
+                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_cidade_fk")));
+
+                logradouros.add(aux);
+            }
+
+            return logradouros;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
+

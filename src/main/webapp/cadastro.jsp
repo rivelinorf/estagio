@@ -17,6 +17,11 @@
     <h1>Cadastro de Usuario</h1>
     <form action="/usuario-insere" method="post" id="form-cadastro">
         <div class="div-form">
+
+            <div class="form-row">
+                <input class="form-control" type="file" name="foto" >
+            </div>
+
             <div class="form-row">
                 <input class="form-control" type="email" name="email" placeholder="insira seu email">
             </div>
