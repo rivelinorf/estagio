@@ -2,6 +2,8 @@
 <%@ page import="br.com.sonner.estagio.vos.LogradouroFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Estado" %>
+<%@ page import="br.com.sonner.estagio.model.Cidade" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -46,6 +48,27 @@
         cidadevo.setCod("");
         cidadevo.setCep("");
         cidadevo.setEstado(null);
+    }
+%>
+
+<%
+    Estado estado = (Estado) session.getAttribute("estado");
+    if (estado == null) {
+        estado = new Estado();
+        estado.setAbv("");
+        estado.setNome("");
+
+    }
+%>
+
+<%
+    Cidade cidade = (Cidade) session.getAttribute("cidade");
+    if (cidade == null) {
+        cidade = new Cidade();
+        cidade.setCep("");
+        cidade.setCod("");
+        cidade.setEstado(null);
+        cidade.setNome("");
     }
 %>
 
@@ -111,6 +134,8 @@
         <form name="form1" action="/atualiza-endereco?id=<%=vo.getId()%>"
               method="post" id="edit-form" style="width: 100%">
             <input type="hidden" value="<%=vo.getId()%>" id="id">
+            <input type="hidden" value="<%=estado.getId()%>" name="estadoSession">
+            <input type="hidden" value="<%=cidade.getId() == null ? ("") : (cidade.getId()) %>" name="cidadeSession">
             <div class="form-row">
                 <div>Bairro:</div>
                 <select name="bairro" class="form-control"
@@ -154,15 +179,25 @@
 
             <div class="form-row">
                 <div>Número:</div>
+                <%
+                    if (vo.getNumero() == null) {
+                %>
                 <input type="text" name="numero" placeholder="Ex.: 111"
-                       class="form-control" onKeyPress="mascaraInteiro()" maxlength="4" value="<%=vo.getNumero()%>">
-            </div>
+                       class="form-control" onKeyPress="mascaraInteiro()" maxlength="4" style="width: 150px;">
+                <%
+                } else {
+                %>
+                <input type="text" name="numero" placeholder="Ex.: 111"
+                       class="form-control" onKeyPress="mascaraInteiro()" maxlength="4" value="<%=vo.getNumero()%>"
+                       style="width: 20.35%;">
+                <%
+                    }
+                %>
 
-            <div class="form-row">
                 <div>CEP:</div>
                 <input type="text" name="cep" placeholder="Ex.: 00.000-000"
                        class="form-control" value="<%=vo.getCep()%>"
-                       onKeyPress="MascaraCep(form1.cep);" maxlength="10">
+                       onKeyPress="MascaraCep(form1.cep);" maxlength="10" style="width: 20.35%;">
             </div>
 
             <div class="form-row">

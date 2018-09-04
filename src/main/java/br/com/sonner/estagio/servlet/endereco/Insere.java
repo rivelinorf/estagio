@@ -86,6 +86,7 @@ public class Insere extends HttpServlet {
                 session.setAttribute("filtroBairro_insereEndereco", null);
                 session.setAttribute("cidade", null);
                 session.setAttribute("enderecoParaInserir", null);
+
             }
 
         }
@@ -102,8 +103,10 @@ public class Insere extends HttpServlet {
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
         TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
 
-        EnderecoFiltroVO vo = new EnderecoFiltroVO();
         HttpSession session = req.getSession();
+
+
+        EnderecoFiltroVO vo = new EnderecoFiltroVO();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
         LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
@@ -118,6 +121,14 @@ public class Insere extends HttpServlet {
         Cidade cidade = null;
         Estado estado = null;
 
+        logradourovo.setNome("");
+        vo.setId(null);
+        vo.setNumero(null);
+        vo.setCep("");
+        vo.setComplemento("");
+        vo.setBairro(null);
+        vo.setLogradouro(null);
+
 
         if (req.getParameter("estadoSession") != "" && req.getParameter("estadoSession") != null) {
             cidadevo.setEstado(Long.valueOf(req.getParameter("estadoSession")));
@@ -127,7 +138,14 @@ public class Insere extends HttpServlet {
 
         if (req.getParameter("cidadeSession") != "" && req.getParameter("cidadeSession") != null) {
             cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeSession")));
+
+            cidadevo.setCep(cidade.getCep());
+            cidadevo.setCod(cidade.getCod());
+            cidadevo.setId(cidade.getId());
+            cidadevo.setNome(cidade.getNome());
+
             bairrovo.setCidade(cidade.getId());
+            logradourovo.setCidade(cidade.getId());
 
 
         }
@@ -142,45 +160,49 @@ public class Insere extends HttpServlet {
         if (req.getParameter("bairro") != "" && req.getParameter("bairro") != null) {
             bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
             vo.setBairro(bairro.getId());
+
+            bairrovo.setNome(bairro.getNome());
+            bairrovo.setId(bairro.getId());
         }
 
         if (req.getParameter("tipologradouro") != "" && req.getParameter("tipologradouro") != null) {
             tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+            logradourovo.setTipologradouro(tipoLogradouro.getId());
 
         }
 
-        if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null && cidade != null
-                && tipoLogradouro != null) {
+
+        if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null) {
+
             String nomeLogradouro = req.getParameter("logradouro");
-
-            vo.setLogradouro(logradouro.getId());
-
-
-            logradourovo.setCidade(cidade.getId());
             logradourovo.setNome(nomeLogradouro);
-            logradourovo.setTipologradouro(tipoLogradouro.getId());
 
-            List<Logradouro> validation = logradouroController.filtrar(logradourovo);
+            if (cidade != null
+                    && tipoLogradouro != null) {
 
-            if (validation.size() == 0) {
-                logradouro = new Logradouro();
 
-                logradouro.setCidade(cidade);
-                logradouro.setNome(nomeLogradouro);
-                logradouro.setTipologradouro(tipoLogradouro);
+                logradourovo.setCidade(cidade.getId());
 
-                logradouroController.save(logradouro);
+                logradourovo.setTipologradouro(tipoLogradouro.getId());
 
-                validation = logradouroController.filtrar(logradourovo);
+                List<Logradouro> validation = logradouroController.filtrar(logradourovo);
+
+                if (validation.size() == 0) {
+                    logradouro = new Logradouro();
+
+                    logradouro.setCidade(cidade);
+                    logradouro.setNome(nomeLogradouro);
+                    logradouro.setTipologradouro(tipoLogradouro);
+
+                    logradouroController.save(logradouro);
+
+                    validation = logradouroController.filtrar(logradourovo);
+
+                }
+
+                logradouro = validation.get(0);
 
             }
-
-            logradouro = validation.get(0);
-
-            logradourovo.setCidade(logradouro.getCidade().getId());
-            logradourovo.setNome(logradouro.getNome());
-            logradouro.setTipologradouro(logradouro.getTipologradouro());
-
         }
 
 
@@ -192,13 +214,6 @@ public class Insere extends HttpServlet {
         endereco.setLogradouro(logradouro);
 
         List<String> erros = enderecoController.validation(endereco);
-
-        vo.setId(null);
-        vo.setNumero(null);
-        vo.setCep("");
-        vo.setComplemento("");
-        vo.setBairro(null);
-        vo.setLogradouro(null);
 
         vo.setCep(endereco.getCep());
         vo.setComplemento(endereco.getComplemento());

@@ -1,5 +1,6 @@
 <%@ page import="br.com.sonner.estagio.vos.BairroFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.CidadeFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Estado" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -32,6 +33,16 @@
     }
 %>
 
+<%
+    Estado estado = (Estado) session.getAttribute("estado");
+    if (estado == null){
+        estado = new Estado();
+        estado.setAbv("");
+        estado.setNome("");
+
+    }
+%>
+
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -47,7 +58,7 @@
 
     <form action="/atualiza-bairro" method="get" id="filter-form"
           style="width: 60%; margin: auto">
-        <input type="hidden" value="<%=bairrovo.getId()%>" id="id">
+
         <div class="form-row">
             <div>Estado:</div>
             <select name="estado" class="form-control"
@@ -71,6 +82,9 @@
     <div class="div-form">
         <form action="/atualiza-bairro?id=<%=bairrovo.getId()%>"
               method="post" id="edit-form" style="width: 60%; margin: auto">
+
+            <input type="hidden" value="<%=estado.getId()%>" name="estadoSession">
+            <input type="hidden" value="<%=bairrovo.getId()%>" id="id">
 
             <div class="form-row">
                 <div>Cidade:</div>

@@ -159,7 +159,14 @@
                         style="width: 20.35%;">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${listaBairro_insereEndereco}" var="bairro">
-                        <option value="${bairro.id}">${bairro.nome}</option>
+                        <c:choose>
+                            <c:when test="${bairro.id == filtroBairro_insereEndereco.id}">
+                                <option value="${bairro.id}" selected>${bairro.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${bairro.id}">${bairro.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
 
@@ -167,7 +174,15 @@
                 <select name="tipologradouro" class="form-control" style="width: 20.35%;">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${tipologradouros.all}" var="tipologradouro">
-                        <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
+                        <c:choose>
+                            <c:when
+                                    test="${tipologradouro.id == filtroLogradouro_insereEndereco.tipologradouro}">
+                                <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </div>
@@ -184,12 +199,12 @@
                     if (vo.getNumero() == null) {
                 %>
                 <input type="text" name="numero" placeholder="Ex.: 111"
-                       class="form-control" maxlength="4" style="width: 20.35%;">
+                       class="form-control" onKeyPress="mascaraInteiro()" maxlength="4" style="width: 150px;">
                 <%
                 } else {
                 %>
                 <input type="text" name="numero" placeholder="Ex.: 111"
-                       class="form-control" maxlength="4" value="<%=vo.getNumero()%>" style="width: 20.35%;">
+                       class="form-control" onKeyPress="mascaraInteiro()" maxlength="4" value="<%=vo.getNumero()%>" style="width: 150px;">
                 <%
                     }
                 %>

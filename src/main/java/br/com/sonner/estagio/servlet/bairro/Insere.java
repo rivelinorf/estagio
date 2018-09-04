@@ -135,7 +135,6 @@ public class Insere extends HttpServlet {
                 String existe = "Bairro já cadastrado!";
 
                 session.setAttribute("errors", existe);
-                session.setAttribute("listaBairro", bairroController.filtrar(vo));
                 session.setAttribute("filtroCidade_insereBairro", cidadevo);
                 session.setAttribute("bairroParaInserir", vo);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");
@@ -143,7 +142,6 @@ public class Insere extends HttpServlet {
             }
         } else {
             session.setAttribute("errors", erros);
-            session.setAttribute("listaBairro", bairroController.filtrar(vo));
             session.setAttribute("filtroCidade_insereBairro", cidadevo);
             session.setAttribute("bairroParaInserir", vo);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/bairro/insere.jsp");

@@ -28,6 +28,9 @@ public class Atualiza extends HttpServlet {
 
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
+        Estado estado;
+        EstadoControllerImpl estadoController = new EstadoControllerImpl();
+
 
         EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
 
@@ -58,9 +61,13 @@ public class Atualiza extends HttpServlet {
 
         if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
             cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
+            estado = estadoController.getOne(cidadevo.getEstado());
 
             session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
             session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("listaBairro_atualizaEndereco", null);
+            session.setAttribute("filtroBairro_atualizaEndereco", null);
+            session.setAttribute("estado", estado);
 
         }
 
@@ -74,16 +81,31 @@ public class Atualiza extends HttpServlet {
 
             enderecovo.setBairro(bairrovo.getId());
 
+
             session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
             session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
             session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
             session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
-            session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+            session.setAttribute("cidade", cidade);
+
+        }
+
+
+
+
+        if (cidadevo.getEstado() == null && bairrovo.getCidade() == null) {
+
+            session.setAttribute("cidade", null);
+            session.setAttribute("filtroCidade_atualizaEndereco", null);
+            session.setAttribute("listaCidade_atualizaEndereco", null);
+            session.setAttribute("filtroBairro_atualizaEndereco", null);
+            session.setAttribute("listaBairro_atualizaEndereco", null);
+
 
         }
 
         response.sendRedirect("/views/endereco/atualiza.jsp");
-    }
+}
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -91,13 +113,20 @@ public class Atualiza extends HttpServlet {
         BairroControllerImpl bairroController = new BairroControllerImpl();
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
+        EstadoControllerImpl estadoController = new EstadoControllerImpl();
         TipoLogradouroControllerImpl tipoLogradouroController = new TipoLogradouroControllerImpl();
 
+        HttpSession session = req.getSession();
+        EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
 
         EnderecoFiltroVO vo = new EnderecoFiltroVO();
-        HttpSession session = req.getSession();
+        BairroFiltroVO bairrovo = new BairroFiltroVO();
+        CidadeFiltroVO cidadevo = new CidadeFiltroVO();
+        LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+        BairroFiltroVO bairrovo2 = new BairroFiltroVO();
 
-        EnderecoFiltroVO enderecoantigo = (EnderecoFiltroVO) session.getAttribute("enderecoParaEditar");
+        bairrovo2.setCidade(null);
+
 
         String cep = req.getParameter("cep");
         String complemento = req.getParameter("complemento");
@@ -106,53 +135,97 @@ public class Atualiza extends HttpServlet {
         Bairro bairro = null;
         TipoLogradouro tipoLogradouro = null;
         Cidade cidade = null;
+        Estado estado = null;
+
+        logradourovo.setNome("");
+        vo.setId(null);
+        vo.setNumero(null);
+        vo.setCep("");
+        vo.setComplemento("");
+        vo.setBairro(null);
+        vo.setLogradouro(null);
+
+
+        if (req.getParameter("estadoSession") != "" && req.getParameter("estadoSession") != null) {
+            cidadevo.setEstado(Long.valueOf(req.getParameter("estadoSession")));
+
+
+        }
+
+        if (req.getParameter("cidadeSession") != "" && req.getParameter("cidadeSession") != null) {
+            cidade = cidadeController.getOne(Long.valueOf(req.getParameter("cidadeSession")));
+
+            cidadevo.setCep(cidade.getCep());
+            cidadevo.setCod(cidade.getCod());
+            cidadevo.setId(cidade.getId());
+            cidadevo.setNome(cidade.getNome());
+
+            bairrovo.setCidade(cidade.getId());
+            logradourovo.setCidade(cidade.getId());
+
+
+            bairrovo2.setCidade(cidade.getId());
+
+
+        }
+
 
         if (req.getParameter("numero") != "" && req.getParameter("numero") != null) {
             numero = Integer.parseInt(req.getParameter("numero"));
+            vo.setNumero(numero);
+
         }
 
         if (req.getParameter("bairro") != "" && req.getParameter("bairro") != null) {
             bairro = bairroController.getOne(Long.valueOf(req.getParameter("bairro")));
-            cidade = cidadeController.getOne(bairro.getCidade().getId());
+            vo.setBairro(bairro.getId());
+
+            bairrovo.setNome(bairro.getNome());
+            bairrovo.setId(bairro.getId());
         }
 
         if (req.getParameter("tipologradouro") != "" && req.getParameter("tipologradouro") != null) {
             tipoLogradouro = tipoLogradouroController.getOne(Long.valueOf(req.getParameter("tipologradouro")));
+            logradourovo.setTipologradouro(tipoLogradouro.getId());
 
         }
 
-        if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null && cidade != null
-                && tipoLogradouro != null) {
+
+        if (req.getParameter("logradouro") != "" && req.getParameter("logradouro") != null) {
+
             String nomeLogradouro = req.getParameter("logradouro");
-
-            LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
-
-            logradourovo.setCidade(cidade.getId());
             logradourovo.setNome(nomeLogradouro);
-            logradourovo.setTipologradouro(tipoLogradouro.getId());
 
-            List<Logradouro> validation = logradouroController.filtrar(logradourovo);
+            if (cidade != null
+                    && tipoLogradouro != null) {
 
-            if (validation.size() == 0) {
-                logradouro = new Logradouro();
 
-                logradouro.setCidade(cidade);
-                logradouro.setNome(nomeLogradouro);
-                logradouro.setTipologradouro(tipoLogradouro);
+                logradourovo.setCidade(cidade.getId());
 
-                logradouroController.save(logradouro);
+                logradourovo.setTipologradouro(tipoLogradouro.getId());
 
-                validation = logradouroController.filtrar(logradourovo);
+                List<Logradouro> validation = logradouroController.filtrar(logradourovo);
+
+                if (validation.size() == 0) {
+                    logradouro = new Logradouro();
+
+                    logradouro.setCidade(cidade);
+                    logradouro.setNome(nomeLogradouro);
+                    logradouro.setTipologradouro(tipoLogradouro);
+
+                    logradouroController.save(logradouro);
+
+                    validation = logradouroController.filtrar(logradourovo);
+
+                }
+
+                logradouro = validation.get(0);
 
             }
-
-            logradouro = validation.get(0);
-
         }
 
 
         Endereco endereco = new Endereco();
-        endereco.setId(Long.valueOf(req.getParameter("id")));
         endereco.setNumero(numero);
         endereco.setCep(cep);
         endereco.setComplemento(complemento);
@@ -160,6 +233,12 @@ public class Atualiza extends HttpServlet {
         endereco.setLogradouro(logradouro);
 
         List<String> erros = enderecoController.validation(endereco);
+
+        vo.setCep(endereco.getCep());
+        vo.setComplemento(endereco.getComplemento());
+
+        endereco.setId(Long.valueOf(req.getParameter("id")));
+        vo.setId(endereco.getId());
 
         if (erros.size() == 0) {
 
@@ -229,17 +308,34 @@ public class Atualiza extends HttpServlet {
 
                     res.sendRedirect("/views/endereco/lista.jsp");
 
+
                 } else {
 
                     String existe = "Endereço já cadastrado!";
 
                     session.setAttribute("errors", existe);
+                    session.setAttribute("errors", erros);
+                    session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+                    session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+                    session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+                    session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
+                    session.setAttribute("enderecoParaEditar", vo);
+                    session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
                     requestDispatcher.forward(req, res);
                 }
             }
         } else {
             session.setAttribute("errors", erros);
+            session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+            session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
+            if(cidade == null){
+                session.setAttribute("listaBairro_atualizaEndereco", null);
+            }
+            session.setAttribute("enderecoParaEditar", vo);
+            session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
             requestDispatcher.forward(req, res);
         }

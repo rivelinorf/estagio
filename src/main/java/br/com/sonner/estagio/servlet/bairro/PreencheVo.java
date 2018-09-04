@@ -11,8 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.BairroControllerImpl;
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
+import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
@@ -24,6 +26,7 @@ public class PreencheVo extends HttpServlet {
             throws IOException {
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO vo = new BairroFiltroVO();
+        EstadoControllerImpl estadoController = new EstadoControllerImpl();
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
 
@@ -43,6 +46,7 @@ public class PreencheVo extends HttpServlet {
             bairro.setNome(vo.getNome());
         }
         Cidade cidade = cidadeController.getOne(bairro.getCidade().getId());
+        Estado estado = estadoController.getOne(bairro.getCidade().getEstado().getId());
 
         cidadevo.setId(cidade.getId());
         cidadevo.setNome(cidade.getNome());
@@ -53,6 +57,7 @@ public class PreencheVo extends HttpServlet {
         session.setAttribute("listaCidade_atualiza", cidadeController.filtrar(cidadevo));
         session.setAttribute("bairroParaEditar", vo);
         session.setAttribute("filtroCidade_atualiza", cidadevo);
+        session.setAttribute("estado", estado);
 
         response.sendRedirect("/views/bairro/atualiza.jsp");
     }
