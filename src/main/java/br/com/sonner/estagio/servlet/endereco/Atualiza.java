@@ -29,6 +29,7 @@ public class Atualiza extends HttpServlet {
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
         Estado estado;
+        Cidade cidade;
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
 
 
@@ -73,7 +74,7 @@ public class Atualiza extends HttpServlet {
 
         if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
             Long id = Long.valueOf(request.getParameter("cidade"));
-            Cidade cidade = cidadeController.getOne(id);
+            cidade = cidadeController.getOne(id);
 
             bairrovo.setCidade(cidade.getId());
 
@@ -91,13 +92,14 @@ public class Atualiza extends HttpServlet {
         }
 
 
-
-
         if (cidadevo.getEstado() == null && bairrovo.getCidade() == null) {
 
+            if (session.getAttribute("cidade") == null) {
+                session.setAttribute("estado", null);
+                session.setAttribute("filtroCidade_atualizaEndereco", null);
+            }
+
             session.setAttribute("cidade", null);
-            session.setAttribute("filtroCidade_atualizaEndereco", null);
-            session.setAttribute("listaCidade_atualizaEndereco", null);
             session.setAttribute("filtroBairro_atualizaEndereco", null);
             session.setAttribute("listaBairro_atualizaEndereco", null);
 
@@ -105,7 +107,7 @@ public class Atualiza extends HttpServlet {
         }
 
         response.sendRedirect("/views/endereco/atualiza.jsp");
-}
+    }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -124,8 +126,10 @@ public class Atualiza extends HttpServlet {
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
         LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
         BairroFiltroVO bairrovo2 = new BairroFiltroVO();
+        CidadeFiltroVO cidadevo2 = new CidadeFiltroVO();
 
         bairrovo2.setCidade(null);
+        cidadevo2.setEstado(null);
 
 
         String cep = req.getParameter("cep");
@@ -148,7 +152,7 @@ public class Atualiza extends HttpServlet {
 
         if (req.getParameter("estadoSession") != "" && req.getParameter("estadoSession") != null) {
             cidadevo.setEstado(Long.valueOf(req.getParameter("estadoSession")));
-
+            cidadevo2.setEstado(cidadevo.getEstado());
 
         }
 
@@ -163,12 +167,9 @@ public class Atualiza extends HttpServlet {
             bairrovo.setCidade(cidade.getId());
             logradourovo.setCidade(cidade.getId());
 
-
             bairrovo2.setCidade(cidade.getId());
 
-
         }
-
 
         if (req.getParameter("numero") != "" && req.getParameter("numero") != null) {
             numero = Integer.parseInt(req.getParameter("numero"));
@@ -199,7 +200,6 @@ public class Atualiza extends HttpServlet {
             if (cidade != null
                     && tipoLogradouro != null) {
 
-
                 logradourovo.setCidade(cidade.getId());
 
                 logradourovo.setTipologradouro(tipoLogradouro.getId());
@@ -223,7 +223,6 @@ public class Atualiza extends HttpServlet {
 
             }
         }
-
 
         Endereco endereco = new Endereco();
         endereco.setNumero(numero);
@@ -314,11 +313,13 @@ public class Atualiza extends HttpServlet {
                     String existe = "Endereço já cadastrado!";
 
                     session.setAttribute("errors", existe);
-                    session.setAttribute("errors", erros);
                     session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-                    session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+                    session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo2));
                     session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
-                    session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo));
+                    session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
+                    if (cidade == null) {
+                        session.setAttribute("listaBairro_atualizaEndereco", null);
+                    }
                     session.setAttribute("enderecoParaEditar", vo);
                     session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
                     RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/atualiza.jsp");
@@ -328,10 +329,10 @@ public class Atualiza extends HttpServlet {
         } else {
             session.setAttribute("errors", erros);
             session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo2));
             session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
             session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
-            if(cidade == null){
+            if (cidade == null) {
                 session.setAttribute("listaBairro_atualizaEndereco", null);
             }
             session.setAttribute("enderecoParaEditar", vo);

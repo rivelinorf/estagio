@@ -27,23 +27,37 @@ public class Insere extends HttpServlet {
 
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
-
+        Estado estado;
+        Cidade cidade;
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
-        Estado estado = new Estado();
-        Cidade cidade = new Cidade();
 
 
-        HttpSession session = request.getSession();
+        EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
 
-        cidadevo.setCep("");
+        LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+
         cidadevo.setEstado(null);
-        cidadevo.setId(null);
         cidadevo.setNome("");
         cidadevo.setCod("");
+        cidadevo.setCep("");
+        cidadevo.setId(null);
+
+        enderecovo.setBairro(null);
+        enderecovo.setCep("");
+        enderecovo.setComplemento("");
+        enderecovo.setNumero(null);
+        enderecovo.setLogradouro(null);
+        enderecovo.setId(null);
 
         bairrovo.setCidade(null);
-        bairrovo.setId(null);
         bairrovo.setNome("");
+        bairrovo.setId(null);
+
+        logradourovo.setNome("");
+        logradourovo.setCidade(null);
+        logradourovo.setTipologradouro(null);
+
+        HttpSession session = request.getSession();
 
         if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
             cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
@@ -51,6 +65,8 @@ public class Insere extends HttpServlet {
 
             session.setAttribute("filtroCidade_insereEndereco", cidadevo);
             session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("listaBairro_insereEndereco", null);
+            session.setAttribute("filtroBairro_insereEndereco", null);
             session.setAttribute("estado", estado);
 
         }
@@ -59,37 +75,54 @@ public class Insere extends HttpServlet {
             Long id = Long.valueOf(request.getParameter("cidade"));
             cidade = cidadeController.getOne(id);
 
-
             bairrovo.setCidade(cidade.getId());
 
             cidadevo.setEstado(cidade.getEstado().getId());
 
+            enderecovo.setBairro(bairrovo.getId());
+
+
             session.setAttribute("filtroCidade_insereEndereco", cidadevo);
             session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
-
             session.setAttribute("filtroBairro_insereEndereco", bairrovo);
             session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
-
             session.setAttribute("cidade", cidade);
 
         }
 
-        if (cidadevo.getEstado() == null) {
+        if ((request.getParameter("estado") == ""
+                || request.getParameter("estado") == null)
+                && (request.getParameter("cidade") == ""
+                || request.getParameter("cidade") == null)
+                && (session.getAttribute("cidade") == null) ) {
 
-            session.setAttribute("listaCidade_insereEndereco", null);
             session.setAttribute("filtroCidade_insereEndereco", null);
+            session.setAttribute("listaCidade_insereEndereco", null);
+            session.setAttribute("filtroLogradouro_insereEndereco", null);
+            session.setAttribute("filtroBairro_insereEndereco", null);
+            session.setAttribute("listaBairro_insereEndereco", null);
+            session.setAttribute("enderecoParaInserir", null);
             session.setAttribute("estado", null);
-
-            if (bairrovo.getCidade() == null) {
-
-                session.setAttribute("listaBairro_insereEndereco", null);
-                session.setAttribute("filtroBairro_insereEndereco", null);
-                session.setAttribute("cidade", null);
-                session.setAttribute("enderecoParaInserir", null);
-
-            }
+            session.setAttribute("cidade", null);
 
         }
+
+
+        if (cidadevo.getEstado() == null && bairrovo.getCidade() == null) {
+
+            if (session.getAttribute("cidade") == null) {
+                session.setAttribute("estado", null);
+                session.setAttribute("filtroCidade_insereEndereco", null);
+            }
+
+            session.setAttribute("cidade", null);
+            session.setAttribute("filtroBairro_insereEndereco", null);
+            session.setAttribute("listaBairro_insereEndereco", null);
+
+        }
+
+
+
 
         response.sendRedirect("/views/endereco/insere.jsp");
     }
@@ -110,6 +143,12 @@ public class Insere extends HttpServlet {
         BairroFiltroVO bairrovo = new BairroFiltroVO();
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
         LogradouroFiltroVO logradourovo = new LogradouroFiltroVO();
+
+        BairroFiltroVO bairrovo2 = new BairroFiltroVO();
+        CidadeFiltroVO cidadevo2 = new CidadeFiltroVO();
+
+        bairrovo2.setCidade(null);
+        cidadevo2.setEstado(null);
 
 
         String cep = req.getParameter("cep");
@@ -132,6 +171,7 @@ public class Insere extends HttpServlet {
 
         if (req.getParameter("estadoSession") != "" && req.getParameter("estadoSession") != null) {
             cidadevo.setEstado(Long.valueOf(req.getParameter("estadoSession")));
+            cidadevo2.setEstado(cidadevo.getEstado());
 
 
         }
@@ -146,6 +186,8 @@ public class Insere extends HttpServlet {
 
             bairrovo.setCidade(cidade.getId());
             logradourovo.setCidade(cidade.getId());
+
+            bairrovo2.setCidade(cidade.getId());
 
 
         }
@@ -275,9 +317,12 @@ public class Insere extends HttpServlet {
 
                 session.setAttribute("errors", existe);
                 session.setAttribute("filtroCidade_insereEndereco", cidadevo);
-                session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+                session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo2));
                 session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-                session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+                session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo2));
+                if (cidade == null) {
+                    session.setAttribute("listaBairro_insereEndereco", null);
+                }
                 session.setAttribute("enderecoParaInserir", vo);
                 session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/insere.jsp");
@@ -288,9 +333,12 @@ public class Insere extends HttpServlet {
         } else {
             session.setAttribute("errors", erros);
             session.setAttribute("filtroCidade_insereEndereco", cidadevo);
-            session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+            session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo2));
             session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-            session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+            session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo2));
+            if (cidade == null) {
+                session.setAttribute("listaBairro_insereEndereco", null);
+            }
             session.setAttribute("enderecoParaInserir", vo);
             session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/endereco/insere.jsp");
