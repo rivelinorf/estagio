@@ -1,10 +1,18 @@
 package br.com.sonner.estagio.model;
 
-public class Logradouro {
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+public class Logradouro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+    @ManyToOne
     TipoLogradouro tipologradouro;
+
+
     Cidade cidade;
 
     public Logradouro() {
@@ -48,5 +56,6 @@ public class Logradouro {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
 }

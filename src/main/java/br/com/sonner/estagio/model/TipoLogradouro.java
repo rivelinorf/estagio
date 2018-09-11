@@ -1,8 +1,20 @@
 package br.com.sonner.estagio.model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class TipoLogradouro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+
+
+    @OneToMany(mappedBy = "tipologradouro")
+
+    private List<Logradouro> logradouros;
+
 
     public TipoLogradouro() {
     }
@@ -27,4 +39,11 @@ public class TipoLogradouro {
         this.nome = nome;
     }
 
+    public List<Logradouro> getLogradouros() {
+        return logradouros;
+    }
+
+    public void setLogradouros(List<Logradouro> logradouros) {
+        this.logradouros = logradouros;
+    }
 }
