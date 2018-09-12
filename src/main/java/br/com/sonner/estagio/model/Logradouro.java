@@ -1,7 +1,6 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Logradouro {
