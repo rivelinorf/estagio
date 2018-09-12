@@ -3,10 +3,7 @@ package br.com.sonner.estagio.dao.api;
 import java.util.List;
 
 import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
-
-import java.util.List;
 
 public interface CidadeDAO {
     void save(Cidade estado);

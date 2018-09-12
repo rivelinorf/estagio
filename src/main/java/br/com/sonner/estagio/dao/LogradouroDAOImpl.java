@@ -215,4 +215,3 @@ public class LogradouroDAOImpl implements LogradouroDAO {
         }
     }
 }
-

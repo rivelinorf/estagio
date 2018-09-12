@@ -28,6 +28,16 @@
         <mapping class="br.com.sonner.estagio.model.TipoLogradouro"/>
         <mapping class="br.com.sonner.estagio.model.Usuario"/>
 
+        <mapping class="br.com.sonner.estagio.model.Parte2.Diciplina"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Diretor"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Funcionario"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Matricula"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Nota"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Pessoa"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Professor"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Sala"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Turma"/>
+        <mapping class="br.com.sonner.estagio.model.Parte2.Escola"/>
 
 
     </session-factory>

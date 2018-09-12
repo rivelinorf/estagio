@@ -13,11 +13,11 @@ public class Endereco {
     private String complemento;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
+    @JoinColumn(name = "endereco_bairro_fk", nullable = false)
     private Bairro bairro;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_bairro_fk", nullable = false)
+    @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
     private Logradouro logradouro;
 
     public Endereco() {

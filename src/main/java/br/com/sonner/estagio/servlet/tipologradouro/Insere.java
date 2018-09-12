@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.TipoLogradouroController;
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 

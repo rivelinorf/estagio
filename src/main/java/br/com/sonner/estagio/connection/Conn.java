@@ -35,10 +35,4 @@ public class Conn {
 
         return CONNECTION;
     }
-
-
-    public static void main(String args[]) {
-
-
-    }
 }

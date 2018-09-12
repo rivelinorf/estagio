@@ -1,18 +1,20 @@
 package br.com.sonner.estagio.model;
 
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+//@Table(name = "tipoLogradouro")
 public class TipoLogradouro {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
 
 
-    @OneToMany(mappedBy = "tipologradouro")
-
+    @OneToMany(mappedBy = "tipologradouro", cascade = CascadeType.PERSIST)
     private List<Logradouro> logradouros;
 
 

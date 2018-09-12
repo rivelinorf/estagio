@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.controller.api.EstadoController;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.Endereco;
 import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;

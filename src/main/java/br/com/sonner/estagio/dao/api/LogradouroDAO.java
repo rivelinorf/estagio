@@ -3,7 +3,6 @@ package br.com.sonner.estagio.dao.api;
 import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface LogradouroDAO {
