@@ -1,14 +1,14 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringBairro;
 import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
+import org.hibernate.Session;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BairroDAOImpl implements BairroDAO {
-    private Connection connection;
+    private Session session;
     public static BairroDAOImpl BAIRRO_DAO;
 
     public BairroDAOImpl() {
-        this.connection = Conn.getConnection();
+        this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public static BairroDAOImpl getInstance() {
@@ -32,115 +32,57 @@ public class BairroDAOImpl implements BairroDAO {
 
     @Override
     public void save(Bairro bairro) {
-        String sql = "insert into bairro (nome, bairro_cidade_fk) values (?, ?)";
-
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, bairro.getNome());
-            stmt.setLong(2, bairro.getCidade().getId());
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            session.beginTransaction();
+            session.save(bairro);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
         }
     }
 
     @Override
     public void update(Bairro bairro) {
-        String sql = "update bairro set nome = ?, bairro_cidade_fk = ? where id = ?";
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.setString(1, bairro.getNome());
-            stmt.setLong(2, bairro.getCidade().getId());
-            stmt.setLong(3, bairro.getId());
-
-            stmt.execute();
-
-            stmt.close();
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            session.beginTransaction();
+            session.update(bairro);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
         }
-
     }
 
     @Override
     public List<Bairro> getAll() {
         try {
-            List<Bairro> bairros = new ArrayList<Bairro>();
-            PreparedStatement stmt = this.connection.prepareStatement("select * from bairro");
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-                Cidade c = cDAO.getOne(rs.getLong("bairro_cidade_fk"));
-
-                Bairro b = new Bairro(rs.getString("nome"), c);
-                b.setId(rs.getLong("id"));
-                b.setNome(rs.getString("nome"));
-                b.getCidade().setId(rs.getLong("bairro_cidade_fk"));
-
-                bairros.add(b);
-            }
-
-            rs.close();
-            stmt.close();
+            session.getTransaction().begin();
+            List<Bairro> bairros = session.createQuery("select b from Bairro as b").list();
+            session.getTransaction().commit();
 
             return bairros;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            return null;
         }
 
     }
 
     @Override
-    public void delete(long id) {
-        String sql = "delete from bairro where id = ?";
+    public void delete(Long id) {
+        Bairro bairro = getOne(id);
         try {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.setLong(1, id);
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            session.getTransaction().begin();
+            session.remove(bairro);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
         }
 
     }
 
     @Override
-    public Bairro getOne(long id) {
-        String sql = "select * from bairro where id=?";
-
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.setLong(1, id);
-
-            ResultSet rs = stmt.executeQuery();
-            CidadeDAO cDAO = CidadeDAOImpl.getInstance();
-
-            Bairro b = null;
-
-            if (rs.first()) {
-                b = new Bairro();
-                b.setId(rs.getLong("id"));
-                b.setNome(rs.getString("nome"));
-                b.setCidade(cDAO.getOne(rs.getLong("bairro_cidade_fk")));
-            }
-
-            rs.close();
-            stmt.close();
-
-            return b;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Bairro getOne(Long id) {
+        return session.find(Bairro.class, id);
 
     }
 
@@ -150,24 +92,13 @@ public class BairroDAOImpl implements BairroDAO {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairro(vo.getNome()).cidade(vo.getCidade())
                     .build();
 
-            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
-            ResultSet resultSet = statement.executeQuery();
-
-            List<Bairro> bairros = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Bairro aux = new Bairro();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("bairro_cidade_fk")));
-
-                bairros.add(aux);
-            }
+            session.getTransaction().begin();
+            List<Bairro> bairros = session.createQuery(queryString.getSql()).list();
+            session.getTransaction().commit();
 
             return bairros;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
             return null;
         }
     }
@@ -178,24 +109,13 @@ public class BairroDAOImpl implements BairroDAO {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairroLike(vo.getNome()).cidade(vo.getCidade())
                     .build();
 
-            PreparedStatement statement = connection.prepareStatement(queryString.getSql());
-            ResultSet resultSet = statement.executeQuery();
-
-            List<Bairro> bairros = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Bairro aux = new Bairro();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("bairro_cidade_fk")));
-
-                bairros.add(aux);
-            }
+            session.getTransaction().begin();
+            List<Bairro> bairros = session.createQuery(queryString.getSql()).list();
+            session.getTransaction().commit();
 
             return bairros;
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
             return null;
         }
     }

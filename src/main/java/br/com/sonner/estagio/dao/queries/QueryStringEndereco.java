@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringEndereco {
-    private String sql = "SELECT * FROM endereco WHERE 1 ";
+    private String sql = "SELECT e FROM endereco WHERE 1=1 ";
 
     public String getSql() {
         return sql;
@@ -12,11 +12,11 @@ public class QueryStringEndereco {
     }
 
     public static class Builder {
-        private String sql = "SELECT * FROM endereco WHERE 1 ";
+        private String sql = "SELECT e FROM endereco WHERE 1=1 ";
 
         public Builder numero(Integer numero) {
             if (numero != null) {
-                this.sql += "and numero = '" + numero + "' ";
+                this.sql += "and e.numero = '" + numero + "' ";
             }
 
             return this;
@@ -24,7 +24,7 @@ public class QueryStringEndereco {
 
         public Builder complemento(String complemento) {
             if (complemento != "" && complemento != null) {
-                this.sql += "and complemento = '" + complemento + "' ";
+                this.sql += "and e.complemento = '" + complemento + "' ";
             }
 
             return this;
@@ -32,7 +32,7 @@ public class QueryStringEndereco {
 
         public Builder cep(String cep) {
             if (cep != "" && cep != null) {
-                this.sql += "and cep = '" + cep + "' ";
+                this.sql += "and e.cep = '" + cep + "' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringEndereco {
 
         public Builder bairro(Long bairro) {
             if (bairro != null) {
-                this.sql += "and endereco_bairro_fk = '" + bairro + "' ";
+                this.sql += "and e.bairro.id = '" + bairro + "' ";
             }
 
             return this;
@@ -48,7 +48,7 @@ public class QueryStringEndereco {
 
         public Builder logradouro(Long logradouro) {
             if (logradouro != null) {
-                this.sql += "and endereco_logradouro_fk = '" + logradouro + "' ";
+                this.sql += "and e.logradouro.id = '" + logradouro + "' ";
             }
 
             return this;
@@ -56,7 +56,7 @@ public class QueryStringEndereco {
 
         public Builder numeroLike(Integer numero) {
             if (numero != null) {
-                this.sql += "and numero like '" + numero + "%' ";
+                this.sql += "and e.numero like '" + numero + "%' ";
             }
 
             return this;
@@ -64,7 +64,7 @@ public class QueryStringEndereco {
 
         public Builder complementoLike(String complemento) {
             if (complemento != "" && complemento != null) {
-                this.sql += "and UPPER(complemento) like '" + complemento.toUpperCase() + "%' ";
+                this.sql += "and UPPER(e.complemento) like '" + complemento.toUpperCase() + "%' ";
             }
 
             return this;
@@ -72,7 +72,7 @@ public class QueryStringEndereco {
 
         public Builder cepLike(String cep) {
             if (cep != "" && cep != null) {
-                this.sql += "and UPPER(cep) like '" + cep.toUpperCase() + "%' ";
+                this.sql += "and UPPER(e.cep) like '" + cep.toUpperCase() + "%' ";
             }
 
             return this;

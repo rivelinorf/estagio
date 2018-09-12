@@ -12,9 +12,9 @@ public interface BairroDAO {
 
     void update(Bairro bairro);
 
-    void delete(long id);
+    void delete(Long id);
 
-    Bairro getOne(long id);
+    Bairro getOne(Long id);
 
     List<Bairro> pesquisaBairro(BairroFiltroVO vo);
 

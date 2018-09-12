@@ -1,12 +1,23 @@
 package br.com.sonner.estagio.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="endereco")
 public class Endereco {
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private Integer numero;
     private String cep;
     private String complemento;
 
+    @ManyToOne
+    @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
     private Bairro bairro;
+
+    @ManyToOne
+    @JoinColumn(name = "endereco_bairro_fk", nullable = false)
     private Logradouro logradouro;
 
     public Endereco() {
@@ -21,11 +32,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
