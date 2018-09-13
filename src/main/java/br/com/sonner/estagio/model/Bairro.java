@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="bairro")
+//@Entity
+//@Table(name="bairro")
 public class Bairro {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "bairro_cidade_fk", nullable = false)
+   // @ManyToOne
+   // @JoinColumn(name = "bairro_cidade_fk", nullable = false)
     private Cidade cidade;
 
-    @OneToMany(mappedBy = "bairro", cascade = CascadeType.PERSIST)
+    //@OneToMany(mappedBy = "bairro", cascade = CascadeType.PERSIST)
     private List<Endereco> enderecos = new ArrayList<>();
 
     public Bairro() {

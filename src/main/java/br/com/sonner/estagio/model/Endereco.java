@@ -2,22 +2,22 @@ package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name="endereco")
+//@Entity
+//@Table(name="endereco")
 public class Endereco {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @Id
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer numero;
     private String cep;
     private String complemento;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
+   // @ManyToOne
+  //  @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
     private Bairro bairro;
 
-    @ManyToOne
-    @JoinColumn(name = "endereco_bairro_fk", nullable = false)
+   // @ManyToOne
+   // @JoinColumn(name = "endereco_bairro_fk", nullable = false)
     private Logradouro logradouro;
 
     public Endereco() {

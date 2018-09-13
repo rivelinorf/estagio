@@ -1,18 +1,12 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.BairroDAO;
-import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringBairro;
 import br.com.sonner.estagio.model.Bairro;
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import org.hibernate.Session;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BairroDAOImpl implements BairroDAO {
@@ -56,7 +50,7 @@ public class BairroDAOImpl implements BairroDAO {
     public List<Bairro> getAll() {
         try {
             session.getTransaction().begin();
-            List<Bairro> bairros = session.createQuery("select b from Bairro as b").list();
+            List<Bairro> bairros = session.createQuery("select b from br.com.sonner.estagio.model.Bairro as b").list();
             session.getTransaction().commit();
 
             return bairros;

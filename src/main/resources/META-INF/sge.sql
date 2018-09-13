@@ -21,6 +21,8 @@ create table usuario (
         senha VARCHAR(30),
         email VARCHAR(50)
 );
+insert into usuario (usuario, senha, email) values ( 'tthif', '12345678', 'tthif@hotmail.com');
+
 
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,

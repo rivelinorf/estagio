@@ -4,16 +4,16 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table
+//@Entity
+//@Table
 public class Estado {
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+   // @Id
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private String abv;
 
-    @OneToMany (mappedBy = "estado")
+    //@OneToMany (mappedBy = "estado")
     private List<Cidade> cidades =  new ArrayList<>();
 
     public Estado() {

@@ -2,13 +2,13 @@ package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class Logradouro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    @ManyToOne
+  //  @ManyToOne
     TipoLogradouro tipologradouro;
 
 

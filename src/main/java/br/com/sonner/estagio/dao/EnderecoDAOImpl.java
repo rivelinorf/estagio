@@ -1,21 +1,12 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EnderecoDAO;
-import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringEndereco;
-import br.com.sonner.estagio.model.Bairro;
 import br.com.sonner.estagio.model.Endereco;
-import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 import org.hibernate.Session;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EnderecoDAOImpl implements EnderecoDAO {
