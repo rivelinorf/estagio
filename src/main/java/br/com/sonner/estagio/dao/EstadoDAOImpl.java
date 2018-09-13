@@ -3,13 +3,11 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringEstado;
 import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 
 public class EstadoDAOImpl implements EstadoDAO {
@@ -82,13 +80,15 @@ public class EstadoDAOImpl implements EstadoDAO {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws CustomException {
         try {
+            Estado estado = getOne(id);
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
             this.hibernateConnection.getTransaction().begin();
-            this.hibernateConnection.remove(getOne(id));
+            this.hibernateConnection.remove(estado);
             this.hibernateConnection.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new CustomException("Impossivel deletar!, Estado possue relacionamento");
         } finally {
             this.hibernateConnection.close();
         }

@@ -16,14 +16,14 @@ public class QueryStringBairro {
 
         public Builder bairro(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and b.nome = '" + nome + "'";
+                this.sql += "and b.nome = '" + nome + "' ";
             }
             return this;
         }
 
         public Builder cidade(Long cidade) {
             if (cidade != null) {
-                this.sql += "and b.cidade.id = '" + cidade + "'";
+                this.sql += "and b.cidade.id = '" + cidade + "' ";
             }
 
             return this;
@@ -31,7 +31,7 @@ public class QueryStringBairro {
 
         public Builder bairroLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and UPPER(b.nome) like '" + nome.toUpperCase() + "%'";
+                this.sql += "and UPPER(b.nome) like '" + nome.toUpperCase() + "%' ";
             }
             return this;
         }

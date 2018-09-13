@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.CidadeController;
 import br.com.sonner.estagio.dao.CidadeDAOImpl;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.model.Cidade;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class CidadeControllerImpl implements CidadeController {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws CustomException {
         this.cidadeDAO.delete(id);
     }
 
