@@ -64,7 +64,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
                 aux.setId(rs.getLong("id"));
                 aux.setUsuario(rs.getString("usuario"));
-                aux.setFoto(rs.getString("foto"));
+//                aux.setFoto(rs.getString("foto"));
                 aux.setSenha(rs.getString("senha"));
 
                 rs.close();

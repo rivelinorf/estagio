@@ -1,11 +1,19 @@
 package br.com.sonner.estagio.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table (name = "cidade")
 public class Cidade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String cod;
     private String cep;
 
+    @ManyToOne
+    @JoinColumn(name = "estado_id")
     private Estado estado;
 
     public Cidade() {
