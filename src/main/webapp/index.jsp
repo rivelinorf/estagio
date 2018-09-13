@@ -5,10 +5,11 @@
     <link rel="stylesheet"
           href="<%=request.getContextPath()%>/assets/css/index.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+    <title></title>
 </head>
 <body>
 <div class="container borda-login">
+    <h1 style=" font-family: 'Gruppo', cursive"> SGE </h1>
     <div class="box-img">
         <img src="<%=request.getContextPath()%>/assets/imgs/logo.png">
     </div>
