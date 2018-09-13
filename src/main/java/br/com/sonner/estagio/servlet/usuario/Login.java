@@ -3,6 +3,7 @@ package br.com.sonner.estagio.servlet.usuario;
 import br.com.sonner.estagio.controller.UsuarioControllerImpl;
 import br.com.sonner.estagio.controller.api.UsuarioController;
 import br.com.sonner.estagio.model.Usuario;
+import br.com.sonner.estagio.util.HibernateUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,6 @@ public class Login extends HttpServlet {
 
         user.setUsuario(request.getParameter("usuario"));
         user.setSenha(request.getParameter("senha"));
-
 
         Usuario usuario = usuarioController.efetuaLogin(user);
 

@@ -17,11 +17,10 @@ ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_bin;
 
 create table usuario (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
-        foto varchar (100),
         usuario VARCHAR(25),
         senha VARCHAR(30),
         email VARCHAR(50)
-)Engine = innodb;
+);
 
 create table tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
