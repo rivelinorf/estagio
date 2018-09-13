@@ -13,7 +13,7 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
     private TipoLogradouroDAO tDAO;
 
     public TipoLogradouroControllerImpl() {
-        this.tDAO = TipoLogradouroDAOImpl.getInstance();
+//        this.tDAO = TipoLogradouroDAOImpl.getInstance();
     }
 
     @Override

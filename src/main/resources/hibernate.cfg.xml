@@ -9,22 +9,22 @@
         <property name="connection.username">root</property>
         <property name="connection.password">123456789</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <property name="show_sql">true</property>
 
         <property name="format_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
-        <mapping class="br.com.sonner.estagio.model.Bairro"/>
-        <mapping class="br.com.sonner.estagio.model.Cidade"/>
-        <mapping class="br.com.sonner.estagio.model.Endereco"/>
         <mapping class="br.com.sonner.estagio.model.Estado"/>
-        <mapping class="br.com.sonner.estagio.model.Logradouro"/>
+        <mapping class="br.com.sonner.estagio.model.Cidade"/>
         <mapping class="br.com.sonner.estagio.model.TipoLogradouro"/>
+        <mapping class="br.com.sonner.estagio.model.Logradouro"/>
+        <mapping class="br.com.sonner.estagio.model.Bairro"/>
+        <mapping class="br.com.sonner.estagio.model.Endereco"/>
         <mapping class="br.com.sonner.estagio.model.Usuario"/>
 
     </session-factory>

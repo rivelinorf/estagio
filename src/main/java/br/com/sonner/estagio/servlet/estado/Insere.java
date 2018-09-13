@@ -49,10 +49,11 @@ public class Insere extends HttpServlet {
             vo.setEstado(null);
             vo.setAbv(aux.getAbv());
 
-            List<Estado> verificaabv = estadoController.filtrar(vo);
+           // List<Estado> verificaabv = estadoController.filtrar(vo);
 
-            if (verificaestado.size() == 0 && verificaabv.size() == 0) {
+            //if (verificaestado.size() == 0 && verificaabv.size() == 0) {
 
+            if (true) {
                 estadoController.save(aux);
 
                 vo.setEstado("");

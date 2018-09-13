@@ -1,25 +1,11 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
-import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
-import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
+public class TipoLogradouroDAOImpl  {
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
-
-    private Connection connection;
-    private static TipoLogradouroDAO TIPOLOGRADOURO_DAO;
+    /*private static TipoLogradouroDAO TIPOLOGRADOURO_DAO;
 
     public TipoLogradouroDAOImpl() {
-        this.connection = Conn.getConnection();
+
     }
 
     public static TipoLogradouroDAO getInstance() {
@@ -171,5 +157,5 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
             return null;
         }
 
-    }
+    }*/
 }

@@ -1,29 +1,8 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
-import br.com.sonner.estagio.controller.CidadeControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.CidadeController;
-import br.com.sonner.estagio.controller.api.TipoLogradouroController;
-import br.com.sonner.estagio.dao.api.CidadeDAO;
-import br.com.sonner.estagio.dao.api.LogradouroDAO;
-import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringLogradouro;
-import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.Logradouro;
-import br.com.sonner.estagio.model.TipoLogradouro;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
+public class LogradouroDAOImpl {
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-public class LogradouroDAOImpl implements LogradouroDAO {
-
-    private Connection connection;
+   /* private Connection connection;
     private static LogradouroDAO LOGRADOURO_DAO;
 
     public LogradouroDAOImpl() {
@@ -213,5 +192,5 @@ public class LogradouroDAOImpl implements LogradouroDAO {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }

@@ -3,16 +3,16 @@ package br.com.sonner.estagio.model;
 import javax.persistence.*;
 import java.util.List;
 
-//@Entity
+@Entity
+@Table
 public class TipoLogradouro {
-    //@Id
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
 
 
-   // @OneToMany(mappedBy = "tipologradouro")
-
+    @OneToMany(mappedBy = "tipologradouro")
     private List<Logradouro> logradouros;
 
 

@@ -13,7 +13,7 @@ public class CidadeControllerImpl implements CidadeController {
     private CidadeDAO cidadeDAO;
 
     public CidadeControllerImpl() {
-        this.cidadeDAO = CidadeDAOImpl.getInstance();
+//        this.cidadeDAO = CidadeDAOImpl.getInstance();
     }
 
     @Override

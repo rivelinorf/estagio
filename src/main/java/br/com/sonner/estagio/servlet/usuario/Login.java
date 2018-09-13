@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet("/usuario-logar")
 public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HibernateUtil.getSessionFactory().openSession();
         UsuarioController usuarioController = new UsuarioControllerImpl();
         Usuario user = new Usuario();
         HttpSession sessao = request.getSession();

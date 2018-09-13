@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.CidadeDAO;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringCidade;
@@ -14,8 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CidadeDAOImpl implements CidadeDAO {
-    private Connection connection;
+public class CidadeDAOImpl {
+    /*private Connection connection;
     private static CidadeDAO CIDADE_DAO;
 
     private CidadeDAOImpl() {
@@ -200,6 +199,6 @@ public class CidadeDAOImpl implements CidadeDAO {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 
 }
