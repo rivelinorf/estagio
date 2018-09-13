@@ -1,28 +1,18 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity
-//@Table(name = "logradouro")
+//@Entity
 public class Logradouro {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @ManyToOne
-    //@JoinColumn(name = "logradouro_tipologradouro_fk", nullable = false)
-    private TipoLogradouro tipologradouro;
-
-
-    @OneToMany(mappedBy = "logradouro", cascade = CascadeType.PERSIST)
-    private List<Endereco> enderecos;
-
-    @ManyToOne
-    //@JoinColumn(name = "logradouro_cidade_fk", nullable = false)
-    private Cidade cidade;
-
     private String nome;
+  //  @ManyToOne
+    TipoLogradouro tipologradouro;
+
+
+    Cidade cidade;
 
     public Logradouro() {
 
@@ -67,11 +57,4 @@ public class Logradouro {
     }
 
 
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
 }

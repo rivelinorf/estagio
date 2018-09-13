@@ -1,23 +1,20 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
-import java.util.List;
-@Entity
+
+//@Entity
+//@Table (name = "cidade")
 public class Cidade {
-    @Id
-    @GeneratedValue
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String cod;
     private String cep;
 
-
+    //@ManyToOne
+    //@JoinColumn(name = "estado_id")
     private Estado estado;
-
-
-    @OneToMany(mappedBy = "cidade", cascade = CascadeType.PERSIST)
-    private List<Logradouro> logradouros;
-
 
     public Cidade() {
     }

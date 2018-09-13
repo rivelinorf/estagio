@@ -50,7 +50,7 @@ public class BairroDAOImpl implements BairroDAO {
     public List<Bairro> getAll() {
         try {
             session.getTransaction().begin();
-            List<Bairro> bairros = session.createQuery("select b from Bairro as b").list();
+            List<Bairro> bairros = session.createQuery("select b from br.com.sonner.estagio.model.Bairro as b").list();
             session.getTransaction().commit();
 
             return bairros;

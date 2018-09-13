@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringEndereco {
-    private String sql = "SELECT e FROM endereco WHERE 1=1 ";
+    private String sql = "SELECT e FROM Endereco WHERE 1=1 ";
 
     public String getSql() {
         return sql;
@@ -12,7 +12,7 @@ public class QueryStringEndereco {
     }
 
     public static class Builder {
-        private String sql = "SELECT e FROM endereco WHERE 1=1 ";
+        private String sql = "SELECT e FROM Endereco WHERE 1=1 ";
 
         public Builder numero(Integer numero) {
             if (numero != null) {

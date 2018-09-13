@@ -1,11 +1,11 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.EstadoDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringEstado;
 import br.com.sonner.estagio.model.Estado;
+import br.com.sonner.estagio.util.HibernateUtil;
+import org.hibernate.Session;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,11 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EstadoDAOImpl implements EstadoDAO {
-    private Connection connection;
     private static EstadoDAO ESTADO_DAO;
+    private Session hibernateConnection;
 
     private EstadoDAOImpl() {
-        this.connection = Conn.getConnection();
     }
 
     public static EstadoDAO getInstance() {
@@ -30,99 +29,68 @@ public class EstadoDAOImpl implements EstadoDAO {
 
     @Override
     public void save(Estado estado) {
-        String sql = "insert into estado (nome, abv) values (?,?)";
-
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
-
-            stmt.setString(1, estado.getNome());
-            stmt.setString(2, estado.getAbv());
-
-            stmt.execute();
-            stmt.close();
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            this.hibernateConnection.getTransaction().begin();
+            this.hibernateConnection.save(estado);
+            this.hibernateConnection.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
     @Override
     public List<Estado> getAll() {
         try {
-            PreparedStatement stmt = connection.prepareStatement("select * from estado");
-            ResultSet resultSet = stmt.executeQuery();
-
-            List<Estado> estados = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Estado aux = new Estado();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setAbv(resultSet.getString("abv"));
-
-                estados.add(aux);
-            }
-
-            return estados;
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            return this.hibernateConnection.createQuery("from Estado").getResultList();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
     @Override
     public Estado getOne(long id) {
         try {
-            PreparedStatement stmt = connection.prepareStatement("select * from estado where id=?");
-            stmt.setLong(1, id);
-            ResultSet resultSet = stmt.executeQuery();
-
-            Estado aux = null;
-
-            if (resultSet.first()) {
-                aux = new Estado();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setAbv(resultSet.getString("abv"));
-
-                stmt.close();
-            }
-
-            return aux;
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            return this.hibernateConnection.get(Estado.class, id);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
     @Override
     public void update(Estado estado) {
-        String sql = "update estado set nome=?, abv=? where id=?";
-
         try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-
-            statement.setString(1, estado.getNome());
-            statement.setString(2, estado.getAbv());
-            statement.setLong(3, estado.getId());
-
-            statement.execute();
-            statement.close();
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            this.hibernateConnection.getTransaction().begin();
+            this.hibernateConnection.update(estado);
+            this.hibernateConnection.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
     @Override
     public void delete(long id) {
         try {
-            PreparedStatement statement = connection.prepareStatement("delete from estado where id=?");
-            statement.setLong(1, id);
-            statement.execute();
-            statement.close();
-        } catch (SQLException e) {
+            this.hibernateConnection.getTransaction().begin();
+            this.hibernateConnection.remove(getOne(id));
+            this.hibernateConnection.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
@@ -130,52 +98,26 @@ public class EstadoDAOImpl implements EstadoDAO {
     public List<Estado> pesquisaEstado(String nome, String abv) {
         try {
             QueryStringEstado queryString = new QueryStringEstado.Builder().estado(nome).abv(abv).build();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Estado> estados = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Estado aux = new Estado();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setAbv(resultSet.getString("abv"));
-
-                estados.add(aux);
-            }
-
-            return estados;
-
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            return this.hibernateConnection.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 
     public List<Estado> pesquisaEstadoLike(String nome, String abv) {
         try {
             QueryStringEstado queryString = new QueryStringEstado.Builder().estadoLike(nome).abvLike(abv).build();
-            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Estado> estados = new ArrayList<>();
-
-            while (resultSet.next()) {
-                Estado aux = new Estado();
-
-                aux.setId(resultSet.getLong("id"));
-                aux.setNome(resultSet.getString("nome"));
-                aux.setAbv(resultSet.getString("abv"));
-
-                estados.add(aux);
-            }
-
-            return estados;
-
-        } catch (SQLException e) {
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
+            return this.hibernateConnection.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            this.hibernateConnection.close();
         }
     }
 }

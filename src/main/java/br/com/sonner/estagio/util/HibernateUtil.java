@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.util;
 
+import br.com.sonner.estagio.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -10,7 +11,16 @@ public class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
-            return new Configuration().configure().buildSessionFactory();
+            return new Configuration()
+                    .configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Bairro.class)
+                    .addAnnotatedClass(Cidade.class)
+                    .addAnnotatedClass(Endereco.class)
+                    .addAnnotatedClass(Estado.class)
+                    .addAnnotatedClass(Logradouro.class)
+                    .addAnnotatedClass(TipoLogradouro.class)
+                    .addAnnotatedClass(Usuario.class)
+                    .buildSessionFactory();
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
@@ -25,6 +35,11 @@ public class HibernateUtil {
     public static void shutdown() {
         // Close caches and connection pools
         getSessionFactory().close();
+    }
+
+    public static void main(String args[]) {
+
+
     }
 
 }
