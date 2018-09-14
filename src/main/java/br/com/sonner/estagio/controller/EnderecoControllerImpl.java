@@ -3,6 +3,7 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.EnderecoController;
 import br.com.sonner.estagio.dao.EnderecoDAOImpl;
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class EnderecoControllerImpl implements EnderecoController {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id){
         this.eDAO.delete(id);
 
     }

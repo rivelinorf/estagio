@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.dao.api;
 
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 import java.util.List;

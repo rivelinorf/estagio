@@ -1,13 +1,13 @@
 drop database sge;
 
-drop table endereco;
-drop table bairro;
-drop table logradouro;
-drop table tipoLogradouro;
-drop table cidade;
-drop table estado;
-drop table usuario;
-drop table tokens;
+drop table Endereco;
+drop table Bairro;
+drop table Logradouro;
+drop table TipoLogradouro;
+drop table Cidade;
+drop table Estado;
+drop table Usuario;
+drop table Tokens;
 
 create database sge;
 use sge;
@@ -15,16 +15,16 @@ ALTER DATABASE `sge` CHARSET = UTF8 COLLATE = utf8_bin;
 
 -- tabelas
 
-create table usuario (
+create table Usuario (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         usuario VARCHAR(25),
         senha VARCHAR(30),
         email VARCHAR(50)
 );
-insert into usuario (usuario, senha, email) values ( 'tthif', '12345678', 'tthif@hotmail.com');
+insert into Usuario (usuario, senha, email) values ( 'tthif', '12345678', 'tthif@hotmail.com');
 
 
-create table tokens(
+create table Tokens(
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         usuario_id BIGINT,
         usuario VARCHAR(10),
@@ -34,13 +34,13 @@ create table tokens(
 )Engine = innodb;
 
 
-create table if not exists estado (
+create table if not exists Estado (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
         abv VARCHAR(5) NOT NULL 
 )ENGINE = innodb;
 
-create table if not exists cidade (
+create table if not exists Cidade (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
         codigo VARCHAR(50) NOT NULL,
@@ -49,12 +49,12 @@ create table if not exists cidade (
         constraint cidade_estado_fk foreign key (cidade_estado_fk) references estado(id)
 )ENGINE = innodb;
 
-create table if not exists tipoLogradouro (
+create table if not exists TipoLogradouro (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL
 )ENGINE = innodb;
 
-create table if not exists logradouro (
+create table if not exists Logradouro (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
         logradouro_cidade_fk BIGINT,
@@ -64,14 +64,14 @@ create table if not exists logradouro (
 )ENGINE = innodb;
 
 
-create table if not exists bairro (
+create table if not exists Bairro (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(50) NOT NULL,
         bairro_cidade_fk BIGINT,
         constraint bairro_cidade_fk foreign key (bairro_cidade_fk) references cidade(id)
 )ENGINE = innodb;
 
-create table if not exists endereco (
+create table if not exists Endereco (
         id BIGINT AUTO_INCREMENT PRIMARY KEY,
         numero INT NOT NULL,
         cep VARCHAR(50),
@@ -83,44 +83,44 @@ create table if not exists endereco (
 )ENGINE = innodb;
 
 
-ALTER TABLE `endereco` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `bairro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `logradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `tipoLogradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `cidade` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `estado` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `usuario` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Endereco` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Bairro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Logradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `TipoLogradouro` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Cidade` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Estado` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `Usuario` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
 
 -- inserindo dados
-insert into estado (nome, abv) values ("SAO PAULO", "SP");
-insert into estado (nome, abv) values ("MINAS GERAIS", "MG");
-insert into cidade (nome, codigo, cep, cidade_estado_fk) values ("Uberlandia", "udia", "38400", 2);
-insert into cidade (nome, codigo, cep, cidade_estado_fk) values ("Osasco", "ossc", "38400", 1);
-insert into tipoLogradouro (nome) values ("RUA");
-insert into tipoLogradouro (nome) values ("AVENIDA");
-insert into tipoLogradouro (nome) values ("ALAMEDA");
-insert into logradouro (nome, logradouro_cidade_fk, logradouro_tipo_fk) values ("Rondon", 1, 2);
-insert into bairro (nome, bairro_cidade_fk) values ("brasil", 1);
-insert into endereco (numero, cep, endereco_logradouro_fk, endereco_bairro_fk) values (87, "2423141", 1, 1);
+insert into Estado (nome, abv) values ("SAO PAULO", "SP");
+insert into Estado (nome, abv) values ("MINAS GERAIS", "MG");
+insert into Cidade (nome, cod, cep, estado_id) values ("Uberlandia", "34", "38.600-000", 2);
+insert into Cidade (nome, cod, cep, estado_id) values ("Paracatu", "38", "38.400-000", 2);
+insert into TipoLogradouro (nome) values ("RUA");
+insert into TipoLogradouro (nome) values ("AVENIDA");
+insert into TipoLogradouro (nome) values ("ALAMEDA");
+insert into Logradouro (nome, cidade_id, tipologradouro_id) values ("4", 2, 1);
+insert into Bairro (nome, cidade_id) values ("brasil", 1);
+insert into Endereco (numero, cep, logradouro_id, bairro_id) values (87, "2423141", 1, 1);
 
 -- limpar tabelas
-delete from endereco;
-delete from bairro;
-delete from logradouro;
-delete from tipoLogradouro;
-delete from cidade;
-delete from estado;
-delete from usuario;
+delete from Endereco;
+delete from Bairro;
+delete from Logradouro;
+delete from TipoLogradouro;
+delete from Cidade;
+delete from Estado;
+delete from Usuario;
 
 -- selecionar tudo
-select * from endereco;
-select * from bairro;
-select * from logradouro;
-select * from tipoLogradouro;
-select * from cidade;
-select * from estado;
-select * from usuario;
-select * from tokens;
+select * from Endereco;
+select * from Bairro;
+select * from Logradouro;
+select * from TipoLogradouro;
+select * from Cidade;
+select * from Estado;
+select * from Usuario;
+select * from Tokens;
 
 -- selecionar com innerJoin
 select cidade.id, cidade.nome as cidade, estado.nome as estado from cidade inner join estado on cidade.cidade_estado_fk=estado.id;

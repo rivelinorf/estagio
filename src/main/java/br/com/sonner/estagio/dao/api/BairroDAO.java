@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.dao.api;
 
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface BairroDAO {
 
     void update(Bairro bairro);
 
-    void delete(Long id);
+    void delete(Long id) throws CustomException;
 
     Bairro getOne(Long id);
 

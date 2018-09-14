@@ -3,6 +3,7 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.BairroController;
 import br.com.sonner.estagio.dao.BairroDAOImpl;
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class BairroControllerImpl implements BairroController {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws CustomException {
         this.bDAO.delete(id);
 
     }

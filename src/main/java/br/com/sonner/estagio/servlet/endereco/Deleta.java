@@ -23,7 +23,7 @@ public class Deleta extends HttpServlet {
         enderecoController.delete(Long.valueOf(req.getParameter("id")));
         session.setAttribute("success", "Endereço deletado com sucesso");
 
-        if (voSession == null){
+        if (voSession == null) {
             voSession = new EnderecoFiltroVO();
         }
 

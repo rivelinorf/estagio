@@ -3,6 +3,7 @@ package br.com.sonner.estagio.controller.api;
 import java.util.List;
 
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 
 public interface BairroController {
@@ -14,7 +15,7 @@ public interface BairroController {
 
     void update(Bairro bairro);
 
-    void delete(long id);
+    void delete(long id) throws CustomException;
 
     List<Bairro> filtrar(BairroFiltroVO bairrosPesquisados);
 

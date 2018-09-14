@@ -3,6 +3,7 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.dao.api.BairroDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringBairro;
 import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.BairroFiltroVO;
 import org.hibernate.Session;
@@ -32,6 +33,8 @@ public class BairroDAOImpl implements BairroDAO {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            this.session.close();
         }
     }
 
@@ -43,6 +46,8 @@ public class BairroDAOImpl implements BairroDAO {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+        } finally {
+            this.session.close();
         }
     }
 
@@ -57,26 +62,38 @@ public class BairroDAOImpl implements BairroDAO {
         } catch (Exception e) {
             session.getTransaction().rollback();
             return null;
+        } finally {
+            this.session.close();
         }
 
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws CustomException {
         Bairro bairro = getOne(id);
         try {
-            session.getTransaction().begin();
-            session.remove(bairro);
-            session.getTransaction().commit();
+            this.session.getTransaction().begin();
+            this.session.remove(bairro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            throw new CustomException("Impossível deletar! Bairro possui relacionamentos");
+        } finally {
+            this.session.close();
         }
 
     }
 
     @Override
     public Bairro getOne(Long id) {
-        return session.find(Bairro.class, id);
+        try {
+            return this.session.find(Bairro.class, id);
+        } catch (Exception e) {
+            this.session.getTransaction().rollback();
+            return null;
+        } finally {
+            this.session.close();
+        }
+
 
     }
 
@@ -86,14 +103,16 @@ public class BairroDAOImpl implements BairroDAO {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairro(vo.getNome()).cidade(vo.getCidade())
                     .build();
 
-            session.getTransaction().begin();
-            List<Bairro> bairros = session.createQuery(queryString.getSql()).list();
-            session.getTransaction().commit();
+            this.session.getTransaction().begin();
+            List<Bairro> bairros = this.session.createQuery(queryString.getSql()).list();
+            this.session.getTransaction().commit();
 
             return bairros;
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            this.session.getTransaction().rollback();
             return null;
+        } finally {
+            this.session.close();
         }
     }
 
@@ -103,14 +122,16 @@ public class BairroDAOImpl implements BairroDAO {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairroLike(vo.getNome()).cidade(vo.getCidade())
                     .build();
 
-            session.getTransaction().begin();
-            List<Bairro> bairros = session.createQuery(queryString.getSql()).list();
-            session.getTransaction().commit();
+            this.session.getTransaction().begin();
+            List<Bairro> bairros = this.session.createQuery(queryString.getSql()).list();
+            this.session.getTransaction().commit();
 
             return bairros;
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            this.session.getTransaction().rollback();
             return null;
+        } finally {
+            this.session.close();
         }
     }
 

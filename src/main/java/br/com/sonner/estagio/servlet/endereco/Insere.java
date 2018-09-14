@@ -77,7 +77,7 @@ public class Insere extends HttpServlet {
 
             bairrovo.setCidade(cidade.getId());
 
-//            cidadevo.setEstado(cidade.getEstado().getId());
+            cidadevo.setEstado(cidade.getEstado().getId());
 
             enderecovo.setBairro(bairrovo.getId());
 
