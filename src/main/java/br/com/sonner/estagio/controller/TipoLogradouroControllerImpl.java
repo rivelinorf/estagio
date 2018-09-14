@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TipoLogradouroControllerImpl implements TipoLogradouroController {
-    private TipoLogradouroDAO tDAO;
+    private TipoLogradouroDAOImpl tDAO;
 
     public TipoLogradouroControllerImpl() {
-//        this.tDAO = TipoLogradouroDAOImpl.getInstance();
+        this.tDAO = (TipoLogradouroDAOImpl) TipoLogradouroDAOImpl.getInstance();
     }
 
     @Override

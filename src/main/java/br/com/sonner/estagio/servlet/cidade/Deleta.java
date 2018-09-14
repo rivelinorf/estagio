@@ -30,7 +30,7 @@ public class Deleta extends HttpServlet {
         logradouroFiltroVO.setCidade(Long.valueOf(request.getParameter("id")));
 
         if (bairroController.filtrar(bairroFiltroVO).size() == 0 && logradouroController.filtrar(logradouroFiltroVO).size() == 0) {
-            cidadeController.delete(Long.valueOf(request.getParameter("id")));
+       //     cidadeController.delete(Long.valueOf(request.getParameter("id")));
             session.setAttribute("success", "Cidade deletada com sucesso");
         } else {
             session.setAttribute("errors", "Impossivel deletar!, Cidade possui relacionamento");

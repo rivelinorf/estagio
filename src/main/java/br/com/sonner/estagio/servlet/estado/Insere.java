@@ -64,7 +64,7 @@ public class Insere extends HttpServlet {
                 response.sendRedirect("/views/estado/lista.jsp");
             } else {
 
-                String existe = "";
+                String existe ;
 
                 if (verificaestado.size() > 0) {
                     existe = "Estado já cadastrado!";

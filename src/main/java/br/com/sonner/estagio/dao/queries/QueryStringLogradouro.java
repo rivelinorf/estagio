@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringLogradouro {
-    private String sql = "SELECT * FROM logradouro WHERE 1 ";
+    private String sql = "SELECT l FROM logradouro as l WHERE 1=1 ";
 
     public String getSql() {
         return sql;
@@ -12,18 +12,18 @@ public class QueryStringLogradouro {
     }
 
     public static class Builder {
-        private String sql = "SELECT * FROM logradouro WHERE 1 ";
+        private String sql = "SELECT l FROM logradouro as l  WHERE 1=1 ";
 
         public Builder logradouro(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and nome = '" + nome + "'";
+                this.sql += "and l.nome = '" + nome + "'";
             }
             return this;
         }
 
         public Builder cidade(Long cidade) {
             if (cidade != null) {
-                this.sql += "and logradouro_cidade_fk = '" + cidade + "'";
+                this.sql += "and l.cidade_id = '" + cidade + "'";
             }
 
             return this;
@@ -31,7 +31,7 @@ public class QueryStringLogradouro {
 
         public Builder tipologradouro(Long tipologradouro) {
             if (tipologradouro != null) {
-                this.sql += "and logradouro_tipo_fk = '" + tipologradouro + "'";
+                this.sql += "and l.tipologradouro_id = '" + tipologradouro + "'";
             }
 
             return this;
@@ -39,7 +39,7 @@ public class QueryStringLogradouro {
 
         public Builder logradouroLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += "and UPPER(l.nome) LIKE '" + nome.toUpperCase() + "%' ";
             }
             return this;
         }
