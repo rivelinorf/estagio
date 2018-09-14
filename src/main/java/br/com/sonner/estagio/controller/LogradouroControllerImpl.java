@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.LogradouroController;
 import br.com.sonner.estagio.dao.LogradouroDAOImpl;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class LogradouroControllerImpl implements LogradouroController {
 
     @Override
     public Logradouro save(Logradouro logradouro) {
-        logradouro = this.logradouroDAO.save(logradouro);
+        this.logradouroDAO.save(logradouro);
         return logradouro;
     }
 
@@ -39,7 +40,7 @@ public class LogradouroControllerImpl implements LogradouroController {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws CustomException {
         this.logradouroDAO.delete(id);
 
     }

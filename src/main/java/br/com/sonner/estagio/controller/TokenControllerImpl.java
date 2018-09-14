@@ -10,7 +10,9 @@ public class TokenControllerImpl implements TokenController {
     private TokenDAO tokenDAO;
 
     public TokenControllerImpl() {
+
         //this.tokenDAO = TokenDAOImpl.getInstance();
+
     }
 
     @Override

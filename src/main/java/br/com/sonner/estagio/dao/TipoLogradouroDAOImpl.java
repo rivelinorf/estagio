@@ -3,6 +3,7 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.dao.api.TipoLogradouroDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 import org.hibernate.Session;
@@ -24,6 +25,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
         }
         return TIPOLOGRADOURO_DAO;
     }
+
 
     @Override
     public void save(TipoLogradouro tipoLogradouro) {
@@ -50,7 +52,6 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
         } finally {
             this.hibernateConnection.close();
         }
-
     }
 
     @Override
@@ -81,16 +82,19 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws CustomException {
         try {
+            TipoLogradouro estado = getOne(id);
+            this.hibernateConnection = HibernateUtil.getSessionFactory().openSession();
             this.hibernateConnection.getTransaction().begin();
-            this.hibernateConnection.remove(getOne(id));
+            this.hibernateConnection.remove(estado);
             this.hibernateConnection.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new CustomException("Impossivel deletar!, Tipo de Logradouro possui relacionamento");
         } finally {
             this.hibernateConnection.close();
         }
+
     }
 
     @Override
@@ -118,7 +122,7 @@ public class TipoLogradouroDAOImpl implements TipoLogradouroDAO {
             return null;
         } finally {
             this.hibernateConnection.close();
-
         }
     }
+
 }

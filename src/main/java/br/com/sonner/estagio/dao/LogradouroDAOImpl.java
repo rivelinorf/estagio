@@ -3,6 +3,7 @@ package br.com.sonner.estagio.dao;
 import br.com.sonner.estagio.dao.api.LogradouroDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringLogradouro;
 import br.com.sonner.estagio.model.Logradouro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 import org.hibernate.Session;
@@ -25,266 +26,113 @@ public class LogradouroDAOImpl implements LogradouroDAO {
         return LOGRADOURO_DAO;
     }
 
+
     @Override
-    public Logradouro save(Logradouro logradouro) {
+    public void save(Logradouro logradouro) {
         try {
-            session.beginTransaction();
-            session.save(logradouro);
-            session.getTransaction().commit();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            this.session.save(logradouro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            this.session.close();
         }
-        return logradouro;
     }
-//        String sql = "insert into logradouro (nome,logradouro_cidade_fk,logradouro_tipo_fk) values (?,?,?)";
-//        try {
-//            PreparedStatement stmt = connection.prepareStatement(sql);
-//
-//            stmt.setString(1, logradouro.getNome());
-//            stmt.setLong(2, logradouro.getCidade().getId());
-//            stmt.setLong(3, logradouro.getTipologradouro().getId());
-//
-//            stmt.execute();
-//            stmt.close();
-//
-//            return logradouro;
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
 
 
     @Override
     public List<Logradouro> getAll() {
-
         try {
-            session.getTransaction().begin();
-            List<Logradouro> logradouros = session.createQuery("select l from br.com.sonner.estagio.model.Logradouro as l").list();
-            session.getTransaction().commit();
-
-            return logradouros;
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery("from Logradouro ").getResultList();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
+        } finally {
+            this.session.close();
         }
-
     }
 
-
-//        try {
-//            PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro");
-//            ResultSet resultSet = stmt.executeQuery();
-//
-//            List<Logradouro> logradouros = new ArrayList<>();
-//
-//            while (resultSet.next()) {
-//                CidadeController cidadeController = new CidadeControllerImpl();
-//                TipoLogradouroController tipoLogradouroController = new TipoLogradouroControllerImpl();
-//
-//                TipoLogradouro tipologradouro = tipoLogradouroController
-//                        .getOne(resultSet.getLong("logradouro_tipo_fk"));
-//                Cidade cidade = cidadeController.getOne(resultSet.getLong("logradouro_cidade_fk"));
-//
-//                Logradouro logradouro = new Logradouro(resultSet.getString("nome"), tipologradouro, cidade);
-//                logradouro.setId(resultSet.getLong("id"));
-//                logradouro.setNome(resultSet.getString("nome"));
-//                logradouro.getTipologradouro().setId(resultSet.getLong("logradouro_tipo_fk"));
-//                logradouro.getCidade().setId(resultSet.getLong("logradouro_cidade_fk"));
-//
-//                logradouros.add(logradouro);
-//            }
-//
-//            return logradouros;
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+    @Override
+    public Logradouro getOne(Long id) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.get(Logradouro.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
 
     @Override
     public void update(Logradouro logradouro) {
         try {
-            session.beginTransaction();
-            session.update(logradouro);
-            session.getTransaction().commit();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            this.session.update(logradouro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
+        } finally {
+            this.session.close();
         }
+
     }
 
-//        String sql = "UPDATE logradouro SET nome=?, logradouro_cidade_fk=?, logradouro_tipo_fk=? where id = ? ";
-//        try {
-//            PreparedStatement stmt = this.connection.prepareStatement(sql);
-//            stmt.setString(1, logradouro.getNome());
-//            stmt.setLong(2, logradouro.getCidade().getId());
-//            stmt.setLong(3, logradouro.getTipologradouro().getId());
-//            stmt.setLong(4, logradouro.getId());
-//
-//            stmt.execute();
-//            stmt.close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//
-//        }
-//    }
-
     @Override
-    public void delete(Long id) {
-        Logradouro logradouro = getOne(id);
+    public void delete(Long id) throws CustomException {
         try {
-            session.getTransaction().begin();
-            session.remove(logradouro);
-            session.getTransaction().commit();
+            Logradouro logradouro = getOne(id);
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            this.session.remove(logradouro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            throw new CustomException("Impossivel deletar!, Logradouro possui relacionamento");
+        } finally {
+            this.session.close();
         }
 
     }
-
-
-//        try {
-//            PreparedStatement stmt = this.connection.prepareStatement("delete from logradouro where id=?");
-//            stmt.setLong(1, id);
-//            stmt.execute();
-//            stmt.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    @Override
-    public Logradouro getOne(Long id) {
-        return session.find(Logradouro.class, id);
-
-    }
-
-//        try {
-//            PreparedStatement stmt = this.connection.prepareStatement("select * from logradouro where id = ?");
-//            stmt.setLong(1, id);
-//
-//            ResultSet resultSet = stmt.executeQuery();
-//            TipoLogradouroDAO tipoLogradouroDAO = TipoLogradouroDAOImpl.getInstance();
-//            CidadeDAO cidadeDAO = CidadeDAOImpl.getInstance();
-//
-//            Logradouro logradouro = null;
-//
-//            if (resultSet.first()) {
-//                logradouro = new Logradouro();
-//                logradouro.setId(resultSet.getLong("id"));
-//                logradouro.setNome(resultSet.getString("nome"));
-//                logradouro.setCidade(cidadeDAO.getOne(resultSet.getLong("logradouro_cidade_fk")));
-//                logradouro.setTipologradouro(tipoLogradouroDAO.getOne(resultSet.getLong("logradouro_tipo_fk")));
-//
-//                stmt.close();
-//            }
-//
-//            return logradouro;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
     @Override
     public List<Logradouro> pesquisaLogradouro(LogradouroFiltroVO vo) {
         try {
-            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
-                    .logradouro(vo.getNome())
+            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder().logradouro(vo.getNome())
                     .tipologradouro(vo.getTipologradouro())
                     .cidade(vo.getCidade())
                     .build();
-
-            session.getTransaction().begin();
-            List<Logradouro> logradouros = session.createQuery(queryString.getSql()).list();
-            session.getTransaction().commit();
-
-            return logradouros;
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
+        } finally {
+            this.session.close();
         }
+
+
     }
-//        try {
-//            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
-//                    .logradouro(vo.getNome())
-//                    .tipologradouro(vo.getTipologradouro())
-//                    .cidade(vo.getCidade())
-//                    .build();
-//
-//            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            List<Logradouro> logradouros = new ArrayList<>();
-//
-//            while (resultSet.next()) {
-//                Logradouro aux = new Logradouro();
-//
-//                aux.setId(resultSet.getLong("id"));
-//                aux.setNome(resultSet.getString("nome"));
-//                aux.setTipologradouro(TipoLogradouroDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_tipo_fk")));
-//                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_cidade_fk")));
-//
-//                logradouros.add(aux);
-//            }
-//
-//            return logradouros;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//
-//    }
 
     @Override
     public List<Logradouro> pesquisaLogradouroLike(LogradouroFiltroVO vo) {
         try {
-            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
-                    .logradouroLike(vo.getNome())
+            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder().logradouroLike(vo.getNome())
                     .tipologradouro(vo.getTipologradouro())
                     .cidade(vo.getCidade())
                     .build();
-
-            session.getTransaction().begin();
-            List<Logradouro> logradouros = session.createQuery(queryString.getSql()).list();
-            session.getTransaction().commit();
-
-            return logradouros;
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
+        } finally {
+            this.session.close();
         }
-    }
 
-//
-//        try {
-//            QueryStringLogradouro queryString = new QueryStringLogradouro.Builder()
-//                    .logradouroLike(vo.getNome())
-//                    .tipologradouro(vo.getTipologradouro())
-//                    .cidade(vo.getCidade())
-//                    .build();
-//            PreparedStatement preparedStatement = connection.prepareStatement(queryString.getSql());
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            List<Logradouro> logradouros = new ArrayList<>();
-//
-//            while (resultSet.next()) {
-//                Logradouro aux = new Logradouro();
-//
-//                aux.setId(resultSet.getLong("id"));
-//                aux.setNome(resultSet.getString("nome"));
-//                aux.setTipologradouro(TipoLogradouroDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_tipo_fk")));
-//                aux.setCidade(CidadeDAOImpl.getInstance().getOne(resultSet.getLong("logradouro_cidade_fk")));
-//
-//                logradouros.add(aux);
-//            }
-//
-//            return logradouros;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+    }
 }

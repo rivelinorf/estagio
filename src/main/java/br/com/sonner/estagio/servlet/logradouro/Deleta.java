@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.servlet.logradouro;
 
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 
@@ -29,12 +30,12 @@ public class Deleta extends HttpServlet {
         enderecoFiltroVO.setNumero(null);
 
 
-        // try {
-        logradouroController.delete(Long.valueOf(request.getParameter("id")));
+        try {
+            logradouroController.delete(Long.valueOf(request.getParameter("id")));
 
-        //  } catch (CustomException e) {
-        //session.setAttribute("errors", e.getMessage());
-        //}
+        } catch (CustomException e) {
+            session.setAttribute("errors", e.getMessage());
+        }
 
         if (logradouroFiltroVO == null) {
             logradouroFiltroVO = new LogradouroFiltroVO();

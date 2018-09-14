@@ -37,10 +37,10 @@ public class Insere extends HttpServlet {
             vo.setNome("");
             vo.setNome(aux.getNome());
 
-            // List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
+            List<TipoLogradouro> verifica = tipoLogradouroController.filtrar(vo);
 
-            //if (verifica.size() == 0) {
-            if (true) {
+            if (verifica.size() == 0) {
+                //if (true) {
                 tipoLogradouroController.save(aux);
                 vo.setNome("");
 

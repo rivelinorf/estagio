@@ -3,6 +3,7 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.TipoLogradouroController;
 import br.com.sonner.estagio.dao.TipoLogradouroDAOImpl;
 import br.com.sonner.estagio.model.TipoLogradouro;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class TipoLogradouroControllerImpl implements TipoLogradouroController {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws CustomException {
         this.tDAO.delete(id);
     }
 

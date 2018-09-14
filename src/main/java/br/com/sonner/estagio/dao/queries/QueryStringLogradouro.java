@@ -23,7 +23,7 @@ public class QueryStringLogradouro {
 
         public Builder cidade(Long cidade) {
             if (cidade != null) {
-                this.sql += "and l.cidade_id = '" + cidade + "'";
+                this.sql += "and l.cidade.id = '" + cidade + "'";
             }
 
             return this;
@@ -31,7 +31,7 @@ public class QueryStringLogradouro {
 
         public Builder tipologradouro(Long tipologradouro) {
             if (tipologradouro != null) {
-                this.sql += "and l.tipologradouro_id = '" + tipologradouro + "'";
+                this.sql += "and l.tipologradouro.id = '" + tipologradouro + "'";
             }
 
             return this;
