@@ -14,7 +14,7 @@ public class LogradouroControllerImpl implements LogradouroController {
     private LogradouroDAO logradouroDAO;
 
     public LogradouroControllerImpl() {
-//        this.logradouroDAO = LogradouroDAOImpl.getIntance();
+        this.logradouroDAO = LogradouroDAOImpl.getIntance();
     }
 
     @Override

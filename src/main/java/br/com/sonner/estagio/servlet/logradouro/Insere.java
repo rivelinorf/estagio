@@ -61,10 +61,10 @@ public class Insere extends HttpServlet {
             vo.setNome(novologradouro.getNome());
             vo.setTipologradouro(novologradouro.getTipologradouro().getId());
 
-            List<Logradouro> verifica = logradouroController.filtrar(vo);
+            // List<Logradouro> verifica = logradouroController.filtrar(vo);
 
-            if (verifica.size() == 0) {
-
+            //if (verifica.size() == 0) {
+            if (true) {
                 logradouroController.save(novologradouro);
 
                 vo.setNome("");

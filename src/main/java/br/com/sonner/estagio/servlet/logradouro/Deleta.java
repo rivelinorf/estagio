@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.servlet.logradouro;
 
-import br.com.sonner.estagio.controller.EnderecoControllerImpl;
 import br.com.sonner.estagio.controller.LogradouroControllerImpl;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 import br.com.sonner.estagio.vos.LogradouroFiltroVO;
@@ -20,7 +19,6 @@ public class Deleta extends HttpServlet {
 
         HttpSession session = request.getSession();
         LogradouroFiltroVO logradouroFiltroVO = (LogradouroFiltroVO) session.getAttribute("filtroLogradouro");
-        EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
 
         EnderecoFiltroVO enderecoFiltroVO = new EnderecoFiltroVO();
 
@@ -30,19 +28,19 @@ public class Deleta extends HttpServlet {
         enderecoFiltroVO.setComplemento("");
         enderecoFiltroVO.setNumero(null);
 
-        if (enderecoController.filtrar(enderecoFiltroVO).size() > 0) {
-            session.setAttribute("errors", "Impossivel deletar!, Logradouro possui relacionamento");
-        } else {
-            logradouroController.delete(Long.valueOf(request.getParameter("id")));
-            session.setAttribute("success", "Logradouro deletado com sucesso");
-        }
+
+        // try {
+        logradouroController.delete(Long.valueOf(request.getParameter("id")));
+
+        //  } catch (CustomException e) {
+        //session.setAttribute("errors", e.getMessage());
+        //}
 
         if (logradouroFiltroVO == null) {
             logradouroFiltroVO = new LogradouroFiltroVO();
         }
 
         session.setAttribute("listaLogradouro", logradouroController.filtrar(logradouroFiltroVO));
-
         response.sendRedirect("/views/logradouro/lista.jsp");
     }
 }

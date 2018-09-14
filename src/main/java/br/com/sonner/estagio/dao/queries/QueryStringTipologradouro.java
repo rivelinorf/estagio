@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringTipologradouro {
-    private String sql = "SELECT t FROM tipoLogradouro as t WHERE 1=1 ";
+    private String sql = "SELECT t FROM TipoLogradouro as t WHERE 1=1 ";
 
     public String getSql() {
         return sql;
@@ -12,7 +12,7 @@ public class QueryStringTipologradouro {
     }
 
     public static class Builder {
-        private String sql = "SELECT t FROM tipoLogradouro as t WHERE 1=1 ";
+        private String sql = "SELECT t FROM TipoLogradouro as t WHERE 1=1 ";
 
         public Builder tipologradouro(String nome) {
             if (nome != "" && nome != null) {

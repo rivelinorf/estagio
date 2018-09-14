@@ -99,6 +99,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     @Override
     public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
+        this.session.getTransaction().begin();
         try {
             QueryStringEndereco queryString = new QueryStringEndereco.Builder()
                     .numero(vo.getNumero())
@@ -108,7 +109,6 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                     .logradouro(vo.getLogradouro())
                     .build();
 
-            this.session.getTransaction().begin();
             List<Endereco> enderecos = this.session.createQuery(queryString.getSql()).list();
             this.session.getTransaction().commit();
 
