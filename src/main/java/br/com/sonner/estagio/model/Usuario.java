@@ -3,7 +3,7 @@ package br.com.sonner.estagio.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="usuario")
+@Table
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

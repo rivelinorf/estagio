@@ -14,7 +14,6 @@ public class Bairro {
     private String nome;
 
     @ManyToOne
-    @JoinColumn(name = "bairro_cidade_fk", nullable = false)
     private Cidade cidade;
 
     @OneToMany(mappedBy = "bairro", cascade = CascadeType.PERSIST)

@@ -13,13 +13,6 @@ public class HibernateUtil {
             // Create the SessionFactory from hibernate.cfg.xml
             return new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(Bairro.class)
-                    .addAnnotatedClass(Cidade.class)
-                    .addAnnotatedClass(Endereco.class)
-                    .addAnnotatedClass(Estado.class)
-                    .addAnnotatedClass(Logradouro.class)
-                    .addAnnotatedClass(TipoLogradouro.class)
-                    .addAnnotatedClass(Usuario.class)
                     .buildSessionFactory();
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
@@ -36,10 +29,4 @@ public class HibernateUtil {
         // Close caches and connection pools
         getSessionFactory().close();
     }
-
-    public static void main(String args[]) {
-
-
-    }
-
 }

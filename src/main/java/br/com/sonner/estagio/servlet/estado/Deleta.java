@@ -2,6 +2,7 @@ package br.com.sonner.estagio.servlet.estado;
 
 import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.EstadoControllerImpl;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.EstadoFiltroVO;
 
@@ -26,11 +27,10 @@ public class Deleta extends HttpServlet {
         cidadeFiltroVO.setCod("");
         cidadeFiltroVO.setEstado(Long.valueOf(request.getParameter("id")));
 
-        if (cidadeController.filtrar(cidadeFiltroVO).size() > 0) {
-            session.setAttribute("errors", "Impossivel deletar!, Estado possue relacionamento");
-        } else {
+        try {
             estadoController.delete(Long.valueOf(request.getParameter("id")));
-            session.setAttribute("success", "Estado deletado com sucesso");
+        } catch (CustomException e) {
+            session.setAttribute("errors", e.getMessage());
         }
 
         if (estadoFiltroVO == null) {

@@ -3,8 +3,9 @@ package br.com.sonner.estagio.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="endereco")
+@Table
 public class Endereco {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,11 +14,9 @@ public class Endereco {
     private String complemento;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_logradouro_fk", nullable = false)
     private Bairro bairro;
 
     @ManyToOne
-    @JoinColumn(name = "endereco_bairro_fk", nullable = false)
     private Logradouro logradouro;
 
     public Endereco() {

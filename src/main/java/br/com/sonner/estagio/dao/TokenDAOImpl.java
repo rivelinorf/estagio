@@ -1,16 +1,7 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
-import br.com.sonner.estagio.dao.api.TokenDAO;
-import br.com.sonner.estagio.model.Usuario;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-public class TokenDAOImpl implements TokenDAO {
-    private Connection connection;
+public class TokenDAOImpl {
+    /*private Connection connection;
     private static TokenDAO TOKEN_DAO;
 
     private TokenDAOImpl() {
@@ -69,5 +60,5 @@ public class TokenDAOImpl implements TokenDAO {
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
 }

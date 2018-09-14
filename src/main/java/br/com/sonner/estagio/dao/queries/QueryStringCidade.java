@@ -12,11 +12,11 @@ public class QueryStringCidade {
     }
 
     public static class Builder {
-        private String sql = "SELECT * FROM cidade WHERE 1 ";
+        private String sql = "SELECT c FROM Cidade as c WHERE 1=1 ";
 
         public Builder cidade(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and nome = '" + nome + "' ";
+                this.sql += "and c.nome = '" + nome + "' ";
             }
 
             return this;
@@ -24,7 +24,7 @@ public class QueryStringCidade {
 
         public Builder codigo(String abv) {
             if (abv != "" && abv != null) {
-                this.sql += "and codigo = '" + abv + "' ";
+                this.sql += "and c.codigo = '" + abv + "' ";
             }
 
             return this;
@@ -32,7 +32,7 @@ public class QueryStringCidade {
 
         public Builder cep(String cep) {
             if (cep != "" && cep != null) {
-                this.sql += "and cep = '" + cep + "' ";
+                this.sql += "and c.cep = '" + cep + "' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringCidade {
 
         public Builder estado(Long estado) {
             if (estado != null) {
-                this.sql += "and cidade_estado_fk = '" + estado + "' ";
+                this.sql += "and c.estado_id = '" + estado + "' ";
             }
 
             return this;
@@ -48,7 +48,7 @@ public class QueryStringCidade {
 
         public Builder cidadeLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += "and UPPER(c.nome) like '" + nome.toUpperCase() + "%' ";
             }
 
             return this;
@@ -56,7 +56,7 @@ public class QueryStringCidade {
 
         public Builder codigoLike(String abv) {
             if (abv != "" && abv != null) {
-                this.sql += "and UPPER(codigo) LIKE '" + abv.toUpperCase() + "%' ";
+                this.sql += "and UPPER(c.codigo) like '" + abv.toUpperCase() + "%' ";
             }
 
             return this;
@@ -64,7 +64,7 @@ public class QueryStringCidade {
 
         public Builder cepLike(String cep) {
             if (cep != "" && cep != null) {
-                this.sql += "and UPPER(cep) LIKE '" + cep.toUpperCase() + "%' ";
+                this.sql += "and UPPER(c.cep) like '" + cep.toUpperCase() + "%' ";
             }
 
             return this;

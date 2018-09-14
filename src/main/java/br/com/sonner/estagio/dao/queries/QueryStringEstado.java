@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringEstado {
-    private String sql = "SELECT * FROM estado WHERE 1 ";
+    private String sql = "From Estado ";
 
     public String getSql() {
         return sql;
@@ -12,11 +12,11 @@ public class QueryStringEstado {
     }
 
     public static class Builder {
-        private String sql = "SELECT * FROM estado WHERE 1 ";
+        private String sql = "SELECT e FROM Estado as e WHERE 1=1 ";
 
         public Builder estado(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and nome = '" + nome + "' ";
+                this.sql += "and e.nome = '" + nome + "' ";
             }
 
             return this;
@@ -24,7 +24,7 @@ public class QueryStringEstado {
 
         public Builder abv(String abv) {
             if (abv != "" && abv != null) {
-                this.sql += "and abv = '" + abv + "' ";
+                this.sql += "and e.abv = '" + abv + "' ";
             }
 
             return this;
@@ -32,7 +32,7 @@ public class QueryStringEstado {
 
         public Builder estadoLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += "and UPPER(e.nome) like '" + nome.toUpperCase() + "%' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringEstado {
 
         public Builder abvLike(String abv) {
             if (abv != "" && abv != null) {
-                this.sql += "and UPPER(abv )LIKE '"+ abv.toUpperCase() +"%' ";
+                this.sql += "and UPPER(e.nome) like '" + abv.toUpperCase() + "%' ";
             }
 
             return this;

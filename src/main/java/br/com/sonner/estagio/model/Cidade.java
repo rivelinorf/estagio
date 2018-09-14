@@ -1,20 +1,27 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
-//@Table (name = "cidade")
+@Entity
+@Table (name = "cidade")
 public class Cidade {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String cod;
     private String cep;
 
-    //@ManyToOne
-    //@JoinColumn(name = "estado_id")
+    @ManyToOne
     private Estado estado;
+
+    @OneToMany (mappedBy = "cidade")
+    private List<Logradouro> logradouros = new ArrayList<>();
+
+    @OneToMany (mappedBy = "cidade")
+    private List<Bairro> bairros = new ArrayList<>();
 
     public Cidade() {
     }
@@ -64,5 +71,21 @@ public class Cidade {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Logradouro> getLogradouros() {
+        return logradouros;
+    }
+
+    public void setLogradouros(List<Logradouro> logradouros) {
+        this.logradouros = logradouros;
+    }
+
+    public List<Bairro> getBairros() {
+        return bairros;
+    }
+
+    public void setBairros(List<Bairro> bairros) {
+        this.bairros = bairros;
     }
 }

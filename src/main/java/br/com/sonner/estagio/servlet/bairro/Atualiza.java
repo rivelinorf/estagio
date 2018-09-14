@@ -88,7 +88,7 @@ public class Atualiza extends HttpServlet {
             cidadevo.setNome(cidade.getNome());
             cidadevo.setId(cidade.getId());
             cidadevo.setCod(cidade.getCod());
-            cidadevo.setEstado(cidade.getEstado().getId());
+//            cidadevo.setEstado(cidade.getEstado().getId());
             cidade.setCep(cidade.getCep());
             bairro.setCidade(cidade);
             vo.setCidade(bairro.getCidade().getId());

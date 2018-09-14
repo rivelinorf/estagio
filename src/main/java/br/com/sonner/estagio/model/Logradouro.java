@@ -1,18 +1,25 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
+@Entity
+@Table
 public class Logradouro {
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-  //  @ManyToOne
-    TipoLogradouro tipologradouro;
 
+    @ManyToOne
+    private TipoLogradouro tipologradouro;
 
-    Cidade cidade;
+    @ManyToOne
+    private Cidade cidade;
+
+    @OneToMany(mappedBy = "logradouro")
+    private List<Endereco> enderecos = new ArrayList<>();
 
     public Logradouro() {
 
@@ -57,4 +64,11 @@ public class Logradouro {
     }
 
 
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 }

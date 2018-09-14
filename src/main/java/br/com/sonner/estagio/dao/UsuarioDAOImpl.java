@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.dao;
 
-import br.com.sonner.estagio.connection.Conn;
 import br.com.sonner.estagio.dao.api.UsuarioDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringUsuario;
 import br.com.sonner.estagio.model.Usuario;
@@ -9,20 +8,13 @@ import br.com.sonner.estagio.vos.UsuarioFiltroVo;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
-    private Connection connection;
     private Session session;
     private static UsuarioDAO USUARIO_DAO;
 
     private UsuarioDAOImpl() {
-        this.connection = Conn.getConnection();
         this.session = HibernateUtil.getSessionFactory().openSession();
     }
 

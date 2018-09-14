@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringTipologradouro {
-    private String sql = "SELECT * FROM tipoLogradouro  WHERE 1 ";
+    private String sql = "SELECT t FROM tipoLogradouro as t WHERE 1=1 ";
 
     public String getSql() {
         return sql;
@@ -12,18 +12,18 @@ public class QueryStringTipologradouro {
     }
 
     public static class Builder {
-        private String sql = "SELECT * FROM tipoLogradouro WHERE 1 ";
+        private String sql = "SELECT t FROM tipoLogradouro as t WHERE 1=1 ";
 
         public Builder tipologradouro(String nome) {
-            if (nome != "") {
-                this.sql += "and nome = '" + nome + "' ";
+            if (nome != "" && nome != null) {
+                this.sql += "and t.nome = '" + nome + "' ";
             }
             return this;
         }
 
         public Builder tipologradouroLike(String nome) {
             if (nome != "") {
-                this.sql += "and UPPER(nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += "and UPPER(t.nome) LIKE '" + nome.toUpperCase() + "%' ";
             }
             return this;
         }

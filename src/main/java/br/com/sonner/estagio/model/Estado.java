@@ -4,17 +4,19 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-//@Table
+@Entity
+@Table
 public class Estado {
-   // @Id
-    //@GeneratedValue (strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nome;
     private String abv;
 
-    //@OneToMany (mappedBy = "estado")
-    private List<Cidade> cidades =  new ArrayList<>();
+    @OneToMany (mappedBy = "estado")
+    private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {
         this.nome = "teste";
@@ -47,5 +49,13 @@ public class Estado {
 
     public long getId() {
         return id;
+    }
+
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
     }
 }

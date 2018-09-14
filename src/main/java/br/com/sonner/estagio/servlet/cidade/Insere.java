@@ -64,7 +64,7 @@ public class Insere extends HttpServlet {
             vo.setId(null);
 
             vo.setNome(novaCidade.getNome());
-            vo.setEstado(novaCidade.getEstado().getId());
+//            vo.setEstado(novaCidade.getEstado().getId());
 
             List<Cidade> verificacidade = cidadeController.filtrar(vo);
 

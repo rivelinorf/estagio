@@ -54,9 +54,9 @@ public class PreencheVo extends HttpServlet {
         cidadevo.setNome(cidade.getNome());
         cidadevo.setCep(cidade.getCep());
         cidadevo.setCod(cidade.getCod());
-        cidadevo.setEstado(cidade.getEstado().getId());
+//        cidadevo.setEstado(cidade.getEstado().getId());
 
-        cidadevo2.setEstado(cidade.getEstado().getId());
+//        cidadevo2.setEstado(cidade.getEstado().getId());
 
         logradourovo.setId(logradouro.getId());
         logradourovo.setNome(logradouro.getNome());
