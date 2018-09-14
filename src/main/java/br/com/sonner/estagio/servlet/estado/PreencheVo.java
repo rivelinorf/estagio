@@ -19,7 +19,7 @@ public class PreencheVo extends HttpServlet {
         EstadoFiltroVO vo = new EstadoFiltroVO();
 
         Estado estado = estadoController.getOne(Long.valueOf(request.getParameter("id")));
-//        vo.setId(estado.getId());
+        vo.setId(estado.getId());
         vo.setEstado(estado.getNome());
         vo.setAbv(estado.getAbv());
 

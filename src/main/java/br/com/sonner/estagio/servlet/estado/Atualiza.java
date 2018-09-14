@@ -41,7 +41,8 @@ public class Atualiza extends HttpServlet {
 
             estado.setAbv(request.getParameter("abv"));
         }
-//        estado.setId(Long.valueOf(request.getParameter("id")));
+
+        estado.setId(Long.valueOf(request.getParameter("id")));
 
         List<String> erros = estadoController.validation(estado);
 

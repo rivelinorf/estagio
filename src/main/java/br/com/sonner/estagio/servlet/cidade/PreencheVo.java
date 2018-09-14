@@ -23,7 +23,7 @@ public class PreencheVo extends HttpServlet {
         vo.setNome(cidade.getNome());
         vo.setCep(cidade.getCep());
         vo.setCod(cidade.getCod());
-//        vo.setEstado(cidade.getEstado().getId());
+        vo.setEstado(cidade.getEstado().getId());
 
 
         HttpSession session = request.getSession();
