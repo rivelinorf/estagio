@@ -17,7 +17,6 @@ import java.io.IOException;
 public class Deleta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
-        CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadeFiltroVO = new CidadeFiltroVO();
         HttpSession session = request.getSession();
         EstadoFiltroVO estadoFiltroVO = (EstadoFiltroVO) session.getAttribute("filtroEstado");

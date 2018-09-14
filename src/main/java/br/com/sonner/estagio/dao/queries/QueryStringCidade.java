@@ -22,9 +22,9 @@ public class QueryStringCidade {
             return this;
         }
 
-        public Builder codigo(String abv) {
-            if (abv != "" && abv != null) {
-                this.sql += "and c.codigo = '" + abv + "' ";
+        public Builder codigo(String cod) {
+            if (cod != "" && cod != null) {
+                this.sql += "and c.cod = '" + cod + "' ";
             }
 
             return this;
@@ -40,7 +40,7 @@ public class QueryStringCidade {
 
         public Builder estado(Long estado) {
             if (estado != null) {
-                this.sql += "and c.estado_id = '" + estado + "' ";
+                this.sql += "and c.estado = '" + estado + "' ";
             }
 
             return this;
@@ -54,9 +54,9 @@ public class QueryStringCidade {
             return this;
         }
 
-        public Builder codigoLike(String abv) {
-            if (abv != "" && abv != null) {
-                this.sql += "and UPPER(c.codigo) like '" + abv.toUpperCase() + "%' ";
+        public Builder codigoLike(String cod) {
+            if (cod != "" && cod != null) {
+                this.sql += "and UPPER(c.cod) like '" + cod.toUpperCase() + "%' ";
             }
 
             return this;

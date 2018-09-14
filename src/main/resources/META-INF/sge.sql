@@ -94,7 +94,7 @@ ALTER TABLE `Usuario` CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
 -- inserindo dados
 insert into Estado (nome, abv) values ("SAO PAULO", "SP");
 insert into Estado (nome, abv) values ("MINAS GERAIS", "MG");
-insert into Cidade (nome, cod, cep, estado_id) values ("Uberlandia", "34", "38.600-000", 2);
+insert into Cidade (nome, cod, cep, estado_id) values ("Uberlandia", "34", "38.600-000", 1);
 insert into Cidade (nome, cod, cep, estado_id) values ("Paracatu", "38", "38.400-000", 2);
 insert into TipoLogradouro (nome) values ("RUA");
 insert into TipoLogradouro (nome) values ("AVENIDA");
