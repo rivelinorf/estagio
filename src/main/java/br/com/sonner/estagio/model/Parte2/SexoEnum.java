@@ -5,18 +5,18 @@ public enum SexoEnum {
     MASCULINO("masculino");
 
 
-    private String sexualidade;
+    private String sexo;
 
-    SexoEnum(String sexualidade) {
-        this.sexualidade = sexualidade;
+    SexoEnum(String sexo) {
+        this.sexo = sexo;
     }
 
 
-    public String getSexualidade() {
-        return sexualidade;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setSexualidade(String sexualidade) {
-        this.sexualidade = sexualidade;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

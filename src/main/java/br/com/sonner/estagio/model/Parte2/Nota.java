@@ -4,12 +4,17 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "nota")
+@Table
 public class Nota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private BigDecimal nota;
+    private Aluno aluno;
+
+    public Nota (){
+
+    }
 
     public BigDecimal getNota() {
         return nota;
@@ -19,11 +24,19 @@ public class Nota {
         this.nota = nota;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 }

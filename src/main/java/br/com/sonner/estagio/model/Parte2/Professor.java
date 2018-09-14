@@ -3,17 +3,20 @@ package br.com.sonner.estagio.model.Parte2;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "professor")
-public class Professor {
+@Table
+public class Professor extends Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    public long getId() {
+    public Professor() {
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

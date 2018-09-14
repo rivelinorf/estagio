@@ -6,8 +6,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "pessoa")
-public class Pessoa {
+@Table
+public abstract class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,7 +17,6 @@ public class Pessoa {
     private String mae;
     private Endereco endereco;
     private SexoEnum sexo;
-
 
     public String getNome() {
         return nome;
@@ -76,3 +75,4 @@ public class Pessoa {
         this.sexo = sexo;
     }
 }
+

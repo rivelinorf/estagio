@@ -1,19 +1,33 @@
 package br.com.sonner.estagio.model.Parte2;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "aluno")
-public class Aluno {
+@Table
+public class Aluno extends Pessoa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    private List<Matricula> matriculas;
 
-    public long getId() {
+    public Aluno(){
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public void setMatriculas(List<Matricula> matriculas) {
+        this.matriculas = matriculas;
     }
 }

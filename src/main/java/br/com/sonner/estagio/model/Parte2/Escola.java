@@ -6,20 +6,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "escola")
+@Table
 public class Escola {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nome;
     private Endereco endereco;
-    private List<Sala> salas;
 
-    public long getId() {
+    private List<Sala> salas;
+    private List<Funcionario> funcionarios;
+    private List<Turma> turmas;
+
+    public Escola(){
+
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,4 +53,12 @@ public class Escola {
     public void setSalas(List<Sala> salas) {
         this.salas = salas;
     }
+
+    public List<Funcionario> getFuncionarios() { return funcionarios; }
+
+    public void setFuncionarios(List<Funcionario> funcionarios) { this.funcionarios = funcionarios; }
+
+    public List<Turma> getTurmas() { return turmas; }
+
+    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
 }

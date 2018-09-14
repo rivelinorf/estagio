@@ -4,12 +4,17 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "funcionario")
-public class Funcionario {
+@Table
+public abstract class Funcionario extends Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private Date admissao;
+    private Escola escola;
+
+    public Funcionario() {
+
+    }
 
     public Date getAdmissao() {
         return admissao;
@@ -19,12 +24,19 @@ public class Funcionario {
         this.admissao = admissao;
     }
 
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
     }
 }
