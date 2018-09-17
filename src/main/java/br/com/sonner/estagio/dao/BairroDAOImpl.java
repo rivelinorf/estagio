@@ -15,7 +15,6 @@ public class BairroDAOImpl implements BairroDAO {
     public static BairroDAOImpl BAIRRO_DAO;
 
     public BairroDAOImpl() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public static BairroDAOImpl getInstance() {
@@ -28,11 +27,12 @@ public class BairroDAOImpl implements BairroDAO {
     @Override
     public void save(Bairro bairro) {
         try {
-            session.beginTransaction();
-            session.save(bairro);
-            session.getTransaction().commit();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.beginTransaction();
+            this.session.save(bairro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             this.session.close();
         }
@@ -41,11 +41,12 @@ public class BairroDAOImpl implements BairroDAO {
     @Override
     public void update(Bairro bairro) {
         try {
-            session.beginTransaction();
-            session.update(bairro);
-            session.getTransaction().commit();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.beginTransaction();
+            this.session.update(bairro);
+            this.session.getTransaction().commit();
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             this.session.close();
         }
@@ -54,13 +55,14 @@ public class BairroDAOImpl implements BairroDAO {
     @Override
     public List<Bairro> getAll() {
         try {
-            session.getTransaction().begin();
-            List<Bairro> bairros = session.createQuery("select b from br.com.sonner.estagio.model.Bairro as b").list();
-            session.getTransaction().commit();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            List<Bairro> bairros = this.session.createQuery("select b from Bairro as b").list();
+            this.session.getTransaction().commit();
 
             return bairros;
         } catch (Exception e) {
-            session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -72,6 +74,7 @@ public class BairroDAOImpl implements BairroDAO {
     public void delete(Long id) throws CustomException {
         Bairro bairro = getOne(id);
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             this.session.remove(bairro);
             this.session.getTransaction().commit();
@@ -86,9 +89,10 @@ public class BairroDAOImpl implements BairroDAO {
     @Override
     public Bairro getOne(Long id) {
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Bairro.class, id);
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -102,14 +106,13 @@ public class BairroDAOImpl implements BairroDAO {
         try {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairro(vo.getNome()).cidade(vo.getCidade())
                     .build();
-
-            this.session.getTransaction().begin();
+            this.session = HibernateUtil.getSessionFactory().openSession();
             List<Bairro> bairros = this.session.createQuery(queryString.getSql()).list();
-            this.session.getTransaction().commit();
+
 
             return bairros;
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -121,14 +124,12 @@ public class BairroDAOImpl implements BairroDAO {
         try {
             QueryStringBairro queryString = new QueryStringBairro.Builder().bairroLike(vo.getNome()).cidade(vo.getCidade())
                     .build();
-
-            this.session.getTransaction().begin();
+            this.session = HibernateUtil.getSessionFactory().openSession();
             List<Bairro> bairros = this.session.createQuery(queryString.getSql()).list();
-            this.session.getTransaction().commit();
 
             return bairros;
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();

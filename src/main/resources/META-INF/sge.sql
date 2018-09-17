@@ -21,7 +21,6 @@ create table Usuario (
         senha VARCHAR(30),
         email VARCHAR(50)
 );
-insert into Usuario (usuario, senha, email) values ( 'tthif', '12345678', 'tthif@hotmail.com');
 
 
 create table Tokens(

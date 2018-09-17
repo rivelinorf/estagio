@@ -90,24 +90,6 @@ public class Insere extends HttpServlet {
 
         }
 
-        if ((request.getParameter("estado") == ""
-                || request.getParameter("estado") == null)
-                && (request.getParameter("cidade") == ""
-                || request.getParameter("cidade") == null)
-                && (session.getAttribute("cidade") == null) ) {
-
-            session.setAttribute("filtroCidade_insereEndereco", null);
-            session.setAttribute("listaCidade_insereEndereco", null);
-            session.setAttribute("filtroLogradouro_insereEndereco", null);
-            session.setAttribute("filtroBairro_insereEndereco", null);
-            session.setAttribute("listaBairro_insereEndereco", null);
-            session.setAttribute("enderecoParaInserir", null);
-            session.setAttribute("estado", null);
-            session.setAttribute("cidade", null);
-
-        }
-
-
         if (cidadevo.getEstado() == null && bairrovo.getCidade() == null) {
 
             if (session.getAttribute("cidade") == null) {
@@ -120,9 +102,6 @@ public class Insere extends HttpServlet {
             session.setAttribute("listaBairro_insereEndereco", null);
 
         }
-
-
-
 
         response.sendRedirect("/views/endereco/insere.jsp");
     }
@@ -259,6 +238,7 @@ public class Insere extends HttpServlet {
 
         vo.setCep(endereco.getCep());
         vo.setComplemento(endereco.getComplemento());
+        vo.setLogradouro(logradouro.getId());
 
 
         if (erros.size() == 0) {

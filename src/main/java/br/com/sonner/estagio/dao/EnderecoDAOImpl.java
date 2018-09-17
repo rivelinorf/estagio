@@ -15,7 +15,6 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     public static EnderecoDAOImpl ENDERECO_DAO;
 
     public EnderecoDAOImpl() {
-        this.session = HibernateUtil.getSessionFactory().openSession();
     }
 
     public static EnderecoDAOImpl getInstance() {
@@ -28,11 +27,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     @Override
     public void save(Endereco endereco) {
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.beginTransaction();
             this.session.save(endereco);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             this.session.close();
         }
@@ -41,13 +41,14 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     @Override
     public List<Endereco> getAll() {
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             List<Endereco> enderecos = this.session.createQuery("select e from Endereco as e").list();
             this.session.getTransaction().commit();
 
             return enderecos;
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -58,11 +59,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     @Override
     public void update(Endereco endereco) {
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.beginTransaction();
             this.session.update(endereco);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             this.session.close();
         }
@@ -72,11 +74,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     public void delete(Long id) {
         Endereco endereco = getOne(id);
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             this.session.remove(endereco);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             this.session.close();
         }
@@ -87,9 +90,10 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     @Override
     public Endereco getOne(Long id) {
         try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Endereco.class, id);
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -99,7 +103,6 @@ public class EnderecoDAOImpl implements EnderecoDAO {
 
     @Override
     public List<Endereco> pesquisaEndereco(EnderecoFiltroVO vo) {
-        this.session.getTransaction().begin();
         try {
             QueryStringEndereco queryString = new QueryStringEndereco.Builder()
                     .numero(vo.getNumero())
@@ -108,13 +111,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                     .bairro(vo.getBairro())
                     .logradouro(vo.getLogradouro())
                     .build();
-
+            this.session = HibernateUtil.getSessionFactory().openSession();
             List<Endereco> enderecos = this.session.createQuery(queryString.getSql()).list();
-            this.session.getTransaction().commit();
 
             return enderecos;
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();
@@ -132,14 +134,12 @@ public class EnderecoDAOImpl implements EnderecoDAO {
                     .bairro(vo.getBairro())
                     .logradouro(vo.getLogradouro())
                     .build();
-
-            this.session.getTransaction().begin();
+            this.session = HibernateUtil.getSessionFactory().openSession();
             List<Endereco> enderecos = this.session.createQuery(queryString.getSql()).list();
-            this.session.getTransaction().commit();
 
             return enderecos;
         } catch (Exception e) {
-            this.session.getTransaction().rollback();
+            e.printStackTrace();
             return null;
         } finally {
             this.session.close();

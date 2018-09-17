@@ -235,6 +235,7 @@ public class Atualiza extends HttpServlet {
 
         vo.setCep(endereco.getCep());
         vo.setComplemento(endereco.getComplemento());
+        vo.setLogradouro(logradouro.getId());
 
         endereco.setId(Long.valueOf(req.getParameter("id")));
         vo.setId(endereco.getId());

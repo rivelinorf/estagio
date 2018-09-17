@@ -33,52 +33,68 @@ public class PreencheVo extends HttpServlet {
         EnderecoFiltroVO vo = new EnderecoFiltroVO();
         BairroControllerImpl bairroController = new BairroControllerImpl();
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
-        Endereco endereco;
+        Endereco endereco = null;
         HttpSession session = request.getSession();
 
-        endereco = enderecoController.getOne(Long.valueOf(request.getParameter("id")));
+        if (request.getParameter("id") != null && request.getParameter("id") != "") {
 
-        vo.setId(endereco.getId());
-        vo.setNumero(endereco.getNumero());
-        vo.setCep(endereco.getCep());
-        vo.setComplemento(endereco.getComplemento());
-        vo.setBairro(endereco.getBairro().getId());
-        vo.setLogradouro(endereco.getLogradouro().getId());
+            endereco = enderecoController.getOne(Long.valueOf(request.getParameter("id")));
 
-        Logradouro logradouro = logradouroController.getOne(endereco.getLogradouro().getId());
-        Bairro bairro = bairroControllerImpl.getOne(endereco.getBairro().getId());
-        Cidade cidade = cidadeController.getOne(endereco.getLogradouro().getCidade().getId());
-        Estado estado = estadoController.getOne(cidade.getEstado().getId());
+            vo.setId(endereco.getId());
+            vo.setNumero(endereco.getNumero());
+            vo.setCep(endereco.getCep());
+            vo.setComplemento(endereco.getComplemento());
+            vo.setBairro(endereco.getBairro().getId());
+            vo.setLogradouro(endereco.getLogradouro().getId());
 
-        cidadevo.setId(cidade.getId());
-        cidadevo.setNome(cidade.getNome());
-        cidadevo.setCep(cidade.getCep());
-        cidadevo.setCod(cidade.getCod());
-        cidadevo.setEstado(cidade.getEstado().getId());
+            Logradouro logradouro = logradouroController.getOne(endereco.getLogradouro().getId());
+            Bairro bairro = bairroControllerImpl.getOne(endereco.getBairro().getId());
+            Cidade cidade = cidadeController.getOne(endereco.getLogradouro().getCidade().getId());
+            Estado estado = estadoController.getOne(cidade.getEstado().getId());
 
-        cidadevo2.setEstado(cidade.getEstado().getId());
+            cidadevo.setId(cidade.getId());
+            cidadevo.setNome(cidade.getNome());
+            cidadevo.setCep(cidade.getCep());
+            cidadevo.setCod(cidade.getCod());
+            cidadevo.setEstado(cidade.getEstado().getId());
 
-        logradourovo.setId(logradouro.getId());
-        logradourovo.setNome(logradouro.getNome());
-        logradourovo.setCidade(logradouro.getCidade().getId());
-        logradourovo.setTipologradouro(logradouro.getTipologradouro().getId());
+            cidadevo2.setEstado(cidade.getEstado().getId());
 
-        bairrovo.setId(bairro.getId());
-        bairrovo.setNome(bairro.getNome());
-        bairrovo.setCidade(bairro.getCidade().getId());
+            logradourovo.setId(logradouro.getId());
+            logradourovo.setNome(logradouro.getNome());
+            logradourovo.setCidade(logradouro.getCidade().getId());
+            logradourovo.setTipologradouro(logradouro.getTipologradouro().getId());
 
-        bairrovo2.setCidade(bairro.getCidade().getId());
+            bairrovo.setId(bairro.getId());
+            bairrovo.setNome(bairro.getNome());
+            bairrovo.setCidade(bairro.getCidade().getId());
 
-        session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-        session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo2));
-        session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
-        session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
-        session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
-        session.setAttribute("enderecoParaEditar", vo);
-        session.setAttribute("estado", estado);
-        session.setAttribute("cidade", cidade);
+            bairrovo2.setCidade(bairro.getCidade().getId());
 
-        response.sendRedirect("/views/endereco/atualiza.jsp");
+            session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
+            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo2));
+            session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
+            session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
+            session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
+            session.setAttribute("enderecoParaEditar", vo);
+            session.setAttribute("estado", estado);
+            session.setAttribute("cidade", cidade);
+
+            response.sendRedirect("/views/endereco/atualiza.jsp");
+        } else {
+
+            session.setAttribute("filtroCidade_insereEndereco", null);
+            session.setAttribute("listaCidade_insereEndereco", null);
+            session.setAttribute("filtroLogradouro_insereEndereco", null);
+            session.setAttribute("filtroBairro_insereEndereco", null);
+            session.setAttribute("listaBairro_insereEndereco", null);
+            session.setAttribute("enderecoParaInserir", null);
+            session.setAttribute("estado", null);
+            session.setAttribute("cidade", null);
+
+            response.sendRedirect("/views/endereco/insere.jsp");
+
+        }
     }
 
 }

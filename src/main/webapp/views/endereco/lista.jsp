@@ -31,7 +31,7 @@
 	<jsp:include page="/includes/menu.jsp"></jsp:include>
 	<div class="main">
 		<sge:header titulo="Pesquisa de Enderecos" page="endereco"
-			actionFiltrar="true" actionNovo="/insere-endereco"
+			actionFiltrar="true" actionNovo="/endereco/preenche-vo"
 			formId="filter-form" actionFechar="true">
 		</sge:header>
 

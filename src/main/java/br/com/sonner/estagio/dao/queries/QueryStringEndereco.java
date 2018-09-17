@@ -12,7 +12,7 @@ public class QueryStringEndereco {
     }
 
     public static class Builder {
-        private String sql = "SELECT e FROM Endereco WHERE 1=1 ";
+        private String sql = "SELECT e FROM Endereco as e WHERE 1=1 ";
 
         public Builder numero(Integer numero) {
             if (numero != null) {
