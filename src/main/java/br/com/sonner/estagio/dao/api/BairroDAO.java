@@ -20,5 +20,4 @@ public interface BairroDAO {
     List<Bairro> pesquisaBairro(BairroFiltroVO vo);
 
     List<Bairro> pesquisaBairroLike(BairroFiltroVO vo);
-
 }
