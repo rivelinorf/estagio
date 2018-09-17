@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.servlet.estado;
 
-import br.com.sonner.estagio.controller.CidadeControllerImpl;
 import br.com.sonner.estagio.controller.EstadoControllerImpl;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.CidadeFiltroVO;
