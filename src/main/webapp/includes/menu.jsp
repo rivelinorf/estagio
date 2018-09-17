@@ -3,10 +3,13 @@
 <% Usuario usuario = (Usuario) request.getSession().getAttribute("USER"); %>
 <script>
     function showOpt(id) {
-        for (var i = 0; i < $(".dropdown-content").length; i++) {
-            $('.dropdown-content:eq(' + i + ')').hide(220)
-        }
         $(id).next(".dropdown-content").toggle(220)
+
+        for (var i = 0; i < $(".dropdown-content").length; i++) {
+            if (!$('.dropdown-content:eq(' + i + ')').is($(id).next(".dropdown-content"))) {
+                $('.dropdown-content:eq(' + i + ')').hide(220)
+            }
+        }
     }
 
     $(document).ready(function () {
