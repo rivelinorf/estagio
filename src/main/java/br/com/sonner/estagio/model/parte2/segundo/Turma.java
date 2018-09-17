@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2.segundo;
+package br.com.sonner.estagio.model.parte2.segundo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,9 +17,8 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Matricula> matriculas;
 
-    @ManyToMany
-    private List<Diciplina> diciplinas;
-
+    @OneToMany(mappedBy = "turma")
+    private List<TurmaDisciplina> turmasDiscplina;
 
     public Turma() {
     }
@@ -52,11 +51,11 @@ public class Turma {
         this.matriculas = matriculas;
     }
 
-    public List<Diciplina> getDiciplinas() {
-        return diciplinas;
+    public List<TurmaDisciplina> getTurmasDiscplina() {
+        return turmasDiscplina;
     }
 
-    public void setDiciplinas(List<Diciplina> diciplinas) {
-        this.diciplinas = diciplinas;
+    public void setTurmasDiscplina(List<TurmaDisciplina> turmasDiscplina) {
+        this.turmasDiscplina = turmasDiscplina;
     }
 }

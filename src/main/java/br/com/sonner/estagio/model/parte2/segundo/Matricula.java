@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2.segundo;
+package br.com.sonner.estagio.model.parte2.segundo;
 
 import javax.persistence.*;
 import java.util.Date;

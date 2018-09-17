@@ -1,20 +1,21 @@
-package br.com.sonner.estagio.model.Parte2.segundo;
+package br.com.sonner.estagio.model.parte2.segundo;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
-public class Diciplina {
+public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
-    @ManyToMany
-    private List<Turma> turmas;
+    @OneToMany(mappedBy = "disciplina")
+    private List<TurmaDisciplina> turmasDiscplina;
 
-    public Diciplina (){
+
+    public Disciplina() {
 
     }
 
@@ -34,11 +35,11 @@ public class Diciplina {
         this.nome = nome;
     }
 
-    public List<Turma> getTurmas() {
-        return turmas;
+    public List<TurmaDisciplina> getTurmasDiscplina() {
+        return turmasDiscplina;
     }
 
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void setTurmasDiscplina(List<TurmaDisciplina> turmasDiscplina) {
+        this.turmasDiscplina = turmasDiscplina;
     }
 }

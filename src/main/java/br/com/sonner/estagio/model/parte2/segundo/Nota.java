@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2.segundo;
+package br.com.sonner.estagio.model.parte2.segundo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +13,9 @@ public class Nota {
 
     @ManyToOne
     private Aluno aluno;
+
+    @ManyToOne
+    private TurmaDisciplina turmaDisciplina;
 
     public Nota (){
 
@@ -40,5 +43,13 @@ public class Nota {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+    }
+
+    public TurmaDisciplina getTurmaDisciplina() {
+        return turmaDisciplina;
+    }
+
+    public void setTurmaDisciplina(TurmaDisciplina turmaDisciplina) {
+        this.turmaDisciplina = turmaDisciplina;
     }
 }

@@ -1,5 +1,7 @@
 package br.com.sonner.estagio.model;
 
+import br.com.sonner.estagio.model.parte2.primeiro.Pessoa;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,9 @@ public class Endereco {
 
     @ManyToOne
     private Logradouro logradouro;
+
+    @OneToOne
+    private Pessoa pessoa;
 
     public Endereco() {
 

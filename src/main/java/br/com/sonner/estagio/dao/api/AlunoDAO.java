@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao.api;
 
 
-import br.com.sonner.estagio.model.Parte2.segundo.Aluno;
+import br.com.sonner.estagio.model.parte2.segundo.Aluno;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

@@ -1,13 +1,16 @@
-package br.com.sonner.estagio.model.Parte2.primeiro;
+package br.com.sonner.estagio.model.parte2.primeiro;
 
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.model.parte2.segundo.Aluno;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
-public abstract class Pessoa {
+public class Pessoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +19,19 @@ public abstract class Pessoa {
     private String pai;
     private String mae;
     private SexoEnum sexo;
+
+    @OneToOne
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Aluno> alunos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Funcionario> funcionario = new ArrayList<>();
+
+
+    public Pessoa() {
+    }
 
     public String getNome() {
         return nome;
@@ -73,6 +88,22 @@ public abstract class Pessoa {
 
     public void setSexo(SexoEnum sexo) {
         this.sexo = sexo;
+    }
+
+    public List<Funcionario> getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(List<Funcionario> funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 }
 

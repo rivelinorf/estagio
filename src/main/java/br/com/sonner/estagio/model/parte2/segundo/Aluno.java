@@ -1,13 +1,13 @@
-package br.com.sonner.estagio.model.Parte2.segundo;
+package br.com.sonner.estagio.model.parte2.segundo;
 
-import br.com.sonner.estagio.model.Parte2.primeiro.Pessoa;
+import br.com.sonner.estagio.model.parte2.primeiro.Pessoa;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table
-public class Aluno extends Pessoa {
+public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +17,9 @@ public class Aluno extends Pessoa {
 
     @OneToMany(mappedBy = "aluno")
     private List<Nota> notas;
+
+    @ManyToOne
+    private Pessoa pessoa;
 
     public Aluno() {
 
@@ -45,5 +48,13 @@ public class Aluno extends Pessoa {
 
     public void setMatricula(Matricula matricula) {
         this.matricula = matricula;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

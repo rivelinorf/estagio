@@ -14,7 +14,7 @@
         <property name="show_sql">true</property>
 
         <property name="format_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create-drop</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -26,6 +26,18 @@
         <mapping class="br.com.sonner.estagio.model.Bairro"/>
         <mapping class="br.com.sonner.estagio.model.Endereco"/>
         <mapping class="br.com.sonner.estagio.model.Usuario"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.primeiro.Funcionario"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.primeiro.Pessoa"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.primeiro.Diretor"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.primeiro.Professor"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Aluno"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Disciplina"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Escola"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Matricula"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Nota"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Sala"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.Turma"/>
+        <mapping class="br.com.sonner.estagio.model.parte2.segundo.TurmaDisciplina"/>
 
     </session-factory>
 </hibernate-configuration>
