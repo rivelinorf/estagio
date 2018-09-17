@@ -1,6 +1,7 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.segundo;
 
 import br.com.sonner.estagio.model.Endereco;
+import br.com.sonner.estagio.model.Parte2.primeiro.Funcionario;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,10 +13,18 @@ public class Escola {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @OneToOne
     private Endereco endereco;
 
+    @OneToMany(mappedBy = "escola")
     private List<Sala> salas;
+
+    @OneToMany(mappedBy = "escola")
     private List<Funcionario> funcionarios;
+
+
+    @OneToMany(mappedBy = "escola")
     private List<Turma> turmas;
 
     public Escola(){

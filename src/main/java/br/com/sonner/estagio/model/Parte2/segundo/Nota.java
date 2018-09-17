@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.segundo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,6 +10,8 @@ public class Nota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private BigDecimal nota;
+
+    @ManyToOne
     private Aluno aluno;
 
     public Nota (){

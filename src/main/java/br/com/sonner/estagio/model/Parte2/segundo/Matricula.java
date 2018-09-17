@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.segundo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +11,12 @@ public class Matricula {
     private Long id;
     private Date data;
     private Integer numero;
+
+
+    @ManyToOne
     private Turma turma;
+
+    @OneToOne
     private Aluno aluno;
 
     public Matricula(){

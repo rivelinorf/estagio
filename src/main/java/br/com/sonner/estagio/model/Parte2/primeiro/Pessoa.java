@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.primeiro;
 
 import br.com.sonner.estagio.model.Endereco;
 
@@ -15,8 +15,8 @@ public abstract class Pessoa {
     private Date dataNascimento;
     private String pai;
     private String mae;
-    private Endereco endereco;
     private SexoEnum sexo;
+    private Endereco endereco;
 
     public String getNome() {
         return nome;

@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.segundo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,6 +11,7 @@ public class Diciplina {
     private Long id;
     private String nome;
 
+    @ManyToMany
     private List<Turma> turmas;
 
     public Diciplina (){

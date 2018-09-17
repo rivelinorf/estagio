@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.segundo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,13 +10,19 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+
+    @ManyToOne
     private Escola escola;
+
+    @OneToMany(mappedBy = "turma")
+    private List<Matricula> matriculas;
+
+    @ManyToMany
+    private List<Diciplina> diciplinas;
+
 
     public Turma() {
     }
-
-    private List<Matricula> matriculas;
-    private List<Diciplina> diciplinas;
 
     public Long getId() { return id; }
 

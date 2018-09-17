@@ -16,14 +16,14 @@ public class QueryStringTipologradouro {
 
         public Builder tipologradouro(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and t.nome = '" + nome + "' ";
+                this.sql += " and t.nome = '" + nome + "' ";
             }
             return this;
         }
 
         public Builder tipologradouroLike(String nome) {
             if (nome != "") {
-                this.sql += "and UPPER(t.nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += " and UPPER(t.nome) LIKE '" + nome.toUpperCase() + "%' ";
             }
             return this;
         }

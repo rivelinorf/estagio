@@ -1,4 +1,6 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.primeiro;
+
+import br.com.sonner.estagio.model.Parte2.segundo.Escola;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -10,6 +12,8 @@ public abstract class Funcionario extends Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date admissao;
+
+    @ManyToOne
     private Escola escola;
 
     public Funcionario() {

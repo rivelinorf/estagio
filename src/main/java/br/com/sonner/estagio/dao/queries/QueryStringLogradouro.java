@@ -16,14 +16,14 @@ public class QueryStringLogradouro {
 
         public Builder logradouro(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and l.nome = '" + nome + "'";
+                this.sql += " and l.nome = '" + nome + "'";
             }
             return this;
         }
 
         public Builder cidade(Long cidade) {
             if (cidade != null) {
-                this.sql += "and l.cidade.id = '" + cidade + "'";
+                this.sql += " and l.cidade.id = '" + cidade + "' ";
             }
 
             return this;
@@ -31,7 +31,7 @@ public class QueryStringLogradouro {
 
         public Builder tipologradouro(Long tipologradouro) {
             if (tipologradouro != null) {
-                this.sql += "and l.tipologradouro.id = '" + tipologradouro + "'";
+                this.sql += " and l.tipologradouro.id = '" + tipologradouro + "' ";
             }
 
             return this;
@@ -39,7 +39,7 @@ public class QueryStringLogradouro {
 
         public Builder logradouroLike(String nome) {
             if (nome != "" && nome != null) {
-                this.sql += "and UPPER(l.nome) LIKE '" + nome.toUpperCase() + "%' ";
+                this.sql += " and UPPER(l.nome) LIKE '" + nome.toUpperCase() + "%' ";
             }
             return this;
         }

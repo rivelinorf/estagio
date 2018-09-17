@@ -1,16 +1,15 @@
-package br.com.sonner.estagio.model.Parte2;
+package br.com.sonner.estagio.model.Parte2.primeiro;
 
 import javax.persistence.*;
 
 @Entity
 @Table
-public class Diretor extends Funcionario {
+public class Professor extends Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Diretor(){
-
+    public Professor() {
     }
 
     public Long getId() {
