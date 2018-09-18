@@ -43,6 +43,12 @@
                 <a href="/pesquisa-funcionario">
                     <button type="button" class="main-btn btn-menu drop-btn" id="funcionario">Funcionário</button>
                 </a>
+                <a href="/pesquisa-disciplina">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="disciplina">Disciplina</button>
+                </a>
+                <a href="/pesquisa-sala">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="sala">Sala</button>
+                </a>
             </div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Configurações</button>
             <div class="dropdown-content">

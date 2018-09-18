@@ -1,9 +1,12 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.SalaDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringLogradouro;
+import br.com.sonner.estagio.dao.queries.QueryStringSala;
 import br.com.sonner.estagio.model.parte2.segundo.Sala;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.SalaFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -95,5 +98,37 @@ public class SalaDAOImpl implements SalaDAO {
         } finally {
             this.session.close();
         }
+    }
+
+    @Override
+    public List<Sala> pesquisaSalaLike(SalaFiltroVO vo) {
+        try {
+            QueryStringSala queryStringSala = new QueryStringSala.Builder().salaLike(vo.getNome()).escola(vo.getEscola()).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryStringSala.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Sala> pesquisaSala(SalaFiltroVO vo) {
+        try {
+            QueryStringSala queryStringSala = new QueryStringSala.Builder().sala(vo.getNome())
+                    .escola(vo.getEscola())
+                    .build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryStringSala.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+
+
     }
 }

@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.controller.api;
 
+import br.com.sonner.estagio.model.TipoLogradouro;
 import br.com.sonner.estagio.model.parte2.segundo.Disciplina;
 import br.com.sonner.estagio.util.CustomException;
 
@@ -15,4 +16,7 @@ public interface DisciplinaController {
     void update(Disciplina disciplina);
 
     void delete(long id) throws CustomException;
+
+    List<String> validation(Disciplina disciplina);
+
 }

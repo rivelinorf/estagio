@@ -17,4 +17,5 @@ public interface SalaController {
     void delete(long id) throws CustomException;
 
 
+    List<String> validation(Sala novaSala);
 }

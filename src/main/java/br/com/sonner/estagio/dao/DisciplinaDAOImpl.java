@@ -1,9 +1,12 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.DisciplinaDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringDisciplina;
+import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
 import br.com.sonner.estagio.model.parte2.segundo.Disciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -91,6 +94,32 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
             this.session.getTransaction().commit();
         } catch (Exception e) {
             throw new CustomException("Impossível deletar! disciplina  possui relacionamentos");
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Disciplina> pesquisaDisciplina(String nome) {
+        try {
+            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplina(nome).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public Object pesquisaTipoLogradouroLike(DisciplinaFiltroVO vo) {
+        try {
+            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplinaLike(vo.getNome()).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             this.session.close();
         }
