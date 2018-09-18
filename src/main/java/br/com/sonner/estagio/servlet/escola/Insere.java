@@ -260,27 +260,36 @@ public class Insere extends HttpServlet {
 
         }
 
-        else{
-            session.setAttribute("errors", erros);
-            session.setAttribute("filtroCidade_insereEndereco", cidadevo);
-            session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo2));
-            session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-            session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo2));
-            if (cidade == null) {
-                session.setAttribute("listaBairro_insereEndereco", null);
-            }
-            session.setAttribute("enderecoParaInserir", vo);
-            session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/escola/insere.jsp");
-            requestDispatcher.forward(req, res);
-        }
-
         novaEscola.setNome(nome);
         novaEscola.setEndereco(endereco);
 
         List<String> errosEscola = escolaController.validation(novaEscola);
         escolavo.setNome(nome);
         escolavo.setEndereco(endereco.getId());
+
+        if (errosEscola.size() == 0) {
+            List<Endereco> verifica = enderecoController.filtrar(vo);
+            if (verifica.size() == 0) {
+                escolaController.save(novaEscola);
+                session.setAttribute("listaAluno", escolaController.getAll());
+                res.sendRedirect("/views/escola/lista.jsp");
+            }
+            else {
+                String existe = "Aluno já cadastrado!";
+
+                session.setAttribute("errors", existe);
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/escola/insere.jsp");
+                requestDispatcher.forward(req, res);
+            }
+
+        }
+        else {
+            session.setAttribute("errors", errosEscola);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/escola/insere.jsp");
+            requestDispatcher.forward(req, res);
+        }
+
+
 
     }
 }
