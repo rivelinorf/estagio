@@ -77,7 +77,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
             this.session.remove(funcionario);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Funcionario possui relacionamentos");
+            throw new CustomException("Impossível deletar! funcionario possui relacionamentos");
         } finally {
             this.session.close();
         }

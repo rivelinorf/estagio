@@ -77,7 +77,7 @@ public class ProfessorDAOImpl implements ProfessorDAO {
             this.session.remove(professor);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Professor possui relacionamentos");
+            throw new CustomException("Impossível deletar! professor possui relacionamentos");
         } finally {
             this.session.close();
         }

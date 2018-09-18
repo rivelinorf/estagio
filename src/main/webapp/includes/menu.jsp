@@ -38,6 +38,12 @@
         </div>
         <hr>
         <div>
+            <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Instituição</button>
+            <div class="dropdown-content">
+                <a href="/pesquisa-funcionario">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="funcionario">Funcionário</button>
+                </a>
+            </div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Configurações</button>
             <div class="dropdown-content">
                 <a href="/pesquisa-endereco">

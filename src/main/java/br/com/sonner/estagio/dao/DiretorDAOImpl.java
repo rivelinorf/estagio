@@ -77,7 +77,7 @@ public class DiretorDAOImpl implements DiretorDAO {
             this.session.remove(aluno);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Diretor possui relacionamentos");
+            throw new CustomException("Impossível deletar! diretor possui relacionamentos");
         } finally {
             this.session.close();
         }

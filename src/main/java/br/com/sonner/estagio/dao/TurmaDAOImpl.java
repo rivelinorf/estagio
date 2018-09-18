@@ -79,7 +79,7 @@ public class TurmaDAOImpl implements TurmaDAO {
             this.session.remove(turma);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Turma possui relacionamentos");
+            throw new CustomException("Impossível deletar! turma possui relacionamentos");
         } finally {
             this.session.close();
         }
