@@ -18,15 +18,11 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     @Override
     public void save(Funcionario funcionario) {
         this.funcionarioDAO.save(funcionario);
-
-
     }
 
     @Override
     public List<Funcionario> getAll() {
         return this.funcionarioDAO.getAll();
-
-
     }
 
     @Override
@@ -43,6 +39,5 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     @Override
     public void delete(long id) throws CustomException {
         this.funcionarioDAO.delete(id);
-
     }
 }

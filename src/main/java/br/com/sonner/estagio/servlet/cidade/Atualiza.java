@@ -106,6 +106,5 @@ public class Atualiza extends HttpServlet {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/cidade/atualiza.jsp");
             requestDispatcher.forward(request, response);
         }
-
     }
 }

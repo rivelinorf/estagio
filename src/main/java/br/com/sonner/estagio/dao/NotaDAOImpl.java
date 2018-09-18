@@ -77,7 +77,7 @@ public class NotaDAOImpl implements NotaDAO {
             this.session.remove(nota);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Nota possui relacionamentos");
+            throw new CustomException("Impossível deletar! nota possui relacionamentos");
         } finally {
             this.session.close();
         }

@@ -90,7 +90,7 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
             this.session.remove(disciplina);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Disciplina  possui relacionamentos");
+            throw new CustomException("Impossível deletar! disciplina  possui relacionamentos");
         } finally {
             this.session.close();
         }

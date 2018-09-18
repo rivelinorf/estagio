@@ -77,7 +77,7 @@ public class AlunoDAOImpl implements AlunoDAO {
             this.session.remove(aluno);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Aluno possui relacionamentos");
+            throw new CustomException("Impossível deletar! aluno possui relacionamentos");
         } finally {
             this.session.close();
         }

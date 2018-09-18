@@ -77,7 +77,7 @@ public class PessoaDAOImpl implements PessoaDAO {
             this.session.remove(pessoa);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Pessoa possui relacionamentos");
+            throw new CustomException("Impossível deletar! pessoa possui relacionamentos");
         } finally {
             this.session.close();
         }
