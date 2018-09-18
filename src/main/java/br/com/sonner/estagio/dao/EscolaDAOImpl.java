@@ -78,7 +78,7 @@ public class EscolaDAOImpl implements EscolaDAO {
             this.session.remove(escola);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! Escola possui relacionamentos");
+            throw new CustomException("Impossível deletar! EscolaController possui relacionamentos");
         } finally {
             this.session.close();
         }

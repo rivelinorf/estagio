@@ -77,7 +77,7 @@ public class TurmaDisciplinaDAOImpl implements TurmaDisciplinaDAO {
             this.session.remove(turmaDisciplina);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! TurmaDisciplina possui relacionamentos");
+            throw new CustomException("Impossível deletar! TurmaDisciplinaControllerImpl possui relacionamentos");
         } finally {
             this.session.close();
         }
