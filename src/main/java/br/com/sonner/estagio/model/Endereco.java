@@ -1,8 +1,11 @@
 package br.com.sonner.estagio.model;
 
 import br.com.sonner.estagio.model.parte2.primeiro.Pessoa;
+import br.com.sonner.estagio.model.parte2.segundo.Escola;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -21,8 +24,11 @@ public class Endereco {
     @ManyToOne
     private Logradouro logradouro;
 
+    @OneToMany
+    private List<Pessoa> pessoas = new ArrayList<>();
+
     @OneToOne
-    private Pessoa pessoa;
+    private Escola escola;
 
     public Endereco() {
 
@@ -84,4 +90,19 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+
+    public Escola getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Escola escola) {
+        this.escola = escola;
+    }
 }

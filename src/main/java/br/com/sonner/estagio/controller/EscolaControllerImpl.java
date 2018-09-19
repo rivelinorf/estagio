@@ -5,6 +5,7 @@ import br.com.sonner.estagio.dao.EscolaDAOImpl;
 import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.parte2.segundo.Escola;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.EscolaFiltroVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +62,15 @@ public class EscolaControllerImpl implements EscolaController {
         }
 
         return erros;
+    }
+
+    @Override
+    public List<Escola> filtrar(EscolaFiltroVO vo) {
+        return this.escolaDAO.pesquisaEscola(vo);
+    }
+
+    @Override
+    public List<Escola> filtrarLike(EscolaFiltroVO vo) {
+        return this.escolaDAO.pesquisaEscolaLike(vo);
     }
 }

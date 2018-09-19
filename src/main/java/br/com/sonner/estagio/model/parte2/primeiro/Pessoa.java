@@ -20,7 +20,7 @@ public class Pessoa {
     private String mae;
     private SexoEnum sexo;
 
-    @OneToOne
+    @ManyToOne
     private Endereco endereco;
 
     @OneToMany(mappedBy = "pessoa")

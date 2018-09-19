@@ -1,8 +1,8 @@
 package br.com.sonner.estagio.controller.api;
 
-import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.parte2.segundo.Escola;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.EscolaFiltroVO;
 
 import java.util.List;
 
@@ -18,4 +18,8 @@ public interface EscolaController {
     void delete(long id) throws CustomException;
 
     List<String> validation(Escola escola);
+
+    List<Escola> filtrar(EscolaFiltroVO bairrosPesquisados);
+
+    List<Escola> filtrarLike(EscolaFiltroVO bairrosPesquisados);
 }

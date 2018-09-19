@@ -25,10 +25,10 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("listaEscola", null);
         } else {
             session.setAttribute("filtroEscola", vo);
-            //session.setAttribute("listaEscola", escolaController.filtrar(vo));
-            //session.setAttribute("listaEscola", escolaController.filtrarLike(vo));
+            session.setAttribute("listaEscola", escolaController.filtrar(vo));
+            session.setAttribute("listaEscola", escolaController.filtrarLike(vo));
         }
 
-        response.sendRedirect("/views/bairro/lista.jsp");
+        response.sendRedirect("/views/escola/lista.jsp");
     }
 }

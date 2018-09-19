@@ -1,9 +1,11 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.EscolaDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringEscola;
 import br.com.sonner.estagio.model.parte2.segundo.Escola;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.EscolaFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -96,6 +98,42 @@ public class EscolaDAOImpl implements EscolaDAO {
             this.session.close();
         }
 
-
     }
+
+    @Override
+    public List<Escola> pesquisaEscola(EscolaFiltroVO vo) {
+        try {
+            QueryStringEscola queryString = new QueryStringEscola.Builder().bairro(vo.getNome()).endereco(vo.getEndereco())
+                    .build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            List<Escola> escolas = this.session.createQuery(queryString.getSql()).list();
+
+
+            return escolas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaLike(EscolaFiltroVO vo) {
+        try {
+            QueryStringEscola queryString = new QueryStringEscola.Builder().bairroLike(vo.getNome()).endereco(vo.getEndereco())
+                    .build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            List<Escola> escolas = this.session.createQuery(queryString.getSql()).list();
+
+            return escolas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+
 }

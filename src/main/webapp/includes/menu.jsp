@@ -49,29 +49,33 @@
                 <a href="/pesquisa-sala">
                     <button type="button" class="main-btn btn-menu drop-btn" id="sala">Sala</button>
                 </a>
+
+                <a href="/pesquisa-escola">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="escola">Escola</button>
+                </a>
             </div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Configurações</button>
             <div class="dropdown-content">
                 <a href="/pesquisa-endereco">
                     <button type="button" class="main-btn btn-menu drop-btn" id="endereco">Endereco</button>
                 </a>
-                <a href="/pesquisa-estado">
-                    <button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button>
+                <a href="/pesquisa-bairro">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button>
                 </a>
-                <a href="/pesquisa-cidade">
-                    <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button>
+                <a href="/pesquisa-logradouro">
+                    <button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro
+                    </button>
                 </a>
                 <a href="/pesquisa-tipologradouro">
                     <button type="button" class="main-btn btn-menu drop-btn tipologradouro" id=tipologradouro>Tipo de
                         Logradouro
                     </button>
                 </a>
-                <a href="/pesquisa-logradouro">
-                    <button type="button" class="main-btn btn-menu drop-btn logradouro" id=logradouro>Logradouro
-                    </button>
+                <a href="/pesquisa-cidade">
+                    <button type="button" class="main-btn btn-menu drop-btn cidade">Cidade</button>
                 </a>
-                <a href="/pesquisa-bairro">
-                    <button type="button" class="main-btn btn-menu drop-btn" id="bairro">Bairro</button>
+                <a href="/pesquisa-estado">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="estado">Estado</button>
                 </a>
             </div>
         </div>
