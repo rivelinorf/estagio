@@ -1,17 +1,20 @@
 <%@page import="br.com.sonner.estagio.vos.SalaFiltroVO" %>
+<%@ page import="javax.persistence.Table" %>
+<%@ page import="br.com.sonner.estagio.model.parte2.segundo.Turma" %>
+<%@ page import="br.com.sonner.estagio.vos.TurmaFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="salaController"
-             class="br.com.sonner.estagio.controller.SalaControllerImpl"></jsp:useBean>
+<jsp:useBean id="turmaController"
+             class="br.com.sonner.estagio.controller.TurmaControllerImpl"></jsp:useBean>
 <jsp:useBean id="escolaController"
              class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 <%
-    SalaFiltroVO vo = (SalaFiltroVO) session.getAttribute("salaParaEditar");
+    TurmaFiltroVO vo = (TurmaFiltroVO) session.getAttribute("turmaParaEditar");
     if (vo == null) {
-        vo = new SalaFiltroVO();
+        vo = new TurmaFiltroVO();
         vo.setNome("");
         vo.setEscola(null);
     }
@@ -25,19 +28,19 @@
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header
-            titulo="Editar Sala"
+            titulo="Editar Turma"
             actionSalvar="true"
-            actionLimpar="/sala/preenche-vo"
+            actionLimpar="/turma/preenche-vo"
             formId="edit-form"
             actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form name="form1" action="/atualiza-sala?id=<%=vo.getId()%>"
+        <form name="form1" action="/atualiza-turma?id=<%=vo.getId()%>"
               method="post" id="edit-form" style="width: 100%">
             <input type="hidden" value="<%=vo.getId()%>" id="id">
             <div class="form-row">
                 <div>Nome:</div>
-                <input type="text" name="sala" class="form-control"
+                <input type="text" name="turma" class="form-control"
                        maxlength="50" value="<%=vo.getNome()%>">
             </div>
 

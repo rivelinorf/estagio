@@ -1,20 +1,20 @@
-<%@ page import="br.com.sonner.estagio.model.parte2.segundo.Sala" %>
+<%@ page import="br.com.sonner.estagio.model.parte2.segundo.Turma" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="salaController"
-             class="br.com.sonner.estagio.controller.SalaControllerImpl"></jsp:useBean>
+<jsp:useBean id="turmaController"
+             class="br.com.sonner.estagio.controller.TurmaControllerImpl"></jsp:useBean>
 <jsp:useBean id="escolaController"
              class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 
 <%
-    Sala campoSala = (Sala) session.getAttribute("campoSala");
-    if (campoSala == null) {
-        campoSala = new Sala();
-        campoSala.setNome("");
-        campoSala.setEscola(null);
+    Turma campoTurma = (Turma) session.getAttribute("campoTurma");
+    if (campoTurma == null) {
+        campoTurma = new Turma();
+        campoTurma.setNome("");
+        campoTurma.setEscola(null);
     }
 %>
 
@@ -26,18 +26,18 @@
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header
-            titulo="Inserir nova Sala"
+            titulo="Inserir nova Turma"
             actionSalvar="true"
             formId="insere-form"
             actionFechar="true">
     </sge:header>
 
     <div class="div-form">
-        <form action="/insere-sala" method="post" id="insere-form" style="width: 60%; margin: auto">
+        <form action="/insere-turma" method="post" id="insere-form" style="width: 60%; margin: auto">
 
             <div class="form-row">
-                <div>Nome:</div>
-                <input type="text" name="sala" class="form-control" value="<%= campoSala.getNome() %>"
+                <div>Turma:</div>
+                <input type="text" name="turma" class="form-control" value="<%= campoTurma.getNome() %>"
                        maxlength="60">
             </div>
 
@@ -55,4 +55,4 @@
 
 </body>
 </html>
-<% session.setAttribute("campoSala", null); %>
+<% session.setAttribute("campoTurma", null); %>

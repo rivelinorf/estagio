@@ -19,7 +19,8 @@ public class Atualiza  extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         DisciplinaControllerImpl disciplinaController = new DisciplinaControllerImpl();
         HttpSession session = request.getSession();
-        DisciplinaFiltroVO vo = new DisciplinaFiltroVO(), voSession = (DisciplinaFiltroVO) session.getAttribute("disciplina-para-editar");
+        DisciplinaFiltroVO vo = new DisciplinaFiltroVO(),
+                voSession = (DisciplinaFiltroVO) session.getAttribute("disciplina-para-editar");
         Disciplina disciplina = new Disciplina();
 
         if (voSession.getNome().equals(request.getParameter("disciplina"))) {
@@ -27,6 +28,7 @@ public class Atualiza  extends HttpServlet {
             response.sendRedirect("/views/disciplina/lista.jsp");
             return;
         }
+
         disciplina.setNome(request.getParameter("disciplina"));
         disciplina.setId(Long.valueOf(request.getParameter("id")));
 

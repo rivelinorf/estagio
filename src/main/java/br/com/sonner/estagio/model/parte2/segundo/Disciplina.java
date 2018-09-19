@@ -7,7 +7,7 @@ import java.util.List;
 @Table
 public class Disciplina {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
 

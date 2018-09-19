@@ -18,4 +18,5 @@ public interface TurmaController {
     void delete(long id) throws CustomException;
 
 
+    List<String> validation(Turma novaturma);
 }

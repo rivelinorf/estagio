@@ -1,9 +1,15 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.TurmaDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringCidade;
+import br.com.sonner.estagio.dao.queries.QueryStringSala;
+import br.com.sonner.estagio.dao.queries.QueryStringTurma;
+import br.com.sonner.estagio.model.parte2.segundo.Sala;
 import br.com.sonner.estagio.model.parte2.segundo.Turma;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.SalaFiltroVO;
+import br.com.sonner.estagio.vos.TurmaFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -96,5 +102,36 @@ public class TurmaDAOImpl implements TurmaDAO {
         } finally {
             this.session.close();
         }
+    }
+
+    public List<Turma> pesquisaTurmaLike(TurmaFiltroVO vo) {
+        try {
+            QueryStringTurma queryString = new QueryStringTurma.Builder().turmaLike(vo.getNome()).escola(vo.getEscola())
+                    .build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Turma> pesquisaTurma(TurmaFiltroVO vo) {
+        try {
+            QueryStringTurma queryString = new QueryStringTurma.Builder().turma(vo.getNome())
+                    .escola(vo.getEscola())
+                    .build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+
+
     }
 }

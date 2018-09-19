@@ -28,9 +28,11 @@
                 actionLimpar="/estado/preenche-vo"
                 formId="edit-form" actionFechar="true">
     </sge:header>
+
     <div class="content">
         <form action="/atualiza-estado?id=<%=vo.getId()%>" method="post"
               id="edit-form">
+
             <input type="hidden" value="<%=vo.getId()%>" id="id">
             <div class="div-form">
                 <div class="form-row">

@@ -46,6 +46,15 @@
                 <a href="/pesquisa-disciplina">
                     <button type="button" class="main-btn btn-menu drop-btn" id="disciplina">Disciplina</button>
                 </a>
+                <a href="/pesquisa-aluno">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="aluno">Aluno</button>
+                </a>
+                <a href="/pesquisa-turma">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="turma">Turma</button>
+                </a>
+                <a href="/pesquisa-nota">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="nota">Notas</button>
+                </a>
                 <a href="/pesquisa-sala">
                     <button type="button" class="main-btn btn-menu drop-btn" id="sala">Sala</button>
                 </a>

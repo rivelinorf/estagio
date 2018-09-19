@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/cidade-deleta")
 public class Deleta extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         HttpSession session = request.getSession();
         CidadeFiltroVO cidadeFiltroVO = (CidadeFiltroVO) session.getAttribute("filtroCidade");

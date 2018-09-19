@@ -58,11 +58,11 @@ public class Insere extends HttpServlet {
                 vo.setEscola(null);
 
                 session.setAttribute("listaSala", (salaController.filtrar(vo)));
-                session.setAttribute("success", "Sala inserido com sucesso");
+                session.setAttribute("success", "Sala inserida com sucesso");
 
                 res.sendRedirect("/views/sala/lista.jsp");
             } else {
-                String existe = "Sala já cadastrado!";
+                String existe = "Sala já cadastrada!";
 
                 session.setAttribute("errors", existe);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/sala/insere.jsp");

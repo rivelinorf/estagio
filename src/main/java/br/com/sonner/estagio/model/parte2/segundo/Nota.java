@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 @Table
 public class Nota {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private BigDecimal nota;
 
@@ -17,7 +17,7 @@ public class Nota {
     @ManyToOne
     private TurmaDisciplina turmaDisciplina;
 
-    public Nota (){
+    public Nota() {
 
     }
 
