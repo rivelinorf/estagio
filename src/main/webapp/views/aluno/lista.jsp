@@ -30,12 +30,29 @@
     <div class="div-form">
         <form action="/pesquisa-aluno" method="get" id="filter-form"
               style="width: 1000px;">
+
+            <div class="form-row">
+                <div>Matricula:</div>
+                <input type="text" name="matricula" class="form-control"
+                       style="background-color: rgb(46, 46, 46)" value=""
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
+            </div>
+
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="aluno" class="form-control"
                        style="background-color: rgb(46, 46, 46)" value=""
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
+
+            <div class="form-row">
+                <div>Sexo:</div>
+                <input type="text" name="sexo" class="form-control"
+                       style="background-color: rgb(46, 46, 46)" value=""
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
+            </div>
+
+
         </form>
     </div>
     <div class="content">
@@ -43,8 +60,9 @@
             <thead>
             <tr>
                 <th></th>
-                <th>Nome</th>
                 <th>Matricula</th>
+                <th>Nome</th>
+                <th>Sexo</th>
             </tr>
             </thead>
             <tbody>
@@ -61,8 +79,9 @@
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${aluno.nome}</td>
                     <td>${aluno.matricula}</td>
+                    <td>${aluno.nome}</td>
+                    <td>${aluno.sexo}</td>
                 </tr>
             </c:forEach>
             </tbody>

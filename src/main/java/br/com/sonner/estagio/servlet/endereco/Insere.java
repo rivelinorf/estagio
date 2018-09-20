@@ -198,9 +198,7 @@ public class Insere extends HttpServlet {
             String nomeLogradouro = req.getParameter("logradouro");
             logradourovo.setNome(nomeLogradouro);
 
-            if (cidade != null
-                    && tipoLogradouro != null) {
-
+            if (cidade != null && tipoLogradouro != null) {
 
                 logradourovo.setCidade(cidade.getId());
 

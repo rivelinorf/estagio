@@ -1,6 +1,8 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.MatriculaDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringMatricula;
+import br.com.sonner.estagio.dao.queries.QueryStringTurma;
 import br.com.sonner.estagio.model.Matricula;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
@@ -88,6 +90,19 @@ public class MatriculaDAOImpl implements MatriculaDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Matricula.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Matricula> pesquisarMatricula(Matricula matricula) {
+        try {
+            QueryStringMatricula queryStringMatricula = new QueryStringMatricula.Builder().matricula(matricula.getNumero()).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryStringMatricula.getSql()).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

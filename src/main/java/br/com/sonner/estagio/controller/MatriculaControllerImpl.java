@@ -46,4 +46,8 @@ public class MatriculaControllerImpl implements MatriculaController {
     public List<String> validation(Matricula matricula) {
         return null;
     }
+
+    public List<Matricula> filtrar(Matricula matricula) {
+        return this.matriculaDAO.pesquisarMatricula(matricula);
+    }
 }
