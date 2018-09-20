@@ -53,7 +53,7 @@
 
 
         </form>
-        <button class="main-btn btn-editar" type="submit" form="filter-form" value="Submit">Buscar</button>
+        <button class="main-btn btn-editar" type="submit" form="filter-form" value="Submit"><i class="fas fa-search"></i></button>
     </div>
 
         <form action="/insere-escola" method="post" id="insere-form"
