@@ -67,63 +67,123 @@ public class Insere extends HttpServlet {
                 endereco = enderecos.get(0);
                 cidade = endereco.getLogradouro().getCidade();
                 estado = endereco.getLogradouro().getCidade().getEstado();
+
+
+                if (enderecos.size() >= 1 & !cidade.getCep().equals(endereco.getCep())) {
+
+                    enderecovo.setCep(endereco.getCep());
+
+                    Logradouro logradouro = logradouroController.getOne(endereco.getLogradouro().getId());
+                    Bairro bairro = bairroController.getOne(endereco.getBairro().getId());
+                    estado = estadoController.getOne(cidade.getEstado().getId());
+
+                    cidadevo.setId(cidade.getId());
+                    cidadevo.setNome(cidade.getNome());
+                    cidadevo.setCep(cidade.getCep());
+                    cidadevo.setCod(cidade.getCod());
+                    cidadevo.setEstado(cidade.getEstado().getId());
+
+
+                    logradourovo.setId(logradouro.getId());
+                    logradourovo.setNome(logradouro.getNome());
+                    logradourovo.setCidade(logradouro.getCidade().getId());
+                    logradourovo.setTipologradouro(logradouro.getTipologradouro().getId());
+
+                    bairrovo.setId(bairro.getId());
+                    bairrovo.setNome(bairro.getNome());
+                    bairrovo.setCidade(bairro.getCidade().getId());
+
+
+                    session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+                    session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+                    session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
+                    session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+                    session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+                    session.setAttribute("enderecoParaInserir", enderecovo);
+                    session.setAttribute("estado", estado);
+                    session.setAttribute("cidade", cidade);
+
+                } else if (enderecos.size() >= 1 & cidade.getCep().equals(endereco.getCep())) {
+                    bairrovo.setCidade(cidade.getId());
+                    bairrovo.setId(null);
+
+                    cidadevo.setEstado(cidade.getEstado().getId());
+
+                    enderecovo.setBairro(bairrovo.getId());
+                    enderecovo.setCep(endereco.getCep());
+
+                    session.setAttribute("enderecoParaInserir", enderecovo);
+                    session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
+                    session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+                    session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
+                    session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+                    session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
+                    session.setAttribute("cidade", cidade);
+                    session.setAttribute("estado", estado);
+
+
+                }
+            } else {
+                String existe = "CEP não encontrado!";
+
+                session.setAttribute("errors", existe);
+
+
+                session.setAttribute("enderecoParaInserir", enderecovo);
+                session.setAttribute("filtroLogradouro_insereEndereco", null);
+                session.setAttribute("filtroCidade_insereEndereco", null);
+                session.setAttribute("listaCidade_insereEndereco", null);
+                session.setAttribute("filtroBairro_insereEndereco", null);
+                session.setAttribute("listaBairro_insereEndereco", null);
+                session.setAttribute("cidade", null);
+                session.setAttribute("estado", null);
+
+
             }
+        }
 
-            if (enderecos.size() == 1 & !cidade.getCep().equals(endereco.getCep())) {
-
-                enderecovo.setCep(endereco.getCep());
-
-                Logradouro logradouro = logradouroController.getOne(endereco.getLogradouro().getId());
-                Bairro bairro = bairroController.getOne(endereco.getBairro().getId());
-                estado = estadoController.getOne(cidade.getEstado().getId());
-
-                cidadevo.setId(cidade.getId());
-                cidadevo.setNome(cidade.getNome());
-                cidadevo.setCep(cidade.getCep());
-                cidadevo.setCod(cidade.getCod());
-                cidadevo.setEstado(cidade.getEstado().getId());
-
-
-                logradourovo.setId(logradouro.getId());
-                logradourovo.setNome(logradouro.getNome());
-                logradourovo.setCidade(logradouro.getCidade().getId());
-                logradourovo.setTipologradouro(logradouro.getTipologradouro().getId());
-
-                bairrovo.setId(bairro.getId());
-                bairrovo.setNome(bairro.getNome());
-                bairrovo.setCidade(bairro.getCidade().getId());
-
+        else{
+            if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
+                cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
+                estado = estadoController.getOne(cidadevo.getEstado());
 
                 session.setAttribute("filtroCidade_insereEndereco", cidadevo);
                 session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
-                session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
-                session.setAttribute("filtroBairro_insereEndereco", bairrovo);
-                session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
-                session.setAttribute("enderecoParaInserir", enderecovo);
+                session.setAttribute("listaBairro_insereEndereco", null);
+                session.setAttribute("filtroBairro_insereEndereco", null);
                 session.setAttribute("estado", estado);
-                session.setAttribute("cidade", cidade);
 
-            } else if (enderecos.size() >= 1 & cidade.getCep().equals(endereco.getCep())) {
+            }
+
+            if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
+                Long id = Long.valueOf(request.getParameter("cidade"));
+                cidade = cidadeController.getOne(id);
+
                 bairrovo.setCidade(cidade.getId());
 
                 cidadevo.setEstado(cidade.getEstado().getId());
 
                 enderecovo.setBairro(bairrovo.getId());
-                enderecovo.setCep(endereco.getCep());
 
-                session.setAttribute("enderecoParaInserir", enderecovo);
+
                 session.setAttribute("filtroCidade_insereEndereco", cidadevo);
                 session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
                 session.setAttribute("filtroBairro_insereEndereco", bairrovo);
                 session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
                 session.setAttribute("cidade", cidade);
-                session.setAttribute("estado", estado);
 
+            }
 
-            } else {
-                String existe = "CEP não encontrado!";
+            if (cidadevo.getEstado() == null && bairrovo.getCidade() == null) {
 
-                session.setAttribute("errors", existe);
+                if (session.getAttribute("cidade") == null) {
+                    session.setAttribute("estado", null);
+                    session.setAttribute("filtroCidade_insereEndereco", null);
+                }
+
+                session.setAttribute("cidade", null);
+                session.setAttribute("filtroBairro_insereEndereco", null);
+                session.setAttribute("listaBairro_insereEndereco", null);
 
             }
         }
@@ -159,7 +219,7 @@ public class Insere extends HttpServlet {
         String nome = req.getParameter("nome");
         Endereco endereco = new Endereco();
 
-        String cep = req.getParameter("cep");
+        String cep = req.getParameter("cepSession");
         String complemento = req.getParameter("complemento");
         Integer numero = null;
         Logradouro logradouro = null;
@@ -298,9 +358,15 @@ public class Insere extends HttpServlet {
         escolavo.setEndereco(endereco.getId());
 
         if (errosEscola.size() == 0) {
+
+            escolavo.setNome("");
+
             List<Escola> verifica = escolaController.filtrar(escolavo);
+
             if (verifica.size() == 0) {
                 escolaController.save(novaEscola);
+                escolavo.setEndereco(null);
+                escolavo.setId(null);
 
                 vo.setId(null);
                 vo.setNumero(null);
@@ -319,7 +385,9 @@ public class Insere extends HttpServlet {
                 cidadevo.setCep("");
                 cidadevo.setId(null);
 
-                session.setAttribute("listaEndereco", enderecoController.filtrar(vo));
+
+
+                session.setAttribute("listaEscola", escolaController.filtrar(escolavo));
                 session.setAttribute("filtroCidade_insereEndereco", cidadevo);
                 session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
                 session.setAttribute("filtroBairro_insereEndereco", bairrovo);
@@ -331,6 +399,7 @@ public class Insere extends HttpServlet {
                 res.sendRedirect("/views/escola/lista.jsp");
             } else {
                 String existe = "Escola já cadastrado!";
+                escolavo.setNome(nome);
 
                 session.setAttribute("errors", existe);
                 session.setAttribute("filtroCidade_insereEndereco", cidadevo);

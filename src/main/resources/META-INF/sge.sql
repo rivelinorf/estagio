@@ -117,6 +117,7 @@ select * from Bairro;
 select * from Logradouro;
 select * from TipoLogradouro;
 select * from Cidade;
+select * from Escola;
 select * from Estado;
 select * from Usuario;
 select * from Tokens;

@@ -26,7 +26,7 @@
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header titulo="Pesquisa de Escolas" page="escola"
-                actionFiltrar="true" actionNovo="/views/escola/insere.jsp"
+                actionFiltrar="true" actionNovo="/escola/preenche-vo"
                 formId="filter-form" actionFechar="true">
     </sge:header>
     <div class="div-form">

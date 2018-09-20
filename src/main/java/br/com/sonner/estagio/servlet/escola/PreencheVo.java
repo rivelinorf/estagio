@@ -6,13 +6,14 @@ import br.com.sonner.estagio.model.Escola;
 import br.com.sonner.estagio.vos.*;
 
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/escola/preenche-vo")
-public class PreencheVo {
+public class PreencheVo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         EscolaControllerImpl escolaController = new EscolaControllerImpl();
@@ -39,6 +40,7 @@ public class PreencheVo {
 
             escolaFiltroVO.setNome(escola.getNome());
             escolaFiltroVO.setEndereco(escola.getEndereco().getId());
+            escolaFiltroVO.setId(escola.getId());
 
             endereco = enderecoController.getOne(escolaFiltroVO.getEndereco());
 
@@ -73,12 +75,12 @@ public class PreencheVo {
 
             bairrovo2.setCidade(bairro.getCidade().getId());
 
-            session.setAttribute("filtroCidade_atualizaEndereco", cidadevo);
-            session.setAttribute("listaCidade_atualizaEndereco", cidadeController.filtrar(cidadevo2));
-            session.setAttribute("filtroLogradouro_atualizaEndereco", logradourovo);
-            session.setAttribute("filtroBairro_atualizaEndereco", bairrovo);
-            session.setAttribute("listaBairro_atualizaEndereco", bairroController.filtrar(bairrovo2));
-            session.setAttribute("enderecoParaEditar", vo);
+            session.setAttribute("filtroCidade_insereEndereco", cidadevo);
+            session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo2));
+            session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
+            session.setAttribute("filtroBairro_insereEndereco", bairrovo);
+            session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo2));
+            session.setAttribute("enderecoParaInserir", vo);
             session.setAttribute("escolaParaEditar", escolaFiltroVO);
             session.setAttribute("estado", estado);
             session.setAttribute("cidade", cidade);
@@ -92,7 +94,7 @@ public class PreencheVo {
             session.setAttribute("filtroBairro_insereEndereco", null);
             session.setAttribute("listaBairro_insereEndereco", null);
             session.setAttribute("enderecoParaInserir", null);
-            session.setAttribute("escolaParaEditar", null);
+            session.setAttribute("escolaParaInserir",  null);
             session.setAttribute("estado", null);
             session.setAttribute("cidade", null);
 
