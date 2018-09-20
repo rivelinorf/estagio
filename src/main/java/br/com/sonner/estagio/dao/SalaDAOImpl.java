@@ -1,9 +1,8 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.SalaDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringLogradouro;
 import br.com.sonner.estagio.dao.queries.QueryStringSala;
-import br.com.sonner.estagio.model.parte2.segundo.Sala;
+import br.com.sonner.estagio.model.Sala;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.SalaFiltroVO;

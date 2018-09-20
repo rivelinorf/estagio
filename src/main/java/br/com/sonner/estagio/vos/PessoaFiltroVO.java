@@ -1,6 +1,6 @@
 package br.com.sonner.estagio.vos;
 
-import br.com.sonner.estagio.model.parte2.primeiro.SexoEnum;
+import br.com.sonner.estagio.model.SexoEnum;
 
 import java.util.Date;
 

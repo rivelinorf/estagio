@@ -1,14 +1,10 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.TurmaDAO;
-import br.com.sonner.estagio.dao.queries.QueryStringCidade;
-import br.com.sonner.estagio.dao.queries.QueryStringSala;
 import br.com.sonner.estagio.dao.queries.QueryStringTurma;
-import br.com.sonner.estagio.model.parte2.segundo.Sala;
-import br.com.sonner.estagio.model.parte2.segundo.Turma;
+import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
-import br.com.sonner.estagio.vos.SalaFiltroVO;
 import br.com.sonner.estagio.vos.TurmaFiltroVO;
 import org.hibernate.Session;
 

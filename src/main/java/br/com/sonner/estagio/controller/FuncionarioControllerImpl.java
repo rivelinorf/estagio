@@ -2,7 +2,7 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.FuncionarioController;
 import br.com.sonner.estagio.dao.FuncionarioDAOImpl;
-import br.com.sonner.estagio.model.parte2.primeiro.Funcionario;
+import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

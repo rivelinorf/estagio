@@ -1,6 +1,6 @@
 package br.com.sonner.estagio.dao.api;
 
-import br.com.sonner.estagio.model.parte2.primeiro.Professor;
+import br.com.sonner.estagio.model.Professor;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

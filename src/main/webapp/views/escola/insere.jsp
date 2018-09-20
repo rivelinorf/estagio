@@ -1,4 +1,4 @@
-<%@ page import="br.com.sonner.estagio.model.parte2.segundo.Escola" %>
+<%@ page import="br.com.sonner.estagio.model.Escola" %>
 <%@ page import="br.com.sonner.estagio.vos.EscolaFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"

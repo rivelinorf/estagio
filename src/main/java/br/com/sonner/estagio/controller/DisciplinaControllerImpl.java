@@ -3,7 +3,7 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.DisciplinaController;
 import br.com.sonner.estagio.dao.DisciplinaDAOImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Disciplina;
+import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
 

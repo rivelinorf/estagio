@@ -76,7 +76,7 @@
             <tr>
                 <th></th>
                 <th>Escola</th>
-                <th>turma</th>
+                <th>Turma</th>
             </tr>
             </thead>
             <tbody>

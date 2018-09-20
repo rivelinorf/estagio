@@ -1,6 +1,6 @@
 package br.com.sonner.estagio.controller.api;
 
-import br.com.sonner.estagio.model.parte2.segundo.TurmaDisciplina;
+import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

@@ -1,7 +1,4 @@
-package br.com.sonner.estagio.model.parte2.segundo;
-
-import br.com.sonner.estagio.model.Endereco;
-import br.com.sonner.estagio.model.parte2.primeiro.Funcionario;
+package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 import java.util.List;

@@ -2,7 +2,7 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.DiretorController;
 import br.com.sonner.estagio.dao.DiretorDAOImpl;
-import br.com.sonner.estagio.model.parte2.primeiro.Diretor;
+import br.com.sonner.estagio.model.Diretor;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

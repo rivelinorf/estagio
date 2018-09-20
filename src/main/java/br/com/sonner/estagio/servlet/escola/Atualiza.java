@@ -2,7 +2,7 @@ package br.com.sonner.estagio.servlet.escola;
 
 import br.com.sonner.estagio.controller.*;
 import br.com.sonner.estagio.model.*;
-import br.com.sonner.estagio.model.parte2.segundo.Escola;
+import br.com.sonner.estagio.model.Escola;
 import br.com.sonner.estagio.vos.*;
 
 import javax.servlet.RequestDispatcher;

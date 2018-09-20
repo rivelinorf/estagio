@@ -1,4 +1,3 @@
-<%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.vos.AlunoFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
@@ -31,7 +30,12 @@
     <div class="div-form">
         <form action="/pesquisa-aluno" method="get" id="filter-form"
               style="width: 1000px;">
-            <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
+            <div class="form-row">
+                <div>Nome:</div>
+                <input type="text" name="aluno" class="form-control"
+                       style="background-color: rgb(46, 46, 46)" value=""
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
+            </div>
         </form>
     </div>
     <div class="content">

@@ -1,6 +1,6 @@
 <%@page import="br.com.sonner.estagio.vos.SalaFiltroVO" %>
 <%@ page import="javax.persistence.Table" %>
-<%@ page import="br.com.sonner.estagio.model.parte2.segundo.Turma" %>
+<%@ page import="br.com.sonner.estagio.model.Turma" %>
 <%@ page import="br.com.sonner.estagio.vos.TurmaFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>

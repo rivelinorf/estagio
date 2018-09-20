@@ -2,8 +2,8 @@ package br.com.sonner.estagio.servlet.sala;
 
 import br.com.sonner.estagio.controller.EscolaControllerImpl;
 import br.com.sonner.estagio.controller.SalaControllerImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Escola;
-import br.com.sonner.estagio.model.parte2.segundo.Sala;
+import br.com.sonner.estagio.model.Escola;
+import br.com.sonner.estagio.model.Sala;
 import br.com.sonner.estagio.vos.SalaFiltroVO;
 
 import javax.servlet.RequestDispatcher;

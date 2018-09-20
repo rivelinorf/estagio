@@ -1,6 +1,4 @@
-package br.com.sonner.estagio.model.parte2.segundo;
-
-import br.com.sonner.estagio.model.parte2.primeiro.Pessoa;
+package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +7,7 @@ import java.util.List;
 @Table
 public class Aluno {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne

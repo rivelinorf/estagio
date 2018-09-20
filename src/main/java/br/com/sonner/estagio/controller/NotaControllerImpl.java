@@ -2,7 +2,7 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.NotaController;
 import br.com.sonner.estagio.dao.NotaDAOImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Nota;
+import br.com.sonner.estagio.model.Nota;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

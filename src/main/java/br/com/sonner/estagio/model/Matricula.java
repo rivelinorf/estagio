@@ -1,13 +1,14 @@
-package br.com.sonner.estagio.model.parte2.segundo;
+package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Random;
 
 @Entity
 @Table
 public class Matricula {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date data;
     private Integer numero;
@@ -19,7 +20,7 @@ public class Matricula {
     @OneToOne
     private Aluno aluno;
 
-    public Matricula(){
+    public Matricula() {
 
     }
 

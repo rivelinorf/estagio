@@ -1,12 +1,9 @@
 package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.SalaController;
-import br.com.sonner.estagio.dao.DiretorDAOImpl;
 import br.com.sonner.estagio.dao.SalaDAOImpl;
-import br.com.sonner.estagio.model.Logradouro;
-import br.com.sonner.estagio.model.parte2.segundo.Sala;
+import br.com.sonner.estagio.model.Sala;
 import br.com.sonner.estagio.util.CustomException;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
 import br.com.sonner.estagio.vos.SalaFiltroVO;
 
 import java.util.ArrayList;

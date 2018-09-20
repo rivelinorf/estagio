@@ -1,7 +1,4 @@
-package br.com.sonner.estagio.model.parte2.primeiro;
-
-import br.com.sonner.estagio.model.Endereco;
-import br.com.sonner.estagio.model.parte2.segundo.Aluno;
+package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;

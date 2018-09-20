@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.TurmaDisciplinaDAO;
-import br.com.sonner.estagio.model.parte2.segundo.TurmaDisciplina;
+import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;

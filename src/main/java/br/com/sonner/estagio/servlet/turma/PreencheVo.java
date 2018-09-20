@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.servlet.turma;
 
 import br.com.sonner.estagio.controller.TurmaControllerImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Turma;
+import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import javax.servlet.annotation.WebServlet;

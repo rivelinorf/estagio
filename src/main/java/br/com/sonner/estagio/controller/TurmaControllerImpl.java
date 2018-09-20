@@ -2,11 +2,8 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.TurmaController;
 import br.com.sonner.estagio.dao.TurmaDAOImpl;
-import br.com.sonner.estagio.model.Cidade;
-import br.com.sonner.estagio.model.parte2.segundo.Sala;
-import br.com.sonner.estagio.model.parte2.segundo.Turma;
+import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.util.CustomException;
-import br.com.sonner.estagio.vos.CidadeFiltroVO;
 import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import java.util.ArrayList;

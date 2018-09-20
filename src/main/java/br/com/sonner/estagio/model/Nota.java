@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.parte2.segundo;
+package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

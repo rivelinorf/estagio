@@ -2,8 +2,7 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.MatriculaController;
 import br.com.sonner.estagio.dao.MatriculaDAOImpl;
-import br.com.sonner.estagio.dao.api.MatriculaDAO;
-import br.com.sonner.estagio.model.parte2.segundo.Matricula;
+import br.com.sonner.estagio.model.Matricula;
 import br.com.sonner.estagio.util.CustomException;
 
 import java.util.List;

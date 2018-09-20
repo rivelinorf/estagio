@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.PessoaDAO;
-import br.com.sonner.estagio.model.parte2.primeiro.Pessoa;
+import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;

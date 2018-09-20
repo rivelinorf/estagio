@@ -1,13 +1,8 @@
 package br.com.sonner.estagio.servlet.disciplina;
 
 import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
-import br.com.sonner.estagio.controller.api.DisciplinaController;
-import br.com.sonner.estagio.model.parte2.segundo.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
-import br.com.sonner.estagio.vos.LogradouroFiltroVO;
-import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import javax.servlet.annotation.WebServlet;

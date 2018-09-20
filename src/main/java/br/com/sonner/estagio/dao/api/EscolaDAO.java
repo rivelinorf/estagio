@@ -1,6 +1,6 @@
 package br.com.sonner.estagio.dao.api;
 
-import br.com.sonner.estagio.model.parte2.segundo.Escola;
+import br.com.sonner.estagio.model.Escola;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EscolaFiltroVO;
 

@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.servlet.disciplina;
 
 import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Disciplina;
+import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
 
 import javax.servlet.annotation.WebServlet;

@@ -2,8 +2,7 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.DisciplinaDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringDisciplina;
-import br.com.sonner.estagio.dao.queries.QueryStringTipologradouro;
-import br.com.sonner.estagio.model.parte2.segundo.Disciplina;
+import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;

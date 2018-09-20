@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.AlunoDAO;
-import br.com.sonner.estagio.model.parte2.segundo.Aluno;
+import br.com.sonner.estagio.model.Aluno;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;

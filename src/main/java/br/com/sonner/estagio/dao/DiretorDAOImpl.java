@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.DiretorDAO;
-import br.com.sonner.estagio.model.parte2.primeiro.Diretor;
+import br.com.sonner.estagio.model.Diretor;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;

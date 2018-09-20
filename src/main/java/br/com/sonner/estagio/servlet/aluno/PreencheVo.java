@@ -1,7 +1,7 @@
 package br.com.sonner.estagio.servlet.aluno;
 
 import br.com.sonner.estagio.controller.AlunoControllerImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Aluno;
+import br.com.sonner.estagio.model.Aluno;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
 
 import javax.servlet.ServletException;

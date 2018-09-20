@@ -1,4 +1,4 @@
-package br.com.sonner.estagio.model.parte2.primeiro;
+package br.com.sonner.estagio.model;
 
 public enum SexoEnum {
     FEMININO("feminino"),

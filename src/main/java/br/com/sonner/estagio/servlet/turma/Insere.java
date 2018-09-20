@@ -2,8 +2,8 @@ package br.com.sonner.estagio.servlet.turma;
 
 import br.com.sonner.estagio.controller.EscolaControllerImpl;
 import br.com.sonner.estagio.controller.TurmaControllerImpl;
-import br.com.sonner.estagio.model.parte2.segundo.Escola;
-import br.com.sonner.estagio.model.parte2.segundo.Turma;
+import br.com.sonner.estagio.model.Escola;
+import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import javax.servlet.RequestDispatcher;
