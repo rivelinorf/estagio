@@ -25,7 +25,6 @@ public class Pesquisa extends HttpServlet {
         if (vo.getEstado() == null && vo.getAbv() == null) {
             session.setAttribute("filtroEstado", null);
             session.setAttribute("listaEstado", null);
-
         } else {
             session.setAttribute("filtroEstado", vo);
             session.setAttribute("listaEstado", estadoController.filtrarLike(vo));

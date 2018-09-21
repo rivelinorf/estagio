@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Funcionario {
     @ManyToOne
     private Escola escola;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
     @OneToMany(mappedBy = "funcionario")
@@ -29,8 +30,8 @@ public class Funcionario {
 
     }
 
-    public Date getAdmissao() {
-        return admissao;
+    public String getAdmissao() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(this.admissao);
     }
 
     public void setAdmissao(Date admissao) {

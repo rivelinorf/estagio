@@ -2,6 +2,7 @@ package br.com.sonner.estagio.vos;
 
 import br.com.sonner.estagio.model.SexoEnum;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PessoaFiltroVO {
@@ -28,8 +29,8 @@ public class PessoaFiltroVO {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public String getDataNascimento() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(this.dataNascimento);
     }
 
     public void setDataNascimento(Date dataNascimento) {

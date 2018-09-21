@@ -44,7 +44,7 @@
                 <div>Código:</div>
                 <input type="text" value="<%= cidade.getCod() %>" name="codigo" class="form-control"
                        style="width: 20.35%;" maxlength="2" onKeyPress="mascaraInteiro()">
-                <div>CEP:</div>
+                <div style="width: 80px">CEP:</div>
                 <input type="text" value="<%= cidade.getCep() %>" name="cep" class="form-control"
                        style="width: 20.35%" onKeyPress="MascaraCep(form1.cep);"
                        maxlength="10" placeholder="Ex.: 00.000-000">

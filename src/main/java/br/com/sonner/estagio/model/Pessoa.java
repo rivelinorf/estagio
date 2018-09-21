@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ public class Pessoa {
     private String pai;
     private String mae;
     private SexoEnum sexo;
+    private String cpf;
 
     @ManyToOne
     private Endereco endereco;
@@ -23,8 +25,8 @@ public class Pessoa {
     @OneToMany(mappedBy = "pessoa")
     private List<Aluno> alunos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "pessoa")
-    private List<Funcionario> funcionario = new ArrayList<>();
+    @OneToOne(mappedBy = "pessoa")
+    private Funcionario funcionario;
 
 
     public Pessoa() {
@@ -38,8 +40,12 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public String getDataNascimento() {
+        if (this.dataNascimento != null) {
+            return new SimpleDateFormat("dd/MM/yyyy").format(this.dataNascimento);
+        } else {
+            return "";
+        }
     }
 
     public void setDataNascimento(Date dataNascimento) {
@@ -70,7 +76,6 @@ public class Pessoa {
         this.endereco = endereco;
     }
 
-
     public Long getId() {
         return id;
     }
@@ -87,20 +92,28 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public List<Funcionario> getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(List<Funcionario> funcionario) {
-        this.funcionario = funcionario;
-    }
-
     public List<Aluno> getAlunos() {
         return alunos;
     }
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }
 

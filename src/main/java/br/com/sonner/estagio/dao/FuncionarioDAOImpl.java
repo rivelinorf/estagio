@@ -1,11 +1,15 @@
 package br.com.sonner.estagio.dao;
 
+import br.com.sonner.estagio.controller.PessoaControllerImpl;
 import br.com.sonner.estagio.dao.api.FuncionarioDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringFuncionario;
 import br.com.sonner.estagio.model.Funcionario;
+import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;
 
+import java.util.Date;
 import java.util.List;
 
 public class FuncionarioDAOImpl implements FuncionarioDAO {
@@ -71,6 +75,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
     @Override
     public void delete(Long id) throws CustomException {
         Funcionario funcionario = getOne(id);
+
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
@@ -89,6 +94,34 @@ public class FuncionarioDAOImpl implements FuncionarioDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Funcionario.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Funcionario> pesquisaFuncionario(Pessoa pessoa, String admissao, Long escola) {
+        try {
+            QueryStringFuncionario queryString = new QueryStringFuncionario.Builder().nome(pessoa.getNome()).admissao(admissao).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Funcionario> pesquisaFuncionarioLike(Pessoa pessoa, String admissao, Long escola) {
+        try {
+            QueryStringFuncionario queryString = new QueryStringFuncionario.Builder().nomeLike(pessoa.getNome()).admissao(admissao).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

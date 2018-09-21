@@ -1,17 +1,15 @@
-<%@ page import="br.com.sonner.estagio.vos.EstadoFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.FuncionarioFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="estadoController"
-             class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
+<jsp:useBean id="funcionarioController"
+             class="br.com.sonner.estagio.controller.FuncionarioControllerImpl"></jsp:useBean>
 
 <%
-    EstadoFiltroVO vo = (EstadoFiltroVO) session.getAttribute("filtroEstado");
+    FuncionarioFiltroVO vo = (FuncionarioFiltroVO) session.getAttribute("filtroFuncionario");
     if (vo == null) {
-        vo = new EstadoFiltroVO();
-        vo.setEstado("");
-        vo.setAbv("");
+        vo = new FuncionarioFiltroVO();
     }
 %>
 
@@ -31,7 +29,17 @@
     <div class="div-form">
         <form action="/pesquisa-funcionario" method="get" id="filter-form"
               style="width: 1000px;">
-            <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
+            <div class="form-row">
+                <div>Nome:</div>
+                <input type="text" name="nome" class="form-control"
+                       style="background-color: rgb(46, 46, 46)" value=""
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
+            </div>
+            <div class="form-row">
+                <div>CPF:</div>
+                <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00"
+                       style="background-color: rgb(46, 46, 46)" value="" style="width: 460px;">
+            </div>
         </form>
     </div>
     <div class="content">
@@ -40,25 +48,32 @@
             <tr>
                 <th></th>
                 <th>Nome</th>
-                <th>Abreviação</th>
+                <th>Nome do Pai</th>
+                <th>Nome da Mãe</th>
+                <th>Data de nascimento</th>
+                <th>Data de admissão</th>
+
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${listaEstado}" var="estado">
+            <c:forEach items="${listaFuncionario}" var="funcionario">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"
-                                onclick="location.href='/estado/preenche-vo?id=${estado.id}'">
+                                onclick="location.href='/funcionario/preenche-vo?id=${funcionario.id}'">
                             <i class="fas fa-pen-square"></i>
                         </button>
-                        <button class="main-btn btn-red" value="${estado.id}"
+                        <button class="main-btn btn-red" value="${funcionario.id}"
                                 data-toggle="modal" data-target="#confirm-modal" type="button"
                                 onclick="$('#deletar').val(this.value)">
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${estado.nome}</td>
-                    <td>${estado.abv}</td>
+                    <td>${funcionario.pessoa.nome}</td>
+                    <td>${funcionario.pessoa.pai}</td>
+                    <td>${funcionario.pessoa.mae}</td>
+                    <td>${funcionario.pessoa.dataNascimento}</td>
+                    <td>${funcionario.admissao}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -76,7 +91,7 @@
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar"
                                 data-dismiss="modal"
-                                onclick="location.href = '/estado-deleta?id='+this.value">Sim
+                                onclick="location.href = '/funcionario-deleta?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red"
                                 data-dismiss="modal">Não

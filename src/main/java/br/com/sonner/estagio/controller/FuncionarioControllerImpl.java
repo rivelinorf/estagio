@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.FuncionarioController;
 import br.com.sonner.estagio.dao.FuncionarioDAOImpl;
 import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.FuncionarioFiltroVO;
 
 import java.util.List;
 
@@ -40,4 +41,11 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     public void delete(long id) throws CustomException {
         this.funcionarioDAO.delete(id);
     }
+
+    public List<Funcionario> filtrar(FuncionarioFiltroVO funcionariosPesquisados) {
+        return this.funcionarioDAO.pesquisaFuncionario(funcionariosPesquisados.getPessoa(), funcionariosPesquisados.getAdmissao(), funcionariosPesquisados.getEscola());
+    }
+
+    public List<Funcionario> filtrarLike(FuncionarioFiltroVO funcionariosPesquisados) {
+        return this.funcionarioDAO.pesquisaFuncionarioLike(funcionariosPesquisados.getPessoa(), funcionariosPesquisados.getAdmissao(), funcionariosPesquisados.getEscola());    }
 }

@@ -33,12 +33,10 @@ public class AlunoControllerImpl implements AlunoController {
     @Override
     public void update(Aluno aluno) {
         this.alunoDAO.update(aluno);
-
     }
 
     @Override
     public void delete(long id) throws CustomException {
         this.alunoDAO.delete(id);
-
     }
 }
