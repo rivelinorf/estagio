@@ -9,7 +9,7 @@ public class Diretor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     private Funcionario funcionario;
 
     public Diretor(){

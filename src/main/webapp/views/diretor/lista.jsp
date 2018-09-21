@@ -1,15 +1,15 @@
-<%@ page import="br.com.sonner.estagio.vos.FuncionarioFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.vos.DiretorFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
-<jsp:useBean id="funcionarioController"
-             class="br.com.sonner.estagio.controller.FuncionarioControllerImpl"></jsp:useBean>
+<jsp:useBean id="diretorController"
+             class="br.com.sonner.estagio.controller.DiretorControllerImpl"></jsp:useBean>
 
 <%
-    FuncionarioFiltroVO vo = (FuncionarioFiltroVO) session.getAttribute("filtroFuncionario");
+    DiretorFiltroVO vo = (DiretorFiltroVO) session.getAttribute("filtroDiretor");
     if (vo == null) {
-        vo = new FuncionarioFiltroVO();
+        vo = new DiretorFiltroVO();
     }
 %>
 
@@ -22,12 +22,12 @@
 
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
-    <sge:header titulo="Pesquisa de Funcionários" page="funcionario"
-                actionFiltrar="true" actionNovo="/views/funcionario/insere.jsp"
+    <sge:header titulo="Pesquisa de Diretor" page="diretor"
+                actionFiltrar="true" actionNovo="/views/diretor/insere.jsp"
                 formId="filter-form" actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form action="/pesquisa-funcionario" method="get" id="filter-form"
+        <form action="/pesquisa-diretor" method="get" id="filter-form"
               style="width: 1000px;">
             <div class="form-row">
                 <div>Nome:</div>
@@ -55,23 +55,23 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${listaFuncionario}" var="funcionario">
+            <c:forEach items="${listaDiretor}" var="diretor">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"
-                                onclick="location.href='/funcionario/preenche-vo?id=${funcionario.id}'">
+                                onclick="location.href='/diretor/preenche-vo?id=${diretor.id}'">
                             <i class="fas fa-pen-square"></i>
                         </button>
-                        <button class="main-btn btn-red" value="${funcionario.id}" data-toggle="modal"
+                        <button class="main-btn btn-red" value="${diretor.id}" data-toggle="modal"
                                 data-target="#confirm-modal" type="button" onclick="$('#deletar').val(this.value)">
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${funcionario.pessoa.nome}</td>
-                    <td>${funcionario.pessoa.cpf}</td>
-                    <td>${funcionario.escola.nome}</td>
-                    <td>${funcionario.pessoa.dataNascimento}</td>
-                    <td>${funcionario.admissao}</td>
+                    <td>${diretor.pessoa.nome}</td>
+                    <td>${diretor.pessoa.cpf}</td>
+                    <td>${diretor.escola.nome}</td>
+                    <td>${diretor.pessoa.dataNascimento}</td>
+                    <td>${diretor.admissao}</td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -89,7 +89,7 @@
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar"
                                 data-dismiss="modal"
-                                onclick="location.href = '/funcionario-deleta?id='+this.value">Sim
+                                onclick="location.href = '/diretor-deleta?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red"
                                 data-dismiss="modal">Não

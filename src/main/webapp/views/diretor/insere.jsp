@@ -13,11 +13,11 @@
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
-    <sge:header titulo="Inserir novo Funcionario" actionSalvar="true"
+    <sge:header titulo="Inserir novo Diretor" actionSalvar="true"
                 formId="insere-form" actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form action="/insere-funcionario" method="post" id="insere-form"
+        <form action="/insere-diretor" method="post" id="insere-form"
               style="width: 60%; margin: auto">
             <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
             <div class="form-row">
@@ -39,12 +39,6 @@
                         </c:choose>
                     </c:forEach>
                 </select>
-            </div>
-            <div class="form-row">
-                <div>Diretor: </div>
-                <input type="checkbox" name="diretor">
-                <div>Professor: </div>
-                <input type="checkbox" name="professor">
             </div>
         </form>
     </div>

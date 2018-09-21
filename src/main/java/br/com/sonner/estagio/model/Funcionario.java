@@ -20,18 +20,22 @@ public class Funcionario {
     @OneToOne(cascade = CascadeType.ALL)
     private Pessoa pessoa;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Diretor> diretores = new ArrayList<>();
+    @OneToOne(mappedBy = "funcionario")
+    private Diretor diretores;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Professor> professores = new ArrayList<>();
+    @OneToOne(mappedBy = "funcionario")
+    private Professor professores;
 
     public Funcionario() {
 
     }
 
     public String getAdmissao() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(this.admissao);
+        if (this.admissao != null) {
+            return new SimpleDateFormat("dd/MM/yyyy").format(this.admissao);
+        } else {
+            return "";
+        }
     }
 
     public void setAdmissao(Date admissao) {
@@ -62,19 +66,19 @@ public class Funcionario {
         this.pessoa = pessoa;
     }
 
-    public List<Diretor> getDiretores() {
-        return diretores;
-    }
-
-    public void setDiretores(List<Diretor> diretores) {
-        this.diretores = diretores;
-    }
-
-    public List<Professor> getProfessores() {
+    public Professor getProfessores() {
         return professores;
     }
 
-    public void setProfessores(List<Professor> professores) {
+    public void setProfessores(Professor professores) {
         this.professores = professores;
+    }
+
+    public Diretor getDiretores() {
+        return diretores;
+    }
+
+    public void setDiretores(Diretor diretores) {
+        this.diretores = diretores;
     }
 }

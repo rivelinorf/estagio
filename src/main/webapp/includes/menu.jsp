@@ -43,6 +43,12 @@
                 <a href="/pesquisa-funcionario">
                     <button type="button" class="main-btn btn-menu drop-btn" id="funcionario">Funcionário</button>
                 </a>
+                <a href="/pesquisa-diretor">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="diretor">Diretor</button>
+                </a>
+                <a href="/pesquisa-professor">
+                    <button type="button" class="main-btn btn-menu drop-btn" id="professor">Professor</button>
+                </a>
                 <a href="/pesquisa-disciplina">
                     <button type="button" class="main-btn btn-menu drop-btn" id="disciplina">Disciplina</button>
                 </a>

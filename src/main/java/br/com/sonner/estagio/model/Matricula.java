@@ -13,7 +13,6 @@ public class Matricula {
     private Date data;
     private Integer numero;
 
-
     @ManyToOne
     private Turma turma;
 

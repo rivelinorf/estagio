@@ -7,6 +7,13 @@
            onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
 </div>
 <div class="form-row">
+    <div>Sexo:</div>
+    <select name="sexo" class="form-control">
+        <option value="m">Masculino</option>
+        <option value="f">Feminino</option>
+    </select>
+</div>
+<div class="form-row">
     <div>Data de nascimento:</div>
     <input type="text" name="data-nascimento" class="form-control" placeholder="00/00/0000"
            style="background-color: rgb(46, 46, 46); width: 100px;">

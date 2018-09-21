@@ -9,7 +9,7 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     private Funcionario funcionario;
 
     public Professor() {
