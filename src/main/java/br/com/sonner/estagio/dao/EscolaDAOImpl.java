@@ -145,7 +145,12 @@ public class EscolaDAOImpl implements EscolaDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
-            Query query = this.session.createQuery("select e from Escola as e inner join Endereco on e.endereco=Endereco");
+            Query query = this.session.createQuery("select e from Escola as e " +
+                    "inner join e.endereco as endereco " +
+                    "inner join endereco.bairro as bairro " +
+                    "inner join bairro.cidade as cidade " +
+                    "where cidade.estado = :estado");
+            query.setParameter("estado", estado);
             List<Escola> escolas = query.list();
             this.session.getTransaction().commit();
 
@@ -165,9 +170,9 @@ public class EscolaDAOImpl implements EscolaDAO {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             Query query = this.session.createQuery("select e from Escola as e " +
-                    "inner join Endereco on e.endereco=Endereco " +
-                    "inner join Bairro on Endereco .bairro = Bairro " +
-                    "inner join Cidade on Bairro .cidade= :cidade");
+                    "inner join  e.endereco as endereco " +
+                    "inner join endereco .bairro as bairro " +
+                    "where bairro.cidade = :cidade");
             query.setParameter("cidade", cidade);
             List<Escola> escolas = query.list();
             this.session.getTransaction().commit();
@@ -187,8 +192,8 @@ public class EscolaDAOImpl implements EscolaDAO {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             Query query = this.session.createQuery("select e from Escola as e " +
-                    "inner join Endereco on e.endereco=Endereco " +
-                    "inner join Bairro on Endereco .bairro = :bairro");
+                    "inner join  e.endereco as endereco " +
+                    "where endereco .bairro = :bairro");
             query.setParameter("bairro", bairro);
             List<Escola> escolas = query.list();
             this.session.getTransaction().commit();

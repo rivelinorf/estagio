@@ -2,7 +2,10 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.EscolaController;
 import br.com.sonner.estagio.dao.EscolaDAOImpl;
+import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Escola;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EscolaFiltroVO;
 
@@ -71,5 +74,20 @@ public class EscolaControllerImpl implements EscolaController {
     @Override
     public List<Escola> filtrarLike(EscolaFiltroVO vo) {
         return this.escolaDAO.pesquisaEscolaLike(vo);
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaPorEstado(Estado estado) {
+        return this.escolaDAO.pesquisaEscolaPorEstado(estado);
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaPorCidade(Cidade cidade) {
+        return this.escolaDAO.pesquisaEscolaPorCidade(cidade);
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaPorBairro(Bairro bairro) {
+        return this.escolaDAO.pesquisaEscolaPorBairro(bairro);
     }
 }

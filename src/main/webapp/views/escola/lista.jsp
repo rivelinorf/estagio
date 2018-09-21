@@ -1,4 +1,5 @@
 <%@ page import="br.com.sonner.estagio.vos.EscolaFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Estado" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,6 +13,8 @@
         vo.setNome("");
         vo.setEndereco(null);
     }
+
+
 %>
 <jsp:useBean id="estados"
              class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
@@ -39,8 +42,64 @@
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
 
+
+            <div class="msg danger"></div>
+
+            <div class="form-row">
+                <div>Estado:</div>
+                <select name="estado" class="form-control"
+                        style="background-color: rgb(46, 46, 46)" style="width: 460px;">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${estados.all}" var="estado">
+                        <c:choose>
+                            <c:when test="${estado.id == filtroCidade.estado}">
+                                <option value="${estado.id}" selected>${estado.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${estado.id}">${estado.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div>Cidade:</div>
+                <select name="cidadeID" class="form-control"
+                        style="background-color: rgb(46, 46, 46)">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${cidades.all}" var="cidade">
+                        <c:choose>
+                            <c:when test="${cidade.id == filtroBairro.cidade}">
+                                <option value="${cidade.id}" selected>${cidade.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${cidade.id}">${cidade.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div>Bairro:</div>
+                <select name="bairro" class="form-control"
+                        style="background-color: rgb(46, 46, 46)">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${bairros.all}" var="bairro">
+                        <c:choose>
+                            <c:when test="${bairro.id == filtroEndereco.bairro}">
+                                <option value="${bairro.id}" selected>${bairro.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${bairro.id}">${bairro.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+
         </form>
-        <div class="msg danger"></div>
     </div>
     <div class="content">
         <table class="table">

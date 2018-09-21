@@ -129,4 +129,18 @@ select tipoLogradouro.nome as tipoLogradouro, logradouro.nome as logradouro, cid
         inner join cidade on logradouro.logradouro_cidade_fk=cidade.id 
         inner join estado on cidade.cidade_estado_fk=estado.id;
 select bairro.nome as bairro, cidade.nome as cidade from bairro inner join cidade on bairro.bairro_cidade_fk=cidade.id;
+select tipoLogradouro.nome as tipo, logradouro.nome, endereco.numero, endereco.cep, bairro.nome as bairro, cidade.nome as cidade, estado.nome as estado from endereco
+        inner join logradouro on logradouro.id=endereco.endereco_logradouro_fk
+        inner join tipoLogradouro on logradouro.logradouro_tipo_fk=tipoLogradouro.id 
+        inner join bairro on bairro.id=endereco.endereco_bairro_fk
+        inner join cidade on logradouro.logradouro_cidade_fk=cidade.id 
+        inner join estado on cidade.cidade_estado_fk=estado.id;
+        
+select * from Escola 
+        inner join Endereco on Escola.endereco_id=Endereco.id
+        inner join Bairro on Endereco.bairro_id=Bairro.id
+        inner join Cidade on Bairro.cidade_id=Cidade.id
+        where Cidade.estado_id = 1;
+;
 
+select * from Escola as e inner join Endereco as end;

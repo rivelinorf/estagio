@@ -43,24 +43,30 @@ public class Pesquisa extends HttpServlet {
         if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
             estado = estadoController.getOne(Long.valueOf(request.getParameter("estado")));
             session.setAttribute("listaCidade", estado.getCidades());
+            session.setAttribute("estado", estado);
+            session.setAttribute("listaEscola",escolaController.pesquisaEscolaPorEstado(estado));
 
         }
         if (request.getParameter("cidade") != "" && request.getParameter("cidade") != null) {
             cidade = cidadeController.getOne(Long.valueOf(request.getParameter("cidade")));
             session.setAttribute("listaBairro", cidade.getBairros());
+            session.setAttribute("cidade", cidade);
+            session.setAttribute("listaEscola",escolaController.pesquisaEscolaPorCidade(cidade));
 
         }
         if (request.getParameter("bairro") != "" && request.getParameter("bairro") != null) {
             bairro = bairroController.getOne(Long.valueOf(request.getParameter("bairro")));
             endereco.setBairro(bairro);
-            escolaFiltroVO.setEndereco(endereco.getId());
+            session.setAttribute("bairro", bairro);
+            session.setAttribute("listaEscola",escolaController.pesquisaEscolaPorCidade(cidade));
         }
 
 
 
-        if (escolaFiltroVO.getNome() == null) {
+        if (escolaFiltroVO.getNome() == null && estado.getId() == null && cidade.getId() == null && bairro.getId() == null) {
             session.setAttribute("filtroEscola", null);
             session.setAttribute("listaEscola", null);
+            session.setAttribute("estado", null);
         } else {
             session.setAttribute("filtroEscola", escolaFiltroVO);
             session.setAttribute("listaEscola", escolaController.filtrarLike(escolaFiltroVO));

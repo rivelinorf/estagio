@@ -195,11 +195,11 @@
 
     <div>Cidade:</div>
     <select name="cidade" class="form-control"
-            style="width: 20.35%;"> <c:forEach items="${listaCidade_insereEndereco}" var="cidade">
+            style="width: 20.35%;">
 
 
-        <option value="${cidade.id}">${cidade.nome}</option>
-    </c:forEach>
+            <option value="${cidade.id}">${cidade.nome}</option>
+
     </select>
 </div>
 
