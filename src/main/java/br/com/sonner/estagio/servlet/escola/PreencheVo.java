@@ -84,6 +84,12 @@ public class PreencheVo extends HttpServlet {
             session.setAttribute("escolaParaEditar", escolaFiltroVO);
             session.setAttribute("estado", estado);
             session.setAttribute("cidade", cidade);
+            if (!cidade.getCep().equals(endereco.getCep())) {
+                session.setAttribute("validaCep", 1);
+            }
+            else{
+                session.setAttribute("validaCep", 2);
+            }
 
             response.sendRedirect("/views/escola/atualiza.jsp");
         } else {
@@ -94,9 +100,10 @@ public class PreencheVo extends HttpServlet {
             session.setAttribute("filtroBairro_insereEndereco", null);
             session.setAttribute("listaBairro_insereEndereco", null);
             session.setAttribute("enderecoParaInserir", null);
-            session.setAttribute("escolaParaInserir",  null);
+            session.setAttribute("escolaParaInserir", null);
             session.setAttribute("estado", null);
             session.setAttribute("cidade", null);
+            session.setAttribute("validaCep", 0);
 
             response.sendRedirect("/views/escola/insere.jsp");
 

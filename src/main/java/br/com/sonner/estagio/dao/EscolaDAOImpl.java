@@ -2,11 +2,15 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.EscolaDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringEscola;
+import br.com.sonner.estagio.model.Bairro;
+import br.com.sonner.estagio.model.Cidade;
 import br.com.sonner.estagio.model.Escola;
+import br.com.sonner.estagio.model.Estado;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.EscolaFiltroVO;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -44,7 +48,8 @@ public class EscolaDAOImpl implements EscolaDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
-            List<Escola> escolas = this.session.createQuery("select e from Escola as e").list();
+            Query query = this.session.createQuery("select e from Escola as e");
+            List<Escola> escolas = query.list();
             this.session.getTransaction().commit();
 
             return escolas;
@@ -125,6 +130,68 @@ public class EscolaDAOImpl implements EscolaDAO {
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             List<Escola> escolas = this.session.createQuery(queryString.getSql()).list();
+
+            return escolas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaPorEstado(Estado estado) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            Query query = this.session.createQuery("select e from Escola as e inner join Endereco on e.endereco=Endereco");
+            List<Escola> escolas = query.list();
+            this.session.getTransaction().commit();
+
+            return escolas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+
+    @Override
+    public List<Escola> pesquisaEscolaPorCidade(Cidade cidade) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            Query query = this.session.createQuery("select e from Escola as e " +
+                    "inner join Endereco on e.endereco=Endereco " +
+                    "inner join Bairro on Endereco .bairro = Bairro " +
+                    "inner join Cidade on Bairro .cidade= :cidade");
+            query.setParameter("cidade", cidade);
+            List<Escola> escolas = query.list();
+            this.session.getTransaction().commit();
+
+            return escolas;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Escola> pesquisaEscolaPorBairro(Bairro bairro) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            Query query = this.session.createQuery("select e from Escola as e " +
+                    "inner join Endereco on e.endereco=Endereco " +
+                    "inner join Bairro on Endereco .bairro = :bairro");
+            query.setParameter("bairro", bairro);
+            List<Escola> escolas = query.list();
+            this.session.getTransaction().commit();
 
             return escolas;
         } catch (Exception e) {

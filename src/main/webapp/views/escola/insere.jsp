@@ -41,32 +41,34 @@
                 formId="insere-form" actionFechar="true">
     </sge:header>
 
-    <div class="div-form">
-        <form action="/insere-escola" method="get" id="filter-form"
-              style="width: 100%;">
 
+        <form name="form1" action="/insere-escola" method="get" id="filter-form"
+              style="width: 80%; margin: auto">
             <div class="form-row">
+
             <div>CEP:</div>
             <input type="text" name="cep" placeholder="Ex.: 00.000-000"
                    class="form-control" value="<%=campoEndereco.getCep()%>"
-                   maxlength="10" style="width: 20.35%;">
-
+                   maxlength="10" style="width: 20.35%;" onKeyPress="MascaraCep(form1.cep);" maxlength="10" >
+                <button class="btn-buscar" type="submit" form="filter-form" value="Submit"><i class="fas fa-search" ></i></button>
+            </div>
 
         </form>
-        <button class="main-btn btn-editar" type="submit" form="filter-form" value="Submit"><i class="fas fa-search"></i></button>
-    </div>
+
+
 
         <form action="/insere-escola" method="post" id="insere-form"
-              style="width: 60%; margin: auto">
+              style="width: 80%; margin: auto">
             <jsp:include page="/includes/enderecoComponente.jsp"></jsp:include>
             <div class="form-row">
+                <input type="hidden" value="<%=campoEndereco.getCep()%>" name="cepSession">
 
                 <div>Nome:</div>
                 <input type="text" value="<%= campoEscola.getNome() %>" name="nome" class="form-control" maxlength="50"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
         </form>
-    </div>
+
 </div>
 </body>
 </html>

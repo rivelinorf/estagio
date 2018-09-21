@@ -93,7 +93,6 @@ public class Insere extends HttpServlet {
                     bairrovo.setNome(bairro.getNome());
                     bairrovo.setCidade(bairro.getCidade().getId());
 
-
                     session.setAttribute("filtroCidade_insereEndereco", cidadevo);
                     session.setAttribute("listaCidade_insereEndereco", cidadeController.filtrar(cidadevo));
                     session.setAttribute("filtroLogradouro_insereEndereco", logradourovo);
@@ -102,6 +101,7 @@ public class Insere extends HttpServlet {
                     session.setAttribute("enderecoParaInserir", enderecovo);
                     session.setAttribute("estado", estado);
                     session.setAttribute("cidade", cidade);
+                    session.setAttribute("validaCep", 1);
 
                 } else if (enderecos.size() >= 1 & cidade.getCep().equals(endereco.getCep())) {
                     bairrovo.setCidade(cidade.getId());
@@ -120,6 +120,7 @@ public class Insere extends HttpServlet {
                     session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
                     session.setAttribute("cidade", cidade);
                     session.setAttribute("estado", estado);
+                    session.setAttribute("validaCep", 2);
 
 
                 }
@@ -127,7 +128,6 @@ public class Insere extends HttpServlet {
                 String existe = "CEP não encontrado!";
 
                 session.setAttribute("errors", existe);
-
 
                 session.setAttribute("enderecoParaInserir", enderecovo);
                 session.setAttribute("filtroLogradouro_insereEndereco", null);
@@ -137,7 +137,7 @@ public class Insere extends HttpServlet {
                 session.setAttribute("listaBairro_insereEndereco", null);
                 session.setAttribute("cidade", null);
                 session.setAttribute("estado", null);
-
+                session.setAttribute("validaCep", 3);
 
             }
         }

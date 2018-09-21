@@ -85,53 +85,166 @@
         logradourovo.setTipologradouro(null);
     }
 
+    Integer validaCep = (Integer) session.getAttribute("validaCep");
+    if (validaCep == null) {
+        validaCep = 0;
+    }
+
+
 %>
 
 
 <script type="text/javascript" src="/assets/js/MascaraValidacao.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 <%
-    if ( cidadevo.getId() != null) {
+    if (validaCep == 0) {
 %>
 <div class="form-row">
     <div>Estado:</div>
-    <select name="estado" class="form-control"
+    <select name="estado" class="form-control" style="width: 20.35%;">
 
+        <option value=""></option>
+
+    </select>
+
+    <div>Cidade:</div>
+    <select name="cidade" class="form-control"
             style="width: 20.35%;">
-        <option value="">Selecione uma opção...</option>
+
+        <option value=""></option>
+
+    </select>
+</div>
+
+
+<div class="form-row">
+    <div>Bairro:</div>
+    <select name="bairro" class="form-control"
+            style="width: 20.35%;">
+        <option value=""></option>
+
+    </select>
+
+    <div>Tipo de Logradouro:</div>
+    <select name="tipologradouro" class="form-control" style="width: 20.35%;">
+        <option value=""></option>
+
+    </select>
+</div>
+
+<%
+    }
+
+    if (validaCep == 1) {
+%>
+<div class="form-row">
+    <div>Estado:</div>
+    <select name="estado" class="form-control" style="width: 20.35%;">
         <c:forEach items="${estados.all}" var="estado">
-            <c:choose>
-                <c:when test="${estado.id == filtroCidade_insereEndereco.estado}">
-                    <option value="${estado.id}" selected>${estado.nome}</option>
-                </c:when>
-                <c:otherwise>
-                    <option value="${estado.id}">${estado.nome}</option>
-                </c:otherwise>
-            </c:choose>
+
+            <option value="${estado.id}">${estado.nome}</option>
         </c:forEach>
     </select>
 
     <div>Cidade:</div>
     <select name="cidade" class="form-control"
-            style="width: 20.35%;"
-            >
-        <option value="">Selecione uma opção...</option>
+            style="width: 20.35%;">
         <c:forEach items="${listaCidade_insereEndereco}" var="cidade">
+
+            <option value="${cidade.id}">${cidade.nome}</option>
+        </c:forEach>
+    </select>
+</div>
+
+
+<div class="form-row">
+    <div>Bairro:</div>
+    <select name="bairro" class="form-control"
+            style="width: 20.35%;">
+
+        <c:forEach items="${listaBairro_insereEndereco}" var="bairro">
+
+            <option value="${bairro.id}">${bairro.nome}</option>
+
+        </c:forEach>
+    </select>
+
+    <div>Tipo de Logradouro:</div>
+    <select name="tipologradouro" class="form-control" style="width: 20.35%;">
+
+        <c:forEach items="${tipologradouros.all}" var="tipologradouro">
+
+            <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
+
+        </c:forEach>
+    </select>
+</div>
+<%
+    }
+
+    if (validaCep == 2) {
+%>
+<div class="form-row">
+    <div>Estado:</div>
+    <select name="estado" class="form-control" style="width: 20.35%;">
+        <c:forEach items="${estados.all}" var="estado">
+
+            <option value="${estado.id}">${estado.nome}</option>
+        </c:forEach>
+    </select>
+
+    <div>Cidade:</div>
+    <select name="cidade" class="form-control"
+            style="width: 20.35%;"> <c:forEach items="${listaCidade_insereEndereco}" var="cidade">
+
+
+        <option value="${cidade.id}">${cidade.nome}</option>
+    </c:forEach>
+    </select>
+</div>
+
+
+<div class="form-row">
+    <div>Bairro:</div>
+    <select name="bairro" class="form-control"
+            style="width: 20.35%;">
+        <option value="">Selecione uma opção...</option>
+        <c:forEach items="${listaBairro_insereEndereco}" var="bairro">
             <c:choose>
-                <c:when test="${cidade.id == filtroBairro_insereEndereco.cidade}">
-                    <option value="${cidade.id}" selected>${cidade.nome}</option>
+                <c:when test="${bairro.id == filtroBairro_insereEndereco.id}">
+                    <option value="${bairro.id}" selected>${bairro.nome}</option>
                 </c:when>
                 <c:otherwise>
-                    <option value="${cidade.id}">${cidade.nome}</option>
+                    <option value="${bairro.id}">${bairro.nome}</option>
                 </c:otherwise>
-            </c:choose>>
+            </c:choose>
+        </c:forEach>
+    </select>
 
+    <div>Tipo de Logradouro:</div>
+    <select name="tipologradouro" class="form-control" style="width: 20.35%;">
+        <option value="">Selecione uma opção...</option>
+        <c:forEach items="${tipologradouros.all}" var="tipologradouro">
+            <c:choose>
+                <c:when
+                        test="${tipologradouro.id == filtroLogradouro_insereEndereco.tipologradouro}">
+                    <option value="${tipologradouro.id}" selected>${tipologradouro.nome}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="${tipologradouro.id}">${tipologradouro.nome}</option>
+                </c:otherwise>
+            </c:choose>
         </c:forEach>
     </select>
 </div>
 
 <%
-} else {%>
+    }
+
+%>
+<%
+    if (validaCep == 3) {
+%>
 <div class="form-row">
     <div>Estado:</div>
     <select name="estado" class="form-control"
@@ -168,7 +281,7 @@
         </c:forEach>
     </select>
 </div>
-<%}%>
+
 
 <div class="form-row">
     <div>Bairro:</div>
@@ -203,6 +316,10 @@
         </c:forEach>
     </select>
 </div>
+
+<%
+    }
+%>
 
 <div class="form-row">
     <div>Logradouro:</div>

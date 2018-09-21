@@ -41,24 +41,25 @@
     </sge:header>
 
 
-    <form name="form1" action="/atualiza-escola" method="get" id="filter-form" style="width: 100%;">
-
+    <form name="form1" action="/atualiza-escola" method="get" id="filter-form"
+          style="width: 80%; margin: auto">
         <div class="form-row">
+
             <div>CEP:</div>
-            <input type="text" name="cep" class="form-control"
-                   value="<%=campoEndereco.getCep()%>" onKeyPress="MascaraCep(form1.cep);"
-                   maxlength="10" onKeyPress="mascaraInteiro()" placeholder="Ex.: 00.000-000" style="width: 150px;">
-            <button class="main-btn btn-editar" type="submit" form="filter-form" value="Submit">Buscar</button>
+            <input type="text" name="cep" placeholder="Ex.: 00.000-000"
+                   class="form-control" value="<%=campoEndereco.getCep()%>"
+                   maxlength="10" style="width: 20.35%;" onKeyPress="MascaraCep(form1.cep);" maxlength="10">
+            <button class="btn-buscar" type="submit" form="filter-form" value="Submit"><i class="fas fa-search" ></i></button>
         </div>
+
     </form>
 
 
-
-    <form action="/atualiza-escola" method="post" id="insere-form">
+    <form action="/atualiza-escola" method="post" id="insere-form"
+          style="width: 80%; margin: auto">
         <jsp:include page="/includes/enderecoComponente.jsp"></jsp:include>
-        <input type="hidden" value="<%=campoEndereco.getCep()%>" name="cepSession">
-        <input type="hidden" value="<%=campoEscola.getId()%>" name="id">
         <div class="form-row">
+            <input type="hidden" value="<%=campoEndereco.getCep()%>" name="cepSession">
 
             <div>Nome:</div>
             <input type="text" value="<%= campoEscola.getNome() %>" name="nome" class="form-control" maxlength="50"

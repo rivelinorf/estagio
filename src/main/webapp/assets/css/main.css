@@ -109,6 +109,24 @@ nav {
     background-color: green;
 }
 
+.btn-buscar {
+    /*display: block;*/
+    /*width: 100%;*/
+    padding: 11px;
+    margin-top: auto;
+    margin-left: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: blue;
+    border-style: none;
+    color: white;
+    transition: background-color 0.5s;
+}
+
+.btn-buscar:hover {
+    background-color: green;
+}
+
 .btn-menu {
     width: 100%;
     padding: 10px;

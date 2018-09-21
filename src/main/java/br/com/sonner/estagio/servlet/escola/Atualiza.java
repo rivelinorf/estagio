@@ -101,6 +101,7 @@ public class Atualiza extends HttpServlet {
                     session.setAttribute("enderecoParaInserir", enderecovo);
                     session.setAttribute("estado", estado);
                     session.setAttribute("cidade", cidade);
+                    session.setAttribute("validaCep", 1);
 
                 } else if (enderecos.size() >= 1 & cidade.getCep().equals(endereco.getCep())) {
                     bairrovo.setCidade(cidade.getId());
@@ -119,6 +120,7 @@ public class Atualiza extends HttpServlet {
                     session.setAttribute("listaBairro_insereEndereco", bairroController.filtrar(bairrovo));
                     session.setAttribute("cidade", cidade);
                     session.setAttribute("estado", estado);
+                    session.setAttribute("validaCep", 2);
 
 
                 }
@@ -136,6 +138,7 @@ public class Atualiza extends HttpServlet {
                 session.setAttribute("listaBairro_insereEndereco", null);
                 session.setAttribute("cidade", null);
                 session.setAttribute("estado", null);
+                session.setAttribute("validaCep", 3);
 
 
             }
