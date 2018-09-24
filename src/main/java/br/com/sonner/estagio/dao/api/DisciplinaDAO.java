@@ -10,10 +10,10 @@ public interface DisciplinaDAO {
 
     List<Disciplina> getAll();
 
-    Disciplina getOne(long id);
+    Disciplina getOne(Long id);
 
     void update(Disciplina disciplina);
 
-    void delete(long id) throws CustomException;
+    void delete(Long id) throws CustomException;
 
 }

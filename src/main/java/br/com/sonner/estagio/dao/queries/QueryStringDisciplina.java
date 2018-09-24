@@ -20,6 +20,13 @@ public class QueryStringDisciplina {
             }
             return this;
         }
+        public QueryStringDisciplina.Builder escola(Long escola) {
+            if (escola != null) {
+                this.sql += "and d.escola.id = '" + escola + "' ";
+            }
+
+            return this;
+        }
 
         public QueryStringDisciplina.Builder disciplinaLike(String nome) {
             if (nome != "") {

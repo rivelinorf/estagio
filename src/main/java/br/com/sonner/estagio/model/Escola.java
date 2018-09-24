@@ -24,6 +24,9 @@ public class Escola {
     @OneToMany(mappedBy = "escola")
     private List<Turma> turmas;
 
+    @OneToMany(mappedBy = "escola")
+    private List<Disciplina> disciplinas;
+
     public Escola(){
 
     }
@@ -67,4 +70,12 @@ public class Escola {
     public List<Turma> getTurmas() { return turmas; }
 
     public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
+
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
+    public void setDisciplinas(List<Disciplina> disciplinas) {
+        this.disciplinas = disciplinas;
+    }
 }

@@ -1,6 +1,5 @@
 package br.com.sonner.estagio.controller;
 
-
 import br.com.sonner.estagio.controller.api.DisciplinaController;
 import br.com.sonner.estagio.dao.DisciplinaDAOImpl;
 import br.com.sonner.estagio.model.Disciplina;
@@ -49,24 +48,28 @@ public class DisciplinaControllerImpl implements DisciplinaController {
     public List<String> validation(Disciplina disciplina) {
         List<String> erros = new ArrayList<>();
 
-        if (disciplina.getNome().length() == 0) {
-            erros.add("Nao é possível inserir uma disciplina  sem nome ");
+        if (disciplina.getNome() == null || disciplina.getNome().isEmpty()) {
+            erros.add("O nome da disciplina não pode ser vazio");
         }
 
-        if (disciplina.getNome().length() > 20) {
-            erros.add("A disciplina  não pode exceder 20 caracteres ");
+
+        if (disciplina.getNome().length() > 50) {
+            erros.add("O nome da disciplina não pode exceder 50 caracteres  ");
         }
 
+
+        if (disciplina.getEscola() == null) {
+            erros.add("Impossível ter uma disciplina sem uma escola selecionada");
+        }
         return erros;
     }
 
     public List<Disciplina> filtrar(DisciplinaFiltroVO vo) {
-        return this.disciplinaDAO.pesquisaDisciplina((vo.getNome()));
-
-
+        return this.disciplinaDAO.pesquisaDisciplina(vo);
     }
 
-    public Object filtrarLike(DisciplinaFiltroVO vo) {
-        return this.disciplinaDAO.pesquisaTipoLogradouroLike(vo);
+    public List<Disciplina> filtrarLike(DisciplinaFiltroVO vo) {
+        return this.disciplinaDAO.pesquisaDisciplinaLike(vo);
+
     }
 }

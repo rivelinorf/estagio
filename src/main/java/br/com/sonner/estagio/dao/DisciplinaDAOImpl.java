@@ -25,10 +25,13 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
         return DISCIPLINA_DAO;
     }
 
+
     @Override
     public void save(Disciplina disciplina) {
         try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
+            if (!this.session.isOpen()) {
+                this.session = HibernateUtil.getSessionFactory().openSession();
+            }
             this.session.beginTransaction();
             this.session.save(disciplina);
             this.session.getTransaction().commit();
@@ -41,26 +44,14 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
 
     @Override
     public List<Disciplina> getAll() {
+
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
-            List<Disciplina> disciplinas = this.session.createQuery("select d from Disciplina as d").list();
+            List<Disciplina> disciplinas = this.session.createQuery("select t from Disciplina as t").list();
             this.session.getTransaction().commit();
 
             return disciplinas;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            this.session.close();
-        }
-    }
-
-    @Override
-    public Disciplina getOne(long id) {
-        try {
-            this.session = HibernateUtil.getSessionFactory().openSession();
-            return this.session.find(Disciplina.class, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -84,7 +75,7 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
     }
 
     @Override
-    public void delete(long id) throws CustomException {
+    public void delete(Long id) throws CustomException {
         Disciplina disciplina = getOne(id);
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
@@ -92,15 +83,29 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
             this.session.remove(disciplina);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            throw new CustomException("Impossível deletar! disciplina  possui relacionamentos");
+            throw new CustomException("Impossível deletar! disciplina possui relacionamentos");
         } finally {
             this.session.close();
         }
     }
 
-    public List<Disciplina> pesquisaDisciplina(String nome) {
+    @Override
+    public Disciplina getOne(Long id) {
         try {
-            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplina(nome).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.find(Disciplina.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Disciplina> pesquisaDisciplinaLike(DisciplinaFiltroVO vo) {
+        try {
+            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplinaLike(vo.getNome()).escola(vo.getEscola())
+                    .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
@@ -111,9 +116,11 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
         }
     }
 
-    public Object pesquisaTipoLogradouroLike(DisciplinaFiltroVO vo) {
+    public List<Disciplina> pesquisaDisciplina(DisciplinaFiltroVO vo) {
         try {
-            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplinaLike(vo.getNome()).build();
+            QueryStringDisciplina queryString = new QueryStringDisciplina.Builder().disciplina(vo.getNome())
+                    .escola(vo.getEscola())
+                    .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
@@ -122,5 +129,7 @@ public class DisciplinaDAOImpl implements DisciplinaDAO {
         } finally {
             this.session.close();
         }
+
+
     }
 }

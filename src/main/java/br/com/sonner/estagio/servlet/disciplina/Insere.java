@@ -1,6 +1,8 @@
 package br.com.sonner.estagio.servlet.disciplina;
 
+import br.com.sonner.estagio.controller.EscolaControllerImpl;
 import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
+import br.com.sonner.estagio.model.Escola;
 import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
 
@@ -15,53 +17,61 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/insere-disciplina")
-public class Insere  extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Disciplina aux = new Disciplina();
+public class Insere extends HttpServlet {
+    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         DisciplinaControllerImpl disciplinaController = new DisciplinaControllerImpl();
-        HttpSession session = request.getSession();
-        DisciplinaFiltroVO vo = new DisciplinaFiltroVO();
-        aux.setNome("");
 
-        if (request.getParameter("nome") != "" && request.getParameter("nome") != null) {
-            aux.setNome(request.getParameter("nome"));
+        EscolaControllerImpl escolaController = new EscolaControllerImpl();
+
+        DisciplinaFiltroVO vo = new DisciplinaFiltroVO();
+
+        HttpSession session = req.getSession();
+
+        Escola escola = null;
+        String disciplina = req.getParameter("disciplina");
+
+        if (req.getParameter("escola") != null && !req.getParameter("escola").isEmpty() && !req.getParameter("escola").equals("-1")) {
+            escola = escolaController.getOne(Long.valueOf(req.getParameter("escola")));
         }
 
-        List<String> erros = disciplinaController.validation(aux);
+        Disciplina novadisciplina = new Disciplina();
+        novadisciplina.setNome(disciplina);
+        novadisciplina.setEscola(escola);
 
-        session.setAttribute("filtroDisciplina", null);
+        List<String> erros = disciplinaController.validation(novadisciplina);
+
 
         if (erros.size() == 0) {
-
-            vo.setNome("");
-            vo.setNome(aux.getNome());
+            vo.setEscola(novadisciplina.getEscola().getId());
+            vo.setNome(novadisciplina.getNome());
 
             List<Disciplina> verifica = disciplinaController.filtrar(vo);
 
             if (verifica.size() == 0) {
-                //if (true) {
-                disciplinaController.save(aux);
+
+
+                disciplinaController.save(novadisciplina);
                 vo.setNome("");
+                vo.setEscola(null);
 
                 session.setAttribute("listaDisciplina", (disciplinaController.filtrar(vo)));
-                session.setAttribute("success", "Disciplina  inserida com sucesso");
-                session.setAttribute("filtroDisciplina", null);
+                session.setAttribute("success", "Disciplina inserida com sucesso");
 
-                response.sendRedirect("/views/disciplina/lista.jsp");
+                res.sendRedirect("/views/disciplina/lista.jsp");
             } else {
-                String existe = "Disciplina já cadastrado!";
+                String existe = "Disciplina já cadastrada!";
 
                 session.setAttribute("errors", existe);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/disciplina/insere.jsp");
-                requestDispatcher.forward(request, response);
-
+                session.setAttribute("campoDisciplina", novadisciplina);
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/disciplina/insere.jsp");
+                requestDispatcher.forward(req, res);
             }
         } else {
             session.setAttribute("errors", erros);
-            session.setAttribute("campoDisciplina", aux);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/disciplina/insere.jsp");
-            requestDispatcher.forward(request, response);
+            session.setAttribute("campoDisciplina", novadisciplina);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/disciplina/insere.jsp");
+            requestDispatcher.forward(req, res);
+
         }
 
     }

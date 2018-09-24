@@ -3,6 +3,7 @@ package br.com.sonner.estagio.vos;
 public class DisciplinaFiltroVO {
     private Long id;
     private String nome;
+    private Long escola;
 
     public Long getId() {
         return id;
@@ -18,5 +19,13 @@ public class DisciplinaFiltroVO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Long getEscola() {
+        return escola;
+    }
+
+    public void setEscola(Long escola) {
+        this.escola = escola;
     }
 }
