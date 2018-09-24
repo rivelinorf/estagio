@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,19 +16,19 @@ public class Escola {
     private Endereco endereco;
 
     @OneToMany(mappedBy = "escola")
-    private List<Sala> salas;
+    private List<Sala> salas = new ArrayList<>();
 
     @OneToMany(mappedBy = "escola")
-    private List<Funcionario> funcionarios;
+    private List<Funcionario> funcionarios = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "escola")
-    private List<Turma> turmas;
+    private List<Turma> turmas = new ArrayList<>();
 
     @OneToMany(mappedBy = "escola")
-    private List<Disciplina> disciplinas;
+    private List<Disciplina> disciplinas = new ArrayList<>();
 
-    public Escola(){
+    public Escola() {
 
     }
 
@@ -63,13 +64,21 @@ public class Escola {
         this.salas = salas;
     }
 
-    public List<Funcionario> getFuncionarios() { return funcionarios; }
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
 
-    public void setFuncionarios(List<Funcionario> funcionarios) { this.funcionarios = funcionarios; }
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
 
-    public List<Turma> getTurmas() { return turmas; }
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
 
-    public void setTurmas(List<Turma> turmas) { this.turmas = turmas; }
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
 
     public List<Disciplina> getDisciplinas() {
         return disciplinas;

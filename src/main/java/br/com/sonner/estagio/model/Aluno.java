@@ -10,13 +10,13 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "aluno")
     private Matricula matricula;
 
     @OneToMany(mappedBy = "aluno")
     private List<Nota> notas;
 
-    @ManyToOne
+    @OneToOne
     private Pessoa pessoa;
 
     public Aluno() {

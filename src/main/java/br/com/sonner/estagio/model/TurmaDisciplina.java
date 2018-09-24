@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,13 +11,13 @@ public class TurmaDisciplina {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Disciplina disciplina;
+    @OneToMany(mappedBy = "turmasDiscplina")
+    private List<Disciplina> disciplina = new ArrayList<>();
 
-    @ManyToOne
-    private Turma turma;
+    @OneToMany(mappedBy = "turmasDiscplina")
+    private List<Turma> turmas = new ArrayList<>();
 
-    @OneToMany (mappedBy = "turmaDisciplina")
+    @OneToMany(mappedBy = "turmaDisciplina")
     private List<Nota> notas;
 
     public TurmaDisciplina() {
@@ -30,21 +31,6 @@ public class TurmaDisciplina {
         this.id = id;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
 
     public List<Nota> getNotas() {
         return notas;
@@ -52,5 +38,21 @@ public class TurmaDisciplina {
 
     public void setNotas(List<Nota> notas) {
         this.notas = notas;
+    }
+
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
+    public List<Disciplina> getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(List<Disciplina> disciplina) {
+        this.disciplina = disciplina;
     }
 }

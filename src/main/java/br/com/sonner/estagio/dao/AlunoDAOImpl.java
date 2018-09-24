@@ -1,7 +1,11 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.AlunoDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringAluno;
+import br.com.sonner.estagio.dao.queries.QueryStringFuncionario;
 import br.com.sonner.estagio.model.Aluno;
+import br.com.sonner.estagio.model.Funcionario;
+import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import org.hibernate.Session;
@@ -89,6 +93,35 @@ public class AlunoDAOImpl implements AlunoDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Aluno.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Aluno> pesquisaAluno(Pessoa pessoa) {
+        try {
+            QueryStringAluno queryString = new QueryStringAluno.Builder().nome(pessoa.getNome()).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+
+    @Override
+    public List<Aluno> pesquisaAlunoLike(Pessoa pessoa) {
+        try {
+            QueryStringAluno queryString = new QueryStringAluno.Builder().nomeLike(pessoa.getNome()).build();
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -1,18 +1,10 @@
-<%@ page import="br.com.sonner.estagio.vos.AlunoFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="alunoController"
              class="br.com.sonner.estagio.controller.AlunoControllerImpl"></jsp:useBean>
-<%
-    AlunoFiltroVO vo = (AlunoFiltroVO) session.getAttribute("filtroAluno");
-    if (vo == null) {
-        vo = new AlunoFiltroVO();
-        vo.setPessoa(null);
 
-    }
-%>
 
 <html>
 <head>
@@ -38,18 +30,19 @@
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
 
+
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="aluno" class="form-control"
                        style="background-color: rgb(46, 46, 46)" value=""
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
-
             <div class="form-row">
                 <div>Sexo:</div>
-                <input type="text" name="sexo" class="form-control"
-                       style="background-color: rgb(46, 46, 46)" value=""
-                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
+                <select name="sexo" class="form-control">
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                </select>
             </div>
 
 
@@ -99,7 +92,7 @@
                     <div style="text-align: right">
                         <button type="button" class="main-btn btn-black" id="deletar"
                                 data-dismiss="modal"
-                                onclick="location.href = '/estado-deleta?id='+this.value">Sim
+                                onclick="location.href = '/aluno-deleta?id='+this.value">Sim
                         </button>
                         <button type="button" class="main-btn btn-red"
                                 data-dismiss="modal">Não

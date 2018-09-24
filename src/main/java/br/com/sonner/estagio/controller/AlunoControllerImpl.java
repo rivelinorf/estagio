@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.AlunoController;
 import br.com.sonner.estagio.dao.AlunoDAOImpl;
 import br.com.sonner.estagio.model.Aluno;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.AlunoFiltroVO;
 
 import java.util.List;
 
@@ -38,5 +39,14 @@ public class AlunoControllerImpl implements AlunoController {
     @Override
     public void delete(long id) throws CustomException {
         this.alunoDAO.delete(id);
+    }
+
+    public List<Aluno> filtrar(AlunoFiltroVO alunosPesquisados) {
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados.getPessoa());
+
+    }
+
+    public List<Aluno> filtrarLike(AlunoFiltroVO alunosPesquisados) {
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados.getPessoa());
     }
 }

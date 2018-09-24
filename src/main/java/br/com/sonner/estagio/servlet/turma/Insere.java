@@ -29,11 +29,15 @@ public class Insere extends HttpServlet {
         HttpSession session = req.getSession();
 
         Escola escola = null;
-        String turma = req.getParameter("turma");
+        String turma = "";
 
+        if (req.getParameter("turma") != null && !req.getParameter("turma").isEmpty()) {
+            turma = req.getParameter("turma");
+        }
         if (req.getParameter("escola") != null && !req.getParameter("escola").isEmpty() && !req.getParameter("escola").equals("-1")) {
             escola = escolaController.getOne(Long.valueOf(req.getParameter("escola")));
         }
+
 
         Turma novaturma = new Turma();
         novaturma.setNome(turma);

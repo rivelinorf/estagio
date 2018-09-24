@@ -22,8 +22,8 @@ public class Pessoa {
     @ManyToOne
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "pessoa")
-    private List<Aluno> alunos = new ArrayList<>();
+    @OneToOne(mappedBy = "pessoa")
+    private Aluno aluno = new Aluno();
 
     @OneToOne(mappedBy = "pessoa")
     private Funcionario funcionario;
@@ -92,13 +92,6 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
 
     public Funcionario getFuncionario() {
         return funcionario;
@@ -114,6 +107,14 @@ public class Pessoa {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 }
 

@@ -17,5 +17,4 @@ public interface DisciplinaController {
     void delete(long id) throws CustomException;
 
     List<String> validation(Disciplina disciplina);
-
 }

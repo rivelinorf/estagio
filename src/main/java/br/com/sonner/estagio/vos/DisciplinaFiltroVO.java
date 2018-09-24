@@ -4,6 +4,7 @@ public class DisciplinaFiltroVO {
     private Long id;
     private String nome;
     private Long escola;
+    private Long turmaDisciplina;
 
     public Long getId() {
         return id;
@@ -27,5 +28,13 @@ public class DisciplinaFiltroVO {
 
     public void setEscola(Long escola) {
         this.escola = escola;
+    }
+
+    public Long getTurmaDisciplina() {
+        return turmaDisciplina;
+    }
+
+    public void setTurmaDisciplina(Long turmaDisciplina) {
+        this.turmaDisciplina = turmaDisciplina;
     }
 }

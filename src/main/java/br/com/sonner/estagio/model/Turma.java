@@ -17,15 +17,19 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Matricula> matriculas;
 
-    @OneToMany(mappedBy = "turma")
-    private List<TurmaDisciplina> turmasDiscplina;
+    @ManyToOne
+    private TurmaDisciplina turmasDiscplina;
 
     public Turma() {
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -51,11 +55,12 @@ public class Turma {
         this.matriculas = matriculas;
     }
 
-    public List<TurmaDisciplina> getTurmasDiscplina() {
+    public TurmaDisciplina getTurmasDiscplina() {
         return turmasDiscplina;
     }
 
-    public void setTurmasDiscplina(List<TurmaDisciplina> turmasDiscplina) {
+    public void setTurmasDiscplina(TurmaDisciplina turmasDiscplina) {
         this.turmasDiscplina = turmasDiscplina;
     }
 }
+

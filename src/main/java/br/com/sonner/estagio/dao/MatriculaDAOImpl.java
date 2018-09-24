@@ -2,7 +2,6 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.MatriculaDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringMatricula;
-import br.com.sonner.estagio.dao.queries.QueryStringTurma;
 import br.com.sonner.estagio.model.Matricula;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;

@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class TipoLogradouro {
 
 
     @OneToMany(mappedBy = "tipologradouro")
-    private List<Logradouro> logradouros;
+    private List<Logradouro> logradouros = new ArrayList<>();
 
 
     public TipoLogradouro() {

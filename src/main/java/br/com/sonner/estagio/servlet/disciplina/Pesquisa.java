@@ -1,7 +1,10 @@
 package br.com.sonner.estagio.servlet.disciplina;
 
 import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
+import br.com.sonner.estagio.controller.TurmaControllerImpl;
+import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
+import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,7 @@ import java.io.IOException;
 public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
+
         DisciplinaControllerImpl disciplinaController = new DisciplinaControllerImpl();
         DisciplinaFiltroVO vo = new DisciplinaFiltroVO();
 
@@ -27,7 +31,7 @@ public class Pesquisa extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if (vo.getNome() == null && vo.getEscola()==null) {
+        if (vo.getNome() == null && vo.getEscola() == null) {
             session.setAttribute("filtroDisciplina", null);
             session.setAttribute("listaDisciplina", null);
         } else {

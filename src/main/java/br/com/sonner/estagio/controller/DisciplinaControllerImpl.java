@@ -2,19 +2,23 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.DisciplinaController;
 import br.com.sonner.estagio.dao.DisciplinaDAOImpl;
+import br.com.sonner.estagio.dao.api.DisciplinaDAO;
 import br.com.sonner.estagio.model.Disciplina;
+import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
+import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DisciplinaControllerImpl implements DisciplinaController {
-    private DisciplinaDAOImpl disciplinaDAO;
+    private DisciplinaDAO disciplinaDAO;
 
     public DisciplinaControllerImpl() {
         disciplinaDAO = DisciplinaDAOImpl.getInstance();
     }
+
 
     @Override
     public void save(Disciplina disciplina) {
