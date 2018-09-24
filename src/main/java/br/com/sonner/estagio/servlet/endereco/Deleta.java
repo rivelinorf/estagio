@@ -1,6 +1,7 @@
 package br.com.sonner.estagio.servlet.endereco;
 
 import br.com.sonner.estagio.controller.EnderecoControllerImpl;
+import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.EnderecoFiltroVO;
 
 import javax.servlet.annotation.WebServlet;
@@ -16,12 +17,17 @@ public class Deleta extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         EnderecoControllerImpl enderecoController = new EnderecoControllerImpl();
-
         HttpSession session = req.getSession();
         EnderecoFiltroVO voSession = (EnderecoFiltroVO) session.getAttribute("filtroEndereco");
 
-        enderecoController.delete(Long.valueOf(req.getParameter("id")));
-        session.setAttribute("success", "Endereço deletado com sucesso");
+        try {
+
+            enderecoController.delete(Long.valueOf(req.getParameter("id")));
+            session.setAttribute("success", "Endereço deletado com sucesso");
+        } catch (CustomException e) {
+            session.setAttribute("errors", e.getMessage());
+        }
+
 
         if (voSession == null) {
             voSession = new EnderecoFiltroVO();

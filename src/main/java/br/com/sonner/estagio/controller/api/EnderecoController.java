@@ -15,7 +15,7 @@ public interface EnderecoController {
 
     void update(Endereco endereco);
 
-    void delete(long id);
+    void delete(long id) throws CustomException ;
 
     List<Endereco> filtrar(EnderecoFiltroVO enderecosPesquisados);
 

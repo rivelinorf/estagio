@@ -13,7 +13,7 @@ public interface EnderecoDAO {
 
     void update(Endereco endereco);
 
-    void delete(Long id);
+    void delete(Long id) throws CustomException ;
 
     Endereco getOne(Long id);
 

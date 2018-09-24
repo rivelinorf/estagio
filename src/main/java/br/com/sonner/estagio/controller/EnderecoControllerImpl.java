@@ -40,7 +40,7 @@ public class EnderecoControllerImpl implements EnderecoController {
     }
 
     @Override
-    public void delete(long id){
+    public void delete(long id) throws CustomException {
         this.eDAO.delete(id);
 
     }

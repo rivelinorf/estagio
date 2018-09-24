@@ -1,5 +1,7 @@
 <%@ page import="br.com.sonner.estagio.vos.EscolaFiltroVO" %>
 <%@ page import="br.com.sonner.estagio.model.Estado" %>
+<%@ page import="br.com.sonner.estagio.model.Cidade" %>
+<%@ page import="br.com.sonner.estagio.model.Bairro" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,8 +18,16 @@
 
 
 %>
+<jsp:useBean id="bairros"
+             class="br.com.sonner.estagio.controller.BairroControllerImpl"></jsp:useBean>
+<jsp:useBean id="logradouros"
+             class="br.com.sonner.estagio.controller.LogradouroControllerImpl"></jsp:useBean>
+<jsp:useBean id="cidades"
+             class="br.com.sonner.estagio.controller.CidadeControllerImpl"></jsp:useBean>
 <jsp:useBean id="estados"
              class="br.com.sonner.estagio.controller.EstadoControllerImpl"></jsp:useBean>
+<jsp:useBean id="tipologradouros"
+             class="br.com.sonner.estagio.controller.TipoLogradouroControllerImpl"></jsp:useBean>
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -52,7 +62,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${estados.all}" var="estado">
                         <c:choose>
-                            <c:when test="${estado.id == filtroCidade.estado}">
+                            <c:when test="${estado.id == estadoFiltro.id}">
                                 <option value="${estado.id}" selected>${estado.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -65,12 +75,12 @@
 
             <div class="form-row">
                 <div>Cidade:</div>
-                <select name="cidadeID" class="form-control"
+                <select name="cidade" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${cidades.all}" var="cidade">
                         <c:choose>
-                            <c:when test="${cidade.id == filtroBairro.cidade}">
+                            <c:when test="${cidade.id == cidadeFiltro.id}">
                                 <option value="${cidade.id}" selected>${cidade.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -88,7 +98,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${bairros.all}" var="bairro">
                         <c:choose>
-                            <c:when test="${bairro.id == filtroEndereco.bairro}">
+                            <c:when test="${bairro.id == bairroFiltro.id}">
                                 <option value="${bairro.id}" selected>${bairro.nome}</option>
                             </c:when>
                             <c:otherwise>

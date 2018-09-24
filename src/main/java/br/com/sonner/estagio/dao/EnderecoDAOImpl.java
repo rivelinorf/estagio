@@ -71,7 +71,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(Long id) throws CustomException {
         Endereco endereco = getOne(id);
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
@@ -79,7 +79,7 @@ public class EnderecoDAOImpl implements EnderecoDAO {
             this.session.remove(endereco);
             this.session.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new CustomException("Impossivel deletar! Escola possui relacionamento");
         } finally {
             this.session.close();
         }
