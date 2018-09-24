@@ -38,6 +38,9 @@ public class Insere extends HttpServlet {
         novadisciplina.setNome(disciplina);
         novadisciplina.setEscola(escola);
 
+
+
+
         List<String> erros = disciplinaController.validation(novadisciplina);
 
 
