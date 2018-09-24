@@ -34,7 +34,7 @@ public class Funcionario {
         if (this.admissao != null) {
             return new SimpleDateFormat("dd/MM/yyyy").format(this.admissao);
         } else {
-            return "";
+            return null;
         }
     }
 

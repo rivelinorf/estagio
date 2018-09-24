@@ -1,4 +1,71 @@
 package br.com.sonner.estagio.servlet.diretor;
 
-public class Atualiza {
+import br.com.sonner.estagio.controller.DiretorControllerImpl;
+import br.com.sonner.estagio.controller.EscolaControllerImpl;
+import br.com.sonner.estagio.model.Diretor;
+import br.com.sonner.estagio.model.Escola;
+import br.com.sonner.estagio.model.Funcionario;
+import br.com.sonner.estagio.model.Pessoa;
+import br.com.sonner.estagio.vos.DiretorFiltroVO;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+@WebServlet("/atualiza-diretor")
+public class Atualiza extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        DiretorControllerImpl diretorController = new DiretorControllerImpl();
+        EscolaControllerImpl escolaController = new EscolaControllerImpl();
+        HttpSession session = request.getSession();
+        Diretor diretor = new Diretor();
+        Pessoa pessoa = new Pessoa();
+        Funcionario funcionario = new Funcionario();
+        DiretorFiltroVO vo = new DiretorFiltroVO(), voSession = (DiretorFiltroVO) session.getAttribute("diretorParaEditar");
+
+        if (voSession.getFuncionario().getPessoa().getNome().equals(request.getParameter("nome"))) {
+            response.sendRedirect("/views/diretor/lista.jsp");
+            return;
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date dataNascimento = formatter.parse(request.getParameter("data-nascimento"));
+            Date dataAdmissao = formatter.parse(request.getParameter("data-admissao"));
+            funcionario.setAdmissao(dataAdmissao);
+            pessoa.setDataNascimento(dataNascimento);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        diretor.setId(Long.valueOf(request.getParameter("id")));
+        pessoa.setNome(request.getParameter("nome"));
+        pessoa.setPai(request.getParameter("pai"));
+        pessoa.setMae(request.getParameter("mae"));
+        pessoa.setCpf(request.getParameter("cpf"));
+        funcionario.setPessoa(pessoa);
+        funcionario.setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
+        diretor.setFuncionario(funcionario);
+
+
+        diretorController.update(diretor);
+
+        vo.setFuncionario(new Funcionario());
+        vo.getFuncionario().setPessoa(new Pessoa());
+        vo.getFuncionario().setEscola(new Escola());
+
+        session.setAttribute("listaDiretor", diretorController.filtrar(vo));
+        session.setAttribute("success", "Diretor atualizado com sucesso");
+
+        response.sendRedirect("/views/diretor/lista.jsp");
+    }
 }

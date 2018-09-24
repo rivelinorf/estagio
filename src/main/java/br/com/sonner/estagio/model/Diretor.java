@@ -1,6 +1,9 @@
 package br.com.sonner.estagio.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table
@@ -9,7 +12,7 @@ public class Diretor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
     public Diretor(){

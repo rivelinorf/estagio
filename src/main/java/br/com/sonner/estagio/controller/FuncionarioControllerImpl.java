@@ -47,5 +47,6 @@ public class FuncionarioControllerImpl implements FuncionarioController {
     }
 
     public List<Funcionario> filtrarLike(FuncionarioFiltroVO funcionariosPesquisados) {
-        return this.funcionarioDAO.pesquisaFuncionarioLike(funcionariosPesquisados.getPessoa(), funcionariosPesquisados.getAdmissao(), funcionariosPesquisados.getEscola());    }
+        return this.funcionarioDAO.pesquisaFuncionarioLike(funcionariosPesquisados.getPessoa(), funcionariosPesquisados.getAdmissao(), funcionariosPesquisados.getEscola());
+    }
 }

@@ -39,7 +39,6 @@
         estado = new Estado();
         estado.setAbv("");
         estado.setNome("");
-
     }
 %>
 
@@ -84,7 +83,7 @@
     <div class="div-form">
         <form action="/insere-bairro" method="post" id="insere-form"
               style="width: 60%; margin: auto">
-            <input type="hidden" value="<%=estado.getId()%>" name="estadoSession">
+            <input type="hidden" value="${estado.id}" name="estadoSession">
 
             <div class="form-row">
                 <div>Cidade:</div>

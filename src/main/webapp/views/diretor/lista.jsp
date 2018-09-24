@@ -1,15 +1,22 @@
 <%@ page import="br.com.sonner.estagio.vos.DiretorFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Pessoa" %>
+<%@ page import="br.com.sonner.estagio.model.Funcionario" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="diretorController"
              class="br.com.sonner.estagio.controller.DiretorControllerImpl"></jsp:useBean>
+<jsp:useBean id="escolaController" class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 
 <%
     DiretorFiltroVO vo = (DiretorFiltroVO) session.getAttribute("filtroDiretor");
     if (vo == null) {
         vo = new DiretorFiltroVO();
+        vo.setFuncionario(new Funcionario());
+        vo.getFuncionario().setPessoa(new Pessoa());
+        vo.getFuncionario().getPessoa().setNome("");
+        vo.getFuncionario().getPessoa().setCpf("");
     }
 %>
 
@@ -32,13 +39,29 @@
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="nome" class="form-control"
-                       style="background-color: rgb(46, 46, 46)" value=""
+                       style="background-color: rgb(46, 46, 46)" value="<%=vo.getFuncionario().getPessoa().getNome()%>"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
             <div class="form-row">
                 <div>CPF:</div>
                 <input type="text" name="cpf" class="form-control" placeholder="000.000.000-00"
-                       style="background-color: rgb(46, 46, 46)" value="" style="width: 460px;">
+                       style="background-color: rgb(46, 46, 46)" value="<%=vo.getFuncionario().getPessoa().getCpf()%>" style="width: 460px;">
+            </div>
+            <div class="form-row">
+                <div>Escola:</div>
+                <select name="escola" class="form-control">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${escolaController.all}" var="escola">
+                        <c:choose>
+                            <c:when test="${escola.id == filtroDiretor.funcionario.escola.id}">
+                                <option value="${escola.id}" selected>${escola.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${escola.id}">${escola.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
             </div>
         </form>
     </div>
@@ -67,11 +90,11 @@
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${diretor.pessoa.nome}</td>
-                    <td>${diretor.pessoa.cpf}</td>
-                    <td>${diretor.escola.nome}</td>
-                    <td>${diretor.pessoa.dataNascimento}</td>
-                    <td>${diretor.admissao}</td>
+                    <td>${diretor.funcionario.pessoa.nome}</td>
+                    <td>${diretor.funcionario.pessoa.cpf}</td>
+                    <td>${diretor.funcionario.escola.nome}</td>
+                    <td>${diretor.funcionario.pessoa.dataNascimento}</td>
+                    <td>${diretor.funcionario.admissao}</td>
                 </tr>
             </c:forEach>
             </tbody>

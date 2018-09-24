@@ -3,7 +3,9 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.DiretorController;
 import br.com.sonner.estagio.dao.DiretorDAOImpl;
 import br.com.sonner.estagio.model.Diretor;
+import br.com.sonner.estagio.model.Diretor;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.DiretorFiltroVO;
 
 import java.util.List;
 
@@ -40,5 +42,13 @@ public class DiretorControllerImpl implements DiretorController {
     public void delete(long id) throws CustomException {
         this.diretorDAO.delete(id);
 
+    }
+
+    public List<Diretor> filtrar(DiretorFiltroVO diretorsPesquisados) {
+        return this.diretorDAO.pesquisaDiretor(diretorsPesquisados);
+    }
+
+    public List<Diretor> filtrarLike(DiretorFiltroVO diretorsPesquisados) {
+        return this.diretorDAO.pesquisaDiretorLike(diretorsPesquisados);
     }
 }
