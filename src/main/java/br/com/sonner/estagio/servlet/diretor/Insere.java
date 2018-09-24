@@ -45,7 +45,6 @@ public class Insere extends HttpServlet {
 
         pessoa.setMae(request.getParameter("mae"));
         pessoa.setPai(request.getParameter("pai"));
-        pessoa.setAlunos(null);
         pessoa.setEndereco(new EnderecoControllerImpl().getOne(1));
         pessoa.setNome(request.getParameter("nome"));
         pessoa.setCpf(request.getParameter("cpf"));
