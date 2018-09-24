@@ -35,23 +35,24 @@
             actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form name="form1" action="/atualiza-turma?id=<%=vo.getId()%>"
-              method="post" id="edit-form" style="width: 100%">
+        <form action="/atualiza-turma?id=<%= vo.getId() %>" method="post" id="edit-form"
+              style="width: 60%; margin: auto">
             <input type="hidden" value="<%=vo.getId()%>" id="id">
+
             <div class="form-row">
                 <div>Nome:</div>
-                <input type="text" name="turma" class="form-control"
-                       maxlength="50" value="<%=vo.getNome()%>">
+                <input type="text" name="turma" class="form-control" value="<%= vo.getNome() %>"
+                       onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
             </div>
+
 
             <div class="form-row">
                 <div>Escola:</div>
-                <select name="escola" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
+                <select name="escola" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
                         <c:choose>
-                            <c:when test="${escola.id == salaParaEditar.escola}">
+                            <c:when test="${escola.id == turmaParaEditar.escola}">
                                 <option value="${escola.id}" selected>${escola.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -61,6 +62,7 @@
                     </c:forEach>
                 </select>
             </div>
+
         </form>
     </div>
 </div>

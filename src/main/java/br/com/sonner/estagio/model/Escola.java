@@ -11,7 +11,7 @@ public class Escola {
     private Long id;
     private String nome;
 
-    @OneToOne
+    @ManyToOne
     private Endereco endereco;
 
     @OneToMany(mappedBy = "escola")

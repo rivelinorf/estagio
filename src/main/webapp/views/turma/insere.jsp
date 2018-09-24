@@ -46,7 +46,14 @@
                 <select name="escola" class="form-control" style="background-color: rgb(46, 46, 46)">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
-                        <option value="${escola.id}">${escola.nome}</option>
+                        <c:choose>
+                            <c:when test="${escola.id == campoTurma.escola.id}">
+                                <option value="${escola.id}" selected>${escola.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                            <option value="${escola.id}">${escola.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </div>

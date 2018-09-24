@@ -28,11 +28,6 @@ public class Insere extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        Turma aux = new Turma();
-        aux.setNome("");
-        aux.setEscola(null);
-
-
         Escola escola = null;
         String turma = req.getParameter("turma");
 
@@ -46,6 +41,7 @@ public class Insere extends HttpServlet {
 
         List<String> erros = turmaController.validation(novaturma);
 
+
         if (erros.size() == 0) {
             vo.setEscola(novaturma.getEscola().getId());
             vo.setNome(novaturma.getNome());
@@ -53,6 +49,7 @@ public class Insere extends HttpServlet {
             List<Turma> verifica = turmaController.filtrar(vo);
 
             if (verifica.size() == 0) {
+
 
                 turmaController.save(novaturma);
                 vo.setNome("");
@@ -66,13 +63,15 @@ public class Insere extends HttpServlet {
                 String existe = "Turma já cadastrada!";
 
                 session.setAttribute("errors", existe);
+                session.setAttribute("campoTurma", novaturma);
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/turma/insere.jsp");
                 requestDispatcher.forward(req, res);
             }
         } else {
             session.setAttribute("errors", erros);
-            session.setAttribute("campoTurma", aux);
+            session.setAttribute("campoTurma", novaturma);
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/turma/insere.jsp");
+            requestDispatcher.forward(req, res);
 
         }
 

@@ -54,7 +54,7 @@ public class TurmaControllerImpl implements TurmaController {
 
 
         if (turma.getNome().length() > 50) {
-            erros.add("O nome da sala não pode exceder 15 caracteres  ");
+            erros.add("O nome da sala não pode exceder 50 caracteres  ");
         }
 
 

@@ -50,7 +50,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
                         <c:choose>
-                            <c:when test="${escola.id == filtroSala.escola}">
+                            <c:when test="${escola.id == filtroTurma.escola}">
                                 <option value="${escola.id}" selected>${escola.nome}</option>
                             </c:when>
                             <c:otherwise>

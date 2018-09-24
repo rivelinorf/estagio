@@ -24,8 +24,8 @@ public class Endereco {
     @OneToMany
     private List<Pessoa> pessoas = new ArrayList<>();
 
-    @OneToOne
-    private Escola escola;
+    @OneToMany
+    private List<Escola> escolas = new ArrayList<>();
 
     public Endereco() {
 
@@ -95,11 +95,11 @@ public class Endereco {
         this.pessoas = pessoas;
     }
 
-    public Escola getEscola() {
-        return escola;
+    public List<Escola> getEscolas() {
+        return escolas;
     }
 
-    public void setEscola(Escola escola) {
-        this.escola = escola;
+    public void setEscolas(List<Escola> escolas) {
+        this.escolas = escolas;
     }
 }
