@@ -17,8 +17,8 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<Matricula> matriculas;
 
-    @ManyToOne
-    private TurmaDisciplina turmasDisciplina;
+    @OneToMany(mappedBy = "turma")
+    private List<TurmaDisciplina> turmaDisciplinas;
 
     public Turma() {
     }
@@ -55,12 +55,12 @@ public class Turma {
         this.matriculas = matriculas;
     }
 
-    public TurmaDisciplina getTurmasDisciplina() {
-        return turmasDisciplina;
+    public List<TurmaDisciplina> getTurmaDisciplinas() {
+        return turmaDisciplinas;
     }
 
-    public void setTurmasDisciplina(TurmaDisciplina turmasDisciplina) {
-        this.turmasDisciplina = turmasDisciplina;
+    public void setTurmaDisciplinas(List<TurmaDisciplina> turmaDisciplinas) {
+        this.turmaDisciplinas = turmaDisciplinas;
     }
 }
 

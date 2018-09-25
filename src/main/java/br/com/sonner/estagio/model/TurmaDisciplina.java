@@ -11,11 +11,11 @@ public class TurmaDisciplina {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "turmasDisciplina")
-    private List<Disciplina> disciplina = new ArrayList<>();
+    @ManyToOne
+    private Disciplina disciplina;
 
-    @OneToMany(mappedBy = "turmasDisciplina")
-    private List<Turma> turmas = new ArrayList<>();
+    @ManyToOne
+    private Turma turma;
 
     @OneToMany(mappedBy = "turmaDisciplina")
     private List<Nota> notas;
@@ -40,19 +40,19 @@ public class TurmaDisciplina {
         this.notas = notas;
     }
 
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
-
-    public List<Disciplina> getDisciplina() {
+    public Disciplina getDisciplina() {
         return disciplina;
     }
 
-    public void setDisciplina(List<Disciplina> disciplina) {
+    public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 }

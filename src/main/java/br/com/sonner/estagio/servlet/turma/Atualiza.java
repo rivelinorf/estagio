@@ -38,7 +38,6 @@ public class Atualiza extends HttpServlet {
         novaturma.setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
 
         novaturma.setMatriculas(null);
-        novaturma.setTurmasDisciplina(null);
 
         List<String> erros = turmaController.validation(novaturma);
 

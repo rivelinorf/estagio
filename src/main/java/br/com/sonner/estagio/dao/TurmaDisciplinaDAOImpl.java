@@ -4,7 +4,9 @@ import br.com.sonner.estagio.dao.api.TurmaDisciplinaDAO;
 import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -89,6 +91,27 @@ public class TurmaDisciplinaDAOImpl implements TurmaDisciplinaDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(TurmaDisciplina.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<TurmaDisciplina> pesquisaTurma(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            Query query = this.session.createQuery("select td from TurmaDisciplina as td " +
+                    "where td.disciplina = :disciplina and td.turma = :turma");
+            query.setParameter("turma", turmaDisciplinaFiltroVO.getTurma());
+            query.setParameter("disciplina", turmaDisciplinaFiltroVO.getDisciplina());
+            List<TurmaDisciplina> turmaDisciplinas = query.list();
+            this.session.getTransaction().commit();
+
+            return turmaDisciplinas;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

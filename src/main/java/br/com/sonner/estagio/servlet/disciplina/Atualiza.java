@@ -37,8 +37,6 @@ public class Atualiza extends HttpServlet {
         novadisciplina.setNome(request.getParameter("disciplina"));
         novadisciplina.setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
 
-        novadisciplina.setTurmasDisciplina(null);
-
         List<String> erros = disciplinaController.validation(novadisciplina);
 
         if (erros.size() == 0) {

@@ -14,8 +14,8 @@ public class Disciplina {
     @ManyToOne
     private Escola escola;
 
-    @ManyToOne
-    private TurmaDisciplina turmasDisciplina;
+    @OneToMany(mappedBy = "disciplina")
+    private List<TurmaDisciplina> turmaDisciplinas;
 
     public Disciplina() {
     }
@@ -44,12 +44,12 @@ public class Disciplina {
         this.escola = escola;
     }
 
-    public TurmaDisciplina getTurmasDisciplina() {
-        return turmasDisciplina;
+    public List<TurmaDisciplina> getTurmaDisciplinas() {
+        return turmaDisciplinas;
     }
 
-    public void setTurmasDisciplina(TurmaDisciplina turmasDiscplina) {
-        this.turmasDisciplina = turmasDiscplina;
+    public void setTurmaDisciplinas(List<TurmaDisciplina> turmaDisciplinas) {
+        this.turmaDisciplinas = turmaDisciplinas;
     }
 }
 

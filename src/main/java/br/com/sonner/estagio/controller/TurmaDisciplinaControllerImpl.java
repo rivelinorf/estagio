@@ -4,6 +4,7 @@ import br.com.sonner.estagio.controller.api.TurmaDisciplinaController;
 import br.com.sonner.estagio.dao.TurmaDisciplinaDAOImpl;
 import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import java.util.List;
 
@@ -40,5 +41,10 @@ public class TurmaDisciplinaControllerImpl implements TurmaDisciplinaController 
     public void delete(long id) throws CustomException {
         this.turmaDisciplinaDAO.delete(id);
 
+    }
+
+    @Override
+    public List<TurmaDisciplina> pesquisaTurma(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
+        return this.pesquisaTurma(turmaDisciplinaFiltroVO);
     }
 }
