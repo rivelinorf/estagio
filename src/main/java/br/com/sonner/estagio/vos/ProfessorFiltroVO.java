@@ -1,8 +1,10 @@
 package br.com.sonner.estagio.vos;
 
+import br.com.sonner.estagio.model.Funcionario;
+
 public class ProfessorFiltroVO {
     private Long id;
-    private Long funcionario;
+    private Funcionario funcionario;
 
     public Long getId() {
         return id;
@@ -12,11 +14,11 @@ public class ProfessorFiltroVO {
         this.id = id;
     }
 
-    public Long getFuncionario() {
+    public Funcionario getFuncionario() {
         return funcionario;
     }
 
-    public void setFuncionario(Long funcionario) {
+    public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
 }

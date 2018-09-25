@@ -13,11 +13,11 @@
 <body>
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
-    <sge:header titulo="Inserir novo Funcionario" actionSalvar="true"
+    <sge:header titulo="Inserir novo Professor" actionSalvar="true"
                 formId="insere-form" actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form action="/insere-funcionario" method="post" id="insere-form"
+        <form action="/insere-professor" method="post" id="insere-form"
               style="width: 60%; margin: auto">
             <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
             <div class="form-row">
@@ -29,22 +29,9 @@
                 <select name="escola" class="form-control">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
-                        <c:choose>
-                            <c:when test="${escola.id == filtroEscola.escola}">
-                                <option value="${escola.id}" selected>${escola.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${escola.id}">${escola.nome}</option>
-                            </c:otherwise>
-                        </c:choose>
+                        <option value="${escola.id}">${escola.nome}</option>
                     </c:forEach>
                 </select>
-            </div>
-            <div class="form-row">
-                <div>Diretor: </div>
-                <input type="checkbox" name="diretor">
-                <div>Professor: </div>
-                <input type="checkbox" name="professor">
             </div>
         </form>
     </div>

@@ -29,14 +29,7 @@
                 <select name="escola" class="form-control">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
-                        <c:choose>
-                            <c:when test="${escola.id == filtroEscola.escola}">
-                                <option value="${escola.id}" selected>${escola.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${escola.id}">${escola.nome}</option>
-                            </c:otherwise>
-                        </c:choose>
+                        <option value="${escola.id}">${escola.nome}</option>
                     </c:forEach>
                 </select>
             </div>
