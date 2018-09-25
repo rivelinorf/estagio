@@ -1,3 +1,5 @@
+<%@ page import="br.com.sonner.estagio.vos.AlunoFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Pessoa" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -5,7 +7,15 @@
 <jsp:useBean id="alunoController"
              class="br.com.sonner.estagio.controller.AlunoControllerImpl"></jsp:useBean>
 
+<%
+    AlunoFiltroVO vo = (AlunoFiltroVO) session.getAttribute("filtroAluno");
+    if (vo == null) {
+        vo = new AlunoFiltroVO();
+        vo.setPessoa(new Pessoa());
+        vo.getPessoa().setNome("");
 
+    }
+%>
 <html>
 <head>
     <jsp:include page="/includes/head.jsp"></jsp:include>
@@ -29,23 +39,20 @@
                        style="background-color: rgb(46, 46, 46)" value=""
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
-
-
             <div class="form-row">
                 <div>Nome:</div>
                 <input type="text" name="aluno" class="form-control"
-                       style="background-color: rgb(46, 46, 46)" value=""
+                       style="background-color: rgb(46, 46, 46)" value="<%=vo.getPessoa().getNome()%>"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
             <div class="form-row">
                 <div>Sexo:</div>
                 <select name="sexo" class="form-control">
+                    <option value="">Selecione uma opção...</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
             </div>
-
-
         </form>
     </div>
     <div class="content">
@@ -56,10 +63,12 @@
                 <th>Matricula</th>
                 <th>Nome</th>
                 <th>Sexo</th>
+                <%--<th>Endereço</th>--%>
+
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${listaMatricula}" var="aluno">
+            <c:forEach items="${listaAluno}" var="aluno">
                 <tr>
                     <td id="botoes" width="150px" style="text-align: center">
                         <button class="main-btn btn-editar"
@@ -72,19 +81,17 @@
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${aluno.matricula}</td>
-                    <td>${aluno.nome}</td>
-                    <td>${aluno.sexo}</td>
+                        <td>${aluno.matricula}</td>
+                    <td>${aluno.pessoa.nome}</td>
+                    <td>${aluno.pessoa.sexo}</td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="confirm-modal" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
@@ -100,7 +107,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
+
         ProfessorControllerImpl professorController = new ProfessorControllerImpl();
         EscolaControllerImpl escolaController = new EscolaControllerImpl();
         HttpSession session = request.getSession();
@@ -33,6 +34,7 @@ public class Pesquisa extends HttpServlet {
         } else {
             funcionario.setEscola(new Escola());
         }
+
 
         funcionario.setPessoa(pessoa);
         vo.setFuncionario(funcionario);

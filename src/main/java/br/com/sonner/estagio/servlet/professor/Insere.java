@@ -61,8 +61,12 @@ public class Insere extends HttpServlet {
             }
 
             funcionario.setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
+
+
+
             funcionario.setPessoa(pessoa);
             pessoa.setFuncionario(funcionario);
+
             professor.setFuncionario(funcionario);
 
             pessoaController.save(pessoa);

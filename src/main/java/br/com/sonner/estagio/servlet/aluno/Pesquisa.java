@@ -1,14 +1,10 @@
 package br.com.sonner.estagio.servlet.aluno;
 
-import br.com.sonner.estagio.controller.AlunoControllerImpl;
-import br.com.sonner.estagio.controller.EnderecoControllerImpl;
-import br.com.sonner.estagio.controller.PessoaControllerImpl;
-import br.com.sonner.estagio.controller.TipoLogradouroControllerImpl;
+import br.com.sonner.estagio.controller.*;
 import br.com.sonner.estagio.controller.api.PessoaController;
-import br.com.sonner.estagio.model.Aluno;
-import br.com.sonner.estagio.model.Pessoa;
-import br.com.sonner.estagio.model.SexoEnum;
+import br.com.sonner.estagio.model.*;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
+import br.com.sonner.estagio.vos.DiretorFiltroVO;
 import br.com.sonner.estagio.vos.TipologradouroFiltroVO;
 
 import javax.servlet.annotation.WebServlet;
@@ -23,27 +19,22 @@ public class Pesquisa extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         AlunoControllerImpl alunoController = new AlunoControllerImpl();
-
-        Pessoa pessoa = new Pessoa();
+        HttpSession session = request.getSession();
         AlunoFiltroVO vo = new AlunoFiltroVO();
-        SexoEnum sexo;
+        Aluno aluno = new Aluno();
+        Pessoa pessoa = new Pessoa();
 
-        pessoa.setNome(request.getParameter("nome"));
+        pessoa.setNome(request.getParameter("aluno"));
+        //matricula vem aqui
+        //aluno.setMatricula(null);
 
-        if (request.getParameter("sexo") != null) {
-            sexo = (request.getParameter("sexo").equals("m")) ? SexoEnum.MASCULINO : SexoEnum.FEMININO;
-            pessoa.setSexo(sexo);
-        }
-
+        pessoa.setAluno(aluno);
         vo.setPessoa(pessoa);
 
-        HttpSession session = request.getSession();
-
-        if (vo.getPessoa() == null) {
+        if (pessoa.getNome() == null ) { // primeira vez entrando na pagina
             session.setAttribute("filtroAluno", null);
             session.setAttribute("listaAluno", null);
         } else {
-
             session.setAttribute("filtroAluno", vo);
             session.setAttribute("listaAluno", alunoController.filtrarLike(vo));
         }

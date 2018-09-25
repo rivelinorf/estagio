@@ -3,9 +3,14 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.AlunoController;
 import br.com.sonner.estagio.dao.AlunoDAOImpl;
 import br.com.sonner.estagio.model.Aluno;
+import br.com.sonner.estagio.model.Diretor;
+import br.com.sonner.estagio.model.Funcionario;
+import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
+import br.com.sonner.estagio.vos.DiretorFiltroVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlunoControllerImpl implements AlunoController {
@@ -42,11 +47,30 @@ public class AlunoControllerImpl implements AlunoController {
     }
 
     public List<Aluno> filtrar(AlunoFiltroVO alunosPesquisados) {
-        return this.alunoDAO.pesquisaAluno(alunosPesquisados.getPessoa());
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados);
 
     }
 
     public List<Aluno> filtrarLike(AlunoFiltroVO alunosPesquisados) {
-        return this.alunoDAO.pesquisaAluno(alunosPesquisados.getPessoa());
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados);
+    }
+
+    public List<String> validation(Aluno aluno) {
+        List<String> erros = new ArrayList<>();
+
+        if (aluno.getPessoa().getNome().length() == 0) {
+            erros.add("Não é possível ter um aluno sem nome");
+        }
+
+        if (aluno.getPessoa().getNome().length() > 50) {
+            erros.add("Nome do aluno não pode exceder 50 caracteres");
+        }
+
+        AlunoFiltroVO alunoFiltroVO = new AlunoFiltroVO();
+
+        alunoFiltroVO.setPessoa(new Pessoa());
+        alunoFiltroVO.getPessoa().setNome(aluno.getPessoa().getCpf());
+
+        return erros;
     }
 }

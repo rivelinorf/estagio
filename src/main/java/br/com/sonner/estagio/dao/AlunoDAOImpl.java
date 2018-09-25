@@ -8,6 +8,7 @@ import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.AlunoFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class AlunoDAOImpl implements AlunoDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
-            List<Aluno> alunos = this.session.createQuery("select b from Aluno as b").list();
+            List<Aluno> alunos = this.session.createQuery("select a from Aluno as a").list();
             this.session.getTransaction().commit();
 
             return alunos;
@@ -102,9 +103,12 @@ public class AlunoDAOImpl implements AlunoDAO {
     }
 
     @Override
-    public List<Aluno> pesquisaAluno(Pessoa pessoa) {
+    public List<Aluno> pesquisaAluno(AlunoFiltroVO alunosPesquisados) {
         try {
-            QueryStringAluno queryString = new QueryStringAluno.Builder().nome(pessoa.getNome()).build();
+            QueryStringAluno queryString = new QueryStringAluno.Builder().table("Aluno")
+                    .nome(alunosPesquisados.getPessoa().getNome())
+                    //.matriculaLike()
+                    .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
@@ -117,9 +121,13 @@ public class AlunoDAOImpl implements AlunoDAO {
 
 
     @Override
-    public List<Aluno> pesquisaAlunoLike(Pessoa pessoa) {
+    public List<Aluno> pesquisaAlunoLike(AlunoFiltroVO alunosPesquisados) {
         try {
-            QueryStringAluno queryString = new QueryStringAluno.Builder().nomeLike(pessoa.getNome()).build();
+            QueryStringAluno queryString = new QueryStringAluno.Builder()
+                    .table("Aluno")
+                    .nomeLike(alunosPesquisados.getPessoa().getNome())
+                    //.matriculaLike()
+                    .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {

@@ -2,7 +2,7 @@ package br.com.sonner.estagio.dao.queries;
 
 public class QueryStringAluno {
 
-    private String sql = "From Aluno ";
+    private String sql;
 
     public String getSql() {
         return sql;
@@ -13,7 +13,15 @@ public class QueryStringAluno {
     }
 
     public static class Builder {
-        private String sql = "SELECT a FROM Aluno as a WHERE 1=1 ";
+        private String sql = "SELECT a FROM ";
+
+        public Builder table(String table) {
+            if (table != null) {
+                this.sql += table + " as a WHERE 1=1 ";
+            }
+
+            return this;
+        }
 
         public Builder nome(String nome) {
             if (nome != "" && nome != null) {
@@ -32,13 +40,6 @@ public class QueryStringAluno {
             return this;
         }
 
-        /*public Builder admissaoLike(Date admissao) {
-            if (admissao != null) {
-                this.sql += "and UPPER(e.nome) like '" + admissao.toUpperCase() + "%' ";
-            }
-
-            return this;
-        }*/
 
         public QueryStringAluno build() {
             return new QueryStringAluno(this);
