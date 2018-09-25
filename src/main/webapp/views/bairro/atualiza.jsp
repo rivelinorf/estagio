@@ -39,6 +39,7 @@
         estado = new Estado();
         estado.setAbv("");
         estado.setNome("");
+        estado.setId(null);
 
     }
 %>
