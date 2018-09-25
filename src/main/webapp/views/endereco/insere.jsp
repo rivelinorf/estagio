@@ -48,7 +48,7 @@
         estado = new Estado();
         estado.setAbv("");
         estado.setNome("");
-
+        estado.setId(null);
     }
 %>
 
@@ -60,6 +60,7 @@
         cidade.setCod("");
         cidade.setEstado(null);
         cidade.setNome("");
+        cidade.setId(null);
     }
 %>
 

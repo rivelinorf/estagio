@@ -36,26 +36,24 @@ public class Atualiza extends HttpServlet {
             return;
         }
 
+        diretor = diretorController.getOne(Long.valueOf(request.getParameter("id")));
+
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
             Date dataNascimento = formatter.parse(request.getParameter("data-nascimento"));
             Date dataAdmissao = formatter.parse(request.getParameter("data-admissao"));
-            funcionario.setAdmissao(dataAdmissao);
-            pessoa.setDataNascimento(dataNascimento);
+            diretor.getFuncionario().setAdmissao(dataAdmissao);
+            diretor.getFuncionario().getPessoa().setDataNascimento(dataNascimento);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        diretor.setId(Long.valueOf(request.getParameter("id")));
-        pessoa.setNome(request.getParameter("nome"));
-        pessoa.setPai(request.getParameter("pai"));
-        pessoa.setMae(request.getParameter("mae"));
-        pessoa.setCpf(request.getParameter("cpf"));
-        funcionario.setPessoa(pessoa);
-        funcionario.setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
-        diretor.setFuncionario(funcionario);
-
+        diretor.getFuncionario().getPessoa().setNome(request.getParameter("nome"));
+        diretor.getFuncionario().getPessoa().setPai(request.getParameter("pai"));
+        diretor.getFuncionario().getPessoa().setMae(request.getParameter("mae"));
+        diretor.getFuncionario().getPessoa().setCpf(request.getParameter("cpf"));
+        diretor.getFuncionario().setEscola(escolaController.getOne(Long.valueOf(request.getParameter("escola"))));
 
         diretorController.update(diretor);
 
