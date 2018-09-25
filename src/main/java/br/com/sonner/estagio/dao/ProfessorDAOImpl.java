@@ -1,9 +1,12 @@
 package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.ProfessorDAO;
+import br.com.sonner.estagio.dao.queries.QueryStringFuncionario;
+import br.com.sonner.estagio.model.Professor;
 import br.com.sonner.estagio.model.Professor;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
+import br.com.sonner.estagio.vos.ProfessorFiltroVO;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -89,6 +92,44 @@ public class ProfessorDAOImpl implements ProfessorDAO {
         try {
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.find(Professor.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Professor> pesquisaProfessor(ProfessorFiltroVO professoresPesquisados) {
+        try {
+            QueryStringFuncionario queryString = new QueryStringFuncionario.Builder()
+                    .table("Professor")
+                    .nome(professoresPesquisados.getFuncionario().getPessoa().getNome())
+                    .cpf(professoresPesquisados.getFuncionario().getPessoa().getCpf())
+                    .admissao(professoresPesquisados.getFuncionario().getAdmissao())
+                    .build();
+
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    public List<Professor> pesquisaProfessorLike(ProfessorFiltroVO professoresPesquisados) {
+        try {
+            QueryStringFuncionario queryString = new QueryStringFuncionario.Builder().table("Professor")
+                    .nomeLike(professoresPesquisados.getFuncionario().getPessoa().getNome())
+                    .admissao(professoresPesquisados.getFuncionario().getAdmissao())
+                    .cpf(professoresPesquisados.getFuncionario().getPessoa().getCpf())
+                    .escola(professoresPesquisados.getFuncionario().getEscola().getId())
+                    .build();
+
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            return this.session.createQuery(queryString.getSql()).getResultList();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
