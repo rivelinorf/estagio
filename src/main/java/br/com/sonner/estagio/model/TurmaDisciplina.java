@@ -11,10 +11,10 @@ public class TurmaDisciplina {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "turmasDiscplina")
+    @OneToMany(mappedBy = "turmasDisciplina")
     private List<Disciplina> disciplina = new ArrayList<>();
 
-    @OneToMany(mappedBy = "turmasDiscplina")
+    @OneToMany(mappedBy = "turmasDisciplina")
     private List<Turma> turmas = new ArrayList<>();
 
     @OneToMany(mappedBy = "turmaDisciplina")

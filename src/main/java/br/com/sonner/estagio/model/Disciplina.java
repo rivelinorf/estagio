@@ -1,26 +1,23 @@
 package br.com.sonner.estagio.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table
 public class Disciplina {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
 
     @ManyToOne
-    private TurmaDisciplina turmasDiscplina;
-
-    @ManyToOne
     private Escola escola;
 
+    @ManyToOne
+    private TurmaDisciplina turmasDisciplina;
 
     public Disciplina() {
-
     }
 
     public Long getId() {
@@ -47,11 +44,12 @@ public class Disciplina {
         this.escola = escola;
     }
 
-    public TurmaDisciplina getTurmasDiscplina() {
-        return turmasDiscplina;
+    public TurmaDisciplina getTurmasDisciplina() {
+        return turmasDisciplina;
     }
 
-    public void setTurmasDiscplina(TurmaDisciplina turmasDiscplina) {
-        this.turmasDiscplina = turmasDiscplina;
+    public void setTurmasDisciplina(TurmaDisciplina turmasDiscplina) {
+        this.turmasDisciplina = turmasDiscplina;
     }
 }
+

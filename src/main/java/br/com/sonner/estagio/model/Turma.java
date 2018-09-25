@@ -18,7 +18,7 @@ public class Turma {
     private List<Matricula> matriculas;
 
     @ManyToOne
-    private TurmaDisciplina turmasDiscplina;
+    private TurmaDisciplina turmasDisciplina;
 
     public Turma() {
     }
@@ -55,12 +55,12 @@ public class Turma {
         this.matriculas = matriculas;
     }
 
-    public TurmaDisciplina getTurmasDiscplina() {
-        return turmasDiscplina;
+    public TurmaDisciplina getTurmasDisciplina() {
+        return turmasDisciplina;
     }
 
-    public void setTurmasDiscplina(TurmaDisciplina turmasDiscplina) {
-        this.turmasDiscplina = turmasDiscplina;
+    public void setTurmasDisciplina(TurmaDisciplina turmasDisciplina) {
+        this.turmasDisciplina = turmasDisciplina;
     }
 }
 
