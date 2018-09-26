@@ -1,4 +1,8 @@
 <%@ page import="br.com.sonner.estagio.model.Nota" %>
+<%@ page import="br.com.sonner.estagio.model.TurmaDisciplina" %>
+<%@ page import="br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO" %>
+<%@ page import="br.com.sonner.estagio.model.Turma" %>
+<%@ page import="br.com.sonner.estagio.model.Disciplina" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,11 +18,29 @@
     Nota nota = (Nota) session.getAttribute("campoNota");
 
     if (nota == null) {
+
         nota = new Nota();
-        nota.setAluno(null);
         nota.setId(null);
-        nota.setTurmaDisciplina(null);
+        nota.setAluno(null);
         nota.setNota(null);
+    }
+
+    Turma turma = (Turma) session.getAttribute("turma");
+
+    if (turma == null) {
+        turma = new Turma();
+        turma.setEscola(null);
+        turma.setNome(null);
+        turma.setId(null);
+    }
+
+    Disciplina disciplina = (Disciplina) session.getAttribute("disciplina");
+
+    if (disciplina == null) {
+        disciplina = new Disciplina();
+        disciplina.setEscola(null);
+        disciplina.setNome(null);
+        disciplina.setId(null);
     }
 %>
 
@@ -28,18 +50,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 </head>
 <body>
-
 <jsp:include page="/includes/menu.jsp"></jsp:include>
 <div class="main">
     <sge:header titulo="Lançar nota" page=""
-                actionFiltrar="true" actionNovo="/views/nota/insere.jsp"
+                actionFiltrar="true" actionLancar="true" formIdlancar="insere-form"
                 formId="filter-form" actionFechar="true">
     </sge:header>
 
 
     <div class="div-form">
-        <form name="form1" action="/insere-nota" method="get"
-              id="insere-form" style="width: 100%;">
+        <form action="/pesquisa-nota" method="get" id="filter-form"
+              style="width: 1000px;">
             <div class="form-row">
                 <div>Disciplina:</div>
                 <select name="disciplina" class="form-control"
@@ -47,7 +68,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${disciplinas.all}" var="disciplina">
                         <c:choose>
-                            <c:when test="${disciplina.id == campoNota.disciplina}">
+                            <c:when test="${disciplina.id == filtroTurmaDisciplina.disciplina}">
                                 <option value="${disciplina.id}" selected>${disciplina.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -58,6 +79,7 @@
                 </select>
             </div>
 
+
             <div class="form-row">
                 <div>Turma:</div>
                 <select name="turma" class="form-control"
@@ -65,7 +87,7 @@
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${turmas.all}" var="turma">
                         <c:choose>
-                            <c:when test="${turma.id == campoNota.turma}">
+                            <c:when test="${turma.id == filtroTurmaDisciplina.turma}">
                                 <option value="${turma.id}" selected>${turma.nome}</option>
                             </c:when>
                             <c:otherwise>
@@ -77,39 +99,55 @@
             </div>
         </form>
     </div>
+    <div class="content">
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Matricula</th>
-            <th>Nome</th>
-            <th>Nota</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${listaAluno}" var="aluno">
+        <table class="table">
+            <thead>
             <tr>
-                <td>${aluno.matricula}</td>
-                <td>${aluno.nome}</td>
-                <td>
-                    <%
-                        if (nota.getNota() == null) {
-                    %>
-                    <input type="text" name="nota" class="form-control" maxlength="50"
-                           onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
-                    <%
-                    } else {
-                    %>
-                    <input type="text" value="<%= nota.getNota() %>" name="nota" class="form-control" maxlength="50"
-                           onkeypress="return validString(String.fromCharCode(window.event.keyCode))">
-                    <%
-                        }
-                    %>
-                </td>
+                <th>Matricula</th>
+                <th>Nome</th>
+                <th>Turma</th>
+                <th>Disciplina</th>
+                <th>Nota</th>
+
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach items="${listaAluno}" var="aluno">
+                <form name="form1" action="/insere-nota" method="post"
+                      id="insere-form">
+                    <tr>
+
+                        <td>${aluno.matricula.numero}</td>
+                        <td>${aluno.pessoa.nome}</td>
+                        <td>${aluno.matricula.turma.nome}</td>
+                        <td>${disciplina.nome}</td>
+
+                        <td>
+                            <%
+                                if (nota.getNota() == null) {
+                            %>
+                            <input type="text" name="nota" class="form-control" maxlength="50" style="width: 20%;">
+                            <%
+                            } else {
+                            %>
+                            <input type="text" value="<%= nota.getNota() %>" name="nota" class="form-control"
+                                   maxlength="50"
+                                   style="width: 20%;">
+                            <%
+                                }
+                            %>
+                            <input type="hidden" value="${aluno.id}" name="aluno">
+                            <input type="hidden" value="${turma.id}" name="turma">
+                            <input type="hidden" value="${disciplina.id}" name="disciplina">
+                        </td>
+                    </tr>
+                </form>
+            </c:forEach>
+            </tbody>
+        </table>
+
+    </div>
 
 
 </div>

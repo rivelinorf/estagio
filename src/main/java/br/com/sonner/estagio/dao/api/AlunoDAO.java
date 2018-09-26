@@ -6,6 +6,7 @@ import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import java.util.List;
 
@@ -23,5 +24,7 @@ public interface AlunoDAO {
     List<Aluno> pesquisaAluno(AlunoFiltroVO alunosPesquisados);
 
     List<Aluno> pesquisaAlunoLike(AlunoFiltroVO alunosPesquisados);
+
+    List<Aluno> pesquisaAlunoPorTurmaDisciplina(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO);
 
 }

@@ -2,13 +2,11 @@ package br.com.sonner.estagio.controller;
 
 import br.com.sonner.estagio.controller.api.AlunoController;
 import br.com.sonner.estagio.dao.AlunoDAOImpl;
-import br.com.sonner.estagio.model.Aluno;
-import br.com.sonner.estagio.model.Diretor;
-import br.com.sonner.estagio.model.Funcionario;
-import br.com.sonner.estagio.model.Pessoa;
+import br.com.sonner.estagio.model.*;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
 import br.com.sonner.estagio.vos.DiretorFiltroVO;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +42,11 @@ public class AlunoControllerImpl implements AlunoController {
     @Override
     public void delete(long id) throws CustomException {
         this.alunoDAO.delete(id);
+    }
+
+    @Override
+    public List<Aluno> pesquisaAlunoPorTurmaDisciplina(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
+        return this.alunoDAO.pesquisaAlunoPorTurmaDisciplina(turmaDisciplinaFiltroVO);
     }
 
     public List<Aluno> filtrar(AlunoFiltroVO alunosPesquisados) {

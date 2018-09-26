@@ -6,10 +6,13 @@ import br.com.sonner.estagio.dao.queries.QueryStringFuncionario;
 import br.com.sonner.estagio.model.Aluno;
 import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.model.Pessoa;
+import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -130,6 +133,33 @@ public class AlunoDAOImpl implements AlunoDAO {
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            this.session.close();
+        }
+    }
+
+    @Override
+    public List<Aluno> pesquisaAlunoPorTurmaDisciplina(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
+        try {
+            this.session = HibernateUtil.getSessionFactory().openSession();
+            this.session.getTransaction().begin();
+            Query query = this.session.createQuery("select aluno from TurmaDisciplina as td " +
+
+                    "inner join td.turma " +
+                    "inner join td.disciplina " +
+                    "inner join td.turma.matriculas as matricula " +
+                    "inner join matricula.aluno as aluno " +
+                    "where td.disciplina.id = :disciplina and td.turma.id = :turma"
+            );
+            query.setParameter("disciplina", turmaDisciplinaFiltroVO.getDisciplina());
+            query.setParameter("turma", turmaDisciplinaFiltroVO.getTurma());
+            List<Aluno> alunos = query.list();
+            this.session.getTransaction().commit();
+
+            return alunos;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
