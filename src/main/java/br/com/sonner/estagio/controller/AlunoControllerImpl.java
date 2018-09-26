@@ -9,6 +9,7 @@ import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
 import br.com.sonner.estagio.vos.DiretorFiltroVO;
+import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import java.util.ArrayList;
 import java.util.List;
