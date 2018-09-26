@@ -101,7 +101,7 @@ public class Insere extends HttpServlet {
         }else{
             session.setAttribute("errors", erros);
             session.setAttribute("campoNota", novaNota);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/nota/insere.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/escola/insere.jsp");
             requestDispatcher.forward(req, res);
         }
 

@@ -45,6 +45,6 @@ public class TurmaDisciplinaControllerImpl implements TurmaDisciplinaController 
 
     @Override
     public List<TurmaDisciplina> pesquisaTurma(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
-        return this.pesquisaTurma(turmaDisciplinaFiltroVO);
+        return this.turmaDisciplinaDAO.pesquisaTurma(turmaDisciplinaFiltroVO);
     }
 }

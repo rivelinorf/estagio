@@ -46,13 +46,18 @@ public class AlunoControllerImpl implements AlunoController {
         this.alunoDAO.delete(id);
     }
 
-    public List<Aluno> filtrar(AlunoFiltroVO vo) {
-        return this.alunoDAO.pesquisaAluno(vo);
+    @Override
+    public List<Aluno> pesquisaAlunoPorTurmaDisciplina(TurmaDisciplinaFiltroVO turmaDisciplinaFiltroVO) {
+        return this.alunoDAO.pesquisaAlunoPorTurmaDisciplina(turmaDisciplinaFiltroVO);
+    }
+
+    public List<Aluno> filtrar(AlunoFiltroVO alunosPesquisados) {
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados);
 
     }
 
-    public List<Aluno> filtrarLike(AlunoFiltroVO vo) {
-        return this.alunoDAO.pesquisaAlunoLike(vo);
+    public List<Aluno> filtrarLike(AlunoFiltroVO alunosPesquisados) {
+        return this.alunoDAO.pesquisaAluno(alunosPesquisados);
     }
 
     public List<String> validation(Aluno aluno) {

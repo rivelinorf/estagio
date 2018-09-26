@@ -8,9 +8,12 @@
               type="java.lang.String" %>
 <%@ attribute name="actionSalvar" required="false"
               type="java.lang.Boolean" %>
+<%@ attribute name="actionLancar" required="false"
+              type="java.lang.Boolean" %>
 <%@ attribute name="actionFechar" required="false"
               type="java.lang.Boolean" %>
 <%@ attribute name="formId" required="false" type="java.lang.String" %>
+<%@ attribute name="formIdlancar" required="false" type="java.lang.String" %>
 <%@ attribute name="id" required="false" type="java.lang.String" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 
@@ -32,6 +35,11 @@
         <c:if test="${actionSalvar && not empty formId}">
             <button class="main-btn" id="salvar">
                 <i class="fas fa-save"></i> Salvar
+            </button>
+        </c:if>
+        <c:if test="${actionLancar && not empty formIdlancar}">
+            <button class="main-btn" id="lancar">
+                <i class="fas fa-save"></i> Lançar
             </button>
         </c:if>
         <c:if test="${not empty formId}">
@@ -59,6 +67,7 @@
                 </c:otherwise>
             </c:choose>
         </c:if>
+
         <c:if test="${actionFechar}">
             <button class="main-btn" onclick="location.href='/views/home.jsp'">
                 <i class="fas fa-window-close"></i> Fechar
@@ -77,6 +86,12 @@
     $("#salvar").on("click", function () {
         console.log("#${formId}");
         $("#${formId}").submit();
+
+    })
+
+    $("#lancar").on("click", function () {
+        console.log("#${formIdlancar}");
+        $("#${formIdlancar}").submit();
 
     })
 
