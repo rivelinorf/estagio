@@ -23,15 +23,13 @@ public class Insere extends HttpServlet {
             throws IOException {
         CidadeControllerImpl cidadeController = new CidadeControllerImpl();
         CidadeFiltroVO cidadevo = new CidadeFiltroVO();
-
         BairroControllerImpl bairroController = new BairroControllerImpl();
         BairroFiltroVO bairrovo = new BairroFiltroVO();
-        Estado estado = new Estado();
-        Cidade cidade = new Cidade();
-        Endereco endereco = new Endereco();
+        Estado estado;
+        Cidade cidade;
+        Endereco endereco;
         EstadoControllerImpl estadoController = new EstadoControllerImpl();
         LogradouroControllerImpl logradouroController = new LogradouroControllerImpl();
-        BairroControllerImpl bairroController1 = new BairroControllerImpl();
         EnderecoController enderecoController = new EnderecoControllerImpl();
         EnderecoFiltroVO enderecovo = new EnderecoFiltroVO();
 
@@ -140,9 +138,7 @@ public class Insere extends HttpServlet {
                 session.setAttribute("validaCep", 3);
 
             }
-        }
-
-        else{
+        } else {
             if (request.getParameter("estado") != "" && request.getParameter("estado") != null) {
                 cidadevo.setEstado(Long.valueOf(request.getParameter("estado")));
                 estado = estadoController.getOne(cidadevo.getEstado());
@@ -384,7 +380,6 @@ public class Insere extends HttpServlet {
                 cidadevo.setCod("");
                 cidadevo.setCep("");
                 cidadevo.setId(null);
-
 
 
                 session.setAttribute("listaEscola", escolaController.filtrar(escolavo));

@@ -41,14 +41,15 @@
             </div>
             <div class="form-row">
                 <div>Nome:</div>
-                <input type="text" name="aluno" class="form-control"
-                       style="background-color: rgb(46, 46, 46)" value="<%=vo.getPessoa().getNome()%>"
+                <input type="text" name="nome" class="form-control"
+                       style="background-color: rgb(46, 46, 46)"
+                       value="<%=vo.getPessoa().getNome()%>"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
             <div class="form-row">
                 <div>Sexo:</div>
                 <select name="sexo" class="form-control">
-                    <option value="">Selecione uma opção...</option>
+                    <option value="-1">Selecione uma opção...</option>
                     <option value="m">Masculino</option>
                     <option value="f">Feminino</option>
                 </select>
@@ -81,7 +82,7 @@
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                        <td>${aluno.matricula}</td>
+                    <td>${aluno.matricula}</td>
                     <td>${aluno.pessoa.nome}</td>
                     <td>${aluno.pessoa.sexo}</td>
                 </tr>

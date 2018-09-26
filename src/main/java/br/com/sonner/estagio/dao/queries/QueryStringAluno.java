@@ -31,13 +31,38 @@ public class QueryStringAluno {
             return this;
         }
 
+        public Builder sexo(String sexo) {
+            if (sexo != "" && sexo != null) {
+                this.sql += "and a.pessoa.sexo = '" + sexo + "' ";
+            }
+            return this;
+
+        }
+
+        public Builder matricula(String matricula) {
+            if (matricula != "" && matricula != null) {
+                this.sql += "and a.pessoa.matricula = '" + matricula + "' ";
+            }
+            return this;
+
+        }
+
 
         public Builder nomeLike(String nome) {
             if (nome != "" && nome != null) {
                 this.sql += "and UPPER(a.pessoa.nome) like '" + nome.toUpperCase() + "%' ";
             }
 
+
             return this;
+        }
+
+        public Builder matriculaLike(String matricula) {
+            if (matricula != "" && matricula != null) {
+                this.sql += "and a.pessoa.matricula like '" + matricula + "%' ";
+            }
+            return this;
+
         }
 
 

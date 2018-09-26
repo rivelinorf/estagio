@@ -103,11 +103,12 @@ public class AlunoDAOImpl implements AlunoDAO {
     }
 
     @Override
-    public List<Aluno> pesquisaAluno(AlunoFiltroVO alunosPesquisados) {
+    public List<Aluno> pesquisaAluno(AlunoFiltroVO vo) {
         try {
             QueryStringAluno queryString = new QueryStringAluno.Builder().table("Aluno")
-                    .nome(alunosPesquisados.getPessoa().getNome())
-                    //.matriculaLike()
+                    .nome(vo.getPessoa().getNome())
+                   // .sexo(String.valueOf(vo.getPessoa().getSexo()))
+                    //.matricula(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
@@ -121,12 +122,13 @@ public class AlunoDAOImpl implements AlunoDAO {
 
 
     @Override
-    public List<Aluno> pesquisaAlunoLike(AlunoFiltroVO alunosPesquisados) {
+    public List<Aluno> pesquisaAlunoLike(AlunoFiltroVO vo) {
         try {
             QueryStringAluno queryString = new QueryStringAluno.Builder()
                     .table("Aluno")
-                    .nomeLike(alunosPesquisados.getPessoa().getNome())
-                    //.matriculaLike()
+                    .nomeLike(vo.getPessoa().getNome())
+                    //.sexo(String.valueOf(vo.getPessoa().getSexo()))
+                    //.matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
