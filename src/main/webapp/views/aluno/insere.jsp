@@ -4,6 +4,8 @@
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="alunoController"
              class="br.com.sonner.estagio.controller.AlunoControllerImpl"></jsp:useBean>
+<jsp:useBean id="turmaController"
+             class="br.com.sonner.estagio.controller.TurmaControllerImpl"></jsp:useBean>
 
 
 <html>
@@ -21,6 +23,24 @@
         <form action="/insere-aluno" method="post" id="insere-form"
               style="width: 60%; margin: auto">
             <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
+            <div class="form-row">
+                <div>Escola:</div>
+                <select name="escola" class="form-control">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${escolaController.all}" var="escola">
+                        <option value="${escola.id}">${escola.nome}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-row">
+                <div>Turma:</div>
+                <select name="turma" class="form-control">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${turmaController.all}" var="turma">
+                        <option value="${turma.id}">${turma.nome}</option>
+                    </c:forEach>
+                </select>
+            </div>
         </form>
     </div>
 </div>
