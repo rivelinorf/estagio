@@ -4,13 +4,11 @@ public enum SexoEnum {
     FEMININO("feminino"),
     MASCULINO("masculino");
 
-
     private String sexo;
 
     SexoEnum(String sexo) {
         this.sexo = sexo;
     }
-
 
     public String getSexo() {
         return sexo;

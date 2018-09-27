@@ -109,6 +109,5 @@ public class Insere extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/cidade/insere.jsp");
             requestDispatcher.forward(req, res);
         }
-
     }
 }

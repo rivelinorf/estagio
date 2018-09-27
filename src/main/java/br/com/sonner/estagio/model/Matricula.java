@@ -8,7 +8,7 @@ import java.util.Random;
 @Table
 public class Matricula {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date data;
     private Integer numero;

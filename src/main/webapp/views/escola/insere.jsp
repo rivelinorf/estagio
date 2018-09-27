@@ -42,7 +42,7 @@
     </sge:header>
 
 
-        <form name="form1" action="/insere-escola" method="get" id="filter-form"
+        <form name="form1" action="/busca-endereco" method="get" id="filter-form"
               style="width: 80%; margin: auto">
             <div class="form-row">
 
@@ -54,8 +54,6 @@
             </div>
 
         </form>
-
-
 
         <form action="/insere-escola" method="post" id="insere-form"
               style="width: 80%; margin: auto">

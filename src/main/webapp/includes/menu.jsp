@@ -40,9 +40,6 @@
         <div>
             <button type="button" class="main-btn btn-menu" onclick="showOpt(this)">Instituição</button>
             <div class="dropdown-content">
-                <a href="/pesquisa-funcionario">
-                    <button type="button" class="main-btn btn-menu drop-btn" id="funcionario">Funcionário</button>
-                </a>
                 <a href="/pesquisa-diretor">
                     <button type="button" class="main-btn btn-menu drop-btn" id="diretor">Diretor</button>
                 </a>

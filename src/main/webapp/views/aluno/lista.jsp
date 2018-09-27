@@ -74,7 +74,7 @@
                             <i class="fas fa-times-circle"></i>
                         </button>
                     </td>
-                    <td>${aluno.matricula}</td>
+                    <td>${aluno.matricula.numero}</td>
                     <td>${aluno.pessoa.nome}</td>
                     <td>${aluno.pessoa.sexo}</td>
                 </tr>

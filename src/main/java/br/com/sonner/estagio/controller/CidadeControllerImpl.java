@@ -62,10 +62,6 @@ public class CidadeControllerImpl implements CidadeController {
             erros.add("Código da cidade não pode exceder 2 caracteres");
         }
 
-        if (cidade.getCep().length() == 0) {
-            erros.add("Não é possível ter uma cidade sem CEP");
-        }
-
         if (cidade.getCep().length() < 10 && cidade.getCep().length() > 0) {
             erros.add("Cep inválido");
         }

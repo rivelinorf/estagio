@@ -1,9 +1,21 @@
+<%@ page import="br.com.sonner.estagio.vos.EnderecoFiltroVO" %>
 <%@page contentType="text/html; charset=iso-8859-1"
         pageEncoding="iso-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sge" tagdir="/WEB-INF/tags" %>
 <jsp:useBean id="escolaController" class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 
+<%
+    EnderecoFiltroVO campoEndereco = (EnderecoFiltroVO) session.getAttribute("enderecoParaInserir");
+    if (campoEndereco == null) {
+        campoEndereco = new EnderecoFiltroVO();
+        campoEndereco.setNumero(null);
+        campoEndereco.setCep("");
+        campoEndereco.setComplemento("");
+        campoEndereco.setLogradouro(null);
+        campoEndereco.setBairro(null);
+    }
+%>
 
 <html>
 <head>
@@ -34,6 +46,7 @@
                 </select>
             </div>
         </form>
+
     </div>
 </div>
 </body>
