@@ -25,6 +25,8 @@ public class Insere extends HttpServlet {
         AlunoControllerImpl alunoController = new AlunoControllerImpl();
         PessoaControllerImpl pessoaController = new PessoaControllerImpl();
         MatriculaControllerImpl matriculaController = new MatriculaControllerImpl();
+        TurmaControllerImpl turmaController = new TurmaControllerImpl();
+        EscolaControllerImpl escolaController = new EscolaControllerImpl();
 
         HttpSession session = request.getSession();
         Aluno aux = new Aluno();
@@ -33,6 +35,7 @@ public class Insere extends HttpServlet {
         aux.setPessoa(null);
         Pessoa pessoa = new Pessoa();
         Aluno aluno = new Aluno();
+        Turma turma = new Turma();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         SexoEnum sexo;
 
@@ -76,6 +79,7 @@ public class Insere extends HttpServlet {
             matricula.setNumero(Integer.parseInt(codigoMatricula));
 
             aluno.setMatricula(matricula);
+            matricula.setTurma(turmaController.getOne(Long.valueOf(request.getParameter("turma"))));
 
             alunoController.update(aluno);
             matriculaController.save(matricula);

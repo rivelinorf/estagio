@@ -6,6 +6,8 @@
              class="br.com.sonner.estagio.controller.AlunoControllerImpl"></jsp:useBean>
 <jsp:useBean id="turmaController"
              class="br.com.sonner.estagio.controller.TurmaControllerImpl"></jsp:useBean>
+<jsp:useBean id="escolaController"
+             class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 
 
 <html>
@@ -25,10 +27,10 @@
             <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
             <div class="form-row">
                 <div>Escola:</div>
-                <select name="escola" class="form-control">
+                <select name="escola" class="form-control" onchange="location.href = '/busca-turma?escola='+this.value">
                     <option value="">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
-                        <option value="${escola.id}">${escola.nome}</option>
+                            <option value="${escola.id}">${escola.nome}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -36,7 +38,7 @@
                 <div>Turma:</div>
                 <select name="turma" class="form-control">
                     <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${turmaController.all}" var="turma">
+                    <c:forEach items="${turmaEscola}" var="turma">
                         <option value="${turma.id}">${turma.nome}</option>
                     </c:forEach>
                 </select>
