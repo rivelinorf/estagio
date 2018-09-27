@@ -110,7 +110,7 @@ public class AlunoDAOImpl implements AlunoDAO {
         try {
             QueryStringAluno queryString = new QueryStringAluno.Builder().table("Aluno")
                     .nome(vo.getPessoa().getNome())
-                   // .sexo(String.valueOf(vo.getPessoa().getSexo()))
+                    // .sexo(String.valueOf(vo.getPessoa().getSexo()))
                     //.matricula(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
@@ -130,7 +130,7 @@ public class AlunoDAOImpl implements AlunoDAO {
             QueryStringAluno queryString = new QueryStringAluno.Builder()
                     .table("Aluno")
                     .nomeLike(vo.getPessoa().getNome())
-                    //.sexo(String.valueOf(vo.getPessoa().getSexo()))
+                    .sexo(vo.getPessoa().getSexo().getSexo())
                     //.matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();

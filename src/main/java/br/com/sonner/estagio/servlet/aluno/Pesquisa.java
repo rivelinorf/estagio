@@ -22,27 +22,29 @@ public class Pesquisa extends HttpServlet {
         AlunoFiltroVO vo = new AlunoFiltroVO();
         Aluno aluno = new Aluno();
         Pessoa pessoa = new Pessoa();
-        SexoEnum sexo = null;
-        String nome;
-        Matricula matricula;
+        SexoEnum sexo ;
+        String nome = "";
+        Matricula matricula = null;
 
         if (request.getParameter("nome") != null && request.getParameter("nome") != "") {
             nome = (request.getParameter("nome"));
-            pessoa.setNome(nome);
         }
+            pessoa.setNome(nome);
 
 //        if (request.getParameter("matricula") != null && request.getParameter("matricula") != "") {
 //            matricula = matriculaController.getOne(Long.valueOf(request.getParameter("matricula")));
+//        }
 //            aluno.setMatricula(matricula);
-//        }
 
-//        if (request.getParameter("sexo") != null && request.getParameter("sexo") != "-1") {
-//            sexo = (request.getParameter("sexo").equals("m")) ? SexoEnum.MASCULINO : SexoEnum.FEMININO;
-//        } else {
-//            sexo.setSexo("");
-//        }
+        if (request.getParameter("sexo") != null) {
+            sexo = (request.getParameter("sexo").equals("m")) ? SexoEnum.MASCULINO : SexoEnum.FEMININO;
+        }else{
+            sexo= null;
+        }
 
-        //pessoa.setSexo(sexo);
+        pessoa.setSexo(sexo);
+
+
         pessoa.setAluno(aluno);
         vo.setPessoa(pessoa);
 

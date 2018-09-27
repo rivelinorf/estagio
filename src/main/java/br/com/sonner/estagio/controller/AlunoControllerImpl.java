@@ -3,12 +3,9 @@ package br.com.sonner.estagio.controller;
 import br.com.sonner.estagio.controller.api.AlunoController;
 import br.com.sonner.estagio.dao.AlunoDAOImpl;
 import br.com.sonner.estagio.model.Aluno;
-import br.com.sonner.estagio.model.Diretor;
-import br.com.sonner.estagio.model.Funcionario;
 import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
-import br.com.sonner.estagio.vos.DiretorFiltroVO;
 import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import java.util.ArrayList;
@@ -58,7 +55,7 @@ public class AlunoControllerImpl implements AlunoController {
     }
 
     public List<Aluno> filtrarLike(AlunoFiltroVO alunosPesquisados) {
-        return this.alunoDAO.pesquisaAluno(alunosPesquisados);
+        return this.alunoDAO.pesquisaAlunoLike(alunosPesquisados);
     }
 
     public List<String> validation(Aluno aluno) {
