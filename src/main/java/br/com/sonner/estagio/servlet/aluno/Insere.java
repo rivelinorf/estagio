@@ -5,6 +5,7 @@ import br.com.sonner.estagio.model.*;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
 import br.com.sonner.estagio.vos.DiretorFiltroVO;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +20,14 @@ import java.util.List;
 
 @WebServlet("/insere-aluno")
 public class Insere extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AlunoControllerImpl alunoController = new AlunoControllerImpl();
         PessoaControllerImpl pessoaController = new PessoaControllerImpl();
 
         HttpSession session = request.getSession();
+        Aluno aux = new Aluno();
+        aux.setMatricula(null);
+        aux.setPessoa(null);
         Pessoa pessoa = new Pessoa();
         Aluno aluno = new Aluno();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -49,21 +52,30 @@ public class Insere extends HttpServlet {
             pessoa.setSexo(sexo);
         }
 
-        aluno.setPessoa(pessoa);
-        pessoa.setAluno(aluno);
+        List<String> erros = pessoaController.validation(pessoa);
 
-        pessoaController.save(pessoa);
-        alunoController.save(aluno);
+        if (erros.size() == 0) {
+            aluno.setPessoa(pessoa);
+            pessoa.setAluno(aluno);
+            pessoaController.save(pessoa);
+            alunoController.save(aluno);
 
-        AlunoFiltroVO vo = new AlunoFiltroVO();
+            AlunoFiltroVO vo = new AlunoFiltroVO();
+            vo.setPessoa(new Pessoa());
+            vo.getPessoa().setAluno(new Aluno());
 
-        vo.setPessoa(new Pessoa());
-        vo.getPessoa().setAluno(new Aluno());
+            session.setAttribute("listaAluno", alunoController.filtrarLike(vo));
+            session.setAttribute("success", "Aluno inserido com sucesso");
+            response.sendRedirect("/views/aluno/lista.jsp");
+        } else {
+            session.setAttribute("errors", erros);
+            session.setAttribute("campoAluno", aux);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/aluno/insere.jsp");
+            requestDispatcher.forward(request, response);
+        }
 
-        session.setAttribute("listaAluno", alunoController.filtrarLike(vo));
-        session.setAttribute("success", "Aluno inserido com sucesso");
-        response.sendRedirect("/views/aluno/lista.jsp");
     }
+
 
 }
 

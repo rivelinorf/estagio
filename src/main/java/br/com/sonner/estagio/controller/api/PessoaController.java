@@ -1,5 +1,6 @@
 package br.com.sonner.estagio.controller.api;
 
+import br.com.sonner.estagio.model.Logradouro;
 import br.com.sonner.estagio.model.Pessoa;
 import br.com.sonner.estagio.util.CustomException;
 
@@ -15,5 +16,7 @@ public interface PessoaController {
     void update(Pessoa pessoa);
 
     void delete(long id) throws CustomException;
+
+    List<String> validation(Pessoa pessoa);
 
 }

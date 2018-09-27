@@ -130,8 +130,7 @@ public class AlunoDAOImpl implements AlunoDAO {
             QueryStringAluno queryString = new QueryStringAluno.Builder()
                     .table("Aluno")
                     .nomeLike(vo.getPessoa().getNome())
-                    .sexo(vo.getPessoa().getSexo().getSexo())
-                    //.matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
+                    // .matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();

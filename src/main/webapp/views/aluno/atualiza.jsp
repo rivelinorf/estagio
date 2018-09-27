@@ -18,7 +18,7 @@
                 formId="insere-form" actionFechar="true">
     </sge:header>
     <div class="div-form">
-        <form action="/insere-aluno" method="post" id="insere-form"
+        <form action="/atualiza-aluno" method="post" id="insere-form"
               style="width: 60%; margin: auto">
             <jsp:include page="/includes/pessoaComponete.jsp"></jsp:include>
         </form>

@@ -46,14 +46,6 @@
                        value="<%=vo.getPessoa().getNome()%>"
                        onkeypress="return validString(String.fromCharCode(window.event.keyCode))" style="width: 460px;">
             </div>
-            <div class="form-row">
-                <div>Sexo:</div>
-                <select name="sexo" class="form-control">
-                    <option value="-1">Selecione uma opção...</option>
-                    <option value="m">Masculino</option>
-                    <option value="f">Feminino</option>
-                </select>
-            </div>
         </form>
     </div>
     <div class="content">
