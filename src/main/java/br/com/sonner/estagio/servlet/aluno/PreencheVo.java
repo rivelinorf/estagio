@@ -14,18 +14,15 @@ import java.io.IOException;
 @WebServlet("/aluno/preenche-vo")
 public class PreencheVo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         AlunoControllerImpl alunoController = new AlunoControllerImpl();
         AlunoFiltroVO vo = new AlunoFiltroVO();
+        HttpSession session = request.getSession();
 
         Aluno aluno = alunoController.getOne(Long.valueOf(request.getParameter("id")));
         vo.setId(aluno.getId());
         vo.setPessoa(aluno.getPessoa());
 
-
-        HttpSession session = request.getSession();
         session.setAttribute("alunoParaEditar", vo);
-
         response.sendRedirect("/views/aluno/atualiza.jsp");
     }
 }

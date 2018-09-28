@@ -1,6 +1,8 @@
 package br.com.sonner.estagio.servlet.turma;
 
+import br.com.sonner.estagio.controller.EscolaControllerImpl;
 import br.com.sonner.estagio.controller.TurmaControllerImpl;
+import br.com.sonner.estagio.vos.EscolaFiltroVO;
 import br.com.sonner.estagio.vos.TurmaFiltroVO;
 
 import javax.servlet.ServletException;
@@ -17,11 +19,14 @@ public class BuscaTurma extends HttpServlet {
         HttpSession session = request.getSession();
         TurmaControllerImpl turmaController = new TurmaControllerImpl();
         TurmaFiltroVO turmaFiltroVO = new TurmaFiltroVO();
+        EscolaFiltroVO escolaFiltroVO = new EscolaFiltroVO();
+
+        escolaFiltroVO.setId(Long.valueOf(request.getParameter("escola")));
 
         turmaFiltroVO.setEscola(Long.valueOf(request.getParameter("escola")));
 
         session.setAttribute("turmaEscola", turmaController.filtrar(turmaFiltroVO));
-        session.setAttribute("escolaId", request.getParameter("escola"));
+        session.setAttribute("escolaVo", escolaFiltroVO);
 
         response.sendRedirect("/views/aluno/insere.jsp");
     }

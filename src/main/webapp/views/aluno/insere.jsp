@@ -28,9 +28,16 @@
             <div class="form-row">
                 <div>Escola:</div>
                 <select name="escola" class="form-control" onchange="location.href = '/busca-turma?escola='+this.value">
-                    <option value="">Selecione uma opção...</option>
+                    <option value="0">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
-                            <option value="${escola.id}">${escola.nome}</option>
+                        <c:choose>
+                            <c:when test="${escola.id == escolaVo.id}">
+                                <option value="${escola.id}" selected>${escola.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${escola.id}">${escola.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </div>
