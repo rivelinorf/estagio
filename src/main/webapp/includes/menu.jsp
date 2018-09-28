@@ -55,7 +55,7 @@
                 <a href="/pesquisa-turma">
                     <button type="button" class="main-btn btn-menu drop-btn" id="turma">Turma</button>
                 </a>
-                <a href="/views/nota/insere.jsp">
+                <a href="/pesquisa-nota">
                     <button type="button" class="main-btn btn-menu drop-btn" id="nota">Lançar notas</button>
                 </a>
                 <a href="/pesquisa-sala">

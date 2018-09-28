@@ -15,15 +15,6 @@
              class="br.com.sonner.estagio.controller.DisciplinaControllerImpl"></jsp:useBean>
 
 <%
-    Nota nota = (Nota) session.getAttribute("campoNota");
-
-    if (nota == null) {
-
-        nota = new Nota();
-        nota.setId(null);
-        nota.setAluno(null);
-        nota.setNota(null);
-    }
 
     Turma turma = (Turma) session.getAttribute("turma");
 
@@ -42,6 +33,8 @@
         disciplina.setNome(null);
         disciplina.setId(null);
     }
+
+    Integer campoNota = (Integer) session.getAttribute("campoNota");
 %>
 
 <html>
@@ -100,53 +93,52 @@
         </form>
     </div>
     <div class="content">
+        <form name="form1" action="/insere-nota" method="post"
+              id="insere-form">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Matricula</th>
+                    <th>Nome</th>
+                    <th>Turma</th>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Matricula</th>
-                <th>Nome</th>
-                <th>Turma</th>
-                <th>Disciplina</th>
-                <th>Nota</th>
 
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${listaAluno}" var="aluno">
-                <form name="form1" action="/insere-nota" method="post"
-                      id="insere-form">
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${listaAluno}" var="aluno">
+
                     <tr>
 
                         <td>${aluno.matricula.numero}</td>
                         <td>${aluno.pessoa.nome}</td>
-                        <td>${aluno.matricula.turma.nome}</td>
-                        <td>${disciplina.nome}</td>
 
-                        <td>
-                            <%
-                                if (nota.getNota() == null) {
-                            %>
-                            <input type="text" name="nota" class="form-control" maxlength="50" style="width: 20%;">
-                            <%
-                            } else {
-                            %>
-                            <input type="text" value="<%= nota.getNota() %>" name="nota" class="form-control"
-                                   maxlength="50"
-                                   style="width: 20%;">
-                            <%
-                                }
-                            %>
-                            <input type="hidden" value="${aluno.id}" name="aluno">
-                            <input type="hidden" value="${turma.id}" name="turma">
-                            <input type="hidden" value="${disciplina.id}" name="disciplina">
+                        <c:forEach items="${listaNota}" var="nota">
+                            <c:choose>
+                                <c:when test="${aluno.pessoa.nome == nota.aluno.pessoa.nome}">
+                                    <td><input type="text" name="nota" placeholder="00.00"
+                                               class="form-control" value="${nota.nota}"
+                                               style="width: 20.35%;"></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><input type="text" name="nota" placeholder="00.00"
+                                               class="form-control" value="00.00"
+                                               style="width: 20.35%;"></td>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+
                         </td>
-                    </tr>
-                </form>
-            </c:forEach>
-            </tbody>
-        </table>
+                        <input type="hidden" value="${aluno.id}" name="aluno">
+                        <input type="hidden" value="${turma.id}" name="turma">
+                        <input type="hidden" value="${disciplina.id}" name="disciplina">
 
+                    </tr>
+
+                </c:forEach>
+                </tbody>
+            </table>
+        </form>
     </div>
 
 

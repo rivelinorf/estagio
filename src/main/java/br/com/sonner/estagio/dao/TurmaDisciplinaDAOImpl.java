@@ -105,7 +105,7 @@ public class TurmaDisciplinaDAOImpl implements TurmaDisciplinaDAO {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             Query query = this.session.createQuery("select td from TurmaDisciplina as td " +
-                    "where td.disciplina = :disciplina and td.turma = :turma");
+                    "where td.disciplina.id = :disciplina and td.turma.id = :turma");
             query.setParameter("turma", turmaDisciplinaFiltroVO.getTurma());
             query.setParameter("disciplina", turmaDisciplinaFiltroVO.getDisciplina());
             List<TurmaDisciplina> turmaDisciplinas = query.list();

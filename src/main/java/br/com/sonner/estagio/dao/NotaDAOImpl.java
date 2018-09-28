@@ -104,8 +104,7 @@ public class NotaDAOImpl implements NotaDAO {
             this.session = HibernateUtil.getSessionFactory().openSession();
             this.session.getTransaction().begin();
             Query query = this.session.createQuery("select n from Nota as n " +
-                    "where n.aluno = :aluno and n.turmaDisciplina = :turmaDisciplina");
-            query.setParameter("aluno", notaFiltroVO.getAluno());
+                    "where n.turmaDisciplina.id = :turmaDisciplina");
             query.setParameter("turmaDisciplina", notaFiltroVO.getTurmaDisciplina());
             List<Nota> turmaDisciplinas = query.list();
             this.session.getTransaction().commit();

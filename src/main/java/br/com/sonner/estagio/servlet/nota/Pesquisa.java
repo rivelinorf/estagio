@@ -1,15 +1,12 @@
 package br.com.sonner.estagio.servlet.nota;
 
-import br.com.sonner.estagio.controller.AlunoControllerImpl;
-import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
-import br.com.sonner.estagio.controller.TurmaControllerImpl;
-import br.com.sonner.estagio.controller.api.AlunoController;
-import br.com.sonner.estagio.controller.api.DisciplinaController;
-import br.com.sonner.estagio.controller.api.TurmaController;
+import br.com.sonner.estagio.controller.*;
+import br.com.sonner.estagio.controller.api.*;
 import br.com.sonner.estagio.model.Disciplina;
 import br.com.sonner.estagio.model.Nota;
 import br.com.sonner.estagio.model.Turma;
 import br.com.sonner.estagio.model.TurmaDisciplina;
+import br.com.sonner.estagio.vos.NotaFiltroVO;
 import br.com.sonner.estagio.vos.TurmaDisciplinaFiltroVO;
 
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/pesquisa-nota")
 public class Pesquisa extends HttpServlet {
@@ -30,7 +28,10 @@ public class Pesquisa extends HttpServlet {
         Nota nota = new Nota();
         TurmaDisciplina turmaDisciplina = new TurmaDisciplina();
         TurmaController turmaController = new TurmaControllerImpl();
+        TurmaDisciplinaController turmaDisciplinaController = new TurmaDisciplinaControllerImpl();
         DisciplinaController disciplinaController = new DisciplinaControllerImpl();
+        NotaController notaController = new NotaControllerImpl();
+        NotaFiltroVO notaFiltroVO = new NotaFiltroVO();
 
         turmaDisciplinaFiltroVO.setDisciplina(null);
         turmaDisciplinaFiltroVO.setTurma(null);
@@ -45,11 +46,16 @@ public class Pesquisa extends HttpServlet {
             turmaDisciplinaFiltroVO.setDisciplina(Long.valueOf(request.getParameter("disciplina")));
         }
 
-        if (turmaDisciplinaFiltroVO.getDisciplina() != null && turmaDisciplinaFiltroVO.getDisciplina() != null){
+        if (turmaDisciplinaFiltroVO.getDisciplina() != null && turmaDisciplinaFiltroVO.getDisciplina() != null) {
             disciplina = disciplinaController.getOne(turmaDisciplinaFiltroVO.getDisciplina());
             turma = turmaController.getOne(turmaDisciplinaFiltroVO.getTurma());
-        }
+            List<TurmaDisciplina> turmaDisciplinas = turmaDisciplinaController.pesquisaTurma(turmaDisciplinaFiltroVO);
+            if (turmaDisciplinas.size() > 0) {
+                turmaDisciplina = turmaDisciplinas.get(0);
+                notaFiltroVO.setTurmaDisciplina(turmaDisciplina.getId());
+            }
 
+        }
 
 
         if (turmaDisciplinaFiltroVO.getDisciplina() == null && turmaDisciplinaFiltroVO.getTurma() == null) { // primeira vez entrando na pagina
@@ -57,12 +63,26 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("listaAluno", null);
             session.setAttribute("campoNota", null);
             session.setAttribute("filtroTurmaDisciplina", null);
+            session.setAttribute("turma", null);
+            session.setAttribute("disciplina", null);
+            session.setAttribute("listaNota", null);
 
-        } else if (turmaDisciplinaFiltroVO.getDisciplina() != null && turmaDisciplinaFiltroVO.getTurma() != null) {
+        } else if (turmaDisciplina != null) {
             session.setAttribute("filtroTurmaDisciplina", turmaDisciplinaFiltroVO);
             session.setAttribute("listaAluno", alunoController.pesquisaAlunoPorTurmaDisciplina(turmaDisciplinaFiltroVO));
             session.setAttribute("turma", turma);
             session.setAttribute("disciplina", disciplina);
+            session.setAttribute("listaNota", notaController.pesquisaNota(notaFiltroVO));
+            session.setAttribute("campoNota", notaController.pesquisaNota(notaFiltroVO).size());
+
+        } else  if(turmaDisciplina == null){
+            session.setAttribute("filtroTurmaDisciplina", turmaDisciplinaFiltroVO);
+            session.setAttribute("listaAluno", alunoController.pesquisaAlunoPorTurmaDisciplina(turmaDisciplinaFiltroVO));
+            session.setAttribute("turma", turma);
+            session.setAttribute("disciplina", disciplina);
+            session.setAttribute("listaNota", null);
+            session.setAttribute("campoNota", null);
+
         }
         else {
             session.setAttribute("errors", "Insira turma e disciplina");

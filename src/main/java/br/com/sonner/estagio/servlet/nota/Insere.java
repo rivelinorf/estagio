@@ -40,6 +40,7 @@ public class Insere extends HttpServlet {
 
         if (req.getParameter("turma") != "" && req.getParameter("turma") != null) {
             turma = turmaController.getOne(Long.valueOf(req.getParameter("turma")));
+            req.getParameterValues("turma");
         }
 
         if (req.getParameter("disciplina") != "" && req.getParameter("disciplina") != null) {
@@ -66,6 +67,7 @@ public class Insere extends HttpServlet {
 
         if (req.getParameter("aluno") != "" && req.getParameter("aluno") != null) {
             aluno = alunoController.getOne(Long.valueOf(req.getParameter("aluno")));
+
         }
 
         if (req.getParameter("nota") != "" && req.getParameter("nota") != null) {
@@ -95,15 +97,20 @@ public class Insere extends HttpServlet {
             }
 
             session.setAttribute("success", "Nota lançada com sucesso");
+            session.setAttribute("filtroTurmaDisciplina", null);
+            session.setAttribute("listaAluno", null);
+            session.setAttribute("campoNota", null);
+            session.setAttribute("filtroTurmaDisciplina", null);
+            session.setAttribute("turma", null);
+            session.setAttribute("disciplina", null);
 
-            res.sendRedirect("/views/turma/lista.jsp");
 
-        }else{
+        } else {
             session.setAttribute("errors", erros);
-            session.setAttribute("campoNota", novaNota);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/escola/insere.jsp");
-            requestDispatcher.forward(req, res);
+
         }
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/nota/insere.jsp");
+        requestDispatcher.forward(req, res);
 
     }
 }
