@@ -2,11 +2,7 @@ package br.com.sonner.estagio.dao;
 
 import br.com.sonner.estagio.dao.api.AlunoDAO;
 import br.com.sonner.estagio.dao.queries.QueryStringAluno;
-import br.com.sonner.estagio.dao.queries.QueryStringFuncionario;
 import br.com.sonner.estagio.model.Aluno;
-import br.com.sonner.estagio.model.Funcionario;
-import br.com.sonner.estagio.model.Pessoa;
-import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.util.CustomException;
 import br.com.sonner.estagio.util.HibernateUtil;
 import br.com.sonner.estagio.vos.AlunoFiltroVO;
@@ -110,8 +106,7 @@ public class AlunoDAOImpl implements AlunoDAO {
         try {
             QueryStringAluno queryString = new QueryStringAluno.Builder().table("Aluno")
                     .nome(vo.getPessoa().getNome())
-                    // .sexo(String.valueOf(vo.getPessoa().getSexo()))
-                    //.matricula(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
+                    .matricula(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();
@@ -130,7 +125,7 @@ public class AlunoDAOImpl implements AlunoDAO {
             QueryStringAluno queryString = new QueryStringAluno.Builder()
                     .table("Aluno")
                     .nomeLike(vo.getPessoa().getNome())
-                    // .matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
+                    .matriculaLike(String.valueOf(vo.getPessoa().getAluno().getMatricula()))
                     .build();
             this.session = HibernateUtil.getSessionFactory().openSession();
             return this.session.createQuery(queryString.getSql()).getResultList();

@@ -31,10 +31,10 @@ public class Pesquisa extends HttpServlet {
         }
         pessoa.setNome(nome);
 
-//        if (request.getParameter("matricula") != null && request.getParameter("matricula") != "") {
-//            matricula = matriculaController.getOne(Long.valueOf(request.getParameter("matricula")));
-//        }
-//        aluno.setMatricula(matricula);
+        if (request.getParameter("matricula") != null && request.getParameter("matricula") != "") {
+            matricula = matriculaController.getOne(Long.valueOf(request.getParameter("matricula")));
+        }
+        aluno.setMatricula(matricula);
 
         pessoa.setAluno(aluno);
         vo.setPessoa(pessoa);
