@@ -8,7 +8,7 @@ import java.util.List;
 @Table
 public class TurmaDisciplina {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

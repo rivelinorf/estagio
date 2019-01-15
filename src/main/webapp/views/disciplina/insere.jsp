@@ -43,17 +43,26 @@
 
             <div class="form-row">
                 <div>Escola:</div>
-                <select name="escola" class="form-control" style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opção...</option>
+                <select name="escola" class="form-control" onchange="location.href = '/busca-turma?escola='+this.value">
+                    <option value="0">Selecione uma opção...</option>
                     <c:forEach items="${escolaController.all}" var="escola">
                         <c:choose>
-                            <c:when test="${escola.id == campoDisciplina.escola.id}">
+                            <c:when test="${escola.id == escolaVo.id}">
                                 <option value="${escola.id}" selected>${escola.nome}</option>
                             </c:when>
                             <c:otherwise>
                                 <option value="${escola.id}">${escola.nome}</option>
                             </c:otherwise>
                         </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-row">
+                <div>Turma:</div>
+                <select name="turma" class="form-control">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${turmaEscola}" var="turma">
+                        <option value="${turma.id}">${turma.nome}</option>
                     </c:forEach>
                 </select>
             </div>

@@ -144,3 +144,5 @@ select * from Escola
 ;
 
 select * from Escola as e inner join Endereco as end;
+
+insert into sge.TurmaDisciplina values 

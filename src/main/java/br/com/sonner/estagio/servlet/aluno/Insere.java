@@ -79,7 +79,7 @@ public class Insere extends HttpServlet {
             matricula.setNumero(Integer.parseInt(codigoMatricula));
 
             aluno.setMatricula(matricula);
-            matricula.setTurma(turmaController.getOne(Long.valueOf(request.getParameter("turma"))));
+           // matricula.setTurma(turmaController.getOne(Long.valueOf(request.getParameter("turma"))));
 
             alunoController.update(aluno);
             matriculaController.save(matricula);

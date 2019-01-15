@@ -28,6 +28,6 @@ public class BuscaTurma extends HttpServlet {
         session.setAttribute("turmaEscola", turmaController.filtrar(turmaFiltroVO));
         session.setAttribute("escolaVo", escolaFiltroVO);
 
-        response.sendRedirect("/views/aluno/insere.jsp");
+        response.sendRedirect(request.getHeader("referer"));
     }
 }

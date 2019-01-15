@@ -40,8 +40,8 @@ public class QueryStringAluno {
         }
 
         public Builder matricula(String matricula) {
-            if (matricula != "" && matricula != null) {
-                this.sql += "and a.pessoa.matricula = '" + matricula + "' ";
+            if (matricula != null) {
+                this.sql += "and a.matricula = '" + matricula + "' ";
             }
             return this;
 

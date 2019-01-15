@@ -57,8 +57,7 @@ public class Pesquisa extends HttpServlet {
 
         }
 
-
-        if (turmaDisciplinaFiltroVO.getDisciplina() == null && turmaDisciplinaFiltroVO.getTurma() == null) { // primeira vez entrando na pagina
+       /* if (turmaDisciplinaFiltroVO.getDisciplina() == null && turmaDisciplinaFiltroVO.getTurma() == null) { // primeira vez entrando na pagina
             session.setAttribute("filtroTurmaDisciplina", null);
             session.setAttribute("listaAluno", null);
             session.setAttribute("campoNota", null);
@@ -88,7 +87,7 @@ public class Pesquisa extends HttpServlet {
             session.setAttribute("errors", "Insira turma e disciplina");
             session.setAttribute("filtroTurmaDisciplina", turmaDisciplinaFiltroVO);
 
-        }
+        }*/
 
         response.sendRedirect("/views/nota/insere.jsp");
     }

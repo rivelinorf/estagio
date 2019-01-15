@@ -2,8 +2,12 @@ package br.com.sonner.estagio.servlet.disciplina;
 
 import br.com.sonner.estagio.controller.EscolaControllerImpl;
 import br.com.sonner.estagio.controller.DisciplinaControllerImpl;
+import br.com.sonner.estagio.controller.TurmaControllerImpl;
+import br.com.sonner.estagio.controller.TurmaDisciplinaControllerImpl;
+import br.com.sonner.estagio.controller.api.TurmaController;
 import br.com.sonner.estagio.model.Escola;
 import br.com.sonner.estagio.model.Disciplina;
+import br.com.sonner.estagio.model.TurmaDisciplina;
 import br.com.sonner.estagio.vos.DisciplinaFiltroVO;
 
 import javax.servlet.RequestDispatcher;
@@ -21,7 +25,9 @@ public class Insere extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         DisciplinaControllerImpl disciplinaController = new DisciplinaControllerImpl();
-
+        TurmaDisciplinaControllerImpl turmaDisciplinaController = new TurmaDisciplinaControllerImpl();
+        TurmaControllerImpl turmaController = new TurmaControllerImpl();
+        TurmaDisciplina turmaDisciplina = new TurmaDisciplina();
         EscolaControllerImpl escolaController = new EscolaControllerImpl();
 
         DisciplinaFiltroVO vo = new DisciplinaFiltroVO();
@@ -54,8 +60,12 @@ public class Insere extends HttpServlet {
 
             if (verifica.size() == 0) {
 
-
                 disciplinaController.save(novadisciplina);
+
+                turmaDisciplina.setDisciplina(novadisciplina);
+                turmaDisciplina.setTurma(turmaController.getOne(Long.valueOf(req.getParameter("turma"))));
+                turmaDisciplinaController.save(turmaDisciplina);
+
                 vo.setNome("");
                 vo.setEscola(null);
 

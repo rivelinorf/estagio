@@ -13,6 +13,8 @@
              class="br.com.sonner.estagio.controller.TurmaControllerImpl"></jsp:useBean>
 <jsp:useBean id="disciplinas"
              class="br.com.sonner.estagio.controller.DisciplinaControllerImpl"></jsp:useBean>
+<jsp:useBean id="escolaController"
+             class="br.com.sonner.estagio.controller.EscolaControllerImpl"></jsp:useBean>
 
 <%
 
@@ -55,6 +57,31 @@
         <form action="/pesquisa-nota" method="get" id="filter-form"
               style="width: 1000px;">
             <div class="form-row">
+                <div>Escola:</div>
+                <select name="escola" class="form-control" onchange="location.href = '/busca-turma?escola='+this.value">
+                    <option value="0">Selecione uma opção...</option>
+                    <c:forEach items="${escolaController.all}" var="escola">
+                        <c:choose>
+                            <c:when test="${escola.id == escolaVo.id}">
+                                <option value="${escola.id}" selected>${escola.nome}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${escola.id}">${escola.nome}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-row">
+                <div>Turma:</div>
+                <select name="turma" class="form-control">
+                    <option value="">Selecione uma opção...</option>
+                    <c:forEach items="${turmaEscola}" var="turma">
+                        <option value="${turma.id}">${turma.nome}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-row">
                 <div>Disciplina:</div>
                 <select name="disciplina" class="form-control"
                         style="background-color: rgb(46, 46, 46)">
@@ -66,25 +93,6 @@
                             </c:when>
                             <c:otherwise>
                                 <option value="${disciplina.id}">${disciplina.nome}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </select>
-            </div>
-
-
-            <div class="form-row">
-                <div>Turma:</div>
-                <select name="turma" class="form-control"
-                        style="background-color: rgb(46, 46, 46)">
-                    <option value="">Selecione uma opção...</option>
-                    <c:forEach items="${turmas.all}" var="turma">
-                        <c:choose>
-                            <c:when test="${turma.id == filtroTurmaDisciplina.turma}">
-                                <option value="${turma.id}" selected>${turma.nome}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${turma.id}">${turma.nome}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
